@@ -10,10 +10,12 @@ themselves live with the repo that made them.
 index.md, tutorials/, how-to/, explanation/, reference/   the VitePress site
 .vitepress/                                              site config + theme
 ADR-INDEX.md                                             published ADR index
-adrs/                                                    pre-split top-level ADRs
 scripts/                                                 generators (see below)
 project/                                                 project worktree (ADR-0129)
 ```
+
+ADRs are **never** at a repo root — every repo keeps them on its `project`
+branch under `project/adrs/`, and this hub publishes the aggregate.
 
 The site's `srcDir` is the repo root; `README.md`, `project/**` and
 `scripts/**` are excluded.

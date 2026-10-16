@@ -23,6 +23,7 @@ An ADR that defines a port, the kernel, or composition stays in
 | 0002 | Single `Plugin` Model for Host, Operations, Libraries, Targets, and Options | `project/adrs/archived/0002-handl-platform-composable-host.md` |
 | 0002 | ADR-0002 (Archived v1): Single Plugin Model — Core Architecture | `project/adrs/archived/0002-handl-platform-composable-host-v1-complete.md` |
 | 0006 | Parametric Polymorphism (Generics) for handl Type System | `project/adrs/archived/0006-generics.md` |
+| 0009 | Strategy C — Runtime Module Loading as Handler Interpreted Ops | `project/adrs/0009-strategy-c-runtime-module-loading.md` |
 | 0009 | Type generation from handl field declarations | `project/adrs/archived/0009-typegen-json-schema.md` |
 | 0010 | Package Manager: Content-Addressed, Diff-Based, Composable Stores | `project/adrs/0010-package-manager.md` |
 | 0012 | Versioning for Language Artifacts | `project/adrs/0012-versioning.md` |
@@ -234,3 +235,10 @@ An ADR that defines a port, the kernel, or composition stays in
 | 0142 | compile-handl target | `handl` | `0114-handl-compile-plugin-architecture.md` |
 | 0143 | compile-js target | `web` | `0114-handl-compile-plugin-architecture.md` |
 | 0144 | compile-llvm target | `native` | `0114-handl-compile-plugin-architecture.md` |
+
+## Repo-local ADRs
+
+| # | title | repo | file |
+|---|---|---|---|
+| 0145 | LSP-only Neovim integration | `extension-neovim` | `adrs/0145-handl-lsp-integration.md` |
+| 0146 | Generic Arrow Calculus for Any Dimension | `lang` | `adrs/0146-generic-arrow-calculus-any-dimension.md` |
