@@ -1,1 +1,15 @@
+# VitePress / node
+node_modules
+.vitepress/dist
+.vitepress/cache
+
+# generated reference + rustdoc (docs/scripts/*) — the hand-written reference
+# pages are tracked and re-included below
+/api
+/reference/*
+!/reference/index.md
+!/reference/host-concepts.md
+!/reference/strings-chars-unicode.md
+
+# the project worktree (ADR-0129)
 /project/

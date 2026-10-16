@@ -1,0 +1,24 @@
+{
+  "name": "handl-docs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VitePress documentation hub for the handl-lang repos",
+  "scripts": {
+    "docs:dev": "vitepress dev .",
+    "docs:gen-ref": "python3 scripts/gen_reference_all.py",
+    "docs:gen-api": "bash scripts/gen-api.sh",
+    "docs:build": "bun run docs:gen-api && bun run docs:gen-ref && vitepress build .",
+    "docs:preview": "vitepress preview ."
+  },
+  "devDependencies": {
+    "vite-plus": "0.2.9",
+    "vitepress": "next"
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "bun",
+      "version": "1.4.0",
+      "onFail": "download"
+    }
+  }
+}
