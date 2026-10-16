@@ -377,3 +377,145 @@ reference:
   description: user-space query registration and invocation algebra.
   include:
   - package: query
+- title: Archive Tar
+  slug: lib-archive-tar
+  description: pack an array of {path, contents} objects into a base64 tar archive
+    string.
+  include:
+  - package: archive_tar
+- title: Base64
+  slug: lib-base64
+  description: encode a string to base64.
+  include:
+  - package: base64
+- title: Bytes
+  slug: lib-bytes
+  description: byte-buffer primitives for the `Bytes` scalar type.
+  include:
+  - package: bytes
+- title: Char
+  slug: lib-char
+  description: Axioms and laws for the character library.
+  include:
+  - package: char
+- title: Char Native
+  slug: lib-char-native
+  description: char-native -- the Rust `std::char` backend for the `char` contract.
+  include:
+  - package: char-native
+- title: Cmp
+  slug: lib-cmp
+  description: test whether two values are deeply equal.
+  include:
+  - package: cmp
+- title: Collections
+  slug: lib-collections
+  description: pure-handl implementation of the `array` functional ops.
+  include:
+  - package: collections
+- title: Crypto
+  slug: lib-crypto
+  description: compute the SHA-256 hash of a string or byte array, returning a hex-encoded
+    digest.
+  include:
+  - package: crypto
+- title: Encoding
+  slug: lib-encoding
+  description: encoding abstractions for the handl runtime.
+  include:
+  - package: encoding
+- title: Error
+  slug: lib-error
+  description: the error-raising primitive contract (ADR-0092 gap (a)).
+  include:
+  - package: error
+- title: Hex
+  slug: lib-hex
+  description: encode a string to hexadecimal.
+  include:
+  - package: hex
+- title: Intl
+  slug: lib-intl
+  description: Internationalization contract for the handl runtime.
+  include:
+  - package: intl
+- title: Intl C
+  slug: lib-intl-c
+  description: intl-c -- `intl` contract backend over the system ICU4C libraries.
+  include:
+  - package: intl-c
+- title: Ip
+  slug: lib-ip
+  description: parse an IP address string into an ip object.
+  include:
+  - package: ip
+- title: Kv Hashmap
+  slug: lib-kv-hashmap
+  description: in-memory HashMap-backed KeyValueStore implementation.
+  include:
+  - package: kv_hashmap
+- title: Obj
+  slug: lib-obj
+  description: 'record introspection primitives (gap #3).'
+  include:
+  - package: obj
+- title: Option
+  slug: lib-option
+  description: Option type and constructors.
+  include:
+  - package: option
+- title: Prim
+  slug: lib-prim
+  description: the minimal atom layer for handl's arrow-based stdlib.
+  include:
+  - package: prim
+- title: Rand C
+  slug: lib-rand-c
+  description: Low-level cryptographically secure entropy from libsodium.
+  include:
+  - package: rand-c
+- title: Result
+  slug: lib-result
+  description: Result type and constructors.
+  include:
+  - package: result
+- title: Stats
+  slug: lib-stats
+  description: the canonical handl statistical aggregates.
+  include:
+  - package: stats
+- title: Time C
+  slug: lib-time-c
+  description: Low-level libc `clock_gettime` reader.
+  include:
+  - package: time-c
+- title: Transform
+  slug: lib-transform
+  description: Keeps the elements of a list that satisfy a predicate.
+  include:
+  - package: transform
+- title: Unicode
+  slug: lib-unicode
+  description: Axioms and laws for the unicode library.
+  include:
+  - package: unicode
+- title: Unicode C
+  slug: lib-unicode-c
+  description: unicode-c -- `unicode` contract backend over the system ICU4C library.
+  include:
+  - package: unicode-c
+- title: Url Rfc
+  slug: lib-url-rfc
+  description: parse a strict RFC 3986 URI string into a Value.
+  include:
+  - package: url_rfc
+- title: Url Whatwg
+  slug: lib-url-whatwg
+  description: parse a WHATWG URL Standard string into a Value.
+  include:
+  - package: url_whatwg
+- title: Utils
+  slug: lib-utils
+  description: boolean utility functions for the handl runtime.
+  include:
+  - package: utils
