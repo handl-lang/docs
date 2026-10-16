@@ -45,6 +45,11 @@ jobs:
 
       - run: bunx vitepress build .
 
+      # GitHub Pages runs a Jekyll pass over the artifact, and Jekyll honours
+      # `.gitignore` — which drops the generated `reference/<repo>/` pages
+      # (this repo ignores them). `.nojekyll` disables that pass.
+      - run: touch .vitepress/dist/.nojekyll
+
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
