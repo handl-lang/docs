@@ -24,6 +24,7 @@ The site's `srcDir` is the repo root; `README.md`, `project/**` and
 
 | script | output | source |
 |---|---|---|
+| `scripts/gen-docs-index.py` | `ADR-INDEX.md` | `platform/project/docs-split.yaml` + each repo's `project/adrs/` |
 | `scripts/gen_reference_all.py` | `reference/<repo>/` + `reference.yaml` + `.vitepress/sidebar-reference.mjs` | every sibling repo's `handl-packages/*.hnl` doc comments |
 | `scripts/gen-api.sh` | `api/<repo>/` | each sibling repo's rustdoc (`cargo +nightly doc-md`, else `cargo doc`) |
 

@@ -7,6 +7,7 @@
     "docs:dev": "vitepress dev .",
     "docs:gen-ref": "python3 scripts/gen_reference_all.py",
     "docs:gen-api": "bash scripts/gen-api.sh",
+    "docs:gen-index": "python3 scripts/gen-docs-index.py",
     "docs:build": "bun run docs:gen-api && bun run docs:gen-ref && vitepress build .",
     "docs:preview": "vitepress preview ."
   },
