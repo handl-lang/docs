@@ -6,10 +6,9 @@ node_modules
 # generated reference + rustdoc (docs/scripts/*) — the hand-written reference
 # pages are tracked and re-included below
 /api
-/reference/*
-!/reference/index.md
-!/reference/host-concepts.md
-!/reference/strings-chars-unicode.md
+# `reference/` is generated (scripts/gen_reference_all.py) but **committed**:
+# GitHub Pages runs a Jekyll pass that honours .gitignore, and anything ignored
+# is dropped from the deployed site. Keeping the pages tracked keeps them live.
 
 # the project worktree (ADR-0129)
 /project/

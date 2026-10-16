@@ -1,0 +1,16 @@
+reference:
+- title: Command
+  slug: lib-command
+  description: user-space command registration and invocation algebra.
+  include:
+  - package: command
+- title: Event
+  slug: lib-event
+  description: user-space event emission and listener registration algebra.
+  include:
+  - package: event
+- title: Query
+  slug: lib-query
+  description: user-space query registration and invocation algebra.
+  include:
+  - package: query

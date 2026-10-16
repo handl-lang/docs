@@ -1,0 +1,189 @@
+[
+  {
+    "text": "Comb",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-comb",
+    "items": [
+      {
+        "text": "Comb",
+        "link": "/reference/kit-canonical/lib-comb-comb"
+      }
+    ]
+  },
+  {
+    "text": "Ffi",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-ffi",
+    "items": [
+      {
+        "text": "Ffi",
+        "link": "/reference/kit-canonical/lib-ffi-ffi"
+      }
+    ]
+  },
+  {
+    "text": "Intl C",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-intl-c",
+    "items": [
+      {
+        "text": "Intl C",
+        "link": "/reference/kit-canonical/lib-intl-c-intl-c"
+      }
+    ]
+  },
+  {
+    "text": "Os C",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-os-c",
+    "items": [
+      {
+        "text": "Env",
+        "link": "/reference/kit-canonical/lib-os-c-env"
+      },
+      {
+        "text": "Path",
+        "link": "/reference/kit-canonical/lib-os-c-path"
+      },
+      {
+        "text": "Time",
+        "link": "/reference/kit-canonical/lib-os-c-time"
+      }
+    ]
+  },
+  {
+    "text": "Os Stub",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-os-stub",
+    "items": [
+      {
+        "text": "Env",
+        "link": "/reference/kit-canonical/lib-os-stub-env"
+      },
+      {
+        "text": "Path",
+        "link": "/reference/kit-canonical/lib-os-stub-path"
+      },
+      {
+        "text": "Time",
+        "link": "/reference/kit-canonical/lib-os-stub-time"
+      }
+    ]
+  },
+  {
+    "text": "Perlin",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-perlin",
+    "items": [
+      {
+        "text": "Perlin",
+        "link": "/reference/kit-canonical/lib-perlin-perlin"
+      }
+    ]
+  },
+  {
+    "text": "Rand C",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-rand-c",
+    "items": [
+      {
+        "text": "Entropy",
+        "link": "/reference/kit-canonical/lib-rand-c-entropy"
+      }
+    ]
+  },
+  {
+    "text": "Simplex",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-simplex",
+    "items": [
+      {
+        "text": "Simplex",
+        "link": "/reference/kit-canonical/lib-simplex-simplex"
+      }
+    ]
+  },
+  {
+    "text": "Test",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-test",
+    "items": [
+      {
+        "text": "Assert",
+        "link": "/reference/kit-canonical/lib-test-assert"
+      },
+      {
+        "text": "Benchmark",
+        "link": "/reference/kit-canonical/lib-test-benchmark"
+      },
+      {
+        "text": "Fuzz",
+        "link": "/reference/kit-canonical/lib-test-fuzz"
+      },
+      {
+        "text": "Property",
+        "link": "/reference/kit-canonical/lib-test-property"
+      },
+      {
+        "text": "Snapshot",
+        "link": "/reference/kit-canonical/lib-test-snapshot"
+      },
+      {
+        "text": "Test",
+        "link": "/reference/kit-canonical/lib-test-test"
+      }
+    ]
+  },
+  {
+    "text": "Time",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-time",
+    "items": [
+      {
+        "text": "Time",
+        "link": "/reference/kit-canonical/lib-time-time"
+      }
+    ]
+  },
+  {
+    "text": "Time C",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-time-c",
+    "items": [
+      {
+        "text": "Clock Gettime",
+        "link": "/reference/kit-canonical/lib-time-c-clock_gettime"
+      },
+      {
+        "text": "Time C",
+        "link": "/reference/kit-canonical/lib-time-c-time-c"
+      }
+    ]
+  },
+  {
+    "text": "Type",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-type",
+    "items": [
+      {
+        "text": "Dependent",
+        "link": "/reference/kit-canonical/lib-type-dependent"
+      },
+      {
+        "text": "Type",
+        "link": "/reference/kit-canonical/lib-type-type"
+      }
+    ]
+  },
+  {
+    "text": "Unicode C",
+    "collapsed": false,
+    "link": "/reference/kit-canonical/lib-unicode-c",
+    "items": [
+      {
+        "text": "Unicode C",
+        "link": "/reference/kit-canonical/lib-unicode-c-unicode-c"
+      }
+    ]
+  }
+]

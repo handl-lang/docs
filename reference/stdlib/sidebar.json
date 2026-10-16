@@ -1,0 +1,350 @@
+[
+  {
+    "text": "Archive Tar",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-archive-tar",
+    "items": [
+      {
+        "text": "Tar",
+        "link": "/reference/stdlib/lib-archive-tar-tar"
+      }
+    ]
+  },
+  {
+    "text": "Base64",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-base64",
+    "items": [
+      {
+        "text": "Base64",
+        "link": "/reference/stdlib/lib-base64-base64"
+      }
+    ]
+  },
+  {
+    "text": "Bytes",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-bytes",
+    "items": [
+      {
+        "text": "Bytes",
+        "link": "/reference/stdlib/lib-bytes-bytes"
+      }
+    ]
+  },
+  {
+    "text": "Char",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-char",
+    "items": [
+      {
+        "text": "Char",
+        "link": "/reference/stdlib/lib-char-char"
+      }
+    ]
+  },
+  {
+    "text": "Char Native",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-char-native",
+    "items": [
+      {
+        "text": "Char",
+        "link": "/reference/stdlib/lib-char-native-char"
+      }
+    ]
+  },
+  {
+    "text": "Cmp",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-cmp",
+    "items": [
+      {
+        "text": "Cmp",
+        "link": "/reference/stdlib/lib-cmp-cmp"
+      }
+    ]
+  },
+  {
+    "text": "Collections",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-collections",
+    "items": [
+      {
+        "text": "Hash Set",
+        "link": "/reference/stdlib/lib-collections-hash_set"
+      }
+    ]
+  },
+  {
+    "text": "Crypto",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-crypto",
+    "items": [
+      {
+        "text": "Crypto",
+        "link": "/reference/stdlib/lib-crypto-crypto"
+      }
+    ]
+  },
+  {
+    "text": "Encoding",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-encoding",
+    "items": [
+      {
+        "text": "Encoding",
+        "link": "/reference/stdlib/lib-encoding-encoding"
+      }
+    ]
+  },
+  {
+    "text": "Error",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-error",
+    "items": [
+      {
+        "text": "Error",
+        "link": "/reference/stdlib/lib-error-error"
+      }
+    ]
+  },
+  {
+    "text": "Hex",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-hex",
+    "items": [
+      {
+        "text": "Hex",
+        "link": "/reference/stdlib/lib-hex-hex"
+      }
+    ]
+  },
+  {
+    "text": "Intl",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-intl",
+    "items": [
+      {
+        "text": "Intl",
+        "link": "/reference/stdlib/lib-intl-intl"
+      }
+    ]
+  },
+  {
+    "text": "Intl C",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-intl-c",
+    "items": [
+      {
+        "text": "Intl C",
+        "link": "/reference/stdlib/lib-intl-c-intl-c"
+      }
+    ]
+  },
+  {
+    "text": "Ip",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-ip",
+    "items": [
+      {
+        "text": "Ip",
+        "link": "/reference/stdlib/lib-ip-ip"
+      },
+      {
+        "text": "Ip.cidr",
+        "link": "/reference/stdlib/lib-ip-ip.cidr"
+      },
+      {
+        "text": "Ip.socket",
+        "link": "/reference/stdlib/lib-ip-ip.socket"
+      }
+    ]
+  },
+  {
+    "text": "Kv Hashmap",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-kv-hashmap",
+    "items": [
+      {
+        "text": "Kv",
+        "link": "/reference/stdlib/lib-kv-hashmap-kv"
+      }
+    ]
+  },
+  {
+    "text": "Obj",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-obj",
+    "items": [
+      {
+        "text": "Obj",
+        "link": "/reference/stdlib/lib-obj-obj"
+      }
+    ]
+  },
+  {
+    "text": "Option",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-option",
+    "items": [
+      {
+        "text": "Option",
+        "link": "/reference/stdlib/lib-option-option"
+      }
+    ]
+  },
+  {
+    "text": "Prim",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-prim",
+    "items": [
+      {
+        "text": "Prim",
+        "link": "/reference/stdlib/lib-prim-prim"
+      }
+    ]
+  },
+  {
+    "text": "Rand C",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-rand-c",
+    "items": [
+      {
+        "text": "Entropy",
+        "link": "/reference/stdlib/lib-rand-c-entropy"
+      }
+    ]
+  },
+  {
+    "text": "Result",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-result",
+    "items": [
+      {
+        "text": "Result",
+        "link": "/reference/stdlib/lib-result-result"
+      }
+    ]
+  },
+  {
+    "text": "Stats",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-stats",
+    "items": [
+      {
+        "text": "Stats",
+        "link": "/reference/stdlib/lib-stats-stats"
+      }
+    ]
+  },
+  {
+    "text": "Time C",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-time-c",
+    "items": [
+      {
+        "text": "Clock Gettime",
+        "link": "/reference/stdlib/lib-time-c-clock_gettime"
+      },
+      {
+        "text": "Time C",
+        "link": "/reference/stdlib/lib-time-c-time-c"
+      }
+    ]
+  },
+  {
+    "text": "Transform",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-transform",
+    "items": [
+      {
+        "text": "Transform",
+        "link": "/reference/stdlib/lib-transform-transform"
+      }
+    ]
+  },
+  {
+    "text": "Unicode",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-unicode",
+    "items": [
+      {
+        "text": "Unicode",
+        "link": "/reference/stdlib/lib-unicode-unicode"
+      }
+    ]
+  },
+  {
+    "text": "Unicode C",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-unicode-c",
+    "items": [
+      {
+        "text": "Unicode C",
+        "link": "/reference/stdlib/lib-unicode-c-unicode-c"
+      }
+    ]
+  },
+  {
+    "text": "Url Rfc",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-url-rfc",
+    "items": [
+      {
+        "text": "Url Rfc",
+        "link": "/reference/stdlib/lib-url-rfc-url_rfc"
+      }
+    ]
+  },
+  {
+    "text": "Url Whatwg",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-url-whatwg",
+    "items": [
+      {
+        "text": "Url Whatwg",
+        "link": "/reference/stdlib/lib-url-whatwg-url_whatwg"
+      }
+    ]
+  },
+  {
+    "text": "Utils",
+    "collapsed": false,
+    "link": "/reference/stdlib/lib-utils",
+    "items": [
+      {
+        "text": "Combinators",
+        "link": "/reference/stdlib/lib-utils-combinators"
+      },
+      {
+        "text": "Encoding",
+        "link": "/reference/stdlib/lib-utils-encoding"
+      },
+      {
+        "text": "Math",
+        "link": "/reference/stdlib/lib-utils-math"
+      },
+      {
+        "text": "Mood",
+        "link": "/reference/stdlib/lib-utils-mood"
+      },
+      {
+        "text": "Parse",
+        "link": "/reference/stdlib/lib-utils-parse"
+      },
+      {
+        "text": "Serialize",
+        "link": "/reference/stdlib/lib-utils-serialize"
+      },
+      {
+        "text": "Str",
+        "link": "/reference/stdlib/lib-utils-str"
+      },
+      {
+        "text": "Typeof",
+        "link": "/reference/stdlib/lib-utils-typeof"
+      }
+    ]
+  }
+]
