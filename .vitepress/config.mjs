@@ -11,6 +11,9 @@ export default defineConfig({
   // The site lives at the repo root (this repo is the docs hub); the ADR
   // worktree and the generator scripts are not site content.
   srcDir: ".",
+  // Project Pages are served from https://handl-lang.github.io/docs/ ;
+  // `DOCS_BASE` overrides this for local `vitepress dev` (use "/").
+  base: process.env.DOCS_BASE ?? "/docs/",
   srcExclude: ["README.md", "project/**", "scripts/**", "node_modules/**"],
   head: [
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],

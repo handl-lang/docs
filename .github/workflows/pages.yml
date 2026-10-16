@@ -1,0 +1,61 @@
+name: pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      # PAT with read access to the private sibling repos (platform, lang,
+      # kit-canonical, stdlib) so the reference can be aggregated.
+      CI_TOKEN: ${{ secrets.CI_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: auth for private sibling repos
+        run: |
+          if [ -n "$CI_TOKEN" ]; then
+            git config --global url."https://x-access-token:${CI_TOKEN}@github.com/".insteadOf "https://github.com/"
+          fi
+
+      - name: check out the sibling repos (for the reference)
+        run: |
+          for r in platform lang kit-canonical stdlib; do
+            git clone --depth 1 --quiet "https://github.com/handl-lang/$r" "../$r" || \
+              echo "::warning::could not clone $r"
+          done
+
+      - uses: oven-sh/setup-bun@v2
+      - run: bun install --frozen-lockfile
+
+      - name: generate the aggregated reference
+        run: bun run docs:gen-ref
+
+      - run: bunx vitepress build .
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .vitepress/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
