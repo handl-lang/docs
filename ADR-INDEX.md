@@ -184,13 +184,13 @@ An ADR that defines a port, the kernel, or composition stays in
 | 0061 | Truffle Backend | `project/adrs/0061-truffle-backend.md` |
 | 0062 | JVM Bytecode Emitter Backend | `project/adrs/0062-jvm-bytecode-emitter-backend.md` |
 
-### `cli` — ADR-0128 Phase 8
+### `host-cli` — ADR-0128 Phase 8
 
 | # | title | file |
 |---|---|---|
 | 0029 | CLI as Capability Orchestrator | `project/adrs/0029-cli-as-capability-orchestrator.md` |
 
-### `lsp` — ADR-0128 Phase 8
+### `host-lsp` — ADR-0128 Phase 8
 
 | # | title | file |
 |---|---|---|
