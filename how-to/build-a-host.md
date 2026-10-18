@@ -84,11 +84,22 @@ fn main() -> Result<(), PlatformError> {
 
 ## CLI flags
 
-The reference `handl-host-cli` binary supports:
+The reference `handl-host-cli` binary (`hnl`) is a dumb extension host
+(ADR-0149) — it owns no tool flags itself:
 
-- `--applier <id>` — select the applier plugin (default `applier.default`).
-- `--config <path>` — path to the host config file (default `.handl.toml`).
-- `--kit <name>` — fallback kit when no `[[kit]]` entries are in the config (default from `HANDL_KIT` env var or `hello`).
+- `--ext-dir <dir>` — extra extension discovery dir (repeatable); then
+  `$HANDL_EXT_DIR` (PATH-style), `~/.handl/ext/`, and (debug builds)
+  `<exe-dir>/ext/` + `<exe-dir>/`.
+- `hnl ext list` / `hnl ext doctor` — show the loaded registry and
+  diagnose discovery.
+- All tool commands (`fmt`, `lint`, `typecheck`, `run`, `test`,
+  `compile`, `sdkgen`, `transform`, `kit`, `plugin`, …) come from
+  dynamically loaded `libhnl_ext_*.so` cdylibs in the `ext-*` repos; their
+  flags are per-extension (`hnl <cmd> --help`-equivalent via usage errors).
+
+The old global flags (`--applier`, `--config`, `--kit`, `--engine`) are
+gone — extensions own their options via `args`/`env` (e.g. `--engine`
+lives in `ext-eval`, `--kit` in `ext-kit`).
 
 ## Configuration file
 
