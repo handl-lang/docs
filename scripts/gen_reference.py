@@ -42,7 +42,7 @@ ORG = DOCS_ROOT.parent
 
 # Defaults; overridden per repo by `--repo` / `--packages-dir` / `--out`
 # (see scripts/gen_reference_all.py, which aggregates every sibling repo).
-ROOT = ORG / 'platform'
+ROOT = ORG / 'host'
 PKGS = ROOT / 'handl-packages'
 REF = DOCS_ROOT / 'reference' / 'platform'
 URL = '/reference/platform'
@@ -279,7 +279,7 @@ def main(argv: list[str] | None = None) -> int:
     import argparse
 
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument('--repo', default='platform',
+    ap.add_argument('--repo', default='host',
                     help='repo label (used for the output dir + URL prefix)')
     ap.add_argument('--packages-dir', type=Path, default=None,
                     help='directory of .hnl packages (default: <org>/<repo>/handl-packages)')

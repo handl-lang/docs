@@ -24,7 +24,7 @@ The site's `srcDir` is the repo root; `README.md`, `project/**` and
 
 | script | output | source |
 |---|---|---|
-| `scripts/gen-docs-index.py` | `ADR-INDEX.md` | `platform/project/docs-split.yaml` + each repo's `project/adrs/` |
+| `scripts/gen-docs-index.py` | `ADR-INDEX.md` | `host/project/docs-split.yaml` + each repo's `project/adrs/` |
 | `scripts/gen_reference_all.py` | `reference/<repo>/` + `reference.yaml` + `.vitepress/sidebar-reference.mjs` | every sibling repo's `handl-packages/*.hnl` doc comments |
 | `scripts/gen-api.sh` | `api/<repo>/` | each sibling repo's rustdoc (`cargo +nightly doc-md`, else `cargo doc`) |
 
@@ -44,7 +44,7 @@ bun run docs:build       # gen-api + gen-ref + vitepress build
 | what | where |
 |---|---|
 | ADR index (published, cross-repo) | [`ADR-INDEX.md`](ADR-INDEX.md) |
-| ADR registry (canonical) | `platform/project/adrs/INDEX.md` |
+| ADR registry (canonical) | `host/project/adrs/INDEX.md` |
 | Project principles | `project/principles.md` (this repo's `project` branch) |
 | A repo's own docs | that repo's `project` branch, mounted at `<repo>/project/` |
 
@@ -54,4 +54,4 @@ This repo publishes the aggregate.
 
 ## History
 
-The site moved here from `platform/docs` in ADR-0128 Phase 12 / ADR-0129 5.3.
+The site moved here from `host/docs` in ADR-0128 Phase 12 / ADR-0129 5.3.

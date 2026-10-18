@@ -27,8 +27,8 @@ def repos_with_packages() -> list[str]:
         for d in sorted(ORG.iterdir())
         if d.is_dir() and d != DOCS_ROOT and (d / "handl-packages").is_dir()
     ]
-    # platform first, then alphabetical
-    repos.sort(key=lambda r: (r != "platform", r))
+    # host first, then alphabetical
+    repos.sort(key=lambda r: (r != "host", r))
     return repos
 
 

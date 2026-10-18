@@ -16,7 +16,7 @@ The hnl runtime is implemented in Rust and lives in the `crates/` directory of t
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/handl-lang/platform
+   git clone https://github.com/handl-lang/host
    cd platform
    ```
 
