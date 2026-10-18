@@ -116,7 +116,7 @@ The `grade Addable` clause is the grade of the operation.
 
 ### Terms
 
-A `Term` is a term in the free arrow category over the `Language` signature. The `Term` enum in `plugin-engine` is the calculus:
+A `Term` is a term in the free arrow category over the `Language` signature. The `Term` enum in `hnl-engine` is the calculus:
 
 ```rust
 pub enum Term {

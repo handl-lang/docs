@@ -8,7 +8,7 @@ The workspace is organised around one idea: the platform defines the composition
 handl-host-cli, handl-host-lsp     # executable hosts
 handl-ext-fmt, handl-ext-lint,    # concrete operations
   handl-ext-lexer, handl-ext-parser,
-  handl-plugin-engine-typecheck, handl-ext-cli,
+  hnl-engine-typecheck, handl-ext-cli,
   handl-ext-lsp, handl-ext-doc,
   handl-ext-eval
 handl-plugin-*                     # rule and library plugins
@@ -24,7 +24,7 @@ handl-platform                     # Plugin, Host, and composition primitives
 | `handl-ext-lint`                | `Lint` operation, `LintBehavior`, `LintContext`, `BasicLinter` `RuleAcceptor` plugin.                                                                                                                                                |
 | `handl-ext-lexer`               | `Lexer` operation, `LexerBehavior`, `BasicLexer` `RuleAcceptor` plugin.                                                                                                                                                              |
 | `handl-ext-parser`              | `Parser` operation, `ParserBehavior`, `BasicParser` `RuleAcceptor` plugin.                                                                                                                                                           |
-| `handl-plugin-engine-typecheck` | Typecheck abstraction: `Typecheck` operation marker, `TypecheckRequest`/`TypecheckResult`, `TypecheckEngine` trait, `check_module` entry point. Engine impl: `handl-plugin-engine-typecheck-handl` (Handl-authored model, ADR-0105). |
+| `hnl-engine-typecheck` | Typecheck abstraction: `Typecheck` operation marker, `TypecheckRequest`/`TypecheckResult`, `TypecheckEngine` trait, `check_module` entry point. Engine impl: `hnl-engine-typecheck-handl` (Handl-authored model, ADR-0105). |
 | `handl-ext-eval`                | `Eval` operation, `EvalBehavior`, `EvalContext`.                                                                                                                                                                                     |
 | `handl-target-rust-interpreter` | Default `Eval` interpreter `RuleAcceptor` target plugin.                                                                                                                                                                             |
 | `handl-ext-doc`                 | `Doc` operation, `DocBehavior`, `BasicDoc` `RuleAcceptor` plugin.                                                                                                                                                                    |

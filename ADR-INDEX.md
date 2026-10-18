@@ -80,18 +80,18 @@ An ADR that defines a port, the kernel, or composition stays in
 | 0085 | Bootstrap Tooling Strategy — Rust Tooling on the Generic Substrate | `project/adrs/0085-bootstrap-tooling-strategy.md` |
 | 0086 | Bootstrap Formatter (`plugin-ext-fmt`) | `project/adrs/0086-bootstrap-formatter.md` |
 | 0087 | Bootstrap Linter (`plugin-ext-lint`) | `project/adrs/0087-bootstrap-linter.md` |
-| 0088 | Bootstrap Typechecker (`plugin-engine-typecheck`) | `project/adrs/0088-bootstrap-typechecker.md` |
-| 0089 | Bootstrap Test Runner (`plugin-engine-test`) | `project/adrs/0089-bootstrap-test-runner.md` |
+| 0088 | Bootstrap Typechecker (`hnl-engine-typecheck`) | `project/adrs/0088-bootstrap-typechecker.md` |
+| 0089 | Bootstrap Test Runner (`hnl-engine-test`) | `project/adrs/0089-bootstrap-test-runner.md` |
 | 0090 | Bootstrap CLI (`host-cli`) | `project/adrs/0090-bootstrap-cli.md` |
 | 0091 | Shared Diagnostics Crate (`plugin-ext-diag`) | `project/adrs/0091-plugin-ext-diag.md` |
 | 0092 | Test Framework in Handl (`handl-packages/test`), Delete `plugin-lib-test` | `project/adrs/0092-test-framework-in-handl.md` |
 | 0093 | String / Char / Unicode Layering | `project/adrs/0093-string-char-unicode-layering.md` |
-| 0094 | Generic AST Transform Engine (`plugin-engine-transform` + `plugin-engine-transform-rewrite`) | `project/adrs/0094-generic-ast-transform-engine.md` |
+| 0094 | Generic AST Transform Engine (`hnl-engine-transform` + `hnl-engine-transform-rewrite`) | `project/adrs/0094-generic-ast-transform-engine.md` |
 | 0095 | Formatter as a Production Pipeline (`FormatEngine` stage contracts) | `project/adrs/0095-formatter-as-production-pipeline.md` |
 | 0096 | Module Resolution — Path-Based Imports + `.handl.toml` Path Dependencies | `project/adrs/0096-module-resolution.md` |
 | 0097 | Lint Rules as Language Data | `project/adrs/0097-lint-rules-as-data.md` |
 | 0098 | One Language, Multiple Interpreters | `project/adrs/0098-one-language-multiple-interpreters.md` |
-| 0099 | Principled Boundaries Between `plugin-engine-*` and `plugin-ext-*` Crates | `project/adrs/0099-plugin-engine-vs-ext-crate-boundaries.md` |
+| 0099 | Principled Boundaries Between `hnl-engine-*` and `plugin-ext-*` Crates | `project/adrs/0099-hnl-engine-vs-ext-crate-boundaries.md` |
 | 0100 | Canonical surface as the arrow calculus | `project/adrs/0100-canonical-term-arrows.md` |
 | 0100 | Directed Homotopy Type Theory as the Theoretical Limit | `project/adrs/0100-directed-hott-limit.md` |
 | 0100 | Wiring `.hnl` modules into `HandlNativeLint` and `HandlNativeRewrite` | `project/adrs/0100-handl-natives-wire.md` |
