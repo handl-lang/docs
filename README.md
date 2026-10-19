@@ -24,8 +24,8 @@ The site's `srcDir` is the repo root; `README.md`, `project/**` and
 
 | script | output | source |
 |---|---|---|
-| `scripts/gen-docs-index.py` | `ADR-INDEX.md` | `host/project/docs-split.yaml` + each repo's `project/adrs/` |
-| `scripts/gen_reference_all.py` | `reference/<repo>/` + `reference.yaml` + `.vitepress/sidebar-reference.mjs` | every sibling repo's `handl-packages/*.hnl` doc comments |
+| `scripts/gen-docs-index.py` | `ADR-INDEX.md` | every sibling's `project/adrs/` worktree + the `project` repo's retired-shell subtrees (+ `host/project/docs-split.yaml` for split/local metadata) |
+| `scripts/gen_reference_all.py` | `reference/<repo>/` + `reference.yaml` + `.vitepress/sidebar-reference.mjs` | every sibling repo's package sources — `handl-packages/<pkg>/`, `pkg.hnl`+`src/`, or `crates/<crate>/src/*.hnl` doc comments |
 | `scripts/gen-api.sh` | `api/<repo>/` | each sibling repo's rustdoc (`cargo +nightly doc-md`, else `cargo doc`) |
 
 Both are per-repo: the hub aggregates. `reference/` and `api/` are gitignored

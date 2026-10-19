@@ -41,7 +41,7 @@ impl Plugin for CommentStylePlugin {
 
 ```toml
 [[kit]]
-include = "handl-kit-canonical"
+include = "handl-kit-prelude"
 
 [options]
 "comment.style" = "inline"

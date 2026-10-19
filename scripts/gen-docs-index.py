@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
 """Publish the aggregated ADR index into the `docs/` hub repo (ADR-0129 5.2).
 
-Reads project/docs-split.yaml (+ the repo list) and writes
-<org>/docs/ADR-INDEX.md: every repo, the ADRs it owns, and the split
-children. The canonical registry stays host/project/adrs/INDEX.md; this
-is the published, cross-repo view.
+Enumerates every sibling repo's checked-out `project` worktree
+(`<repo>/project/adrs/*.md`, including `adrs/archived/`) — plus the
+`project` repo's retired-shell subtrees (`project/<shell>/adrs/`) — and
+writes <org>/docs/ADR-INDEX.md: every repo, the ADRs it owns, and the
+split children. The canonical registry stays host/project/adrs/INDEX.md;
+this is the published, cross-repo view.
 
-Run from the host repo: `python3 scripts/gen-docs-index.py`.
+The pre-restructure manifest (host/project/docs-split.yaml) is still read
+for its `splits:`/`local_adrs:` metadata, but repo names there reflect the
+*planned* target repos — each numbered ADR is attributed to the repo whose
+worktree actually contains the file today.
+
+Run from the docs repo: `python3 scripts/gen-docs-index.py`.
 """
 
 from __future__ import annotations
@@ -19,18 +26,23 @@ import yaml
 
 DOCS_ROOT = Path(__file__).resolve().parent.parent
 ORG = DOCS_ROOT.parent
-# The assignment manifest lives in the host repo (it maps host/project
-# docs to repos); override with --manifest.
+# The assignment manifest lives in the host repo; it records the split
+# plan (parents, children, numbers) even where the child ADR was never
+# written. Override with --manifest.
 MANIFEST = ORG / "host" / "project" / "docs-split.yaml"
 OUT = DOCS_ROOT / "ADR-INDEX.md"
 
 NUM = re.compile(r"^(\d+[a-z]?)")
 TITLE = re.compile(r"^#\s+(?:ADR-\d+[a-z]?:\s*)?(.*)")
+# ADR-0128 extraction phase per *current* repo name (the manifest's keys
+# are the planned, pre-rename names — platform → host, cli → host-cli,
+# dot/term/sexp/handl → compile-*, lang → kit-data-prelude, …).
 PHASE = {
-    "host": 0, "python": 1, "c": 2, "stdlib": 3, "otlp": 4, "web": 5,
-    "native": 6, "dot": 7, "term": 7, "sexp": 7, "handl": 7, "cli": 8,
-    "lsp": 8, "meta": 9, "ffi": 10, "lang": 11, "kit-canonical": 11,
-    "docs": 12,
+    "host": 0, "c": 2, "web": 5,
+    "compile-dot": 7, "compile-term": 7, "compile-sexp": 7,
+    "compile-handl": 7, "compile-js": 7, "compile-llvm": 7,
+    "host-cli": 8, "host-lsp": 8, "kit-data-prelude": 11,
+    "kit-prelude": 11, "docs": 12,
 }
 
 
@@ -44,6 +56,44 @@ def title_of(path: Path) -> str:
     return path.stem
 
 
+def repo_adrs() -> dict[str, list[tuple[str, str, Path]]]:
+    """`repo label -> [(number, display path, file)]` on disk.
+
+    A repo's ADRs live on its `project` branch, checked out as the
+    `<repo>/project` worktree.  The `project` repo itself aggregates the
+    retired shells' project docs under `<shell>/`; each shell subtree is
+    reported as `project/<shell>`.
+    """
+    found: dict[str, list[tuple[str, str, Path]]] = {}
+
+    def collect(repo: str, adrs_dir: Path, prefix: str) -> None:
+        rows = []
+        for sub in ("adrs", "adrs/archived"):
+            d = adrs_dir.parent / sub
+            if not d.is_dir():
+                continue
+            for f in sorted(d.iterdir()):
+                if f.suffix != ".md":
+                    continue
+                m = NUM.match(f.name)
+                if m:
+                    rows.append((m.group(1), f"{prefix}{sub}/{f.name}", f))
+        if rows:
+            found[repo] = rows
+
+    for d in sorted(ORG.iterdir()):
+        if not d.is_dir():
+            continue
+        if (d / "project" / "adrs").is_dir():
+            collect(d.name, d / "project" / "adrs", "project/")
+    proj = ORG / "project"
+    if proj.is_dir():
+        for shell in sorted(proj.iterdir()):
+            if shell.is_dir() and (shell / "adrs").is_dir():
+                collect(f"project/{shell.name}", shell / "adrs", f"{shell.name}/")
+    return found
+
+
 def main(argv: list[str] | None = None) -> int:
     import argparse
 
@@ -52,8 +102,14 @@ def main(argv: list[str] | None = None) -> int:
                     help="path to host/project/docs-split.yaml")
     args = ap.parse_args(argv)
 
-    data = yaml.safe_load(args.manifest.read_text())
-    repos = data.get("repos") or {}
+    data = yaml.safe_load(args.manifest.read_text()) if args.manifest.exists() else {}
+    repos = repo_adrs()
+
+    # ADR number -> (repo label, repo-relative file path) on disk.
+    index: dict[str, tuple[str, str]] = {}
+    for repo, rows in repos.items():
+        for num, display, f in rows:
+            index[num] = (repo, display)
 
     out = [
         "# ADR index (published)",
@@ -65,31 +121,25 @@ def main(argv: list[str] | None = None) -> int:
         "",
         "An ADR that defines a port, the kernel, or composition stays in",
         "`host`; a repo-local decision lives in that repo's `project` branch.",
+        "The retired shells' docs (`web`, `c`, …) live in the `project`",
+        "repo under `project/<shell>/`.",
         "",
         "## By repo",
         "",
     ]
 
-    for repo, sections in repos.items():
-        adrs = []
-        for key, sub in (("adrs", "adrs"), ("adrs_archived", "adrs/archived")):
-            for name in (sections or {}).get(key) or []:
-                m = NUM.match(name)
-                if not m:
-                    continue
-                # the ADR lives in the owning repo's project worktree
-                p = ORG / repo / "project" / sub / name
-                adrs.append((m.group(1), sub, name, title_of(p)))
-
-        if not adrs:
-            continue
-        phase = PHASE.get(repo)
-        out.append(f"### `{repo}`" + (f" — ADR-0128 Phase {phase}" if phase else ""))
+    order = sorted(repos, key=lambda r: (r != "host", r))
+    for repo in order:
+        rows = repos[repo]
+        phase = PHASE.get(repo.split("/", 1)[-1] if "/" in repo else repo)
+        # `project/<shell>` sections are labelled by the shell's own phase
+        # when the current name carries one.
+        out.append(f"### `{repo}`" + (f" — ADR-0128 Phase {phase}" if phase is not None else ""))
         out.append("")
         out.append("| # | title | file |")
         out.append("|---|---|---|")
-        for num, sub, name, title in sorted(adrs, key=lambda a: a[0].rjust(5, "0")):
-            out.append(f"| {num} | {title} | `project/{sub}/{name}` |")
+        for num, display, f in sorted(rows, key=lambda a: a[0].rjust(5, "0")):
+            out.append(f"| {num} | {title_of(f)} | `{display}` |")
         out.append("")
 
     splits = data.get("splits") or []
@@ -98,10 +148,13 @@ def main(argv: list[str] | None = None) -> int:
         for s in splits:
             parent = s["parent"].split("/", 1)[1]
             for t in s.get("targets") or []:
-                if t.get("number"):
-                    out.append(
-                        f"| {t['number']} | {t['title']} | `{t['repo']}` | `{parent}` |"
-                    )
+                if not t.get("number"):
+                    continue
+                hit = index.get(str(t["number"]))
+                repo = hit[0] if hit else t["repo"] + " (planned — not landed)"
+                out.append(
+                    f"| {t['number']} | {t['title']} | `{repo}` | `{parent}` |"
+                )
         out.append("")
 
     locals_ = data.get("local_adrs") or []
@@ -113,8 +166,10 @@ def main(argv: list[str] | None = None) -> int:
             "|---|---|---|---|",
         ]
         for a in locals_:
+            hit = index.get(str(a["number"]))
+            repo, file = hit if hit else (a["repo"], a["file"])
             out.append(
-                f"| {a['number']} | {a['title']} | `{a['repo']}` | `{a['file']}` |"
+                f"| {a['number']} | {a['title']} | `{repo}` | `{file}` |"
             )
         out.append("")
 

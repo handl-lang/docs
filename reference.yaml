@@ -1,20 +1,54 @@
 reference:
-- title: Archive Tar
-  slug: lib-archive-tar
-  description: pack an array of {path, contents} objects into a base64 tar archive
-    string.
+- title: Tensor
+  slug: host-tensor
+  description: host-side dense n-d tensor functions (f64, row-major).
   include:
-  - package: archive_tar
-- title: Base64
-  slug: lib-base64
-  description: encode a string to base64.
-  include:
-  - package: base64
+  - package: tensor
 - title: Bytes
   slug: lib-bytes
   description: byte-buffer primitives for the `Bytes` scalar type.
   include:
   - package: bytes
+- title: Cmp
+  slug: lib-cmp
+  description: test whether two values are deeply equal.
+  include:
+  - package: cmp
+- title: Combinators
+  slug: lib-combinators
+  description: function combinator utilities for the handl runtime.
+  include:
+  - package: combinators
+- title: Error
+  slug: lib-error
+  description: the error-raising primitive contract (ADR-0092 gap (a)).
+  include:
+  - package: error
+- title: Mood
+  slug: lib-mood
+  description: mood (mode-of-data) operations for the handl runtime.
+  include:
+  - package: mood
+- title: Obj
+  slug: lib-obj
+  description: 'record introspection primitives (gap #3).'
+  include:
+  - package: obj
+- title: Prim
+  slug: lib-prim
+  description: the minimal atom layer for handl's arrow-based stdlib.
+  include:
+  - package: prim
+- title: Type
+  slug: lib-type
+  description: type coercion, predicates, and utility functions for the handl runtime.
+  include:
+  - package: type
+- title: Base64
+  slug: lib-base64
+  description: "`base64.decode` \u2014 pure-Handl base64 decoding (RFC 4648)."
+  include:
+  - package: base64
 - title: Char
   slug: lib-char
   description: Axioms and laws for the character library.
@@ -25,16 +59,21 @@ reference:
   description: char-native -- the Rust `std::char` backend for the `char` contract.
   include:
   - package: char-native
-- title: Cmp
-  slug: lib-cmp
-  description: test whether two values are deeply equal.
-  include:
-  - package: cmp
 - title: Collections
   slug: lib-collections
-  description: pure-handl implementation of the `array` functional ops.
+  description: Private reflection helpers shared by the `collections/array` modules.
   include:
   - package: collections
+- title: Comb
+  slug: lib-comb
+  description: Calls a function with an array of arguments.
+  include:
+  - package: comb
+- title: Command
+  slug: lib-command
+  description: user-space command registration and invocation algebra.
+  include:
+  - package: command
 - title: Compress
   slug: lib-compress
   description: compression contract.
@@ -73,14 +112,19 @@ reference:
   - package: dedent
 - title: Encoding
   slug: lib-encoding
-  description: encoding abstractions for the handl runtime.
+  description: generic encoding to/from string forms for the handl runtime.
   include:
   - package: encoding
-- title: Error
-  slug: lib-error
-  description: the error-raising primitive contract (ADR-0092 gap (a)).
+- title: Event
+  slug: lib-event
+  description: user-space event emission and listener registration algebra.
   include:
-  - package: error
+  - package: event
+- title: Fetch
+  slug: lib-fetch
+  description: HTTP client contract (WinterCG `fetch` surface).
+  include:
+  - package: fetch
 - title: Fetch C
   slug: lib-fetch-c
   description: fetch-c -- `fetch` backed by libcurl (sdkgen bindings).
@@ -91,16 +135,26 @@ reference:
   description: fetch-js -- `fetch` over the generated WebIDL bindings.
   include:
   - package: fetch-js
+- title: Ffi
+  slug: lib-ffi
+  description: Objects and arrows for foreign function calls.
+  include:
+  - package: ffi
+- title: Grade
+  slug: lib-grade
+  description: the `Grade` kind for effect-graded arrows.
+  include:
+  - package: grade
 - title: Hex
   slug: lib-hex
-  description: encode a string to hexadecimal.
+  description: "`hex.decode` \u2014 pure-Handl hex decoding."
   include:
   - package: hex
 - title: Http Rfc
   slug: lib-http-rfc
   description: HTTP/1.1 wire codec in pure Handl.
   include:
-  - package: http_rfc
+  - package: http-rfc
 - title: Intl
   slug: lib-intl
   description: Internationalization contract for the handl runtime.
@@ -113,7 +167,7 @@ reference:
   - package: intl-c
 - title: Ip
   slug: lib-ip
-  description: parse an IP address string into an ip object.
+  description: "`ip.cidr.*` \u2014 pure-Handl IPv4 CIDR ops over u32 int rep."
   include:
   - package: ip
 - title: Js
@@ -146,16 +200,26 @@ reference:
   description: Deterministic lattice-noise contract.
   include:
   - package: noise
-- title: Obj
-  slug: lib-obj
-  description: 'record introspection primitives (gap #3).'
-  include:
-  - package: obj
 - title: Option
   slug: lib-option
   description: Option type and constructors.
   include:
   - package: option
+- title: Os C
+  slug: lib-os-c
+  description: Read and inspect environment variables through libc.
+  include:
+  - package: os-c
+- title: Os Stub
+  slug: lib-os-stub
+  description: Deterministic, no-effect environment stubs for tests and benchmarks.
+  include:
+  - package: os-stub
+- title: Otlp
+  slug: lib-otlp
+  description: set endpoint, service name, headers and resource attributes.
+  include:
+  - package: otlp
 - title: Otlp
   slug: lib-otlp
   description: set endpoint, service name, headers and resource attributes.
@@ -166,11 +230,21 @@ reference:
   description: set endpoint, service name, headers and resource attributes.
   include:
   - package: otlp_std
-- title: Prim
-  slug: lib-prim
-  description: the minimal atom layer for handl's arrow-based stdlib.
+- title: Parse
+  slug: lib-parse
+  description: generic string parsing for the handl runtime.
   include:
-  - package: prim
+  - package: parse
+- title: Perlin
+  slug: lib-perlin
+  description: Pure-Handl deterministic Perlin noise.
+  include:
+  - package: perlin
+- title: Query
+  slug: lib-query
+  description: user-space query registration and invocation algebra.
+  include:
+  - package: query
 - title: Rand
   slug: lib-rand
   description: Randomness generation contract.
@@ -186,6 +260,11 @@ reference:
   description: Result type and constructors.
   include:
   - package: result
+- title: Serialize
+  slug: lib-serialize
+  description: generic serialization to/from strings for the handl runtime.
+  include:
+  - package: serialize
 - title: Serve
   slug: lib-serve
   description: run an HTTP server around a fetch-shaped handler arrow.
@@ -196,6 +275,11 @@ reference:
   description: serve-epoll -- `serve` backend on concurrent-epoll.
   include:
   - package: serve-epoll
+- title: Simplex
+  slug: lib-simplex
+  description: Pure-Handl deterministic simplex noise.
+  include:
+  - package: simplex
 - title: Stats
   slug: lib-stats
   description: the canonical handl statistical aggregates.
@@ -217,126 +301,17 @@ reference:
   description: mint a tagged value (host capability, ADR-0055).
   include:
   - package: tag
-- title: Time
-  slug: lib-time
-  description: Wall-clock and monotonic clock reads.
+- title: Tar
+  slug: lib-tar
+  description: pack an array of {path, contents} objects into a base64 tar archive
+    string.
   include:
-  - package: time
-- title: Time C
-  slug: lib-time-c
-  description: Low-level libc `clock_gettime` reader.
+  - package: tar
+- title: Tensor
+  slug: lib-tensor
+  description: "codec.hnl \u2014 the tensor wire representation and the boundary ops."
   include:
-  - package: time-c
-- title: Time Stub
-  slug: lib-time-stub
-  description: Deterministic, pure-Handl backend for `time`.
-  include:
-  - package: time-stub
-- title: Tls Libssl
-  slug: lib-tls-libssl
-  description: tls-libssl -- nonblocking TLS primitives over libssl, scheduler-agnostic.
-  include:
-  - package: tls-libssl
-- title: Transform
-  slug: lib-transform
-  description: Keeps the elements of a list that satisfy a predicate.
-  include:
-  - package: transform
-- title: Type
-  slug: lib-type
-  description: indexed families and dependent structure (ADR-0120 Phase 4;
-  include:
-  - package: type
-- title: Unicode
-  slug: lib-unicode
-  description: Axioms and laws for the unicode library.
-  include:
-  - package: unicode
-- title: Unicode C
-  slug: lib-unicode-c
-  description: unicode-c -- `unicode` contract backend over the system ICU4C library.
-  include:
-  - package: unicode-c
-- title: Url Rfc
-  slug: lib-url-rfc
-  description: parse a strict RFC 3986 URI string into a Value.
-  include:
-  - package: url_rfc
-- title: Url Whatwg
-  slug: lib-url-whatwg
-  description: parse a WHATWG URL Standard string into a Value.
-  include:
-  - package: url_whatwg
-- title: Utils
-  slug: lib-utils
-  description: boolean utility functions for the handl runtime.
-  include:
-  - package: utils
-- title: Uuid
-  slug: lib-uuid
-  description: Universally unique identifier generation contract.
-  include:
-  - package: uuid
-- title: Ws C
-  slug: lib-ws-c
-  description: ws-c -- WebSocket client for the concurrent-epoll scheduler.
-  include:
-  - package: ws-c
-- title: Ws Whatwg C
-  slug: lib-ws-whatwg-c
-  description: ws-whatwg-c/http -- pure HTTP/1.1 upgrade-handshake helpers
-  include:
-  - package: ws-whatwg-c
-- title: Ws Frame
-  slug: lib-ws-frame
-  description: "WebSocket frame codec contract (RFC 6455 \xA75.2)."
-  include:
-  - package: ws_frame
-- title: Ws Frame Handl
-  slug: lib-ws-frame-handl
-  description: ws_frame-handl -- the pure-Handl implementation of the `ws_frame`
-  include:
-  - package: ws_frame-handl
-- title: Comb
-  slug: lib-comb
-  description: Calls a function with an array of arguments.
-  include:
-  - package: comb
-- title: Ffi
-  slug: lib-ffi
-  description: Objects and arrows for foreign function calls.
-  include:
-  - package: ffi
-- title: Intl C
-  slug: lib-intl-c
-  description: intl-c -- `intl` contract backend over the system ICU4C libraries.
-  include:
-  - package: intl-c
-- title: Os C
-  slug: lib-os-c
-  description: Read and inspect environment variables through libc.
-  include:
-  - package: os-c
-- title: Os Stub
-  slug: lib-os-stub
-  description: Deterministic, no-effect environment stubs for tests and benchmarks.
-  include:
-  - package: os-stub
-- title: Perlin
-  slug: lib-perlin
-  description: Pure-Handl deterministic Perlin noise.
-  include:
-  - package: perlin
-- title: Rand C
-  slug: lib-rand-c
-  description: Low-level cryptographically secure entropy from libsodium.
-  include:
-  - package: rand-c
-- title: Simplex
-  slug: lib-simplex
-  description: Pure-Handl deterministic simplex noise.
-  include:
-  - package: simplex
+  - package: tensor
 - title: Test
   slug: lib-test
   description: Pure-handl assertion helpers (ADR-0092).
@@ -352,148 +327,37 @@ reference:
   description: Low-level libc `clock_gettime` reader.
   include:
   - package: time-c
-- title: Type
-  slug: lib-type
-  description: indexed families and dependent structure (ADR-0120 Phase 4;
+- title: Time Stub
+  slug: lib-time-stub
+  description: Deterministic, pure-Handl backend for `time`.
   include:
-  - package: type
-- title: Unicode C
-  slug: lib-unicode-c
-  description: unicode-c -- `unicode` contract backend over the system ICU4C library.
+  - package: time-stub
+- title: Tls
+  slug: lib-tls
+  description: nonblocking TLS contract.
   include:
-  - package: unicode-c
-- title: Command
-  slug: lib-command
-  description: user-space command registration and invocation algebra.
+  - package: tls
+- title: Tls Libssl
+  slug: lib-tls-libssl
+  description: tls-libssl -- nonblocking TLS primitives over libssl, scheduler-agnostic.
   include:
-  - package: command
-- title: Event
-  slug: lib-event
-  description: user-space event emission and listener registration algebra.
-  include:
-  - package: event
-- title: Query
-  slug: lib-query
-  description: user-space query registration and invocation algebra.
-  include:
-  - package: query
-- title: Archive Tar
-  slug: lib-archive-tar
-  description: pack an array of {path, contents} objects into a base64 tar archive
-    string.
-  include:
-  - package: archive_tar
-- title: Base64
-  slug: lib-base64
-  description: encode a string to base64.
-  include:
-  - package: base64
-- title: Bytes
-  slug: lib-bytes
-  description: byte-buffer primitives for the `Bytes` scalar type.
-  include:
-  - package: bytes
-- title: Char
-  slug: lib-char
-  description: Axioms and laws for the character library.
-  include:
-  - package: char
-- title: Char Native
-  slug: lib-char-native
-  description: char-native -- the Rust `std::char` backend for the `char` contract.
-  include:
-  - package: char-native
-- title: Cmp
-  slug: lib-cmp
-  description: test whether two values are deeply equal.
-  include:
-  - package: cmp
-- title: Collections
-  slug: lib-collections
-  description: pure-handl implementation of the `array` functional ops.
-  include:
-  - package: collections
-- title: Crypto
-  slug: lib-crypto
-  description: compute the SHA-256 hash of a string or byte array, returning a hex-encoded
-    digest.
-  include:
-  - package: crypto
-- title: Encoding
-  slug: lib-encoding
-  description: encoding abstractions for the handl runtime.
-  include:
-  - package: encoding
-- title: Error
-  slug: lib-error
-  description: the error-raising primitive contract (ADR-0092 gap (a)).
-  include:
-  - package: error
-- title: Hex
-  slug: lib-hex
-  description: encode a string to hexadecimal.
-  include:
-  - package: hex
-- title: Intl
-  slug: lib-intl
-  description: Internationalization contract for the handl runtime.
-  include:
-  - package: intl
-- title: Intl C
-  slug: lib-intl-c
-  description: intl-c -- `intl` contract backend over the system ICU4C libraries.
-  include:
-  - package: intl-c
-- title: Ip
-  slug: lib-ip
-  description: parse an IP address string into an ip object.
-  include:
-  - package: ip
-- title: Kv Hashmap
-  slug: lib-kv-hashmap
-  description: in-memory HashMap-backed KeyValueStore implementation.
-  include:
-  - package: kv_hashmap
-- title: Obj
-  slug: lib-obj
-  description: 'record introspection primitives (gap #3).'
-  include:
-  - package: obj
-- title: Option
-  slug: lib-option
-  description: Option type and constructors.
-  include:
-  - package: option
-- title: Prim
-  slug: lib-prim
-  description: the minimal atom layer for handl's arrow-based stdlib.
-  include:
-  - package: prim
-- title: Rand C
-  slug: lib-rand-c
-  description: Low-level cryptographically secure entropy from libsodium.
-  include:
-  - package: rand-c
-- title: Result
-  slug: lib-result
-  description: Result type and constructors.
-  include:
-  - package: result
-- title: Stats
-  slug: lib-stats
-  description: the canonical handl statistical aggregates.
-  include:
-  - package: stats
-- title: Time C
-  slug: lib-time-c
-  description: Low-level libc `clock_gettime` reader.
-  include:
-  - package: time-c
+  - package: tls-libssl
 - title: Transform
   slug: lib-transform
   description: Keeps the elements of a list that satisfy a predicate.
   include:
   - package: transform
+- title: Type
+  slug: lib-type
+  description: indexed families and dependent structure (ADR-0120 Phase 4;
+  include:
+  - package: type
+- title: Types
+  slug: lib-types
+  description: "types/c \u2014 transparent aliases for the C type vocabulary used\
+    \ by"
+  include:
+  - package: types
 - title: Unicode
   slug: lib-unicode
   description: Axioms and laws for the unicode library.
@@ -508,14 +372,44 @@ reference:
   slug: lib-url-rfc
   description: parse a strict RFC 3986 URI string into a Value.
   include:
-  - package: url_rfc
+  - package: url-rfc
 - title: Url Whatwg
   slug: lib-url-whatwg
   description: parse a WHATWG URL Standard string into a Value.
   include:
-  - package: url_whatwg
+  - package: url-whatwg
 - title: Utils
   slug: lib-utils
   description: boolean utility functions for the handl runtime.
   include:
   - package: utils
+- title: Uuid
+  slug: lib-uuid
+  description: Universally unique identifier generation contract.
+  include:
+  - package: uuid
+- title: Ws
+  slug: lib-ws
+  description: WebSocket client contract (RFC 6455).
+  include:
+  - package: ws
+- title: Ws C
+  slug: lib-ws-c
+  description: ws-c -- WebSocket client for the concurrent-epoll scheduler.
+  include:
+  - package: ws-c
+- title: Ws Frame
+  slug: lib-ws-frame
+  description: "WebSocket frame codec contract (RFC 6455 \xA75.2)."
+  include:
+  - package: ws-frame
+- title: Ws Frame Handl
+  slug: lib-ws-frame-handl
+  description: ws_frame-handl -- the pure-Handl implementation of the `ws_frame`
+  include:
+  - package: ws-frame-handl
+- title: Ws Whatwg C
+  slug: lib-ws-whatwg-c
+  description: ws-whatwg-c/http -- pure HTTP/1.1 upgrade-handshake helpers
+  include:
+  - package: ws-whatwg-c

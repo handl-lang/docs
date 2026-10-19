@@ -18,9 +18,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      # PAT with read access to the private sibling repos (host, lang,
-      # kit-canonical, stdlib) so the reference can be aggregated.
+      # PAT with read access to the private sibling repos so the reference
+      # can be aggregated. Post-restructure the sources are spread over the
+      # whole org (`lib-*`, `host-*`, `kernel`, …) — the set is resolved
+      # from `gh repo list`, not a hardcoded name list.
       CI_TOKEN: ${{ secrets.CI_TOKEN }}
+      GH_TOKEN: ${{ secrets.CI_TOKEN }}
     steps:
       - uses: actions/checkout@v4
 
@@ -32,10 +35,12 @@ jobs:
 
       - name: check out the sibling repos (for the reference)
         run: |
-          for r in host lang kit-canonical stdlib; do
-            git clone --depth 1 --quiet "https://github.com/handl-lang/$r" "../$r" || \
-              echo "::warning::could not clone $r"
-          done
+          gh repo list handl-lang --limit 500 --json name --jq '.[].name' \
+            | grep -vx docs \
+            | while read -r r; do
+                git clone --depth 1 --quiet "https://github.com/handl-lang/$r" "../$r" || \
+                  echo "::warning::could not clone $r"
+              done
 
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile

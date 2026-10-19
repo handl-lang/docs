@@ -31,12 +31,12 @@ Open `Cargo.toml` and add the dependencies you need:
 ```toml
 [dependencies]
 handl-platform = { path = "../crates/platform" }
-handl-kit-canonical = { git = "https://github.com/handl-lang/kit-canonical" }
+handl-kit-prelude = { git = "https://github.com/handl-lang/kit-prelude" }
 handl-ext-cli = { path = "../crates/ext-cli" }
 serde_json = "1"
 ```
 
-`handl-platform` provides `Host` and `Plugin`. `handl-kit-canonical` provides the kit manifest. `handl-ext-cli` provides the `Cli` operation plugin.
+`handl-platform` provides `Host` and `Plugin`. `handl-kit-prelude` provides the kit manifest. `handl-ext-cli` provides the `Cli` operation plugin.
 
 ## Step 3: Create a `Host`
 
@@ -78,7 +78,7 @@ Create `.handl.toml` next to `Cargo.toml`:
 
 ```toml
 [[kit]]
-include = "handl-kit-canonical"
+include = "handl-kit-prelude"
 ```
 
 This tells the applier to load the canonical kit, which contains the standard library, parser, lexer, and evaluator plugins.

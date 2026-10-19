@@ -1,10 +1,10 @@
 # Install hnl
 
-This guide explains how to build and install the `hnl` runtime from the platform repository.
+This guide explains how to build and install the `hnl` runtime from the `host` repository.
 
 ## Build from source
 
-The hnl runtime is implemented in Rust and lives in the `crates/` directory of the platform repository.
+The hnl runtime is implemented in Rust and lives in the `crates/` directory of the `host` repository.
 
 ### Requirements
 
@@ -17,7 +17,7 @@ The hnl runtime is implemented in Rust and lives in the `crates/` directory of t
 
    ```sh
    git clone https://github.com/handl-lang/host
-   cd platform
+   cd host
    ```
 
 2. Build the CLI:

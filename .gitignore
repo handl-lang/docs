@@ -3,6 +3,9 @@ node_modules
 .vitepress/dist
 .vitepress/cache
 
+# python
+scripts/__pycache__/
+
 # generated reference + rustdoc (docs/scripts/*) — the hand-written reference
 # pages are tracked and re-included below
 /api

@@ -1,6 +1,6 @@
 # String, char, and Unicode package reference
 
-The string stack is split across three concerns, each in its own package. Every package is either a **contract** (axioms, consumed by `parse_contracts`) or an **impl** (a runtime module, registered in `kit-canonical`).
+The string stack is split across three concerns, each in its own package. Every package is either a **contract** (axioms, consumed by `parse_contracts`) or an **impl** (a runtime module, registered through `host`'s `plugin-lib-stdlib`).
 
 ## Package map
 
@@ -36,7 +36,8 @@ All 45 live in `str-handl/` (Layer 1, pure handl). They call `char/` atoms for a
 
 ## Module registration
 
-Impl packages are registered in `crates/kit-canonical/src/lib.rs`:
+Impl packages are registered in `host`'s `plugin-lib-stdlib` package table
+(`crates/plugin-lib-stdlib/src/packages.rs`):
 
 - `char` → `CharModule` (`plugin-lib-char-native`'s Rust `std::char` atoms).
 - `str` → `build_str_handl_module()` (`handl_plugin_lib_handl::build_str_handl_module_with(&StdlibResolver, "tree-walk")`), re-exporting the per-arrow files in `STR_HANDL_SOURCES`. Replaces the former all-FFI `StrModule`.

@@ -51,7 +51,7 @@ A `.handl.toml` can exclude a plugin from a kit without forking the kit:
 
 ```toml
 [[kit]]
-include = "handl-kit-canonical"
+include = "handl-kit-prelude"
 exclude = ["handl-plugin-deprecated-grammar"]
 ```
 

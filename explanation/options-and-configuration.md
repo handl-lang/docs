@@ -74,7 +74,7 @@ A `.handl.toml` is the main user-facing configuration file. It lists kits, direc
 
 ```toml
 [[kit]]
-include = "handl-kit-canonical"
+include = "handl-kit-prelude"
 
 [[plugin]]
 register = "handl-plugin-custom-linter"
