@@ -35,7 +35,7 @@ jobs:
 
       - name: check out the sibling repos (for the reference)
         run: |
-          gh repo list handl-lang --limit 500 --json name --jq '.[].name' \
+          gh repo list handl-lang --limit 500 --visibility public --json name --jq '.[].name' \
             | grep -vx docs \
             | while read -r r; do
                 git clone --depth 1 --quiet "https://github.com/handl-lang/$r" "../$r" || \
