@@ -42,7 +42,7 @@ PHASE = {
     "compile-dot": 7, "compile-term": 7, "compile-sexp": 7,
     "compile-handl": 7, "compile-js": 7, "compile-llvm": 7,
     "host-cli": 8, "host-lsp": 8, "kit-data-prelude": 11,
-    "kit-prelude": 11, "docs": 12,
+    "kit-prelude": 11, "kit-prelude-lang": 11, "docs": 12,
 }
 
 
