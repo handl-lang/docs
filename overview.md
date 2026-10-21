@@ -44,6 +44,6 @@ Host                       # empty composer
 
 The language core is a single semantic world: `Obj : sym()`, `Type : Obj := sym()`, and the arrow `A ~> B` as the only computational primitive. The VM primitives `sym()` / `sym(A)` create fresh nominal identity (with an optional parent), and the same `sym` parent graph powers runtime `instanceof`, static subtyping `<:`, and polymorphism — no separate subtype, interface, trait, or impl systems. Types, grades, proofs, algebras, and capabilities are ordinary objects; generics, dependent types, and refinements ride on one dimension form, `f<...>`; composition is `>>>` (do-blocks lower to it); state is explicit data (`State ~> (State, Result)`), so programs are serializable arrow graphs with no closures or mutable bindings.
 
-For the full kernel design, read [ADR-0106: The object/arrow kernel](../project/adrs/0106-object-arrow-kernel.md).
+For the full kernel design, read [ADR-0106: The object/arrow kernel](https://github.com/handl-lang/host/blob/project/adrs/0106-object-arrow-kernel.md).
 
-For the full platform design, read [ADR-0002: Single Plugin Model](../project/adrs/0002-handl-platform-composable-host). For hands-on instructions, see the [Build a host tutorial](../tutorials/build-a-host).
+For the full platform design, read [ADR-0002: Single Plugin Model](https://github.com/handl-lang/host/blob/project/adrs/archived/0002-handl-platform-composable-host.md). For hands-on instructions, see the [Build a host tutorial](../tutorials/build-a-host).

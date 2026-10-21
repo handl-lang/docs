@@ -60,4 +60,4 @@ The handl _language_ kernel (the six field primitives described in [Why the lang
 
 ## Relation to ADR-0106
 
-[ADR-0106: the object/arrow kernel](../../project/adrs/0106-object-arrow-kernel.md) grounds this calculus. It keeps the closed six-combinator set as the computational substrate and folds it into a single object world: arrows are objects, `sym()`/`sym(A)` provide nominal identity, and `f<...>` is the one dimension specialization form. The six combinators are unchanged — they are the arrow fragment of ADR-0106's conceptual kernel.
+[ADR-0106: the object/arrow kernel](https://github.com/handl-lang/host/blob/project/adrs/0106-object-arrow-kernel.md) grounds this calculus. It keeps the closed six-combinator set as the computational substrate and folds it into a single object world: arrows are objects, `sym()`/`sym(A)` provide nominal identity, and `f<...>` is the one dimension specialization form. The six combinators are unchanged — they are the arrow fragment of ADR-0106's conceptual kernel.

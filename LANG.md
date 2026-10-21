@@ -19,7 +19,7 @@ subtyping `<:`, and polymorphism. Programs are serializable arrow graphs
 composed with `>>>` — no closures, no mutable bindings, no hidden captured
 state.
 
-For the full design, read [ADR-0106: The object/arrow kernel](../project/adrs/0106-object-arrow-kernel.md).
+For the full design, read [ADR-0106: The object/arrow kernel](https://github.com/handl-lang/host/blob/project/adrs/0106-object-arrow-kernel.md).
 
 ## Core forms
 

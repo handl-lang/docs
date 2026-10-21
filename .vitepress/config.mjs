@@ -14,7 +14,14 @@ export default defineConfig({
   // Project Pages are served from https://handl-lang.github.io/docs/ ;
   // `DOCS_BASE` overrides this for local `vitepress dev` (use "/").
   base: process.env.DOCS_BASE ?? "/docs/",
-  srcExclude: ["README.md", "project/**", "scripts/**", "node_modules/**"],
+  srcExclude: [
+    "README.md",
+    "ANALYSIS.md",
+    "DESIGN.md",
+    "project/**",
+    "scripts/**",
+    "node_modules/**",
+  ],
   head: [
     ["link", { rel: "preconnect", href: "https://fonts.googleapis.com" }],
     ["link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" }],
@@ -40,6 +47,7 @@ export default defineConfig({
       { text: "How-to", link: "/how-to/" },
       { text: "Explanation", link: "/explanation/" },
       { text: "Reference", link: "/reference/" },
+      { text: "ADRs", link: "/ADR-INDEX" },
     ],
 
     sidebar: {
@@ -85,6 +93,44 @@ export default defineConfig({
             { text: "Kits and manifests", link: "/explanation/kits-and-manifests" },
             { text: "Options and configuration", link: "/explanation/options-and-configuration" },
             { text: "Security and trust", link: "/explanation/security-and-trust" },
+            { text: "Graded algebraic theory", link: "/explanation/graded-algebraic-theory" },
+            {
+              text: "Graded Modal Sanada Arrow Calculus",
+              link: "/explanation/graded-modal-sanada-arrow-calculus",
+            },
+            {
+              text: "Strings, chars, and Unicode",
+              link: "/explanation/strings-chars-unicode-layers",
+            },
+          ],
+        },
+      ],
+      "/explanations/": [
+        {
+          text: "Design notes",
+          items: [
+            {
+              text: "Library API design principles",
+              link: "/explanations/ac-lib-api-design-principles",
+            },
+            { text: "Crate architecture", link: "/explanations/crate-architecture" },
+            { text: "Design principles", link: "/explanations/design-principles" },
+            { text: "Fields, not keys", link: "/explanations/fields-not-keys" },
+            { text: "Name explanation", link: "/explanations/lang-name" },
+            {
+              text: "Per-workspace language variants",
+              link: "/explanations/per-workspace-language-variants",
+            },
+            {
+              text: "Platform architecture (earlier draft)",
+              link: "/explanations/platform-architecture",
+            },
+            { text: "Polyglot runtimes", link: "/explanations/polyglot-runtimes" },
+            { text: "Why the kernel is small", link: "/explanations/small-kernel" },
+            {
+              text: "VS Code extension constraints",
+              link: "/explanations/vscode-extension-constraints",
+            },
           ],
         },
       ],

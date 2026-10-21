@@ -101,10 +101,12 @@ Two things bite when writing these files by hand or from another tool:
 The `catopt` project (categorical optimization of computation graphs)
 emits its vocabulary in exactly this layout and loads it back:
 
-- generator: `catopt`'s `lab/handl-spike/dump_fragments.py`;
-- fixture: `crates/handl-kit-data-canonical/tests/data/catopt-fragments/`
-  (eight empty shell files plus `ast.yaml` and `transforms.yaml`);
-- test: `crates/handl-kit-data-canonical/tests/catopt_fragments.rs`.
+- generator: `research-mlopt`'s `scripts/dump_fragments.py`;
+- fixture: `kit-data-prelude`'s
+  `crates/handl-kit-data-prelude/tests/data/catopt-fragments/`
+  (seven shell files plus `ast.yaml` and `transforms.yaml`);
+- test: `kit-data-prelude`'s
+  `crates/handl-kit-data-prelude/tests/catopt_fragments.rs`.
 
 That is the spike that established the boundary: a foreign project's laws
 land in `lang.transforms` with their fields intact — **all 83 of them**

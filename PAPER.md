@@ -1,14 +1,14 @@
 # Arrow-First Language Kernel
 
 > This paper presents the arrow-first thesis. The normative kernel design is
-> [ADR-0106: the object/arrow kernel](../project/adrs/0106-object-arrow-kernel.md),
+> [ADR-0106: the object/arrow kernel](https://github.com/handl-lang/host/blob/project/adrs/0106-object-arrow-kernel.md),
 > which folds the arrow calculus into a single object world (`sym()`/`sym(A)`,
 > arrows, and `<>` dimensions). The graded arrow is written `A ~[R]~> B` in
 > both the ADR and the canonical grammar (the legacy `A ~R~> B` shorthand is
 > still accepted).
 >
 > The kernel presented here is the dimension-1 fragment of a more general
-> design: [the N-dimensional arrow calculus](../research/PAPER.md)
+> design: [the N-dimensional arrow calculus](https://github.com/handl-lang/host/blob/main/research/PAPER.md)
 > generalizes `A ~> B` to n-morphisms `A ~[n]~> B`, distinguishes morphism
 > dimension from composition axis (`>>>[k]` — the `>>>` of this paper is
 > `>>>[0]` at dimension 1), and treats laws and proofs as higher morphisms
