@@ -45,6 +45,10 @@ features:
     details: Targets are plugins, so the same language can compile to native, wasm, JS, or an interpreter.
     link: /explanation/platform-architecture
     linkText: View architecture
+  - title: The research stack
+    details: research-mlopt — a categorical optimizer that mints its own rewrite laws, certifies them, and learns to play the game they create.
+    link: /explanation/research/
+    linkText: Explore the research
 ---
 
 <script setup>

@@ -17,6 +17,7 @@ scripts/__pycache__/
 !/reference/index.md
 !/reference/host-concepts.md
 !/reference/strings-chars-unicode.md
+!/reference/research/
 
 # the project worktree (ADR-0129)
 /project/

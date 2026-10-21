@@ -37,6 +37,23 @@ Explanations help you understand _why_ handl works the way it does. They are bac
 - [Arrow support vs arrow-native](../comparison) — how handl compares to Haskell and other arrow-capable languages.
 - [Cross-repo ADR index](../ADR-INDEX) — every decision record, aggregated.
 
+## The research stack (graphopt)
+
+The `research-mlopt` repo (renamed `graphopt` at the repo split) — the
+categorical optimizer and law-discovery engine:
+
+- [The research stack](./research/) — the section landing, with the rename note.
+- [How mlopt works](./research/mechanism) — syntax → structure → search → certificate.
+- [Evaluation: the fourth dimension](./research/evaluation) — describe, rank, measure — never decide equivalence.
+
+## Cross-cutting
+
+Concepts that cross repo boundaries:
+
+- [The three costs](./cross-cutting/three-costs) — `dag_cost` guesses, fixtures measure, the verifier proves.
+- [The game](./cross-cutting/the-game) — boards, players, episodes, and the learned-policy loop.
+- [The gauntlet](./cross-cutting/the-gauntlet) — what a minted law must survive to ship.
+
 ## Design notes
 
 Older design notes, merged here from the retired `explanations/` directory:

@@ -11,6 +11,14 @@ Tutorials are hands-on lessons for learning handl by doing. If you are new here,
 - [Build a host](./build-a-host) — create a Rust binary that loads a kit and runs a capability.
 - [Write a plugin](./write-a-plugin) — implement a `Plugin` and contribute a rule to an operation.
 
+## The research track
+
+The end-to-end path for the `research-mlopt` stack (the future
+`graphopt` repo) — a model in, a cheaper certified form out, and the
+law-discovery loop underneath:
+
+- [Research track](./research/) — install → first `search()` → first minted law → the scorecard.
+
 ## When to use another section
 
 - If you know the basics and need a recipe, see the [How-to guides](../how-to/).

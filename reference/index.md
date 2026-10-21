@@ -20,7 +20,24 @@ package repo, kernel substrate crate, or `handl-packages/` package.
 - [Obj](./kernel/lib-obj) — record introspection primitives.
 - [Type](./kernel/lib-type) — type coercion, predicates, and utilities.
 
-## Contracts and implementations (`lib-*` repos)
+## Research stack (`research-mlopt` → `graphopt`)
+
+The frozen public surface of the research stack — bound to
+`research-mlopt:docs/public_api.md` (`API_VERSION = "0.1.0"`):
+
+- [The frozen API](./research/frozen-api) — the contracts the repo split must not break, tagged per destination repo (`eqsat`/`gamekit`/`graphopt`).
+- [Discovery scorecard](./research/scorecard) — can the engine derive each named optimization, certify it, and beat the registered floor? *(generated upstream, vendored)*
+- [Player leaderboard](./research/leaderboard) — every registered player on every board under one paired protocol. *(generated upstream, vendored)*
+- [Limits table](./research/limits) — the delivered form vs every registered baseline, honest losses included. *(generated upstream, vendored)*
+
+## Contracts and implementations (`lib-*` repos — internal)
+
+::: warning Internal — links are local-only
+This section is generated from **private** sibling `lib-*` repos. The
+deployed site clones public repos only, so every link below **404s on
+the published site** and renders only in a local checkout. The real
+fix (publish or drop the section) belongs to the repo split.
+:::
 
 - [Base64](./lib-base64/lib-base64) — base64 encoding/decoding.
 - [Char](./strings-chars-unicode) — the `char`/`str`/`unicode` package map: contracts, impls, layer membership, backend swap.

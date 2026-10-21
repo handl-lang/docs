@@ -61,6 +61,17 @@ export default defineConfig({
             { text: "Write a plugin", link: "/tutorials/write-a-plugin" },
           ],
         },
+        {
+          text: "Research track (research-mlopt)",
+          collapsed: false,
+          items: [
+            { text: "Overview", link: "/tutorials/research/" },
+            { text: "Set up research-mlopt", link: "/tutorials/research/setup" },
+            { text: "Your first search()", link: "/tutorials/research/first-search" },
+            { text: "Watch a law get minted", link: "/tutorials/research/mint-a-law" },
+            { text: "Run the scorecard", link: "/tutorials/research/run-the-scorecard" },
+          ],
+        },
       ],
       "/how-to/": [
         {
@@ -105,6 +116,24 @@ export default defineConfig({
           ],
         },
         {
+          text: "The research stack (graphopt)",
+          collapsed: false,
+          items: [
+            { text: "Overview", link: "/explanation/research/" },
+            { text: "How mlopt works", link: "/explanation/research/mechanism" },
+            { text: "Evaluation", link: "/explanation/research/evaluation" },
+          ],
+        },
+        {
+          text: "Cross-cutting",
+          collapsed: false,
+          items: [
+            { text: "The three costs", link: "/explanation/cross-cutting/three-costs" },
+            { text: "The game", link: "/explanation/cross-cutting/the-game" },
+            { text: "The gauntlet", link: "/explanation/cross-cutting/the-gauntlet" },
+          ],
+        },
+        {
           text: "Design notes",
           collapsed: true,
           items: [
@@ -134,6 +163,16 @@ export default defineConfig({
           link: "/reference/",
           collapsed: false,
           items: referenceSidebar,
+        },
+        {
+          text: "Research (research-mlopt)",
+          collapsed: false,
+          items: [
+            { text: "The frozen API", link: "/reference/research/frozen-api" },
+            { text: "Discovery scorecard", link: "/reference/research/scorecard" },
+            { text: "Player leaderboard", link: "/reference/research/leaderboard" },
+            { text: "Limits table", link: "/reference/research/limits" },
+          ],
         },
       ],
     },
