@@ -64,8 +64,8 @@ Order matters; each step links to the next. This is the gap-1 fix.
 |---|---|---|---|
 | `how-to/install-handl.md` … (6 existing) | handl toolchain recipes | docs: | shipped |
 | `how-to/research/optimize-a-model.md` | `Optimizer`/`search` + runners + `engine=` | `graphopt:docs/api.md` | **shipped** (phase 5.3 cont.) |
-| `how-to/research/add-a-board.md` | write a `Domain` + `Board` | `graphopt:gamekit.engine` + `mlopt_discovery.play` | **shipped** (phase 5.3 cont.) |
-| `how-to/research/register-a-player.md` | `PlayerSpec` + registry | `graphopt:gamekit.players.registry` | **shipped** (phase 5.3 cont.) |
+| `how-to/research/add-a-board.md` | write a `Domain` + `Board` | `gamekit:packages/gamekit/src/gamekit/engine.py` + `graphopt:mlopt_discovery.play` | **shipped** (phase 5.3 cont.; provenance swept at 5.4 — gamekit lives in its own repo) |
+| `how-to/research/register-a-player.md` | `PlayerSpec` + registry | `gamekit:packages/gamekit/src/gamekit/players/registry.py` | **shipped** (phase 5.3 cont.; provenance swept at 5.4) |
 | `how-to/research/admit-a-law.md` | `verify_law` → gauntlet → `MACHINE_SHIPPED` | `graphopt:mlopt_discovery.{pipeline,verifier,emit}` + `mlopt_core.laws.provenance` | **shipped** (phase 5.3 cont.) |
 
 ### Explanation — per-repo groups + cross-cutting
