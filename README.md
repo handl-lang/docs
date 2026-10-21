@@ -1,15 +1,27 @@
 # docs — the `handl-lang` documentation hub
 
-One place to find the language, the platform, and every repo's project docs.
-This repo owns the **published** documentation surface; the decision records
-themselves live with the repo that made them.
+One place to find the platform's published docs — the kernel, the engines,
+the composable host, and the research stack — plus every public repo's
+project docs. This repo owns the **published** documentation surface; the
+decision records themselves live with the repo that made them.
+
+**Publication boundary.** Only content about **public** org repos belongs
+here: `kernel`, `engine*` abstractions, `host`, `host-tensor`,
+`kit-prelude-lang`, `egraph`, `discovery`, `graphopt`, `slidev-theme`,
+and this repo. The handl **language surface** (syntax, the standard
+library, and the `hnl` toolchain) is not yet released — do not document it
+here. Private sibling repos (`lib-*`, `ext-*`, `kit-*`, `compile-*`,
+`host-cli`, `host-lsp`, `engine-fmt`/`lint`/`test`/`typecheck*`, …)
+produce no pages, links, or mentions.
 
 ## Layout
 
 ```
-index.md, tutorials/, how-to/, explanation/, reference/   the VitePress site
+index.md, adrs/                                        the VitePress site (org level)
+handl/                                                   Handl Language product docs
 .vitepress/                                              site config + theme
-ADR-INDEX.md                                             published ADR index
+vendored/                                                product docs vendored from
+                                                         <repo>/docs/site/ (generated)
 scripts/                                                 generators (see below)
 project/                                                 project worktree (ADR-0129)
 ```
@@ -24,13 +36,16 @@ The site's `srcDir` is the repo root; `README.md`, `project/**` and
 
 | script | output | source |
 |---|---|---|
-| `scripts/gen-docs-index.py` | `ADR-INDEX.md` | every sibling's `project/adrs/` worktree + the `project` repo's retired-shell subtrees (+ `host/project/docs-split.yaml` for split/local metadata) |
+| `scripts/gen-docs-index.py` | `adrs/{index,handl,graphopt}.md` | every sibling's `project/adrs/` worktree + the `project` repo's retired-shell subtrees (+ `host/project/docs-split.yaml` for split/local metadata) |
 | `scripts/gen_reference_all.py` | `reference/<repo>/` + `reference.yaml` + `.vitepress/sidebar-reference.mjs` | every sibling repo's package sources — `handl-packages/<pkg>/`, `pkg.hnl`+`src/`, or `crates/<crate>/src/*.hnl` doc comments |
+| `scripts/vendor-docs.py` | `vendored/<product>/` | each public product repo's `docs/site/` + `docs/site.yaml` |
 | `scripts/gen-api.sh` | `api/<repo>/` | each sibling repo's rustdoc (`cargo +nightly doc-md`, else `cargo doc`) |
 
-Both are per-repo: the hub aggregates. `reference/` and `api/` are gitignored
-except the three hand-written reference pages (`index.md`,
-`host-concepts.md`, `strings-chars-unicode.md`).
+Both are per-repo: the hub aggregates **public repos only** (the
+`PUBLIC_REPOS` allowlist in each generator mirrors the Pages workflow's
+`--visibility public` clone set). `reference/` and `api/` are gitignored
+except the hand-written `handl/reference/` pages (`index.md`,
+`host-concepts.md`).
 
 ```bash
 bun run docs:gen-ref     # regenerate the aggregated reference
@@ -43,7 +58,7 @@ bun run docs:build       # gen-api + gen-ref + vitepress build
 
 | what | where |
 |---|---|
-| ADR index (published, cross-repo) | [`ADR-INDEX.md`](ADR-INDEX.md) |
+| ADR indexes (published, per-product) | [`adrs/index.md`](adrs/index.md), [`adrs/handl.md`](adrs/handl.md), [`adrs/graphopt.md`](adrs/graphopt.md) |
 | ADR registry (canonical) | `host/project/adrs/INDEX.md` |
 | Project principles | `project/principles.md` (this repo's `project` branch) |
 | A repo's own docs | that repo's `project` branch, mounted at `<repo>/project/` |

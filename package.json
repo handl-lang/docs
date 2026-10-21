@@ -2,14 +2,15 @@
   "name": "handl-docs",
   "version": "1.0.0",
   "private": true,
-  "description": "VitePress documentation hub for the handl-lang repos",
+  "description": "VitePress documentation hub for the handl platform \u2014 kernel, engines, host, and research stack",
   "scripts": {
-    "docs:dev": "vitepress dev .",
+    "docs:dev": "bun run docs:vendor && vitepress dev .",
     "docs:gen-ref": "python3 scripts/gen_reference_all.py",
     "docs:gen-api": "bash scripts/gen-api.sh",
     "docs:gen-index": "python3 scripts/gen-docs-index.py",
-    "docs:build": "bun run docs:gen-api && bun run docs:gen-ref && vitepress build .",
-    "docs:preview": "vitepress preview ."
+    "docs:build": "bun run docs:vendor && bun run docs:gen-api && bun run docs:gen-ref && vitepress build .",
+    "docs:preview": "vitepress preview .",
+    "docs:vendor": "python3 scripts/vendor-docs.py"
   },
   "devDependencies": {
     "vite-plus": "0.2.9",

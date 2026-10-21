@@ -59,8 +59,8 @@ ORG = DOCS_ROOT.parent
 # (see scripts/gen_reference_all.py, which aggregates every sibling repo).
 ROOT = ORG / 'host'
 PKGS = ROOT
-REF = DOCS_ROOT / 'reference' / 'host'
-URL = '/reference/host'
+REF = DOCS_ROOT / 'handl' / 'reference' / 'host'
+URL = '/handl/reference/host'
 
 # --- line patterns ----------------------------------------------------------
 
@@ -390,8 +390,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f'gen_reference: no package sources for {args.repo}')
         return 0
     PKGS = ORG / args.repo
-    REF = args.out or (DOCS_ROOT / 'reference' / args.repo)
-    URL = f'/reference/{args.repo}'
+    REF = args.out or (DOCS_ROOT / 'handl' / 'reference' / args.repo)
+    URL = f'/handl/reference/{args.repo}'
 
     packages = [p for p in (scan_package(d, pkg=n, slug=s) for n, d, s in sources) if p]
     # Guard: never overwrite the hand-maintained index with an empty one.

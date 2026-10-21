@@ -1,24 +1,25 @@
 #!/usr/bin/env python3
-"""Publish the aggregated ADR index into the `docs/` hub repo (ADR-0129 5.2).
+"""Build the per-product ADR index pages for the docs site.
 
-Enumerates every sibling repo's checked-out `project` worktree
-(`<repo>/project/adrs/*.md`, including `adrs/archived/`) — plus the
-`project` repo's retired-shell subtrees (`project/<shell>/adrs/`) — and
-writes <org>/docs/ADR-INDEX.md: every repo, the ADRs it owns, and the
-split children. The canonical registry stays host/project/adrs/INDEX.md;
-this is the published, cross-repo view.
+Sweeps every **public** sibling repo's `project/adrs/` worktree (the
+worktrees exist only in a developer checkout, not in CI, so the pages are
+generated and committed like the old `ADR-INDEX.md`) and writes one
+index page per product subtree:
 
-The pre-restructure manifest (host/project/docs-split.yaml) is still read
-for its `splits:`/`local_adrs:` metadata, but repo names there reflect the
-*planned* target repos — each numbered ADR is attributed to the repo whose
-worktree actually contains the file today.
+    adrs/handl.md    — handl product repos (host, kernel, engine-*, ...)
+    adrs/graphopt.md — the graphopt repo
+    adrs/index.md    — org-level (docs, research-dts, slidev-theme, project)
 
-Run from the docs repo: `python3 scripts/gen-docs-index.py`.
+The **canonical registry** is `host/project/adrs/INDEX.md` (on the
+`host` repo's `project` branch); these pages are the published
+cross-repo view, scoped per product. Private siblings produce no pages
+and no mentions.
 """
 
 from __future__ import annotations
 
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -26,24 +27,45 @@ import yaml
 
 DOCS_ROOT = Path(__file__).resolve().parent.parent
 ORG = DOCS_ROOT.parent
-# The assignment manifest lives in the host repo; it records the split
-# plan (parents, children, numbers) even where the child ADR was never
-# written. Override with --manifest.
+OUT = DOCS_ROOT / "adrs"
 MANIFEST = ORG / "host" / "project" / "docs-split.yaml"
-OUT = DOCS_ROOT / "ADR-INDEX.md"
 
-NUM = re.compile(r"^(\d+[a-z]?)")
+NUM = re.compile(r"^(\d+)")
 TITLE = re.compile(r"^#\s+(?:ADR-\d+[a-z]?:\s*)?(.*)")
-# ADR-0128 extraction phase per *current* repo name (the manifest's keys
-# are the planned, pre-rename names — platform → host, cli → host-cli,
-# dot/term/sexp/handl → compile-*, lang → kit-data-prelude, …).
-PHASE = {
-    "host": 0, "c": 2, "web": 5,
-    "compile-dot": 7, "compile-term": 7, "compile-sexp": 7,
-    "compile-handl": 7, "compile-js": 7, "compile-llvm": 7,
-    "host-cli": 8, "host-lsp": 8, "kit-data-prelude": 11,
-    "kit-prelude": 11, "kit-prelude-lang": 11, "docs": 12,
+
+# Only public org repos may appear in the published index — this mirrors
+# the Pages workflow's `gh repo list --visibility public` clone set.
+# Private siblings produce no sections, no rows, and no mentions.
+PUBLIC_REPOS = {
+    "discovery", "docs", "egraph", "engine", "engine-exec",
+    "engine-exec-tree-walk", "engine-lex", "engine-lex-pattern",
+    "engine-parse", "engine-parse-pratt", "engine-transform", "host",
+    "host-tensor", "kernel", "kit-prelude-lang", "research-dts",
+    "graphopt", "slidev-theme",
 }
+
+# Repo -> product subtree its ADR page belongs to.
+PRODUCT = {
+    "host": "handl", "kernel": "handl", "host-tensor": "handl",
+    "kit-prelude-lang": "handl", "egraph": "handl", "discovery": "handl",
+    "engine": "handl", "engine-exec": "handl",
+    "engine-exec-tree-walk": "handl", "engine-lex": "handl",
+    "engine-lex-pattern": "handl", "engine-parse": "handl",
+    "engine-parse-pratt": "handl", "engine-transform": "handl",
+    "graphopt": "graphopt",
+}
+
+
+def remote_name(repo_dir: Path) -> str | None:
+    try:
+        url = subprocess.run(
+            ["git", "-C", str(repo_dir), "remote", "get-url", "origin"],
+            capture_output=True, text=True, check=True,
+        ).stdout.strip()
+    except subprocess.CalledProcessError:
+        return None
+    name = url.rsplit("/", 1)[-1]
+    return name[:-4] if name.endswith(".git") else name
 
 
 def title_of(path: Path) -> str:
@@ -57,12 +79,12 @@ def title_of(path: Path) -> str:
 
 
 def repo_adrs() -> dict[str, list[tuple[str, str, Path]]]:
-    """`repo label -> [(number, display path, file)]` on disk.
+    """`repo name -> [(number, display path, file)]` on disk.
 
     A repo's ADRs live on its `project` branch, checked out as the
-    `<repo>/project` worktree.  The `project` repo itself aggregates the
-    retired shells' project docs under `<shell>/`; each shell subtree is
-    reported as `project/<shell>`.
+    `<repo>/project` worktree. Repo names are resolved from the
+    checkout's `origin` remote so a dir named differently from the repo
+    (e.g. `research-mlopt` -> `graphopt`) still indexes correctly.
     """
     found: dict[str, list[tuple[str, str, Path]]] = {}
 
@@ -84,14 +106,32 @@ def repo_adrs() -> dict[str, list[tuple[str, str, Path]]]:
     for d in sorted(ORG.iterdir()):
         if not d.is_dir():
             continue
+        repo = remote_name(d)
+        if repo not in PUBLIC_REPOS:
+            continue
         if (d / "project" / "adrs").is_dir():
-            collect(d.name, d / "project" / "adrs", "project/")
-    proj = ORG / "project"
-    if proj.is_dir():
-        for shell in sorted(proj.iterdir()):
-            if shell.is_dir() and (shell / "adrs").is_dir():
-                collect(f"project/{shell.name}", shell / "adrs", f"{shell.name}/")
+            collect(repo, d / "project" / "adrs", "project/")
     return found
+
+
+def page(product: str, repos: dict[str, list]) -> str:
+    title = {"handl": "Handl Language", "graphopt": "graphopt",
+             "index": "handl-lang (org)"}[product]
+    out = [
+        f"# ADR index — {title}",
+        "",
+        "Decision records aggregated across the product's public repos.",
+        "The canonical registry is `host/project/adrs/INDEX.md` (on the",
+        "`host` repo's `project` branch); this page is the published",
+        "cross-repo view. Generated by `docs/scripts/gen-docs-index.py`.",
+        "",
+    ]
+    for repo in sorted(repos):
+        out += [f"## `{repo}`", "", "| # | title | file |", "|---|---|---|"]
+        for num, display, f in sorted(repos[repo], key=lambda a: a[0].rjust(5, "0")):
+            out.append(f"| {num} | {title_of(f)} | `{display}` |")
+        out.append("")
+    return "\n".join(out)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -100,82 +140,19 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--manifest", type=Path, default=MANIFEST,
                     help="path to host/project/docs-split.yaml")
-    args = ap.parse_args(argv)
+    ap.parse_args(argv)
 
-    data = yaml.safe_load(args.manifest.read_text()) if args.manifest.exists() else {}
     repos = repo_adrs()
-
-    # ADR number -> (repo label, repo-relative file path) on disk.
-    index: dict[str, tuple[str, str]] = {}
+    by_product: dict[str, dict[str, list]] = {}
     for repo, rows in repos.items():
-        for num, display, f in rows:
-            index[num] = (repo, display)
+        prod = PRODUCT.get(repo, "index")
+        by_product.setdefault(prod, {})[repo] = rows
 
-    out = [
-        "# ADR index (published)",
-        "",
-        "Aggregated across the `handl-lang` repos. The **canonical registry** is",
-        "`host/project/adrs/INDEX.md` (on the `host` repo's `project` branch); this page is",
-        "the published cross-repo view. Generated by",
-        "`docs/scripts/gen-docs-index.py`.",
-        "",
-        "An ADR that defines a port, the kernel, or composition stays in",
-        "`host`; a repo-local decision lives in that repo's `project` branch.",
-        "The retired shells' docs (`web`, `c`, …) live in the `project`",
-        "repo under `project/<shell>/`.",
-        "",
-        "## By repo",
-        "",
-    ]
-
-    order = sorted(repos, key=lambda r: (r != "host", r))
-    for repo in order:
-        rows = repos[repo]
-        phase = PHASE.get(repo.split("/", 1)[-1] if "/" in repo else repo)
-        # `project/<shell>` sections are labelled by the shell's own phase
-        # when the current name carries one.
-        out.append(f"### `{repo}`" + (f" — ADR-0128 Phase {phase}" if phase is not None else ""))
-        out.append("")
-        out.append("| # | title | file |")
-        out.append("|---|---|---|")
-        for num, display, f in sorted(rows, key=lambda a: a[0].rjust(5, "0")):
-            out.append(f"| {num} | {title_of(f)} | `{display}` |")
-        out.append("")
-
-    splits = data.get("splits") or []
-    if splits:
-        out += ["## Split children", "", "| # | title | repo | parent |", "|---|---|---|---|"]
-        for s in splits:
-            parent = s["parent"].split("/", 1)[1]
-            for t in s.get("targets") or []:
-                if not t.get("number"):
-                    continue
-                hit = index.get(str(t["number"]))
-                repo = hit[0] if hit else t["repo"] + " (planned — not landed)"
-                out.append(
-                    f"| {t['number']} | {t['title']} | `{repo}` | `{parent}` |"
-                )
-        out.append("")
-
-    locals_ = data.get("local_adrs") or []
-    if locals_:
-        out += [
-            "## Repo-local ADRs",
-            "",
-            "| # | title | repo | file |",
-            "|---|---|---|---|",
-        ]
-        for a in locals_:
-            hit = index.get(str(a["number"]))
-            repo, file = hit if hit else (a["repo"], a["file"])
-            out.append(
-                f"| {a['number']} | {a['title']} | `{repo}` | `{file}` |"
-            )
-        out.append("")
-
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text("\n".join(out), encoding="utf-8")
-    print(f"wrote {OUT}")
+    OUT.mkdir(exist_ok=True)
+    for prod, r in by_product.items():
+        dest = OUT / ("index.md" if prod == "index" else f"{prod}.md")
+        dest.write_text(page(prod, r), encoding="utf-8")
+        print(f"wrote {dest}")
     return 0
 
 

@@ -4,13 +4,20 @@ import { handlDark } from "./theme/shiki-themes.mjs";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: "handl",
-  description: "Documentation for the handl language",
+  title: "handl-lang",
+  description:
+    "handl-lang — products and services built on a categorical language foundation.",
   ignoreDeadLinks: true,
   appearance: "dark",
   // The site lives at the repo root (this repo is the docs hub); the ADR
   // worktree and the generator scripts are not site content.
   srcDir: ".",
+  // Product repos ship their published docs under `docs/site/`; the
+  // vendor script copies them to `vendored/<product>/`, and these
+  // rewrites serve them at the site root.
+  rewrites: {
+    "vendored/:rest(.*)": ":rest",
+  },
   // Project Pages are served from https://handl-lang.github.io/docs/ ;
   // `DOCS_BASE` overrides this for local `vitepress dev` (use "/").
   base: process.env.DOCS_BASE ?? "/docs/",
@@ -43,110 +50,77 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Tutorials", link: "/tutorials/" },
-      { text: "How-to", link: "/how-to/" },
-      { text: "Explanation", link: "/explanation/" },
-      { text: "Reference", link: "/reference/" },
-      { text: "ADRs", link: "/ADR-INDEX" },
+      {
+        text: "Products",
+        items: [
+          { text: "Handl Language", link: "/handl/" },
+        ],
+      },
+      {
+        text: "Research",
+        items: [
+          { text: "graphopt", link: "/graphopt/" },
+        ],
+      },
+      { text: "Project", link: "/adrs/" },
     ],
 
     sidebar: {
-      "/tutorials/": [
+      "/handl/": [
+        {
+          text: "Handl Language",
+          items: [
+            { text: "Overview", link: "/handl/" },
+            { text: "Platform overview", link: "/handl/overview" },
+            { text: "Arrow-First Kernel (paper)", link: "/handl/PAPER" },
+            { text: "Staged Arrow Engines (paper)", link: "/handl/SAE" },
+            { text: "Arrow-native comparison", link: "/handl/comparison" },
+          ],
+        },
         {
           text: "Tutorials",
-          items: [
-            { text: "Overview", link: "/tutorials/" },
-            { text: "Getting started", link: "/tutorials/getting-started" },
-            { text: "Build a host", link: "/tutorials/build-a-host" },
-            { text: "Write a plugin", link: "/tutorials/write-a-plugin" },
-          ],
-        },
-        {
-          text: "Research track (graphopt)",
           collapsed: false,
           items: [
-            { text: "Overview", link: "/tutorials/research/" },
-            { text: "Set up graphopt", link: "/tutorials/research/setup" },
-            { text: "Your first search()", link: "/tutorials/research/first-search" },
-            { text: "Watch a law get minted", link: "/tutorials/research/mint-a-law" },
-            { text: "Run the scorecard", link: "/tutorials/research/run-the-scorecard" },
+            { text: "Overview", link: "/handl/tutorials/" },
+            { text: "Set up the platform", link: "/handl/tutorials/setup" },
+            { text: "Build a host", link: "/handl/tutorials/build-a-host" },
+            { text: "Write a plugin", link: "/handl/tutorials/write-a-plugin" },
           ],
         },
-      ],
-      "/how-to/": [
         {
           text: "How-to guides",
-          items: [
-            { text: "Overview", link: "/how-to/" },
-            { text: "Install hnl", link: "/how-to/install-handl" },
-            { text: "Write a handl script", link: "/how-to/write-a-script" },
-            { text: "Build a host", link: "/how-to/build-a-host" },
-            { text: "Write a plugin", link: "/how-to/write-a-plugin" },
-            { text: "Configure options", link: "/how-to/configure-options" },
-          ],
-        },
-        {
-          text: "Research stack (graphopt)",
           collapsed: false,
           items: [
-            {
-              text: "Optimize a model",
-              link: "/how-to/research/optimize-a-model",
-            },
-            { text: "Add a board", link: "/how-to/research/add-a-board" },
-            {
-              text: "Register a player",
-              link: "/how-to/research/register-a-player",
-            },
-            { text: "Admit a law", link: "/how-to/research/admit-a-law" },
+            { text: "Overview", link: "/handl/how-to/" },
+            { text: "Set up the platform", link: "/handl/how-to/setup" },
+            { text: "Build a host", link: "/handl/how-to/build-a-host" },
+            { text: "Write a plugin", link: "/handl/how-to/write-a-plugin" },
+            { text: "Configure options", link: "/handl/how-to/configure-options" },
           ],
         },
-      ],
-      "/explanation/": [
         {
           text: "Explanations",
+          collapsed: false,
           items: [
-            { text: "Overview", link: "/explanation/" },
-            { text: "What is handl?", link: "/explanation/what-is-handl" },
-            { text: "Language overview", link: "/explanation/language-overview" },
-            { text: "Runtime", link: "/explanation/runtime" },
-            { text: "Platform architecture", link: "/explanation/platform-architecture" },
-            { text: "The composable host", link: "/explanation/composable-host" },
-            { text: "The arrow calculus kernel", link: "/explanation/arrow-calculus-kernel" },
+            { text: "Overview", link: "/handl/explanation/" },
+            { text: "What is handl?", link: "/handl/explanation/what-is-handl" },
+            { text: "The arrow calculus kernel", link: "/handl/explanation/arrow-calculus-kernel" },
+            { text: "Language as data", link: "/handl/explanation/language-as-data" },
+            { text: "The composable host", link: "/handl/explanation/composable-host" },
+            { text: "Platform architecture", link: "/handl/explanation/platform-architecture" },
+            { text: "Runtime", link: "/handl/explanation/runtime" },
             {
               text: "Plugins, rules, and operations",
-              link: "/explanation/plugins-rules-operations",
+              link: "/handl/explanation/plugins-rules-operations",
             },
-            { text: "Kits and manifests", link: "/explanation/kits-and-manifests" },
-            { text: "Options and configuration", link: "/explanation/options-and-configuration" },
-            { text: "Security and trust", link: "/explanation/security-and-trust" },
-            { text: "Graded algebraic theory", link: "/explanation/graded-algebraic-theory" },
+            { text: "Kits and manifests", link: "/handl/explanation/kits-and-manifests" },
+            { text: "Options and configuration", link: "/handl/explanation/options-and-configuration" },
+            { text: "Security and trust", link: "/handl/explanation/security-and-trust" },
+            { text: "Graded algebraic theory", link: "/handl/explanation/graded-algebraic-theory" },
             {
               text: "Graded Modal Sanada Arrow Calculus",
-              link: "/explanation/graded-modal-sanada-arrow-calculus",
+              link: "/handl/explanation/graded-modal-sanada-arrow-calculus",
             },
-            {
-              text: "Strings, chars, and Unicode",
-              link: "/explanation/strings-chars-unicode-layers",
-            },
-          ],
-        },
-        {
-          text: "The research stack (graphopt)",
-          collapsed: false,
-          items: [
-            { text: "Overview", link: "/explanation/research/" },
-            { text: "How mlopt works", link: "/explanation/research/mechanism" },
-            { text: "Evaluation", link: "/explanation/research/evaluation" },
-          ],
-        },
-        {
-          text: "Cross-cutting",
-          collapsed: false,
-          items: [
-            { text: "The three costs", link: "/explanation/cross-cutting/three-costs" },
-            { text: "The game", link: "/explanation/cross-cutting/the-game" },
-            { text: "The gauntlet", link: "/explanation/cross-cutting/the-gauntlet" },
           ],
         },
         {
@@ -155,40 +129,75 @@ export default defineConfig({
           items: [
             {
               text: "Library API design principles",
-              link: "/explanation/ac-lib-api-design-principles",
+              link: "/handl/explanation/ac-lib-api-design-principles",
             },
-            { text: "Design principles", link: "/explanation/design-principles" },
-            { text: "Fields, not keys", link: "/explanation/fields-not-keys" },
-            { text: "Name explanation", link: "/explanation/lang-name" },
-            {
-              text: "Per-workspace language variants",
-              link: "/explanation/per-workspace-language-variants",
-            },
-            { text: "Polyglot runtimes", link: "/explanation/polyglot-runtimes" },
-            { text: "Why the kernel is small", link: "/explanation/small-kernel" },
-            {
-              text: "VS Code extension constraints",
-              link: "/explanation/vscode-extension-constraints",
-            },
+            { text: "Design principles", link: "/handl/explanation/design-principles" },
+            { text: "Name explanation", link: "/handl/explanation/lang-name" },
+            { text: "Polyglot runtimes", link: "/handl/explanation/polyglot-runtimes" },
           ],
         },
-      ],
-      "/reference/": [
         {
           text: "Reference",
-          link: "/reference/",
-          collapsed: false,
-          items: referenceSidebar,
-        },
-        {
-          text: "Research (graphopt)",
           collapsed: false,
           items: [
-            { text: "The frozen API", link: "/reference/research/frozen-api" },
-            { text: "Discovery scorecard", link: "/reference/research/scorecard" },
-            { text: "Player leaderboard", link: "/reference/research/leaderboard" },
-            { text: "Limits table", link: "/reference/research/limits" },
+            { text: "Overview", link: "/handl/reference/" },
+            { text: "Host concepts", link: "/handl/reference/host-concepts" },
+            ...referenceSidebar,
           ],
+        },
+        {
+          text: "Project",
+          collapsed: false,
+          items: [{ text: "ADRs", link: "/adrs/handl" }],
+        },
+      ],
+      "/graphopt/": [
+        {
+          text: "graphopt",
+          items: [
+            { text: "Overview", link: "/graphopt/" },
+            { text: "How graphopt works", link: "/graphopt/explanation/mechanism" },
+            { text: "Evaluation", link: "/graphopt/explanation/evaluation" },
+            { text: "The three costs", link: "/graphopt/explanation/three-costs" },
+            { text: "The game", link: "/graphopt/explanation/the-game" },
+            { text: "The gauntlet", link: "/graphopt/explanation/the-gauntlet" },
+          ],
+        },
+        {
+          text: "Tutorials",
+          collapsed: false,
+          items: [
+            { text: "Overview", link: "/graphopt/tutorials/" },
+            { text: "Set up graphopt", link: "/graphopt/tutorials/setup" },
+            { text: "Your first search()", link: "/graphopt/tutorials/first-search" },
+            { text: "Watch a law get minted", link: "/graphopt/tutorials/mint-a-law" },
+            { text: "Run the scorecard", link: "/graphopt/tutorials/run-the-scorecard" },
+          ],
+        },
+        {
+          text: "How-to guides",
+          collapsed: false,
+          items: [
+            { text: "Optimize a model", link: "/graphopt/how-to/optimize-a-model" },
+            { text: "Add a board", link: "/graphopt/how-to/add-a-board" },
+            { text: "Register a player", link: "/graphopt/how-to/register-a-player" },
+            { text: "Admit a law", link: "/graphopt/how-to/admit-a-law" },
+          ],
+        },
+        {
+          text: "Reference",
+          collapsed: false,
+          items: [
+            { text: "The frozen API", link: "/graphopt/reference/frozen-api" },
+            { text: "Discovery scorecard", link: "/graphopt/reference/scorecard" },
+            { text: "Player leaderboard", link: "/graphopt/reference/leaderboard" },
+            { text: "Limits table", link: "/graphopt/reference/limits" },
+          ],
+        },
+        {
+          text: "Project",
+          collapsed: false,
+          items: [{ text: "ADRs", link: "/adrs/graphopt" }],
         },
       ],
     },

@@ -9,15 +9,18 @@ scripts/__pycache__/
 # generated reference + rustdoc (docs/scripts/*) — the hand-written reference
 # pages are tracked and re-included below
 /api
-# `reference/` is generated (scripts/gen_reference_all.py); only the three
+# `handl/reference/` is generated (scripts/gen_reference_all.py); only the
 # hand-written pages are tracked. Pages is configured with
 # build_type=workflow, so it serves the artifact as-is and does not run a
 # Jekyll pass that would drop ignored paths.
-/reference/*
-!/reference/index.md
-!/reference/host-concepts.md
-!/reference/strings-chars-unicode.md
-!/reference/research/
+/handl/reference/*
+!/handl/reference/index.md
+!/handl/reference/host-concepts.md
+!/graphopt/reference/
 
 # the project worktree (ADR-0129)
 /project/
+
+# vendored product docs (scripts/vendor-docs.py) — sourced from each
+# product repo's docs/site/, served at the site root via rewrites
+/vendored/

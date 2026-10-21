@@ -243,8 +243,22 @@ body .VPButton.brand:active {
   color: var(--secondary-foreground);
 }
 
+/* Force a real CSS grid: 1 col mobile, 3 cols once items fit — bypasses
+   VitePress's item-count grid-N classes (grid-6 was 2 cols below 48rem). */
 .VPFeatures .container .items {
+  display: grid;
   gap: var(--spacing);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 40rem) {
+  .VPFeatures .container .items {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.VPFeatures .container .items .item {
+  width: auto;
 }
 
 .VPFeatures .VPFeature {

@@ -32,11 +32,24 @@ sys.path.insert(0, str(HERE))
 from gen_reference import package_sources  # noqa: E402
 
 
+# Only public org repos contribute generated reference pages — this
+# mirrors the Pages workflow's `gh repo list --visibility public` clone
+# set. Private siblings produce no pages, links, or mentions.
+PUBLIC_REPOS = {
+    "discovery", "docs", "egraph", "engine", "engine-exec",
+    "engine-exec-tree-walk", "engine-lex", "engine-lex-pattern",
+    "engine-parse", "engine-parse-pratt", "engine-transform", "host",
+    "host-tensor", "kernel", "kit-prelude-lang", "research-dts",
+    "graphopt", "slidev-theme",
+}
+
+
 def repos_with_packages() -> list[str]:
     repos = [
         d.name
         for d in sorted(ORG.iterdir())
-        if d.is_dir() and d != DOCS_ROOT and package_sources(d, d.name)
+        if d.is_dir() and d != DOCS_ROOT and d.name in PUBLIC_REPOS
+        and package_sources(d, d.name)
     ]
     # host first, then alphabetical
     repos.sort(key=lambda r: (r != "host", r))
@@ -46,7 +59,7 @@ def repos_with_packages() -> list[str]:
 def prune_stale_fragments(produced: set[str]) -> list[str]:
     """Remove generated `reference/<repo>/` fragments no run produced."""
     removed = []
-    for frag in sorted((DOCS_ROOT / "reference").iterdir()):
+    for frag in sorted((DOCS_ROOT / "handl" / "reference").iterdir()):
         if not frag.is_dir() or frag.name in produced:
             continue
         if (frag / "sidebar.json").exists() or (frag / "reference.yaml").exists():
@@ -70,7 +83,7 @@ def main() -> int:
             [sys.executable, str(HERE / "gen_reference.py"), "--repo", repo],
             check=True,
         )
-        frag = DOCS_ROOT / "reference" / repo
+        frag = DOCS_ROOT / "handl" / "reference" / repo
 
         yml = frag / "reference.yaml"
         if yml.exists():

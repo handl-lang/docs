@@ -3,51 +3,32 @@
 layout: home
 
 hero:
-  name: "handl"
-  text: "Platform Docs"
-  tagline: Build your toolchain one plugin at a time.
+  name: "handl-lang"
+  text: "A new paradigm"
+  tagline: "Products and services built on a categorical language — arrows, not functions."
   actions:
     - theme: brand
-      text: Get started
-      link: /tutorials/getting-started
+      text: Products
+      link: /handl/
     - theme: brand
-      text: Build a host
-      link: /tutorials/build-a-host
+      text: Research
+      link: /graphopt/
     - theme: alt
-      text: How-to guides
-      link: /how-to/
-    - theme: alt
-      text: Explanations
-      link: /explanation/
+      text: The kernel paper
+      link: /handl/PAPER
 
 features:
-  - title: Universal plugins
-    details: One Plugin trait unifies libraries, targets, operations, rules, and options.
-    link: /explanation/composable-host
-    linkText: Learn more
-  - title: Composable host
-    details: The Host is an empty composer that loads kits, resolves dependencies, and runs capabilities.
-    link: /tutorials/build-a-host
-    linkText: Build one
-  - title: Kits and manifests
-    details: Curated, version-pinned kits make language toolchains reproducible and swappable.
-    link: /explanation/kits-and-manifests
-    linkText: Explore kits
-  - title: Type-safe rules
-    details: contribute::<P>(rule) is checked at compile time, so a Format rule cannot reach a Linter.
-    link: /explanation/plugins-rules-operations
-    linkText: See how it works
-  - title: Plugin-defined options
-    details: Options are declared by the plugins that own them and resolved from kit, host, and user config.
-    link: /explanation/options-and-configuration
-    linkText: Read about options
-  - title: Multiple targets
-    details: Targets are plugins, so the same language can compile to native, wasm, JS, or an interpreter.
-    link: /explanation/platform-architecture
-    linkText: View architecture
-  - title: The research stack
-    details: graphopt — a categorical optimizer that mints its own rewrite laws, certifies them, and learns to play the game they create.
-    link: /explanation/research/
+  - title: The paradigm
+    details: A categorical language — computation described as arrows, not applied as functions. Structure is inspectable; meaning is supplied by handlers.
+    link: /handl/comparison
+    linkText: Why not functions
+  - title: Handl Language
+    details: The platform — a closed arrow-calculus kernel, a data-driven engine, and a plugin-composed host.
+    link: /handl/
+    linkText: Explore the product
+  - title: graphopt
+    details: Our first practical product applying Handl Language — a categorical optimizer that mints its own rewrite laws, certifies them, and learns to play the game they create.
+    link: /graphopt/
     linkText: Explore the research
 ---
 
@@ -73,9 +54,6 @@ onMounted(() => {
 
   const settings = {
     maxDepth: 4,
-    statementCount: { min: 60, max: 140 },
-    branchChance: 0.35,
-    indentSize: 24,
     lineHeight: 18,
     space: 6,
     alpha: 0.18
@@ -83,124 +61,52 @@ onMounted(() => {
 
   const randInt = (min, max) => min + Math.floor(Math.random() * (max - min + 1))
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
-  const chance = (p) => Math.random() < p
 
-  const vars = [
-    'x', 'y', 'z', 'u', 'v', 'w', 'a', 'b', 'c', 'd', 'e',
-    'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't'
-  ]
-  const caps = [
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-    'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
-  ]
+  // The kernel vocabulary — the six closed combinators and the
+  // object/arrow forms. This is the published calculus.
+  const arrows = ['f', 'g', 'h', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w']
   const types = [
-    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'M', 'T', 'K', 'R', 'S', 'P', 'Q',
-    'Int', 'Float', 'Bool', 'String', 'Unit', 'Type', 'Kind', 'Constraint',
-    'Eff', 'IO', 'List', 'Maybe', 'Option', 'Result', 'Either', 'Task',
-    'Stream', 'Handler', 'Cont', 'State', 'Reader', 'Writer', 'Promise', 'Future',
-    'Category', 'Functor', 'Monad', 'Arrow', 'Profunctor', 'Bifunctor',
-    'Traversable', 'Foldable'
+    'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+    'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+    'Obj', 'State', 'Input', 'Output', 'World'
   ]
-  const ops = [
-    '->', '=>', '::', ':', '~>', '>=>', '<=<', '<<<', '>>>',
-    '**', '&&', '||', '++', '>>=', '<$>', '<*>',
-    '=', '!=', '==', '<', '>', '<=', '>=', '+', '-', '*', '/', '%',
-    '&', '|', '!', '?', '@', '#', '.'
-  ]
-  const keywords = [
-    'let', 'in', 'where', 'fun', 'val', 'op', 'handle', 'with', 'perform',
-    'resume', 'signal', 'do', 'return', 'yield', 'match', 'rec', 'fix', 'lam',
-    'forall', 'exists', 'arr', 'first', 'second', 'loop', 'delay', 'pre',
-    'feedback', 'run', 'eval', 'compose', 'id', 'lift', 'map', 'fold', 'unfold',
-    'coalg', 'alg', 'free', 'cofree', 'mu', 'nu', 'pure', 'bind', 'fmap', 'ap',
-    'join', 'sequence', 'traverse', 'handler', 'operation', 'request', 'continue',
-    'abort', 'raise', 'catch', 'subst', 'apply', 'curry', 'uncurry', 'swap', 'dup',
-    'fst', 'snd', 'unit', 'void', 'nil', 'cons', 'snoc', 'head', 'tail', 'init',
-    'last', 'take', 'drop', 'filter', 'zip', 'unzip', 'foldl', 'foldr', 'scanl',
-    'scanr', 'iterate', 'repeat', 'replicate', 'concat', 'append', 'reverse', 'sort'
-  ]
-  const literals = [
-    '0', '1', '2', '3', '42', '123', '"a"', '"b"', '"c"',
-    'true', 'false', '()', '[]'
-  ]
-  const delim = ['(', ')', '{', '}', '[', ']', '<', '>', '|']
-
-  const varr = () => pick(vars)
-  const cap = () => pick(caps)
-  const ty = () => pick(types)
-  const lit = () => pick(literals)
-  const op = () => pick(ops)
-  const kw = (w) => w
+  const grades = ['Op', 'Query', 'Command', 'Event', 'IO', 'Net', 'Time', 'Rand']
   const p = (s) => s
 
-  function repeat(fn, min, max) {
-    const out = []
-    for (let i = 0, n = randInt(min, max); i < n; i++) out.push(...fn())
-    return out
-  }
+  const ty = () => pick(types)
+  const arr = () => pick(arrows)
 
-  function program() {
-    return repeat(stmt, settings.statementCount.min, settings.statementCount.max)
-  }
-
-  function stmt(depth = 0) {
-    if (depth >= settings.maxDepth) return [...expr(depth + 1), p(';')]
-    const roll = Math.random()
-    if (roll < 0.15) return [kw('fun'), cap(), p('('), ...params(depth + 1), p(')'), p(':'), ...type(depth + 1), p('->'), ...expr(depth + 1), p(';')]
-    if (roll < 0.30) return [kw('val'), varr(), p(':'), ...type(depth + 1), p('='), ...expr(depth + 1), p(';')]
-    if (roll < 0.42) return [kw('op'), cap(), p('('), ...params(depth + 1), p(')'), p(':'), ...type(depth + 1), p('->'), ...type(depth + 1), p(';')]
-    if (roll < 0.54) return [kw('handle'), ...expr(depth + 1), kw('with'), p('{'), ...arms(depth + 1), p('}')]
-    if (roll < 0.66) return [kw('let'), varr(), p('='), ...expr(depth + 1), kw('in'), ...expr(depth + 1)]
-    if (roll < 0.78) return [kw('rec'), varr(), p('.'), ...expr(depth + 1), p(';')]
-    if (roll < 0.88) return [kw('match'), ...expr(depth + 1), kw('with'), p('{'), ...arms(depth + 1), p('}')]
-    return [...expr(depth + 1), p('::'), ...type(depth + 1), p(';')]
-  }
-
-  function params(depth) {
-    if (depth >= settings.maxDepth) return [varr(), p(':'), ...type(depth + 1)]
-    return repeat(() => [varr(), p(':'), ...type(depth + 1)], 0, 3).reduce((a, b, i) => (i ? a.concat(p(','), ...b) : a.concat(...b)), [])
-  }
-
-  function arms(depth) {
-    if (depth >= settings.maxDepth) return [...expr(depth + 1), p('->'), ...expr(depth + 1)]
-    return repeat(() => [...expr(depth + 1), p('->'), ...expr(depth + 1)], 1, 4).flatMap((g, i) => (i ? [p('|'), ...g] : g))
-  }
-
-  function doStmts(depth) {
-    if (depth >= settings.maxDepth) return [varr(), p('<-'), ...expr(depth + 1)]
-    return repeat(() => [varr(), p('<-'), ...expr(depth + 1)], 1, 4).flatMap((g, i) => (i ? [p(';'), ...g] : g))
-  }
-
-  function expr(depth) {
-    if (depth >= settings.maxDepth) return [pick([cap, varr, lit])()]
-    const roll = Math.random()
-    if (roll < 0.18) return [pick([cap, varr, lit])()]
-    if (roll < 0.32) return [cap(), p('('), ...args(depth + 1), p(')')]
-    if (roll < 0.48) return [...expr(depth + 1), op(), ...expr(depth + 1)]
-    if (roll < 0.60) return [p('('), ...expr(depth + 1), p(')'), p('->'), ...expr(depth + 1)]
-    if (roll < 0.72) return [kw('lam'), varr(), p('=>'), ...expr(depth + 1)]
-    if (roll < 0.82) return [kw('do'), p('{'), ...doStmts(depth + 1), p('}')]
-    if (roll < 0.90) return [p('<'), ...expr(depth + 1), p(','), ...expr(depth + 1), p('>')]
-    return [p('['), ...expr(depth + 1), p(']'), p('->'), ...expr(depth + 1)]
-  }
-
-  function args(depth) {
-    if (depth >= settings.maxDepth) return [expr(depth + 1)]
-    return repeat(() => expr(depth + 1), 0, 4).flatMap((g, i) => (i ? [p(','), ...g] : g))
-  }
-
-  function type(depth) {
+  function typeExpr(depth = 0) {
     if (depth >= settings.maxDepth) return [ty()]
     const roll = Math.random()
-    if (roll < 0.35) return [ty()]
-    if (roll < 0.55) return [...type(depth + 1), p('->'), ...type(depth + 1)]
-    if (roll < 0.75) return [...type(depth + 1), p('*'), ...type(depth + 1)]
-    if (roll < 0.88) return [p('('), ...type(depth + 1), p(')'), p('->'), ...type(depth + 1)]
-    return [p('Eff'), p('<'), ...type(depth + 1), p('>')]
+    if (roll < 0.30) return [ty()]
+    if (roll < 0.50) return [ty(), p('~>'), ty()]
+    if (roll < 0.65) return [p('('), ty(), p(','), ty(), p(')'), p('~>'), ty()]
+    if (roll < 0.78) return [ty(), p('~['), pick(grades), p(']~>'), ty()]
+    if (roll < 0.90) return [ty(), p('*'), ty()]
+    return [ty(), p('+'), ty()]
   }
 
-  function tokenStream() {
-    return program()
+  function arrowExpr(depth = 0) {
+    if (depth >= settings.maxDepth) return [arr()]
+    const roll = Math.random()
+    if (roll < 0.22) return [arr()]
+    if (roll < 0.40) return [arr(), p('>>>'), ...arrowExpr(depth + 1)]
+    if (roll < 0.52) return [arr(), p('&&&'), arr()]
+    if (roll < 0.62) return [arr(), p('|||'), arr()]
+    if (roll < 0.72) return [p('first'), p('('), ...arrowExpr(depth + 1), p(')')]
+    if (roll < 0.80) return [p('loop'), p('('), ...arrowExpr(depth + 1), p(')')]
+    if (roll < 0.88) return [p('arr'), p('('), ty(), p('->'), ty(), p(')')]
+    if (roll < 0.94) return [p('app'), p('('), arr(), p(','), ty(), p(')')]
+    return [p('('), ...arrowExpr(depth + 1), p(')')]
+  }
+
+  function stmt() {
+    const roll = Math.random()
+    if (roll < 0.35) return [arr(), p(':'), ...typeExpr(), p(';')]
+    if (roll < 0.70) return [arr(), p('='), ...arrowExpr(), p(';')]
+    if (roll < 0.85) return [p('sym'), p('('), ty(), p(')'), p(';')]
+    return [...arrowExpr(), p('>>>'), ...arrowExpr(), p(';')]
   }
 
   function draw() {
@@ -222,27 +128,18 @@ onMounted(() => {
 
     let queue = []
     function nextToken() {
-      while (queue.length === 0) queue = stmt(0)
+      while (queue.length === 0) queue = stmt()
       return queue.shift()
     }
 
     let x = 0
     let y = 0
-    let indent = 0
 
     while (y < rect.height) {
       const t = nextToken()
-      if (t === '\n') {
-        x = indent * settings.indentSize
-        y += settings.lineHeight
-        continue
-      }
-      if (t === '{') indent++
-      if (t === '}') indent = Math.max(0, indent - 1)
-
       const w = ctx.measureText(t).width
       if (x + w > rect.width) {
-        x = indent * settings.indentSize
+        x = 0
         y += settings.lineHeight
         if (y >= rect.height) break
       }
@@ -256,11 +153,9 @@ onMounted(() => {
 })
 </script>
 
-## Documentation structure
+## The mission
 
-This documentation follows the [Diátaxis](https://diataxis.fr/) framework, which separates documentation into four purposes:
-
-- **Tutorials** — step-by-step lessons for learning handl and the platform.
-- **How-to guides** — focused recipes for solving specific problems.
-- **Explanations** — background and conceptual understanding.
-- **Reference** — generated facts about functions, types, and APIs.
+**handl-lang** builds products and services on a categorical language —
+a different paradigm from functional programming. Composition, not
+application; structure you can inspect, not closures you can't. The same
+foundation drives the language platform and the research stack.
