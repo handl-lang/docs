@@ -8,14 +8,14 @@ hero:
   tagline: "Products and services built on a categorical language — arrows, not functions."
   actions:
     - theme: brand
-      text: Products
+      text: Handl Language
       link: /handl/
     - theme: brand
-      text: Research
+      text: graphopt
       link: /graphopt/
     - theme: alt
-      text: The kernel paper
-      link: /handl/PAPER
+      text: Kernel paper
+      link: https://github.com/handl-lang/kernel/blob/main/paper/paper.pdf
 
 features:
   - title: The paradigm

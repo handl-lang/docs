@@ -81,9 +81,9 @@ export default defineConfig({
           items: [
             { text: "Overview", link: "/handl/" },
             { text: "Platform overview", link: "/handl/overview" },
-            { text: "Arrow-First Kernel (paper)", link: "/handl/PAPER" },
-            { text: "Staged Arrow Engines (paper)", link: "/handl/SAE" },
             { text: "Arrow-native comparison", link: "/handl/comparison" },
+            { text: "Kernel paper (PDF)", link: "https://github.com/handl-lang/kernel/blob/main/paper/paper.pdf" },
+            { text: "Platform paper (PDF)", link: "https://github.com/handl-lang/host/blob/main/paper/paper.pdf" },
           ],
         },
         {
