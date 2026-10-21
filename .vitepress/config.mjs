@@ -63,6 +63,8 @@ export default defineConfig({
         text: "Research",
         items: [
           { text: "graphopt", link: "/graphopt/" },
+          { text: "eqsat", link: "/eqsat/" },
+          { text: "gamekit", link: "/gamekit/" },
         ],
       },
       { text: "ADRs", link: "/adrs/" },
@@ -210,6 +212,43 @@ export default defineConfig({
             { text: "Goals", link: "/graphopt/project/GOALS" },
             { text: "ADRs", link: "/adrs/graphopt" },
             { text: "ADRs", collapsed: true, items: graphoptAdrs },
+          ],
+        },
+      ],
+      "/eqsat/": [
+        {
+          text: "eqsat",
+          items: [
+            { text: "Overview", link: "/eqsat/" },
+            { text: "The e-graph and dag_cost", link: "/eqsat/explanation/egraph" },
+            { text: "Certificates", link: "/eqsat/explanation/certificates" },
+            { text: "The ports", link: "/eqsat/explanation/ports" },
+          ],
+        },
+        {
+          text: "Reference",
+          collapsed: false,
+          items: [
+            { text: "The frozen API (substrate slice)", link: "/eqsat/reference/frozen-api" },
+          ],
+        },
+      ],
+      "/gamekit/": [
+        {
+          text: "gamekit",
+          items: [
+            { text: "Overview", link: "/gamekit/" },
+            { text: "The substrate-free kernel", link: "/gamekit/explanation/the-kernel" },
+          ],
+        },
+        {
+          text: "Reference",
+          collapsed: false,
+          items: [
+            { text: "Overview", link: "/gamekit/reference/" },
+            { text: "The Board protocol", link: "/gamekit/reference/board" },
+            { text: "Players & the registry", link: "/gamekit/reference/players" },
+            { text: "The frozen API (game slice)", link: "/gamekit/reference/frozen-api" },
           ],
         },
       ],

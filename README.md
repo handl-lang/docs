@@ -7,10 +7,10 @@ decision records themselves live with the repo that made them.
 
 **Publication boundary.** Only content about **public** org repos belongs
 here: `kernel`, `engine*` abstractions, `host`, `host-tensor`,
-`kit-prelude-lang`, `egraph`, `discovery`, `graphopt`, `slidev-theme`,
-and this repo. The handl **language surface** (syntax, the standard
-library, and the `hnl` toolchain) is not yet released — do not document it
-here. Private sibling repos (`lib-*`, `ext-*`, `kit-*`, `compile-*`,
+`kit-prelude-lang`, `egraph`, `discovery`, `graphopt`, `eqsat`,
+`gamekit`, `slidev-theme`, and this repo. The handl **language surface**
+(syntax, the standard library, and the `hnl` toolchain) is not yet
+released — do not document it here. Private sibling repos (`lib-*`, `ext-*`, `kit-*`, `compile-*`,
 `host-cli`, `host-lsp`, `engine-fmt`/`lint`/`test`/`typecheck*`, …)
 produce no pages, links, or mentions.
 
@@ -19,6 +19,9 @@ produce no pages, links, or mentions.
 ```
 index.md, adrs/                                        the VitePress site (org level)
 handl/                                                   Handl Language product docs
+eqsat/, gamekit/                                         research-stack product docs
+                                                         (docs-repo pages until those
+                                                         repos ship docs/site/)
 .vitepress/                                              site config + theme
 vendored/                                                product docs vendored from
                                                          <repo>/docs/site/ (generated)

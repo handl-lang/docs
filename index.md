@@ -30,6 +30,14 @@ features:
     details: Our first practical product applying Handl Language — a categorical optimizer that mints its own rewrite laws, certifies them, and learns to play the game they create.
     link: /graphopt/
     linkText: Explore the research
+  - title: eqsat
+    details: The equality-saturation substrate the research stack is built on — term IR, e-graph, certificates, the cost algebra, and the ports backends plug into.
+    link: /eqsat/
+    linkText: Explore the substrate
+  - title: gamekit
+    details: The game layer — one Board protocol, the players that play it, and the referee's value spec as data. Substrate-free by contract.
+    link: /gamekit/
+    linkText: Explore the game layer
 ---
 
 <script setup>

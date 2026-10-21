@@ -41,7 +41,7 @@ PUBLIC_REPOS = {
     "engine-exec-tree-walk", "engine-lex", "engine-lex-pattern",
     "engine-parse", "engine-parse-pratt", "engine-transform", "host",
     "host-tensor", "kernel", "kit-prelude-lang", "research-dts",
-    "graphopt", "slidev-theme",
+    "graphopt", "eqsat", "gamekit", "slidev-theme",
 }
 
 # Repo -> product subtree its ADR page belongs to.
@@ -52,7 +52,7 @@ PRODUCT = {
     "engine-exec-tree-walk": "handl", "engine-lex": "handl",
     "engine-lex-pattern": "handl", "engine-parse": "handl",
     "engine-parse-pratt": "handl", "engine-transform": "handl",
-    "graphopt": "graphopt",
+    "graphopt": "graphopt", "eqsat": "eqsat", "gamekit": "gamekit",
 }
 
 
@@ -116,6 +116,7 @@ def repo_adrs() -> dict[str, list[tuple[str, str, Path]]]:
 
 def page(product: str, repos: dict[str, list]) -> str:
     title = {"handl": "Handl Language", "graphopt": "graphopt",
+             "eqsat": "eqsat", "gamekit": "gamekit",
              "index": "handl-lang (org)"}[product]
     out = [
         f"# ADR index — {title}",

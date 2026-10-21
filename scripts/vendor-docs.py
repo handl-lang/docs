@@ -36,7 +36,7 @@ PUBLIC_REPOS = {
     "engine-exec-tree-walk", "engine-lex", "engine-lex-pattern",
     "engine-parse", "engine-parse-pratt", "engine-transform", "host",
     "host-tensor", "kernel", "kit-prelude-lang", "research-dts",
-    "graphopt", "slidev-theme",
+    "graphopt", "eqsat", "gamekit", "slidev-theme",
 }
 
 # Repo -> site subtree it feeds (fallback: repo name via site.yaml site_path).
@@ -51,6 +51,17 @@ PROJECT_FILES = [
     "research_lab_notebook.md",
     "adrs", "design", "notes", "tasks", "plans", "retros", "reports",
 ]
+
+# Vendored project paths left out of the published tree — they name a
+# private sibling repo, and private siblings produce no pages, links, or
+# mentions on this site. Keys are repo names (post-remote resolution);
+# values are paths relative to the repo's `project/` dir.
+PROJECT_EXCLUDE = {
+    "graphopt": {
+        "notes/repo-split-plan.md",
+        "plans/0032-repo-split.md",
+    },
+}
 
 NUM = re.compile(r"^(\d+)")
 TITLE = re.compile(r"^#\s+(?:ADR-\d+[a-z]?:\s*)?(.*)")
@@ -176,6 +187,8 @@ def main() -> int:
                     shutil.copytree(src, dest / item)
                 elif src.is_file():
                     shutil.copy2(src, dest / item)
+            for rel in PROJECT_EXCLUDE.get(repo, ()):
+                (dest / rel).unlink(missing_ok=True)
             for f in dest.rglob("*.md"):
                 sanitize_md(f)
             if not (dest / "index.md").exists():
