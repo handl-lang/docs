@@ -1,6 +1,6 @@
 # Your first `search()`
 
-<!-- provenance: research-mlopt:docs/api.md@eea02f6 -->
+<!-- provenance: graphopt:docs/api.md@eea02f6 -->
 
 A `torch.nn.Module` and a sample input go in; a verified-lowered module
 and run stats come out. The e-graph in between explores every
@@ -60,5 +60,5 @@ standalone). The certificate, not the timing, is the claim.
 ## Next
 
 → [Watch a law get minted](./mint-a-law) — or read the full
-walkthrough in [`docs/api.md`](https://github.com/handl-lang/research-mlopt/blob/main/docs/api.md)
+walkthrough in [`docs/api.md`](https://github.com/handl-lang/graphopt/blob/main/docs/api.md)
 and the contract in [the frozen API reference](../../reference/research/frozen-api).

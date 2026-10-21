@@ -249,7 +249,7 @@ repo under `project/<shell>/`.
 | 0137 | `sdkgen-webidl` backend and the JS emitters | `web/adrs/0137-sdkgen-webidl-and-js-emitters.md` |
 | 0143 | `compile-js` target | `web/adrs/0143-compile-js-target.md` |
 
-### `research-mlopt`
+### `graphopt`
 
 | # | title | file |
 |---|---|---|

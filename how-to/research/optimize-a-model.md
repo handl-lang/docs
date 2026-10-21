@@ -1,6 +1,6 @@
 # Optimize a model
 
-<!-- provenance: research-mlopt:docs/api.md@bac1a61 + mlopt_orchestrator.optimize + mlopt_torch.export -->
+<!-- provenance: graphopt:docs/api.md@bac1a61 + mlopt_orchestrator.optimize + mlopt_torch.export -->
 
 Take a `torch.nn.Module` and an example input to a verified, delivered
 optimized module. Assumes [the dev environment is set up](../../tutorials/research/setup);
@@ -94,5 +94,5 @@ timing, is the claim.
 ## See also
 
 - [The frozen API reference](../../reference/research/frozen-api) — the contract surface these calls sit on.
-- [`docs/api.md`](https://github.com/handl-lang/research-mlopt/blob/main/docs/api.md) — the upstream working walkthrough.
+- [`docs/api.md`](https://github.com/handl-lang/graphopt/blob/main/docs/api.md) — the upstream working walkthrough.
 - [The three costs](../../explanation/cross-cutting/three-costs) — how the engine prices a form.

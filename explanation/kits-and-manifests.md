@@ -101,7 +101,7 @@ Two things bite when writing these files by hand or from another tool:
 The `catopt` project (categorical optimization of computation graphs)
 emits its vocabulary in exactly this layout and loads it back:
 
-- generator: `research-mlopt`'s `scripts/dump_fragments.py`;
+- generator: `graphopt`'s `scripts/dump_fragments.py`;
 - fixture: `kit-data-prelude`'s
   `crates/handl-kit-data-prelude/tests/data/catopt-fragments/`
   (seven shell files plus `ast.yaml` and `transforms.yaml`);

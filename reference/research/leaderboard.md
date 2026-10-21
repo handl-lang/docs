@@ -1,4 +1,4 @@
-<!-- provenance: research-mlopt:docs/leaderboard_players.md@eea02f6 — generated upstream; do not hand-edit -->
+<!-- provenance: graphopt:docs/leaderboard_players.md@eea02f6 — generated upstream; do not hand-edit -->
 
 # Player leaderboard
 

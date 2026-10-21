@@ -1,6 +1,6 @@
 # The three costs — how the engine knows a form is *better*
 
-<!-- provenance: research-mlopt:docs/cost-model.md@eea02f6 — ported; upstream is the source of truth -->
+<!-- provenance: graphopt:docs/cost-model.md@eea02f6 — ported; upstream is the source of truth -->
 
 "How do you know the cost — and how do you know when it found a better
 algorithm?" The answer is three different costs at three different

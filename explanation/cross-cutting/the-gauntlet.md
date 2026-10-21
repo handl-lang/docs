@@ -1,6 +1,6 @@
 # The gauntlet — what a minted law must survive
 
-<!-- provenance: research-mlopt:mlopt_discovery.verifier + docs/{public_api,mechanism}.md@eea02f6 -->
+<!-- provenance: graphopt:mlopt_discovery.verifier + docs/{public_api,mechanism}.md@eea02f6 -->
 
 A candidate law is *proposed* cheaply and *admitted* expensively. The
 admission gauntlet is the pipeline every minted law runs before it may

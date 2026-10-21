@@ -1,12 +1,12 @@
 # The research stack — mlopt
 
-<!-- provenance: research-mlopt:README.md@eea02f6 -->
+<!-- provenance: graphopt:README.md@eea02f6 -->
 
 ::: info Rename note
-`research-mlopt` is the current repo name; the plan renames it
-**`graphopt`** at the phase-4 split (the `eqsat` substrate and the
-`gamekit` game layer are carved out at the same time). Until then the
-`research/` sections of this site point at `research-mlopt`.
+The repo is **`graphopt`** — renamed from `research-mlopt` ahead of the
+phase-4 split (the `eqsat` substrate and the `gamekit` game layer are
+still to be carved out). The `research/` sections of this site point at
+`graphopt`.
 :::
 
 **mlopt** is a categorical optimizer for neural-network computation
@@ -33,4 +33,4 @@ The [research tutorial track](../../tutorials/research/) walks install
 → first `search()` → first minted law → the scorecard. The contract
 surface is [the frozen API reference](../../reference/research/frozen-api);
 upstream, the repository's own docs live at
-[`handl-lang/research-mlopt/docs/`](https://github.com/handl-lang/research-mlopt/tree/main/docs).
+[`handl-lang/graphopt/docs/`](https://github.com/handl-lang/graphopt/tree/main/docs).

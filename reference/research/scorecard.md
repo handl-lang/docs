@@ -1,4 +1,4 @@
-<!-- provenance: research-mlopt:docs/scorecard.md@eea02f6 — generated upstream; do not hand-edit -->
+<!-- provenance: graphopt:docs/scorecard.md@eea02f6 — generated upstream; do not hand-edit -->
 
 # Discovery scorecard
 

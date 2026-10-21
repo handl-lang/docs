@@ -1,6 +1,6 @@
 # Run the scorecard
 
-<!-- provenance: research-mlopt:bench/discovery/run.py + docs/scorecard.md@eea02f6 -->
+<!-- provenance: graphopt:bench/discovery/run.py + docs/scorecard.md@eea02f6 -->
 
 The **discovery scorecard** is the engine's public test of the
 "found, not encoded" claim: each row is one named optimization from

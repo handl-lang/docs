@@ -1,4 +1,4 @@
-<!-- provenance: research-mlopt:docs/limits_table.md@eea02f6 — generated upstream; do not hand-edit -->
+<!-- provenance: graphopt:docs/limits_table.md@eea02f6 — generated upstream; do not hand-edit -->
 
 # Limits table — the delivered form vs the registered baselines
 

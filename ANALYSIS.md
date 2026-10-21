@@ -4,14 +4,14 @@ Plan 0032 phase 5. Working document for the org-docs rewrite — **not a
 published site page** (excluded via `srcExclude`).
 
 Scope: every page in `handl-lang/docs` plus the public-facing docs in
-`research-mlopt` (`docs/*.md`, `README.md`, `paper/`). Owner column names
+`graphopt` (`docs/*.md`, `README.md`, `paper/`). Owner column names
 the *future* repo per the plan's cut map (`handl` = the language/toolchain
 org; `eqsat`/`gamekit`/`graphopt` = the three public repos the split
-produces — `graphopt` is what `research-mlopt` becomes, so content
-currently in `research-mlopt` is tagged `graphopt`).
+produces — `graphopt` is the renamed `research-mlopt`, so its content
+is tagged `graphopt`).
 
-**Rename note.** `research-mlopt` is the current name; the plan lands
-`graphopt` at phase 4. This inventory uses `graphopt` as the owner tag so
+**Rename note.** `research-mlopt` is renamed `graphopt` — landed ahead
+of the phase-4 split. This inventory uses `graphopt` as the owner tag so
 the provenance column in DESIGN.md sweeps cleanly. The `catopt` name still
 appears in handl docs (kit-manifest worked example) and in the paper draft
 title — the project name for the system, not the repo name.
@@ -22,8 +22,8 @@ title — the project name for the system, not the repo name.
 |---|---|---|
 | docs repo — hand-written site pages | 37 | 4 tutorials, 6 how-to, 14 `explanation/`, 10 `explanations/`, 3 hand-written reference, 10 root pages |
 | docs repo — generated | ~200 `reference/<repo>/*.md` + `ADR-INDEX.md` | reference is gitignored except `index`/`host-concepts`/`strings-chars-unicode`; ADR-INDEX is generated but committed |
-| research-mlopt — `docs/*.md` | 28 | 8 concept/API docs, 14 `results_*.md` evidence docs, 3 generated tables (+`.json` twins), 1 generated `results.md`, 1 completed internal plan |
-| research-mlopt — other | `README.md`, `AGENTS.md`, `paper/` (qmd+pdf), `docs/tutorials/course/` (Vite+ app), `bench/{README,RESULTS}.md` | |
+| graphopt — `docs/*.md` | 28 | 8 concept/API docs, 14 `results_*.md` evidence docs, 3 generated tables (+`.json` twins), 1 generated `results.md`, 1 completed internal plan |
+| graphopt — other | `README.md`, `AGENTS.md`, `paper/` (qmd+pdf), `docs/tutorials/course/` (Vite+ app), `bench/{README,RESULTS}.md` | |
 
 ## Page inventory — `handl-lang/docs`
 
@@ -61,7 +61,7 @@ title — the project name for the system, not the repo name.
 | `explanation/graded-algebraic-theory.md` | explanation | handl | **orphaned** — not in index or sidebar; links into excluded `project/adrs/` |
 | `explanation/graded-modal-sanada-arrow-calculus.md` | explanation | handl | **orphaned** — not in index or sidebar |
 | `explanation/plugins-rules-operations.md` | explanation | handl | no |
-| `explanation/kits-and-manifests.md` | explanation | handl | **stale paths** — `catopt`'s `lab/handl-spike/dump_fragments.py` (now `research-mlopt`'s `scripts/dump_fragments.py`), `handl-kit-data-canonical` (now `handl-kit-data-prelude`), "eight empty shell files" (now seven) |
+| `explanation/kits-and-manifests.md` | explanation | handl | **stale paths** — `catopt`'s `lab/handl-spike/dump_fragments.py` (now `graphopt`'s `scripts/dump_fragments.py`), `handl-kit-data-canonical` (now `handl-kit-data-prelude`), "eight empty shell files" (now seven) |
 | `explanation/options-and-configuration.md` | explanation | handl | no |
 | `explanation/security-and-trust.md` | explanation | handl | no |
 | `explanation/strings-chars-unicode-layers.md` | explanation | handl | in index but not sidebar |
@@ -111,7 +111,7 @@ link in the whole site: `explanation/arrow-calculus-kernel.md` →
 | `api-examples.md` | scaffold | — | **deleted (4314dd7)** |
 | `markdown-examples.md` | scaffold | — | **deleted (4314dd7)** |
 
-## Page inventory — `research-mlopt` (public-facing; future `graphopt`)
+## Page inventory — `graphopt` (public-facing; renamed from `research-mlopt`)
 
 | path | quadrant | owner | stale? |
 |---|---|---|---|
@@ -139,10 +139,10 @@ link in the whole site: `explanation/arrow-calculus-kernel.md` →
 
 1. ~~**No end-to-end tutorial path.**~~ **Done (913e4ed)** —
    `tutorials/research/` is the learn-by-doing path: install → first
-   `search()` → mint-a-law → scorecard. `research-mlopt/docs/tutorials/course/`
+   `search()` → mint-a-law → scorecard. `graphopt/docs/tutorials/course/`
    stays a separate unpublished app, now linked as such from the track
    index.
-2. ~~**research-mlopt has no how-to section at all**~~ **Done (phase
+2. ~~**graphopt has no how-to section at all**~~ **Done (phase
    5.3 cont.)** — `how-to/research/` ships the four DESIGN recipes:
    `optimize-a-model` (from `docs/api.md`), `add-a-board`, `register-
    a-player`, `admit-a-law` (from `docs/public_api.md` + the code).
@@ -174,7 +174,7 @@ link in the whole site: `explanation/arrow-calculus-kernel.md` →
 8. ~~**ADR-INDEX.md is published but orphaned**~~ **Fixed (4314dd7)** —
    nav entry + `explanation/index.md` link; regenerated header no longer
    calls `host` private.
-9. ~~**No per-repo reference for research-mlopt.**~~ **Done (913e4ed)** —
+9. ~~**No per-repo reference for graphopt.**~~ **Done (913e4ed)** —
    `reference/research/frozen-api.md` vendors `docs/public_api.md` at
    `eea02f6`; scorecard/leaderboard/limits vendor the generated tables.
 10. ~~**Stale singletons**~~ **Fixed (4314dd7/f589b2b)** —

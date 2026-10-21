@@ -16,7 +16,7 @@ How-to guides are practical recipes. They assume you already know the basics and
 - [Write a plugin](./write-a-plugin) — implement a plugin and contribute a rule.
 - [Configure options](./configure-options) — declare and override options from kits and `.handl.toml`.
 
-## The research stack (research-mlopt)
+## The research stack (graphopt)
 
 - [Optimize a model](./research/optimize-a-model) — `torch.nn.Module` → a verified, delivered optimized module.
 - [Add a board](./research/add-a-board) — a new optimization game as an RL environment.

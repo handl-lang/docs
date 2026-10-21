@@ -1,6 +1,6 @@
 # Evaluation — the fourth dimension
 
-<!-- provenance: research-mlopt:docs/evaluation.md@eea02f6 — summarized; the full account lives upstream -->
+<!-- provenance: graphopt:docs/evaluation.md@eea02f6 — summarized; the full account lives upstream -->
 
 mlopt splits into four independent dimensions; this page is the
 **evaluation** one — how a program is described, ranked, and measured
@@ -57,5 +57,5 @@ performance (soft) stay distinct, which is what lets
 each level exists because the cheaper one can lie.
 
 The full account is
-[`docs/evaluation.md`](https://github.com/handl-lang/research-mlopt/blob/main/docs/evaluation.md)
+[`docs/evaluation.md`](https://github.com/handl-lang/graphopt/blob/main/docs/evaluation.md)
 upstream.

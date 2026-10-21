@@ -1,6 +1,6 @@
 # Add a board
 
-<!-- provenance: research-mlopt:gamekit/engine.py + mlopt_discovery/play.py@bac1a61 -->
+<!-- provenance: graphopt:gamekit/engine.py + mlopt_discovery/play.py@bac1a61 -->
 
 A **board** is one optimization game as an RL environment — observe a
 state, play a move, get a report, repeat until done. A **domain** is the

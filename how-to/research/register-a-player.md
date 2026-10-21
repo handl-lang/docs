@@ -1,6 +1,6 @@
 # Register a player
 
-<!-- provenance: research-mlopt:gamekit/players/registry.py@bac1a61 -->
+<!-- provenance: graphopt:gamekit/players/registry.py@bac1a61 -->
 
 A player is a folder in `packages/gamekit/src/gamekit/players/` — a
 docstring carrying the measured record, a `SPECS` tuple of `PlayerSpec`

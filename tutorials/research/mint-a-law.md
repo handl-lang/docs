@@ -1,6 +1,6 @@
 # Watch a law get minted
 
-<!-- provenance: research-mlopt:docs/mechanism.md@eea02f6 + mlopt_discovery.pipeline -->
+<!-- provenance: graphopt:docs/mechanism.md@eea02f6 + mlopt_discovery.pipeline -->
 
 The shipped bank is not fixed. `mlopt_discovery` runs a closed loop
 over a corpus of real exported models:

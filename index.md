@@ -46,7 +46,7 @@ features:
     link: /explanation/platform-architecture
     linkText: View architecture
   - title: The research stack
-    details: research-mlopt — a categorical optimizer that mints its own rewrite laws, certifies them, and learns to play the game they create.
+    details: graphopt — a categorical optimizer that mints its own rewrite laws, certifies them, and learns to play the game they create.
     link: /explanation/research/
     linkText: Explore the research
 ---

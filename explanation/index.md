@@ -39,7 +39,7 @@ Explanations help you understand _why_ handl works the way it does. They are bac
 
 ## The research stack (graphopt)
 
-The `research-mlopt` repo (renamed `graphopt` at the repo split) — the
+The `graphopt` repo (renamed from `research-mlopt`) — the
 categorical optimizer and law-discovery engine:
 
 - [The research stack](./research/) — the section landing, with the rename note.

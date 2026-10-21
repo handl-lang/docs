@@ -1,6 +1,6 @@
 # How mlopt works — syntax, structure, and the rewrite loop
 
-<!-- provenance: research-mlopt:docs/mechanism.md@eea02f6 — summarized; the full account lives upstream -->
+<!-- provenance: graphopt:docs/mechanism.md@eea02f6 — summarized; the full account lives upstream -->
 
 The model graph is **syntax**; a category-theoretic **structure**
 interprets it; the structure's **axioms** generate rewrites; **search**
@@ -94,6 +94,6 @@ representations from drifting silently.
 meta-layer) · `bench/drivers/` (measurement probes).
 
 The full account — with the measured asides — is
-[`docs/mechanism.md`](https://github.com/handl-lang/research-mlopt/blob/main/docs/mechanism.md)
+[`docs/mechanism.md`](https://github.com/handl-lang/graphopt/blob/main/docs/mechanism.md)
 upstream. See also [evaluation](./evaluation) and
 [the three costs](../cross-cutting/three-costs).

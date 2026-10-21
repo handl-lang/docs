@@ -20,10 +20,10 @@ package repo, kernel substrate crate, or `handl-packages/` package.
 - [Obj](./kernel/lib-obj) — record introspection primitives.
 - [Type](./kernel/lib-type) — type coercion, predicates, and utilities.
 
-## Research stack (`research-mlopt` → `graphopt`)
+## Research stack (`graphopt`, renamed from `research-mlopt`)
 
 The frozen public surface of the research stack — bound to
-`research-mlopt:docs/public_api.md` (`API_VERSION = "0.1.0"`):
+`graphopt:docs/public_api.md` (`API_VERSION = "0.1.0"`):
 
 - [The frozen API](./research/frozen-api) — the contracts the repo split must not break, tagged per destination repo (`eqsat`/`gamekit`/`graphopt`).
 - [Discovery scorecard](./research/scorecard) — can the engine derive each named optimization, certify it, and beat the registered floor? *(generated upstream, vendored)*

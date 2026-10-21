@@ -13,8 +13,8 @@ Tutorials are hands-on lessons for learning handl by doing. If you are new here,
 
 ## The research track
 
-The end-to-end path for the `research-mlopt` stack (the future
-`graphopt` repo) — a model in, a cheaper certified form out, and the
+The end-to-end path for the `graphopt` stack (renamed from
+`research-mlopt`) — a model in, a cheaper certified form out, and the
 law-discovery loop underneath:
 
 - [Research track](./research/) — install → first `search()` → first minted law → the scorecard.

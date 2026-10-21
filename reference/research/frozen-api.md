@@ -1,9 +1,9 @@
 ::: warning Vendored — do not edit here
-Synced from `research-mlopt:docs/public_api.md` @ `eea02f6` — the
+Synced from `graphopt:docs/public_api.md` @ `eea02f6` — the
 phase-1 frozen manifest (`API_VERSION = "0.1.0"`). Edit upstream and
 re-vendor; this copy drifts on purpose only at the repo split. The
-rename note: `research-mlopt` → `graphopt` at phase 4; each row tags
-its destination repo (`eqsat`/`gamekit`/`graphopt`).
+`research-mlopt` → `graphopt` rename has landed; the `eqsat`/`gamekit`
+carve-outs land at phase 4 — each row tags its destination repo.
 :::
 
 # The frozen public API — plan 0032 phase 1

@@ -1,6 +1,6 @@
 # Admit a law
 
-<!-- provenance: research-mlopt:mlopt_discovery/{pipeline,verifier,emit}.py + mlopt_core.laws.provenance@bac1a61 -->
+<!-- provenance: graphopt:mlopt_discovery/{pipeline,verifier,emit}.py + mlopt_core.laws.provenance@bac1a61 -->
 
 Move a candidate equality through [the gauntlet](../../explanation/cross-cutting/the-gauntlet)
 into `DEFAULT` with `MACHINE_SHIPPED` provenance. The discovery pipeline
@@ -90,7 +90,7 @@ before it lands.
 shipped bank's claim holds: every machine-admitted law replayed its
 certificate and paid on a measured fixture before it shipped. The
 promotion table and per-law evidence live upstream in
-[`project/retros/promoted-laws.md`](https://github.com/handl-lang/research-mlopt/blob/main/project/retros/promoted-laws.md).
+[`project/retros/promoted-laws.md`](https://github.com/handl-lang/graphopt/blob/main/project/retros/promoted-laws.md).
 
 ## See also
 

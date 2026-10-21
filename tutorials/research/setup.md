@@ -1,6 +1,6 @@
-# Set up research-mlopt
+# Set up graphopt
 
-<!-- provenance: research-mlopt:README.md@eea02f6 -->
+<!-- provenance: graphopt:README.md@eea02f6 -->
 
 This step gets a working dev environment for the research stack.
 Requires Python 3.13, [`uv`](https://docs.astral.sh/uv/), and (only for
@@ -9,8 +9,8 @@ the Rust crates) a Rust toolchain — the Python path needs no Rust.
 ## 1. Clone and sync
 
 ```sh
-git clone https://github.com/handl-lang/research-mlopt
-cd research-mlopt
+git clone https://github.com/handl-lang/graphopt
+cd graphopt
 uv sync                    # creates .venv/ — the dev environment
 ```
 

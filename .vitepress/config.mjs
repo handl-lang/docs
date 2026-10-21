@@ -62,11 +62,11 @@ export default defineConfig({
           ],
         },
         {
-          text: "Research track (research-mlopt)",
+          text: "Research track (graphopt)",
           collapsed: false,
           items: [
             { text: "Overview", link: "/tutorials/research/" },
-            { text: "Set up research-mlopt", link: "/tutorials/research/setup" },
+            { text: "Set up graphopt", link: "/tutorials/research/setup" },
             { text: "Your first search()", link: "/tutorials/research/first-search" },
             { text: "Watch a law get minted", link: "/tutorials/research/mint-a-law" },
             { text: "Run the scorecard", link: "/tutorials/research/run-the-scorecard" },
@@ -86,7 +86,7 @@ export default defineConfig({
           ],
         },
         {
-          text: "Research stack (research-mlopt)",
+          text: "Research stack (graphopt)",
           collapsed: false,
           items: [
             {
@@ -181,7 +181,7 @@ export default defineConfig({
           items: referenceSidebar,
         },
         {
-          text: "Research (research-mlopt)",
+          text: "Research (graphopt)",
           collapsed: false,
           items: [
             { text: "The frozen API", link: "/reference/research/frozen-api" },

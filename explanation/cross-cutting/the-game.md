@@ -1,6 +1,6 @@
 # The game — boards, players, and the learned-policy loop
 
-<!-- provenance: research-mlopt:gamekit.engine + docs/results_player_on_board.md@eea02f6 -->
+<!-- provenance: graphopt:gamekit.engine + docs/results_player_on_board.md@eea02f6 -->
 
 Because programs, rules, and derivations are all values in one
 calculus, *discovery itself* is a game: observe a state, play a move,
