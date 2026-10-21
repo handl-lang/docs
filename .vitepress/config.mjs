@@ -1,6 +1,9 @@
 import { defineConfig } from "vitepress";
 import referenceSidebar from "./sidebar-reference.mjs";
+import * as adrsSidebar from "./sidebar-adrs.mjs";
 import { handlDark } from "./theme/shiki-themes.mjs";
+
+const { handlAdrs = [], graphoptAdrs = [] } = adrsSidebar;
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -62,7 +65,7 @@ export default defineConfig({
           { text: "graphopt", link: "/graphopt/" },
         ],
       },
-      { text: "Project", link: "/adrs/" },
+      { text: "ADRs", link: "/adrs/" },
     ],
 
     sidebar: {
@@ -148,7 +151,12 @@ export default defineConfig({
         {
           text: "Project",
           collapsed: false,
-          items: [{ text: "ADRs", link: "/adrs/handl" }],
+          items: [
+            { text: "TODO", link: "/handl/project/TODO" },
+            { text: "Backlog", link: "/handl/project/BACKLOG" },
+            { text: "ADRs", link: "/adrs/handl" },
+            { text: "ADRs", collapsed: true, items: handlAdrs },
+          ],
         },
       ],
       "/graphopt/": [
@@ -197,7 +205,22 @@ export default defineConfig({
         {
           text: "Project",
           collapsed: false,
-          items: [{ text: "ADRs", link: "/adrs/graphopt" }],
+          items: [
+            { text: "TODO", link: "/graphopt/project/TODO" },
+            { text: "Goals", link: "/graphopt/project/GOALS" },
+            { text: "ADRs", link: "/adrs/graphopt" },
+            { text: "ADRs", collapsed: true, items: graphoptAdrs },
+          ],
+        },
+      ],
+      "/adrs/": [
+        {
+          text: "ADRs",
+          items: [
+            { text: "handl-lang (org)", link: "/adrs/" },
+            { text: "Handl Language", link: "/adrs/handl" },
+            { text: "graphopt", link: "/adrs/graphopt" },
+          ],
         },
       ],
     },

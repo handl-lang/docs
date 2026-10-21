@@ -40,6 +40,9 @@ jobs:
             | while read -r r; do
                 git clone --depth 1 --quiet "https://github.com/handl-lang/$r" "../$r" || \
                   echo "::warning::could not clone $r"
+                # the project docs live on each repo's `project` branch
+                git clone --depth 1 --quiet -b project \
+                  "https://github.com/handl-lang/$r" "../$r/project" 2>/dev/null || true
               done
 
       - uses: oven-sh/setup-bun@v2
