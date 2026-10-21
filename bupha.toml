@@ -1,0 +1,91 @@
+# bupha.toml — watch product repos for published-docs changes and
+# rebuild + deploy this site (scripts/deploy-pages.sh -> gh-pages).
+#
+# Live topology on luis's box: these [[repos]] entries are merged into
+# the shared watcher config ~/.config/bupha/bupha.toml (one systemd
+# `bupha-watch.service`, one cloudflared tunnel `handl-ci` -> :9000, one
+# latest-wins queue/worker — the box is memory-constrained, so builds
+# serialize with the other watches). This file is the committed manifest
+# of that watch; it is also a valid standalone config — run a dedicated
+# instance with `bupha watch --config docs/bupha.toml` after moving
+# `trigger.listen` to a free port (and giving it a public ingress).
+#
+# Secrets resolve env var -> OS keyring -> ~/.config/bupha/env; never
+# this file. Schema: github.com/9aia/bupha examples/bupha.toml.example.
+
+# A push to docs/site/** or docs/site.yaml on main in any of these
+# queues one pending sha (latest-wins, default) and runs
+# ci/docs-trigger.sh in a detached worktree; the trigger script diffs
+# against the last seen sha and deploys only when docs changed.
+
+[[repos]]
+name = "handl-lang/host"
+dir = "/home/luis/GitHub/handl-lang/host"
+branch = "refs/heads/main"
+  [repos.runner]
+  kind = "script"
+  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/docs-trigger.sh"
+  cancel_running = true
+
+[[repos]]
+name = "handl-lang/graphopt"
+dir = "/home/luis/GitHub/handl-lang/graphopt"
+branch = "refs/heads/main"
+  [repos.runner]
+  kind = "script"
+  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/docs-trigger.sh"
+  cancel_running = true
+
+[[repos]]
+name = "handl-lang/eqsat"
+dir = "/home/luis/GitHub/handl-lang/eqsat"
+branch = "refs/heads/main"
+  [repos.runner]
+  kind = "script"
+  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/docs-trigger.sh"
+  cancel_running = true
+
+[[repos]]
+name = "handl-lang/gamekit"
+dir = "/home/luis/GitHub/handl-lang/gamekit"
+branch = "refs/heads/main"
+  [repos.runner]
+  kind = "script"
+  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/docs-trigger.sh"
+  cancel_running = true
+
+# the docs repo itself: every push to main rebuilds (the trigger
+# script short-circuits the diff check for repo = "docs")
+[[repos]]
+name = "handl-lang/docs"
+dir = "/home/luis/GitHub/handl-lang/docs"
+branch = "refs/heads/main"
+  [repos.runner]
+  kind = "script"
+  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/docs-trigger.sh"
+  cancel_running = true
+
+[trigger]
+kind = "github"
+listen = "127.0.0.1:9000"
+secret_env = "BUPHA_WEBHOOK_SECRET"
+
+# global runner is a placeholder — every watched repo above overrides
+# it wholesale via [repos.runner] (a full replacement, per schema).
+[runner]
+kind = "script"
+cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/docs-trigger.sh"
+token_env = "BUPHA_TOKEN"
+
+[status]
+kind = "github"
+context = "ci/bupha"
+
+[tunnel]
+provider = "cloudflared"
+name = "handl-ci"
+local_url = "http://127.0.0.1:9000"
+public_url = "https://ci.luisfuturist.com"   # hooks land at <url>/hook
+
+[worktree]
+base = "/home/luis/dagger/worktrees/bupha"   # worktrees: <base>-<repo>-<sha12>
