@@ -63,11 +63,15 @@ export default defineConfig({
         text: "Research",
         items: [
           { text: "graphopt", link: "/graphopt/" },
+        ],
+      },
+      {
+        text: "Libraries",
+        items: [
           { text: "eqsat", link: "/eqsat/" },
           { text: "gamekit", link: "/gamekit/" },
         ],
       },
-      { text: "ADRs", link: "/adrs/" },
     ],
 
     sidebar: {

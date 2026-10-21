@@ -6,17 +6,14 @@ node_modules
 # python
 scripts/__pycache__/
 
-# generated reference + rustdoc (docs/scripts/*) — the hand-written reference
-# pages are tracked and re-included below
+# generated reference + rustdoc (docs/scripts/*)
 /api
-# `handl/reference/` is generated (scripts/gen_reference_all.py); only the
-# hand-written pages are tracked. Pages is configured with
-# build_type=workflow, so it serves the artifact as-is and does not run a
-# Jekyll pass that would drop ignored paths.
-/handl/reference/*
-!/handl/reference/index.md
-!/handl/reference/host-concepts.md
-!/graphopt/reference/
+# `handl/` on disk is generated output only — scripts/gen_reference*.py
+# writes `handl/reference/<repo>/`. All hand-written handl pages are
+# vendored from the host repo's docs/site/ (see /vendored/ below).
+# Pages is configured with build_type=workflow, so it serves the artifact
+# as-is and does not run a Jekyll pass that would drop ignored paths.
+/handl/
 
 # the project worktree (ADR-0129)
 /project/

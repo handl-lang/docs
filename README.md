@@ -18,10 +18,11 @@ produce no pages, links, or mentions.
 
 ```
 index.md, adrs/                                        the VitePress site (org level)
-handl/                                                   Handl Language product docs
-eqsat/, gamekit/                                         research-stack product docs
-                                                         (docs-repo pages until those
-                                                         repos ship docs/site/)
+handl/                                                   generated reference output only
+                                                         (gen_reference*.py writes
+                                                         handl/reference/<repo>/;
+                                                         gitignored — the Handl
+                                                         product pages are vendored)
 .vitepress/                                              site config + theme
 vendored/                                                product docs vendored from
                                                          <repo>/docs/site/ (generated)
@@ -40,15 +41,16 @@ The site's `srcDir` is the repo root; `README.md`, `project/**` and
 | script | output | source |
 |---|---|---|
 | `scripts/gen-docs-index.py` | `adrs/{index,handl,graphopt}.md` | every sibling's `project/adrs/` worktree + the `project` repo's retired-shell subtrees (+ `host/project/docs-split.yaml` for split/local metadata) |
-| `scripts/gen_reference_all.py` | `reference/<repo>/` + `reference.yaml` + `.vitepress/sidebar-reference.mjs` | every sibling repo's package sources — `handl-packages/<pkg>/`, `pkg.hnl`+`src/`, or `crates/<crate>/src/*.hnl` doc comments |
+| `scripts/gen_reference_all.py` | `handl/reference/<repo>/` + `reference.yaml` + `.vitepress/sidebar-reference.mjs` | every sibling repo's package sources — `handl-packages/<pkg>/`, `pkg.hnl`+`src/`, or `crates/<crate>/src/*.hnl` doc comments |
 | `scripts/vendor-docs.py` | `vendored/<product>/` | each public product repo's `docs/site/` + `docs/site.yaml` |
 | `scripts/gen-api.sh` | `api/<repo>/` | each sibling repo's rustdoc (`cargo +nightly doc-md`, else `cargo doc`) |
 
 Both are per-repo: the hub aggregates **public repos only** (the
 `PUBLIC_REPOS` allowlist in each generator mirrors the Pages workflow's
-`--visibility public` clone set). `reference/` and `api/` are gitignored
-except the hand-written `handl/reference/` pages (`index.md`,
-`host-concepts.md`).
+`--visibility public` clone set). `handl/` and `api/` are gitignored —
+`handl/` on disk holds only generated reference output; every
+hand-written product page lives in its repo's `docs/site/` and is
+vendored.
 
 ```bash
 bun run docs:gen-ref     # regenerate the aggregated reference
