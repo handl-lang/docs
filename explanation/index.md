@@ -39,19 +39,16 @@ Explanations help you understand _why_ handl works the way it does. They are bac
 
 ## Design notes
 
-Older design notes live in `explanations/` (a merge into this section is
-planned — see `DESIGN.md`):
+Older design notes, merged here from the retired `explanations/` directory:
 
-- [Library API design principles](../explanations/ac-lib-api-design-principles)
-- [Crate architecture](../explanations/crate-architecture)
-- [Design principles](../explanations/design-principles)
-- [Naming: "fields" not "keys"](../explanations/fields-not-keys)
-- [Name explanation](../explanations/lang-name)
-- [Per-workspace language variants](../explanations/per-workspace-language-variants)
-- [Platform architecture (earlier draft)](../explanations/platform-architecture)
-- [handl and other polyglot runtimes](../explanations/polyglot-runtimes)
-- [Why the language kernel is small](../explanations/small-kernel)
-- [VS Code extension constraints](../explanations/vscode-extension-constraints)
+- [Library API design principles](./ac-lib-api-design-principles)
+- [Design principles](./design-principles)
+- [Naming: "fields" not "keys"](./fields-not-keys)
+- [Name explanation](./lang-name)
+- [Per-workspace language variants](./per-workspace-language-variants)
+- [handl and other polyglot runtimes](./polyglot-runtimes)
+- [Why the language kernel is small](./small-kernel)
+- [VS Code extension constraints](./vscode-extension-constraints)
 
 ## When to use another section
 

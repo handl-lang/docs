@@ -104,32 +104,26 @@ export default defineConfig({
             },
           ],
         },
-      ],
-      "/explanations/": [
         {
           text: "Design notes",
+          collapsed: true,
           items: [
             {
               text: "Library API design principles",
-              link: "/explanations/ac-lib-api-design-principles",
+              link: "/explanation/ac-lib-api-design-principles",
             },
-            { text: "Crate architecture", link: "/explanations/crate-architecture" },
-            { text: "Design principles", link: "/explanations/design-principles" },
-            { text: "Fields, not keys", link: "/explanations/fields-not-keys" },
-            { text: "Name explanation", link: "/explanations/lang-name" },
+            { text: "Design principles", link: "/explanation/design-principles" },
+            { text: "Fields, not keys", link: "/explanation/fields-not-keys" },
+            { text: "Name explanation", link: "/explanation/lang-name" },
             {
               text: "Per-workspace language variants",
-              link: "/explanations/per-workspace-language-variants",
+              link: "/explanation/per-workspace-language-variants",
             },
-            {
-              text: "Platform architecture (earlier draft)",
-              link: "/explanations/platform-architecture",
-            },
-            { text: "Polyglot runtimes", link: "/explanations/polyglot-runtimes" },
-            { text: "Why the kernel is small", link: "/explanations/small-kernel" },
+            { text: "Polyglot runtimes", link: "/explanation/polyglot-runtimes" },
+            { text: "Why the kernel is small", link: "/explanation/small-kernel" },
             {
               text: "VS Code extension constraints",
-              link: "/explanations/vscode-extension-constraints",
+              link: "/explanation/vscode-extension-constraints",
             },
           ],
         },

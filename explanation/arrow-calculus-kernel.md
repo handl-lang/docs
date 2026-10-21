@@ -56,7 +56,7 @@ The set is closed, not frozen. A seventh combinator is justified only when a fea
 
 ## Relation to the handl language kernel
 
-The handl _language_ kernel (the six field primitives described in [Why the language kernel is small](../explanations/small-kernel)) follows the same principle at a different layer: expressive power comes from composition, not from adding keywords. The arrow calculus kernel is the layer below — the calculus the language compiles _to_. Both layers are closed by design, and for the same reason: a small, fixed core keeps every consumer honest.
+The handl _language_ kernel (the six field primitives described in [Why the language kernel is small](./small-kernel)) follows the same principle at a different layer: expressive power comes from composition, not from adding keywords. The arrow calculus kernel is the layer below — the calculus the language compiles _to_. Both layers are closed by design, and for the same reason: a small, fixed core keeps every consumer honest.
 
 ## Relation to ADR-0106
 

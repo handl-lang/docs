@@ -1,5 +1,13 @@
 # Design principles
 
+::: info Historical framing
+The kernel-level principles below (1–12) describe the field/expression kernel —
+the pre-[ADR-0106](https://github.com/handl-lang/host/blob/project/adrs/0106-object-arrow-kernel.md)
+framing. The normative semantic kernel is now the object/arrow kernel
+(see [The arrow calculus kernel](./arrow-calculus-kernel)); the platform-level
+principles (13–17) describe the current plugin model.
+:::
+
 1. **Runtime-agnostic.** The language specification is independent of any runtime, host, or execution target. Programs can run in browsers, game engines, servers, CLI tools, type-level contexts, embedded hardware, or GPUs — the host determines the execution model. The language does not constrain _where_ or _how_ programs execute.
 2. **Declarative.** A document describes _what_ values it contains, not _how_ to compute them. Computation is expressed through field declarations and host-provided functions, not imperative code.
 3. **Schema-optional.** Schemas define types when present. The `$:` section is a convention of the canonical dialect, not a language-level requirement. A host may use any schema system, or none — the kernel evaluates expressions regardless.

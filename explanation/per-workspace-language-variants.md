@@ -27,7 +27,7 @@ A `.handl.toml` manifest at the project root declares which language kit to use:
 ```toml
 # .handl.toml
 [language]
-kit = "handl-kit-data-canonical"
+kit = "handl-kit-data-prelude"
 version = "0.1"
 ```
 
@@ -39,7 +39,7 @@ When the server receives a request (e.g., `semanticTokens/full`) for `file:///wo
 
 1. Walk up from `/workspace/project-a/arrows/` looking for `.handl.toml`
 2. Find it at `/workspace/project-a/.handl.toml`
-3. Read the manifest: kit = `handl-kit-data-canonical`, version = `0.1`
+3. Read the manifest: kit = `handl-kit-data-prelude`, version = `0.1`
 4. Load (or retrieve from cache) that kit's data files
 5. Lex and tokenize using those rules
 6. Return semantic tokens
