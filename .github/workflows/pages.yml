@@ -4,18 +4,20 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  repository_dispatch:
+    types: [docs-changed]
 
+# Pages is configured with build_type=branch serving the gh-pages branch,
+# so the deploy is a plain `git push` — contents: write is all it needs.
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     env:
       # PAT with read access to the private sibling repos so the reference
@@ -48,27 +50,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install --frozen-lockfile
 
-      - name: generate the aggregated reference
-        run: bun run docs:gen-ref
-
-      - run: bunx vitepress build .
-
-      # GitHub Pages runs a Jekyll pass over the artifact, and Jekyll honours
-      # `.gitignore` — which drops the generated `reference/<repo>/` pages
-      # (this repo ignores them). `.nojekyll` disables that pass.
-      - run: touch .vitepress/dist/.nojekyll
-
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .vitepress/dist
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      # Same entry point a local bupha run uses: build the site and push
+      # .vitepress/dist to gh-pages (the script drops the CI_TOKEN URL
+      # rewrite so the push authenticates with GITHUB_TOKEN).
+      - name: build the site and push gh-pages
+        run: bash scripts/deploy-pages.sh

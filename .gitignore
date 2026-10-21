@@ -11,8 +11,9 @@ scripts/__pycache__/
 # `handl/` on disk is generated output only — scripts/gen_reference*.py
 # writes `handl/reference/<repo>/`. All hand-written handl pages are
 # vendored from the host repo's docs/site/ (see /vendored/ below).
-# Pages is configured with build_type=workflow, so it serves the artifact
-# as-is and does not run a Jekyll pass that would drop ignored paths.
+# Pages serves the gh-pages branch; scripts/deploy-pages.sh drops a
+# .nojekyll into dist so the Jekyll pass (which honours .gitignore and
+# would drop these generated pages) is skipped.
 /handl/
 
 # the project worktree (ADR-0129)
