@@ -33,6 +33,22 @@ repo:
 - [The game](../../explanation/cross-cutting/the-game) — boards, players, and the learned-policy loop.
 - [The gauntlet](../../explanation/cross-cutting/the-gauntlet) — what a minted law must survive to ship.
 
+## The interactive course (runs locally)
+
+[`docs/tutorials/course/`](https://github.com/handl-lang/research-mlopt/tree/main/docs/tutorials/course)
+in the repo is a **28-level interactive course** on mlopt's
+architecture — one idea per level, a worked example, an interactive,
+and a gated checkpoint per level. It is a Vite+ app with its own
+toolchain, **not published on this site**; it builds standalone and
+runs locally:
+
+```sh
+cd research-mlopt/docs/tutorials/course
+vp install                 # install the workspace (pnpm + vite-plus)
+vp -C apps/learn dev       # http://localhost:5173
+vp run -r build            # engine → dist, app → dist
+```
+
 ## When to use another section
 
 - For the frozen contract surface, see [the frozen API reference](../../reference/research/frozen-api).

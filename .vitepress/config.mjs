@@ -85,6 +85,22 @@ export default defineConfig({
             { text: "Configure options", link: "/how-to/configure-options" },
           ],
         },
+        {
+          text: "Research stack (research-mlopt)",
+          collapsed: false,
+          items: [
+            {
+              text: "Optimize a model",
+              link: "/how-to/research/optimize-a-model",
+            },
+            { text: "Add a board", link: "/how-to/research/add-a-board" },
+            {
+              text: "Register a player",
+              link: "/how-to/research/register-a-player",
+            },
+            { text: "Admit a law", link: "/how-to/research/admit-a-law" },
+          ],
+        },
       ],
       "/explanation/": [
         {

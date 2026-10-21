@@ -100,16 +100,16 @@ link in the whole site: `explanation/arrow-calculus-kernel.md` →
 | path | quadrant | owner | stale? |
 |---|---|---|---|
 | `index.md` | meta (landing) | handl | no |
-| `overview.md` | explanation | handl | **orphan**; overlaps `explanation/platform-architecture.md`; links into excluded `project/adrs/` |
-| `LANG.md` | explanation (stub landing) | handl | **orphan**; links into excluded `project/adrs/` |
-| `RUNTIME.md` | explanation (stub landing) | handl | **orphan** |
-| `PAPER.md` | explanation (paper) | handl | **orphan**; dead link `../research/PAPER.md` (the n-dimensional paper lives at `host/research/PAPER.md`, not in this repo); links into excluded `project/adrs/` |
-| `SAE.md` | explanation (paper) | handl | **orphan** |
-| `comparison.md` | explanation | handl | **orphan** |
-| `dialect-removal-plan.md` | internal plan | handl | **orphan + stale** — `handl-dialect` no longer exists in any workspace manifest; the plan is done, page is not site material |
-| `ADR-INDEX.md` | reference | cross-repo | **orphan** — published but reachable only from `README.md` (which is `srcExclude`d); header still says "private `host` repo" — `host` is public now |
-| `api-examples.md` | scaffold | — | VitePress template leftover; delete candidate |
-| `markdown-examples.md` | scaffold | — | VitePress template leftover; delete candidate |
+| `overview.md` | explanation | handl | linked from `explanation/index.md` (f589b2b); overlaps `explanation/platform-architecture.md`; ADR links now github URLs |
+| `LANG.md` | explanation (stub landing) | handl | linked from `explanation/index.md`; ADR links now github URLs |
+| `RUNTIME.md` | explanation (stub landing) | handl | linked from `explanation/index.md` |
+| `PAPER.md` | explanation (paper) | handl | dead link **fixed (4314dd7)** — now points at `github.com/handl-lang/host/blob/main/research/PAPER.md`; still reachable only via `explanation/index.md` |
+| `SAE.md` | explanation (paper) | handl | linked from `explanation/index.md` |
+| `comparison.md` | explanation | handl | linked from `explanation/index.md` |
+| `dialect-removal-plan.md` | internal plan | handl | **deleted (4314dd7)** — the plan was done, page was not site material |
+| `ADR-INDEX.md` | reference | cross-repo | in nav + linked from `explanation/index.md` (4314dd7); header regenerated — `host` is public now |
+| `api-examples.md` | scaffold | — | **deleted (4314dd7)** |
+| `markdown-examples.md` | scaffold | — | **deleted (4314dd7)** |
 
 ## Page inventory — `research-mlopt` (public-facing; future `graphopt`)
 
@@ -131,47 +131,53 @@ link in the whole site: `explanation/arrow-calculus-kernel.md` →
 | `docs/scorecard.md` + `.json` | reference (generated) | graphopt | generated discovery scorecard |
 | `docs/leaderboard_players.md` + `.json` | reference (generated) | graphopt → gamekit content | generated player leaderboard |
 | `docs/limits_table.md` + `.json` | reference (generated) | graphopt | generated limits table |
-| `docs/tutorials/course/` | tutorial | graphopt | **interactive Vite+ app, not markdown** — exists but is not linked from README or the docs site; no published build |
+| `docs/tutorials/course/` | tutorial | graphopt | **interactive Vite+ app, not markdown** — builds standalone (`vp run -r build`) but has no published deployment; decision: **linked as unpublished** from `tutorials/research/index.md` with local-run commands |
 | `paper/` (`paper.qmd`, `paper.pdf`, `references.bib`, `README.md`) | explanation (paper) | graphopt | no |
 | `bench/README.md`, `bench/RESULTS.md` | how-to + reference | graphopt | no |
 
 ## Gap list
 
-1. **No end-to-end tutorial path.** Neither repo has a learn-by-doing path
-   for the research stack: install → first `search()` → first minted law →
-   run the scorecard. `research-mlopt/docs/tutorials/course/` is the
-   closest thing and is (a) unpublished, (b) unlinked from the README,
-   (c) a separate app with its own toolchain.
-2. **research-mlopt has no how-to section at all** — every doc is
-   explanation or results evidence. `docs/api.md` is the nearest how-to
-   and isn't even linked from the README's evidence table.
-3. **The org site documents only handl.** `docs/` aggregates *generated
-   reference* from public siblings, but no prose: no mlopt/graphopt
-   section, no research landing. The only research-mlopt presence is two
-   ADR rows in `ADR-INDEX.md`. The split needs per-repo sections.
-4. **`explanation/` vs `explanations/` split.** Ten orphaned pages in a
-   near-identically-named second dir; one drifted duplicate
-   (`platform-architecture`), one overlap (`crate-architecture`).
-5. **Explanation content scattered across root.** `overview.md`,
-   `LANG.md`, `RUNTIME.md`, `PAPER.md`, `SAE.md`, `comparison.md` are
-   orphan pages at the repo root with no inbound links or nav entry.
-6. **Dead links are masked.** `ignoreDeadLinks: true` in
-   `.vitepress/config.mjs` hides every broken target at build. Known-dead
-   classes: `*/project/adrs/*` links (7 files — `project/` is
-   `srcExclude`d), `PAPER.md → ../research/PAPER.md`,
-   `explanations/small-kernel.md → ../../docs/LANG.md` ×2, and every
-   `reference/lib-*` link from `reference/index.md` on the deployed site
-   (private siblings are never cloned by the Pages workflow).
-7. **Missing index/sidebar entries in `explanation/`.**
-   `graded-algebraic-theory` and `graded-modal-sanada-arrow-calculus` are
-   in neither; `arrow-calculus-kernel` is sidebar-only;
-   `strings-chars-unicode-layers` is index-only.
-8. **ADR-INDEX.md is published but orphaned** — nothing in the site links
-   to it; its generated header still calls `host` private.
-9. **No per-repo reference for research-mlopt.** `docs/public_api.md`
-   freezes the surface but there is no rendered API reference bound to it
-   — the site generates handl reference only.
-10. **Stale singletons:** `explanation/kits-and-manifests.md` catopt
-    paths; `dialect-removal-plan.md` (done); `explanations/small-kernel.md`
-    pre-ADR-0106 field kernel (has its own caveat, still worth a merge
-    decision).
+1. ~~**No end-to-end tutorial path.**~~ **Done (913e4ed)** —
+   `tutorials/research/` is the learn-by-doing path: install → first
+   `search()` → mint-a-law → scorecard. `research-mlopt/docs/tutorials/course/`
+   stays a separate unpublished app, now linked as such from the track
+   index.
+2. ~~**research-mlopt has no how-to section at all**~~ **Done (phase
+   5.3 cont.)** — `how-to/research/` ships the four DESIGN recipes:
+   `optimize-a-model` (from `docs/api.md`), `add-a-board`, `register-
+   a-player`, `admit-a-law` (from `docs/public_api.md` + the code).
+   Upstream `docs/api.md` stays the working walkthrough; the how-to
+   links out to it.
+3. ~~**The org site documents only handl.**~~ **Done (913e4ed)** —
+   `tutorials/research/`, `how-to/research/`, `explanation/research/` +
+   `cross-cutting/`, and `reference/research/` give the research stack
+   a section in every quadrant; ADR-INDEX has a nav entry.
+4. ~~**`explanation/` vs `explanations/` split.**~~ **Done (f589b2b)** —
+   merged into `explanation/`; `platform-architecture` deduped, every
+   page now in index + sidebar.
+5. ~~**Explanation content scattered across root.**~~ **Mostly done
+   (f589b2b/913e4ed)** — the six root pages are reachable from
+   `explanation/index.md` (a "papers & longer reads" group). A
+   dedicated `papers.md`/`explanation/papers/` grouping is still on
+   the DESIGN map.
+6. ~~**Dead links are masked.**~~ **Fixed (4314dd7)** — `ignoreDeadLinks`
+   stays on, but the known classes are repointed: `project/adrs/*`
+   links now go to `github.com/handl-lang/host/blob/project/adrs/…`
+   (ADRs live on the host repo's `project` *branch*), `PAPER.md` →
+   `…/blob/main/research/PAPER.md`, `small-kernel.md`'s
+   `../../docs/LANG.md` → `./LANG`. The `reference/lib-*` links remain
+   local-only by design — marked "(internal repo)" in `reference/
+   index.md` (913e4ed); real fix belongs to the split.
+7. ~~**Missing index/sidebar entries in `explanation/`.**~~ **Fixed
+   (4314dd7/f589b2b)** — every `explanation/` page is in both index and
+   sidebar.
+8. ~~**ADR-INDEX.md is published but orphaned**~~ **Fixed (4314dd7)** —
+   nav entry + `explanation/index.md` link; regenerated header no longer
+   calls `host` private.
+9. ~~**No per-repo reference for research-mlopt.**~~ **Done (913e4ed)** —
+   `reference/research/frozen-api.md` vendors `docs/public_api.md` at
+   `eea02f6`; scorecard/leaderboard/limits vendor the generated tables.
+10. ~~**Stale singletons**~~ **Fixed (4314dd7/f589b2b)** —
+    `kits-and-manifests` paths updated, `dialect-removal-plan` deleted,
+    `small-kernel` merged into `explanation/` keeping its pre-ADR-0106
+    caveat.

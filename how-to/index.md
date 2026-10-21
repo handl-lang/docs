@@ -16,6 +16,13 @@ How-to guides are practical recipes. They assume you already know the basics and
 - [Write a plugin](./write-a-plugin) — implement a plugin and contribute a rule.
 - [Configure options](./configure-options) — declare and override options from kits and `.handl.toml`.
 
+## The research stack (research-mlopt)
+
+- [Optimize a model](./research/optimize-a-model) — `torch.nn.Module` → a verified, delivered optimized module.
+- [Add a board](./research/add-a-board) — a new optimization game as an RL environment.
+- [Register a player](./research/register-a-player) — a measured arm in the `gamekit` players registry.
+- [Admit a law](./research/admit-a-law) — a candidate equality through the gauntlet into `DEFAULT`.
+
 ## When to use another section
 
 - If you are new to handl, start with [Tutorials](../tutorials/getting-started).

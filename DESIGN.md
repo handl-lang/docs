@@ -60,13 +60,13 @@ Order matters; each step links to the next. This is the gap-1 fix.
 
 ### How-to — per-repo groups
 
-| page | purpose | provenance |
-|---|---|---|
-| `how-to/install-handl.md` … (6 existing) | handl toolchain recipes | docs: |
-| `how-to/research/optimize-a-model.md` | `Optimizer`/`search` + runners + `engine=` | `research-mlopt:docs/api.md` (promote; api.md becomes this how-to) |
-| `how-to/research/add-a-board.md` | write a `Domain` + `Board` | `research-mlopt:docs/public_api.md` (game + domain contracts) |
-| `how-to/research/register-a-player.md` | `PlayerSpec` + registry | `research-mlopt:docs/public_api.md` |
-| `how-to/research/admit-a-law.md` | `verify_law` → gauntlet → `MACHINE_SHIPPED` | `research-mlopt:docs/public_api.md`, AGENTS.md law-bank notes |
+| page | purpose | provenance | status |
+|---|---|---|---|
+| `how-to/install-handl.md` … (6 existing) | handl toolchain recipes | docs: | shipped |
+| `how-to/research/optimize-a-model.md` | `Optimizer`/`search` + runners + `engine=` | `research-mlopt:docs/api.md` | **shipped** (phase 5.3 cont.) |
+| `how-to/research/add-a-board.md` | write a `Domain` + `Board` | `research-mlopt:gamekit.engine` + `mlopt_discovery.play` | **shipped** (phase 5.3 cont.) |
+| `how-to/research/register-a-player.md` | `PlayerSpec` + registry | `research-mlopt:gamekit.players.registry` | **shipped** (phase 5.3 cont.) |
+| `how-to/research/admit-a-law.md` | `verify_law` → gauntlet → `MACHINE_SHIPPED` | `research-mlopt:mlopt_discovery.{pipeline,verifier,emit}` + `mlopt_core.laws.provenance` | **shipped** (phase 5.3 cont.) |
 
 ### Explanation — per-repo groups + cross-cutting
 
@@ -99,12 +99,22 @@ local-only rendering; real fix belongs to the split.
 
 ## Sequencing (the update lane, phase 5.3+)
 
-1. Cheap fixes now: stale `lab/`/crate paths, dead links
-   (`project/adrs/*`, `../research/PAPER.md`, `../../docs/LANG.md`),
-   missing index/sidebar entries, scaffold pages, README/api pointers.
-2. Add the research skeleton: `tutorials/research/`, `how-to/research/`,
-   `explanation/research/` + `cross-cutting/` stubs that *link out* to
-   the repo docs rather than vendoring prose.
+1. ~~Cheap fixes now~~ — **done (4314dd7)**: stale paths, dead links
+   (`project/adrs/*` → `host@project` branch URLs, `PAPER.md` →
+   `host@main` `research/PAPER.md`, `../../docs/LANG.md`), index/sidebar
+   entries, scaffold pages.
+2. ~~Add the research skeleton~~ — **done (913e4ed + cont.)**:
+   `tutorials/research/` (4 steps + index), `explanation/research/` +
+   `cross-cutting/` (3 pages), `reference/research/` (frozen-api +
+   3 vendored tables), `how-to/research/` (4 recipes). The
+   `docs/tutorials/course/` app is linked as unpublished from the track
+   index — it builds standalone (`vp run -r build`) but has no
+   deployment; wiring a published path is deferred (separate toolchain,
+   separate site).
 3. On phase-4 extraction: sweep `research-mlopt:` → `graphopt:`, split
    `frozen-api.md` by destination tag into `reference/eqsat/` +
    `reference/gamekit/` + `reference/graphopt/`.
+4. Remaining open items: the `papers.md` / `explanation/papers/`
+   grouping (PAPER.md, SAE.md, `paper_draft.md`, `paper/`); the
+   `reference/lib-*` internal-repo treatment on the deployed site
+   (currently marked "(internal repo)" — real fix at the split).
