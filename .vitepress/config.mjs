@@ -233,6 +233,10 @@ export default defineConfig({
           text: "Reference",
           collapsed: false,
           items: [
+            { text: "Overview", link: "/eqsat/reference/" },
+            { text: "The e-graph", link: "/eqsat/reference/egraph" },
+            { text: "The cost algebra", link: "/eqsat/reference/cost" },
+            { text: "The ports", link: "/eqsat/reference/ports" },
             { text: "The frozen API (substrate slice)", link: "/eqsat/reference/frozen-api" },
           ],
         },

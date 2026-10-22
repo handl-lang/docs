@@ -119,10 +119,20 @@ local-only rendering; real fix belongs to the split.
    stay in the vendored `graphopt/reference/frozen-api`. New tracked
    sections `eqsat/` + `gamekit/` carry the repo-scoped stubs
    (egraph/certificates/ports; board/players/kernel) — the vendored
-   `graphopt/docs/site/` pages still carry pre-split provenance tags
-   (`graphopt:gamekit.*` paths) that now resolve to the
-   `gamekit`/`eqsat` repos; the upstream sweep is the follow-up.
-4. Remaining open items: the `papers.md` / `explanation/papers/`
+   `graphopt/docs/site/` pages' provenance tags swept to
+   `gamekit:`/`eqsat:` paths at phase 5.5.
+4. ~~Deepen the repo-scoped stubs~~ — **done (phase 5.5, upstream
+   `docs/site/` trees)**: eqsat `reference/` gains an index plus
+   signature-level pages (`egraph`, `cost`, `ports`) mirroring the
+   manifest's substrate half; gamekit `reference/{board,players}` fill
+   from the real registry source (full spec roster, `register_player`
+   semantics, `Report`/`forced_action`); the graphopt tutorials were
+   re-verified post-split (the `LowerResult` unpack fix, `--group
+   bench` for the `bench` CLI, the git+ssh pin caveat) and
+   `the-game`'s private-repo mention swept. The page sources live in
+   each product repo's `docs/site/`; `scripts/vendor-docs.py`
+   republishes them here.
+5. Remaining open items: the `papers.md` / `explanation/papers/`
    grouping (PAPER.md, SAE.md, `paper_draft.md`, `paper/`); the
    `reference/lib-*` internal-repo treatment on the deployed site
    (currently marked "(internal repo)" — real fix at the split).

@@ -103,4 +103,5 @@ export const handlAdrs = [
       { text: "ADR-0148 Lower `call`/`dimension` application to `App` terms", link: "/handl/project/adrs/0148-lower-call-application" },
       { text: "ADR-0149 `host-cli` is a dumb host; `ext-*` extensions load dynamically", link: "/handl/project/adrs/0149-dynamic-extension-host" },
       { text: "ADR-0150 Repo visibility is derived from the dep closure, not chosen per-repo", link: "/handl/project/adrs/0150-visibility-closure-model" },
+      { text: "ADR-0151 Exec erases type annotations — signatures are typecheck-owned metadata", link: "/handl/project/adrs/0151-exec-erases-type-annotations" },
 ]
