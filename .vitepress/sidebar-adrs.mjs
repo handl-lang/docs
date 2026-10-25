@@ -104,4 +104,11 @@ export const handlAdrs = [
       { text: "ADR-0149 `host-cli` is a dumb host; `ext-*` extensions load dynamically", link: "/handl/project/adrs/0149-dynamic-extension-host" },
       { text: "ADR-0150 Repo visibility is derived from the dep closure, not chosen per-repo", link: "/handl/project/adrs/0150-visibility-closure-model" },
       { text: "ADR-0151 Exec erases type annotations — signatures are typecheck-owned metadata", link: "/handl/project/adrs/0151-exec-erases-type-annotations" },
+      { text: "ADR-0152 `data` is a nominal former + constructor arrows + dependent eliminator", link: "/handl/project/adrs/0152-data-nominal-inductive-families" },
+      { text: "ADR-0153 `~[n]~>` is a dimension index — n-cells as one indexed former", link: "/handl/project/adrs/0153-grades-as-arrow-indices" },
+      { text: "ADR-0154 Typecheck semantics — identity, equality, universes, literals, erasure", link: "/handl/project/adrs/0154-typecheck-semantics" },
+      { text: "ADR-0155 Scope-bound arrow environments — deps as lexical arrow records, no registry dispatch", link: "/handl/project/adrs/0155-scope-bound-arrow-environments" },
+      { text: "ADR-0156 Module environments are parameters, not construction state", link: "/handl/project/adrs/0156-module-env-as-parameter" },
+      { text: "ADR-0157 mlopt on the fragment tower — domain vocabularies as `Language` fragments", link: "/handl/project/adrs/0157-mlopt-on-fragment-tower" },
+      { text: "ADR-0158 Effect resumption semantics — `perform`/`handle` as algebra homomorphisms on free arrow-algebras", link: "/handl/project/adrs/0158-effect-resumption-semantics" },
 ]

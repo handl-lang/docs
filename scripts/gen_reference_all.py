@@ -30,18 +30,12 @@ HERE = Path(__file__).resolve().parent
 
 sys.path.insert(0, str(HERE))
 from gen_reference import package_sources  # noqa: E402
+from public_repos import PUBLIC_REPOS
 
 
 # Only public org repos contribute generated reference pages — this
 # mirrors the Pages workflow's `gh repo list --visibility public` clone
 # set. Private siblings produce no pages, links, or mentions.
-PUBLIC_REPOS = {
-    "discovery", "docs", "egraph", "engine", "engine-exec",
-    "engine-exec-tree-walk", "engine-lex", "engine-lex-pattern",
-    "engine-parse", "engine-parse-pratt", "engine-transform", "host",
-    "host-tensor", "kernel", "kit-prelude-lang", "research-dts",
-    "graphopt", "slidev-theme",
-}
 
 
 def repos_with_packages() -> list[str]:

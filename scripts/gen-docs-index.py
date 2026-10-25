@@ -24,6 +24,7 @@ import sys
 from pathlib import Path
 
 import yaml
+from public_repos import PUBLIC_REPOS
 
 DOCS_ROOT = Path(__file__).resolve().parent.parent
 ORG = DOCS_ROOT.parent
@@ -36,13 +37,6 @@ TITLE = re.compile(r"^#\s+(?:ADR-\d+[a-z]?:\s*)?(.*)")
 # Only public org repos may appear in the published index — this mirrors
 # the Pages workflow's `gh repo list --visibility public` clone set.
 # Private siblings produce no sections, no rows, and no mentions.
-PUBLIC_REPOS = {
-    "discovery", "docs", "egraph", "engine", "engine-exec",
-    "engine-exec-tree-walk", "engine-lex", "engine-lex-pattern",
-    "engine-parse", "engine-parse-pratt", "engine-transform", "host",
-    "host-tensor", "kernel", "kit-prelude-lang", "research-dts",
-    "graphopt", "eqsat", "gamekit", "slidev-theme",
-}
 
 # Repo -> product subtree its ADR page belongs to.
 PRODUCT = {

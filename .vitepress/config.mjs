@@ -1,6 +1,7 @@
 import { defineConfig } from "vitepress";
 import referenceSidebar from "./sidebar-reference.mjs";
 import * as adrsSidebar from "./sidebar-adrs.mjs";
+import { productSidebars } from "./sidebar-products.mjs";
 import { handlDark } from "./theme/shiki-themes.mjs";
 
 const { handlAdrs = [], graphoptAdrs = [] } = adrsSidebar;
@@ -58,6 +59,10 @@ export default defineConfig({
         items: [
           { text: "Handl Language", link: "/handl/" },
         ],
+      },
+      {
+        text: "Engines",
+        link: "/engines/",
       },
       {
         text: "Research",
@@ -260,6 +265,13 @@ export default defineConfig({
           ],
         },
       ],
+      "/engines/": [
+        {
+          text: "Engines",
+          items: [{ text: "Overview", link: "/engines/" }],
+        },
+      ],
+      ...productSidebars,
       "/adrs/": [
         {
           text: "ADRs",
