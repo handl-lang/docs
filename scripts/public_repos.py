@@ -6,11 +6,12 @@ One list, imported by `vendor-docs.py`, `gen-docs-index.py` and
 Keeping it in one place is the point — the three generators had drifted (a repo
 could be public, publish ADRs, and still be absent from the reference build).
 
-Membership rule: the repo is **public on GitHub** *and* its content is
-publishable. `lib-char`, `lib-char-native`, `lib-desugar`, `lib-loader` and
-`lib-str-handl` are public but document the unreleased Handl language surface
-(syntax / standard library), which `docs/README.md` keeps out of the hub until
-the language is released — add them here (and drop that paragraph) when it is.
+Membership rule: the repo is **public on GitHub**. That is the whole rule — the
+allowlist is what the org actually publishes, so a repo becoming public is what
+admits it here. (Until this sweep the five `lib-*` repos above were public but
+withheld on the theory that the language surface was unreleased; publishing docs
+for a public repo cannot leak anything its code does not, so they are
+included.)
 
 `.github` is not a product repo and never appears.
 """
@@ -36,6 +37,11 @@ PUBLIC_REPOS = {
     "gamekit",
     "host-tensor",
     "kit-prelude-lang",
+    "lib-char",
+    "lib-char-native",
+    "lib-desugar",
+    "lib-loader",
+    "lib-str-handl",
     # research / tooling / this hub
     "discovery",
     "egraph",
