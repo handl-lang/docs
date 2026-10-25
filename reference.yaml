@@ -44,3 +44,19 @@ reference:
   description: type coercion, predicates, and utility functions for the handl runtime.
   include:
   - package: type
+- title: Char
+  slug: lib-char
+  description: Axioms and laws for the character library.
+  include:
+  - package: char
+- title: Char Native
+  slug: lib-char-native
+  description: char-native -- the Rust `std::char` backend for the `char` contract.
+  include:
+  - package: char-native
+- title: Str Handl
+  slug: lib-str-handl
+  description: "`str.camel_case` \u2014 part of `str-handl`, the pure-Handl `str`\
+    \ implementation over `char`."
+  include:
+  - package: str-handl

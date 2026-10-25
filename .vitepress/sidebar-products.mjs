@@ -777,6 +777,36 @@ export const productSidebars = {
       ],
     },
   ],
+  "/research-dts/": [
+    {
+      text: "research-dts",
+      items: [
+      { text: "Overview", link: "/research-dts/" },
+      {
+        text: "How-to guides",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/research-dts/how-to/" },
+        ],
+      },
+      {
+        text: "Reference",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/research-dts/reference/" },
+        ],
+      },
+      {
+        text: "Explanation",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/research-dts/explanation/" },
+        ],
+      },
+      { text: "Project docs", link: "/research-dts/project/" },
+      ],
+    },
+  ],
   "/slidev-theme/": [
     {
       text: "slidev-theme",

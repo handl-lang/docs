@@ -109,5 +109,56 @@ export default [
         ]
       }
     ]
+  },
+  {
+    "text": "lib-char",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "Char",
+        "collapsed": false,
+        "link": "/handl/reference/lib-char/lib-char",
+        "items": [
+          {
+            "text": "Char",
+            "link": "/handl/reference/lib-char/lib-char-char"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "text": "lib-char-native",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "Char Native",
+        "collapsed": false,
+        "link": "/handl/reference/lib-char-native/lib-char-native",
+        "items": [
+          {
+            "text": "Char",
+            "link": "/handl/reference/lib-char-native/lib-char-native-char"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "text": "lib-str-handl",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "Str Handl",
+        "collapsed": false,
+        "link": "/handl/reference/lib-str-handl/lib-str-handl",
+        "items": [
+          {
+            "text": "Str Handl",
+            "link": "/handl/reference/lib-str-handl/lib-str-handl-str-handl"
+          }
+        ]
+      }
+    ]
   }
 ];
