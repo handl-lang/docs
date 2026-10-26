@@ -119,6 +119,7 @@ export default defineConfig({
             { text: "Overview", link: "/handl/explanation/" },
             { text: "What is handl?", link: "/handl/explanation/what-is-handl" },
             { text: "The arrow calculus kernel", link: "/handl/explanation/arrow-calculus-kernel" },
+            { text: "The type system", link: "/handl/explanation/type-system" },
             { text: "Language as data", link: "/handl/explanation/language-as-data" },
             { text: "The composable host", link: "/handl/explanation/composable-host" },
             { text: "Platform architecture", link: "/handl/explanation/platform-architecture" },
