@@ -538,6 +538,7 @@ export const productSidebars = {
           { text: "`handl` and other polyglot runtimes", link: "/handl/explanation/polyglot-runtimes" },
           { text: "Runtime", link: "/handl/explanation/runtime" },
           { text: "Security and trust", link: "/handl/explanation/security-and-trust" },
+          { text: "The type system", link: "/handl/explanation/type-system" },
           { text: "What is handl?", link: "/handl/explanation/what-is-handl" },
         ],
       },
