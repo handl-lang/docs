@@ -3,7 +3,7 @@
 #
 # Live topology on luis's box: these [[repos]] entries are merged into
 # the shared watcher config ~/.config/bupha/bupha.toml (one systemd
-# `bupha-watch.service`, one cloudflared tunnel `handl-ci` -> :9000, one
+# `bupha-watch.service`, one cloudflared tunnel `handl-ci` -> :29173, one
 # latest-wins queue/worker — the box is memory-constrained, so builds
 # serialize with the other watches). This file is the committed manifest
 # of that watch; it is also a valid standalone config — run a dedicated
@@ -67,7 +67,7 @@ branch = "refs/heads/main"
 
 [trigger]
 kind = "github"
-listen = "127.0.0.1:9000"
+listen = "127.0.0.1:29173"
 secret_env = "BUPHA_WEBHOOK_SECRET"
 
 # global runner is a placeholder — every watched repo above overrides
@@ -84,7 +84,7 @@ context = "ci/bupha"
 [tunnel]
 provider = "cloudflared"
 name = "handl-ci"
-local_url = "http://127.0.0.1:9000"
+local_url = "http://127.0.0.1:29173"
 public_url = "https://ci.luisfuturist.com"   # hooks land at <url>/hook
 
 [worktree]
