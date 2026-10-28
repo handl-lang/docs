@@ -23,6 +23,20 @@ contract (`§` marker type, request, trait, shared helpers) and one or more
 
 - [engine](/engine/) — `Term`, `Model`, and the arena view every engine uses.
 
+## Tools
+
+These are `engine-*` repos that are **not** operation slots — they are
+rule-based tools over the same `Language` data:
+
+| tool | what it does |
+|---|---|
+| [engine-fmt](/engine-fmt/) | data-driven AST formatter (`FormattingRule` / `PostProcessRule` seams) |
+| [engine-lint](/engine-lint/) | rule-based linter (`lang.lints` + named native checks) |
+| [engine-exec-cranelift](/engine-exec-cranelift/) | Cranelift eval backend (JIT / object file) |
+
+`engine-test` is the test runner; it stays private while its corpus harness
+depends on the private kit closure.
+
 ## How to read a crate here
 
 Each engine repo publishes the same four quadrants: an **overview** (what it is),
