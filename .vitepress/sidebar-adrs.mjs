@@ -111,4 +111,5 @@ export const handlAdrs = [
       { text: "ADR-0156 Module environments are parameters, not construction state", link: "/handl/project/adrs/0156-module-env-as-parameter" },
       { text: "ADR-0157 mlopt on the fragment tower — domain vocabularies as `Language` fragments", link: "/handl/project/adrs/0157-mlopt-on-fragment-tower" },
       { text: "ADR-0158 Effect resumption semantics — `perform`/`handle` as algebra homomorphisms on free arrow-algebras", link: "/handl/project/adrs/0158-effect-resumption-semantics" },
+      { text: "ADR-0159 Optimizer domains dissolve into `ext` tools, on a trigger", link: "/handl/project/adrs/0159-opt-domains-dissolve-into-ext-tools" },
 ]

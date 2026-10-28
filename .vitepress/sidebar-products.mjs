@@ -145,6 +145,35 @@ export const productSidebars = {
       ],
     },
   ],
+  "/engine-exec-cranelift/": [
+    {
+      text: "engine-exec-cranelift",
+      items: [
+      { text: "Overview", link: "/engine-exec-cranelift/" },
+      {
+        text: "How-to guides",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/engine-exec-cranelift/how-to/" },
+        ],
+      },
+      {
+        text: "Reference",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/engine-exec-cranelift/reference/" },
+        ],
+      },
+      {
+        text: "Explanation",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/engine-exec-cranelift/explanation/" },
+        ],
+      },
+      ],
+    },
+  ],
   "/engine-exec-tree-walk/": [
     {
       text: "engine-exec-tree-walk",
@@ -169,6 +198,35 @@ export const productSidebars = {
         collapsed: false,
         items: [
           { text: "Overview", link: "/engine-exec-tree-walk/explanation/" },
+        ],
+      },
+      ],
+    },
+  ],
+  "/engine-fmt/": [
+    {
+      text: "engine-fmt",
+      items: [
+      { text: "Overview", link: "/engine-fmt/" },
+      {
+        text: "How-to guides",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/engine-fmt/how-to/" },
+        ],
+      },
+      {
+        text: "Reference",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/engine-fmt/reference/" },
+        ],
+      },
+      {
+        text: "Explanation",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/engine-fmt/explanation/" },
         ],
       },
       ],
@@ -227,6 +285,35 @@ export const productSidebars = {
         collapsed: false,
         items: [
           { text: "Overview", link: "/engine-lex-pattern/explanation/" },
+        ],
+      },
+      ],
+    },
+  ],
+  "/engine-lint/": [
+    {
+      text: "engine-lint",
+      items: [
+      { text: "Overview", link: "/engine-lint/" },
+      {
+        text: "How-to guides",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/engine-lint/how-to/" },
+        ],
+      },
+      {
+        text: "Reference",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/engine-lint/reference/" },
+        ],
+      },
+      {
+        text: "Explanation",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/engine-lint/explanation/" },
         ],
       },
       ],
