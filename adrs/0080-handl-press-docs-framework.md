@@ -3,19 +3,17 @@ title: '`handl-press` — A VitePress-Class Docs Framework Written In and Config
 type: adr
 date: 2026-09-04
 status: proposed
+status_note: |-
+  Proposed. Targets the backlog (see `project/BACKLOG.md` → "Low priority").
+  Depends on [ADR-0077 — Stdlib Migration to Handl](./0077-stdlib-migration-to-handl.md)
+  (`op`/`handl`/`cap` surface, `HandlModule` loader), [ADR-0069 — Arrow-Native
+  Modules](./0069-arrow-native-modules.md) (importable `.hnl` modules),
+  [ADR-0021 — HMR](./0021-hmr.md) (dev-server hot reload), and
+  [ADR-0079 — Unified Dialect](./0079-unify-dialects-no-let-in.md) (graph blocks
+  as the configuration surface).
 ---
 
 # ADR-0080: `handl-press` — A VitePress-Class Docs Framework Written In and Configurable Through Handl
-
-## Status
-
-Proposed. Targets the backlog (see `project/BACKLOG.md` → "Low priority").
-Depends on [ADR-0077 — Stdlib Migration to Handl](./0077-stdlib-migration-to-handl.md)
-(`op`/`handl`/`cap` surface, `HandlModule` loader), [ADR-0069 — Arrow-Native
-Modules](./0069-arrow-native-modules.md) (importable `.hnl` modules),
-[ADR-0021 — HMR](./0021-hmr.md) (dev-server hot reload), and
-[ADR-0079 — Unified Dialect](./0079-unify-dialects-no-let-in.md) (graph blocks
-as the configuration surface).
 
 ## Context
 
