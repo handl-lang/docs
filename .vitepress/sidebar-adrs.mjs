@@ -120,6 +120,7 @@ export const handlAdrs = [
       { text: "ADR-0159 Optimizer domains dissolve into `ext` tools, on a trigger", link: "/handl/project/adrs/0159-opt-domains-dissolve-into-ext-tools" },
       { text: "ADR-0160 `lib-*` repos are language packages, not crates", link: "/handl/project/adrs/0160-lib-repos-are-language-packages" },
       { text: "ADR-0161 An ADR is a one-page decision record", link: "/handl/project/adrs/0161-adr-is-a-one-page-decision" },
+      { text: "ADR-0161 Ports are types; implementations are named for what they do", link: "/handl/project/adrs/0161-ports-are-types-impls-are-named-for-what-they-do" },
       { text: "ADR-0162 `project/` holds process artifacts; published docs live in the org `docs/`", link: "/handl/project/adrs/0162-project-folder-taxonomy" },
       { text: "ADR-0163 Every `project/` artifact declares its metadata in YAML frontmatter", link: "/handl/project/adrs/0163-project-artifact-frontmatter" },
 ]
