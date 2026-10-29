@@ -59,12 +59,28 @@ PROJECT_EXCLUDE = {
 
 NUM = re.compile(r"^(\d+)")
 TITLE = re.compile(r"^#\s+(?:ADR-\d+[a-z]?:\s*)?(.*)")
+FRONT = re.compile(r"\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*\r?\n", re.S)
 
 ADRS_SIDEBAR = DOCS_ROOT / ".vitepress" / "sidebar-adrs.mjs"
 _adrs: dict[str, list[str]] = {}
 
 
+def frontmatter(path: Path) -> dict:
+    """ADR-0163 header, or {} for a legacy page."""
+    m = FRONT.match(path.read_text(encoding="utf-8", errors="replace"))
+    if not m:
+        return {}
+    try:
+        data = yaml.safe_load(m.group(1)) or {}
+    except yaml.YAMLError:
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
 def title_of(path: Path) -> str:
+    fm = frontmatter(path)
+    if fm.get("title"):
+        return str(fm["title"]).strip()
     for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
         m = TITLE.match(line)
         if m:
@@ -120,8 +136,13 @@ def _escape_tags(seg: str) -> str:
 
 def sanitize_md(path: Path) -> None:
     """Escape non-HTML `<tag` outside code spans so Vue doesn't treat
-    generics/placeholders as unclosed components."""
+    generics/placeholders as unclosed components. Frontmatter is left byte-
+    identical — it is YAML (ADR-0163), not Markdown."""
     text = path.read_text(encoding="utf-8", errors="replace")
+    head = ""
+    m = FRONT.match(text)
+    if m:
+        head, text = text[:m.end()], text[m.end():]
     parts = FENCE.split(text)
     fences = FENCE.findall(text)
     out = []
@@ -135,7 +156,7 @@ def sanitize_md(path: Path) -> None:
         out.append(seg)
         if i < len(fences):
             out.append(fences[i])
-    path.write_text("".join(out), encoding="utf-8")
+    path.write_text(head + "".join(out), encoding="utf-8")
 
 
 def remote_name(repo_dir: Path) -> str | None:
