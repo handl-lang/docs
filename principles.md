@@ -1,3 +1,9 @@
+---
+title: Principles
+type: principle
+date: 2026-08-24
+---
+
 # Principles
 
 - Decoupled

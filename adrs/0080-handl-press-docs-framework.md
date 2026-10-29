@@ -1,3 +1,10 @@
+---
+title: '`handl-press` — A VitePress-Class Docs Framework Written In and Configurable Through Handl'
+type: adr
+date: 2026-09-04
+status: proposed
+---
+
 # ADR-0080: `handl-press` — A VitePress-Class Docs Framework Written In and Configurable Through Handl
 
 ## Status
