@@ -34,6 +34,9 @@ PUBLIC_REPOS = {
     "engine-typecheck",
     "kernel",
     "host",
+    # targets
+    "c",
+    "web",
     # products
     "graphopt",
     "eqsat",
