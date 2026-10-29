@@ -37,4 +37,7 @@ done
 if [ "$found" = 0 ]; then
   echo "no sibling repos with Cargo.toml found (expected checkouts beside $DOCS_ROOT)"
 fi
+# Rustdoc writes `Vec<T>` as bare text; VitePress treats `<T>` as a Vue
+# component. Escape non-HTML tags so the site builds (same rule as vendor-docs).
+python3 "$DOCS_ROOT/scripts/sanitize-md.py" "$OUT"
 echo "wrote $OUT"
