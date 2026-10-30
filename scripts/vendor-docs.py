@@ -42,8 +42,8 @@ SITE_PATH = {"host": "handl"}
 # docs individually). Retired shells, yaml manifests, assets stay out.
 PROJECT_FILES = [
     "TODO.md", "BACKLOG.md", "GOALS.md", "principles.md",
-    "research_lab_notebook.md",
-    "adrs", "design", "notes", "tasks", "plans", "retros", "reports",
+    "research_lab_notebook.md", "DECISIONS.md",
+    "adrs", "design", "rfcs", "notes", "tasks", "plans", "retros", "reports",
 ]
 
 # Vendored project paths left out of the published tree — they name a
