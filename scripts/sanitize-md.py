@@ -33,10 +33,25 @@ HTML_TAGS = {
 
 def escape_tags(segment: str) -> str:
     return TAG.sub(
-        lambda m: m.group(0) if m.group(2).lower() in HTML_TAGS
+        lambda m: m.group(0) if m.group(2) in HTML_TAGS
         else f"&lt;{m.group(1)}{m.group(2)}",
         segment,
     )
+
+
+def escape_outside_code(segment: str) -> str:
+    """Escape non-HTML tags, leaving inline code spans untouched."""
+    codes: list[str] = []
+
+    def stash(m: re.Match) -> str:
+        codes.append(m.group(0))
+        return f"\x00{len(codes) - 1}\x00"
+
+    guarded = INLINE.sub(stash, segment)
+    guarded = escape_tags(guarded)
+    for i, code in enumerate(codes):
+        guarded = guarded.replace(f"\x00{i}\x00", code)
+    return guarded
 
 
 def sanitize(text: str) -> str:
@@ -47,12 +62,7 @@ def sanitize(text: str) -> str:
     fences = FENCE.findall(text)
     out: list[str] = []
     for i, seg in enumerate(parts):
-        bits = INLINE.split(seg)
-        inlines = INLINE.findall(seg)
-        out.append("".join(
-            b if j % 2 else escape_tags(b)
-            for j, b in enumerate(sum(zip(bits, inlines + [""]), ()))
-        ))
+        out.append(escape_outside_code(seg))
         if i < len(fences):
             out.append(fences[i])
     return head + "".join(out)

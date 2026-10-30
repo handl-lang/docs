@@ -129,7 +129,7 @@ HTML_TAGS = {
 
 def _escape_tags(seg: str) -> str:
     return TAG.sub(
-        lambda m: m.group(0) if m.group(2).lower() in HTML_TAGS else f"&lt;{m.group(1)}{m.group(2)}",
+        lambda m: m.group(0) if m.group(2) in HTML_TAGS else f"&lt;{m.group(1)}{m.group(2)}",
         seg,
     )
 
@@ -145,15 +145,19 @@ def sanitize_md(path: Path) -> None:
         head, text = text[:m.end()], text[m.end():]
     parts = FENCE.split(text)
     fences = FENCE.findall(text)
-    out = []
+    out: list[str] = []
     for i, seg in enumerate(parts):
-        bits = INLINE.split(seg)
-        inlines = INLINE.findall(seg)
-        seg = "".join(
-            b if j % 2 else _escape_tags(b)
-            for j, b in enumerate(sum(zip(bits, inlines + [""]), ()))
-        )
-        out.append(seg)
+        codes: list[str] = []
+
+        def stash(m, codes=codes):
+            codes.append(m.group(0))
+            return f"\x00{len(codes) - 1}\x00"
+
+        guarded = INLINE.sub(stash, seg)
+        guarded = _escape_tags(guarded)
+        for j, code in enumerate(codes):
+            guarded = guarded.replace(f"\x00{j}\x00", code)
+        out.append(guarded)
         if i < len(fences):
             out.append(fences[i])
     path.write_text(head + "".join(out), encoding="utf-8")
