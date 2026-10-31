@@ -1,3 +1,10 @@
++++
+id = "ADR-0080"
+title = "ADR-0080: `handl-press` — A VitePress-Class Docs Framework Written In and Configurable Through Handl"
+status = "open"
+priority = "medium"
++++
+
 ---
 title: '`handl-press` — A VitePress-Class Docs Framework Written In and Configurable Through Handl'
 type: adr
