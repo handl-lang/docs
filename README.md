@@ -7,11 +7,12 @@ decision records themselves live with the repo that made them.
 
 **Publication boundary.** Public repos are published, and the allowlist lives in
 exactly one place: [`scripts/public_repos.py`](scripts/public_repos.py) (all three
-generators import it — they had drifted apart). That is **28 repos today**:
-`kernel`, the `engine-*` family, `host`, `host-tensor`, `kit-prelude-lang`,
-`egraph`, `discovery`, `graphopt`, `eqsat`, `gamekit`, `research-dts`,
-`slidev-theme`, `lib-char`, `lib-char-native`, `lib-desugar`, `lib-loader`,
-`lib-str-handl`, and this repo. Membership rule: public on GitHub. (An earlier
+generators import it — they had drifted apart). That is **33 repos today**:
+`kernel`, the `engine`/`engine-*` family (14), `host`, `host-tensor`, the `c`
+and `web` targets, `graphopt`, `eqsat`, `gamekit`, `kit-prelude-lang`,
+`egraph`, `discovery`, `research-dts`, `slidev-theme`, `lib-char`,
+`lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`, and this
+repo. Membership rule: public on GitHub. (An earlier
 revision withheld the `lib-*` repos on the theory that the language surface was
 unreleased; publishing docs for a public repo cannot disclose more than its
 source does, so they are in.) Every other repo (`ext-*`, `kit-*` other than

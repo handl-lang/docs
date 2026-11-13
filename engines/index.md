@@ -9,6 +9,10 @@ Every operation follows the same shape: a small **abstraction** crate owns the
 contract (`§` marker type, request, trait, shared helpers) and one or more
 **engine** crates implement it. The kit decides which engine fills each slot.
 
+This section covers the `engine-*` family only. The wider org families —
+`compile-*` (emitters), `ext-*` (`hnl` extensions), `kit-*`, `host-*`,
+`sdkgen-*` and `lib-*` — are private and documented in their own repos.
+
 ## The five operations
 
 | operation | contract | engines |

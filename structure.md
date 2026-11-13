@@ -1,22 +1,23 @@
 # handl-lang repo structure
 
-~110 private repos under `github.com/handl-lang`, checked out as siblings in `~/GitHub/handl-lang/`. Deps are git deps (`branch = "main"`); workspace-root `[patch]` tables resolve them from sibling checkouts (ADR-0128).
+~185 repos under `github.com/handl-lang`, checked out as siblings in `~/GitHub/handl-lang/`. Deps are git deps (`branch = "main"`); workspace-root `[patch]` tables resolve them from sibling checkouts (ADR-0128). The public subset is the docs hub's `PUBLIC_REPOS` allowlist (`docs/scripts/public_repos.py`).
 
 ## Core layers (bare)
 
 - `host` — runtime, loaders, `plugin-lib-*`/`plugin-ext-*` internals, `plugin-lib-stdlib` (the library-as-data registry)
-- `kernel` — `handl-language`, `handl-value`, `handl-ext`, plus substrate ops: `prim`, `prim-handl`, `ops`, `bytes`, `cmp`, `error`, `obj`, `type`, `mood`, `combinators`
-- `kit-data-canonical` — `handl-kit-data-canonical` + `data/*.yaml` (the canonical language definition, language-as-data)
-- `meta` — `defining-handl` (self-hosting, ADR-0044 Phase 8)
-- `docs` `project` `automation` `bench` `playground` `assets`
+- `kernel` — `handl-language`, `handl-value`, `handl-ext`, `defining-handl` (self-hosting, ADR-0044 Phase 8), plus substrate ops: `prim`, `prim-handl`, `ops`, `bytes`, `cmp`, `error`, `obj`, `type`, `mood`, `combinators`
+- `docs` `automation` `assets` — org-level purpose repos
+- `graphopt` `eqsat` `gamekit` `kernelopt` `discovery` `egraph` — the research/product repos (public: `graphopt`, `eqsat`, `gamekit`, `discovery`, `egraph`)
+- `c` `web` `research-dts` — public target/research repos (not checked out locally)
+- `slidev-theme` `pitch-*` `extension-{neovim,vscode}` — theme, pitch decks, editor extensions
 
-## `engine-*` (17)
+## `engine-*` (16)
 
 `engine` · `engine-{lex,lex-pattern,parse,parse-pratt,exec,exec-tree-walk,exec-bytecode,exec-cranelift,fmt,lint,test,transform,transform-rewrite,typecheck,typecheck-nbe}`
 
-## `compile-*` (5)
+## `compile-*` (7)
 
-`compile-{dot,sexp,term,handl,js}`
+`compile-{dot,handl,js,llvm,sexp,term,triton}`
 
 ## `sdkgen-*` (5)
 
@@ -30,7 +31,7 @@
 
 `ext-{compile,eval,fmt,kit,lint,plugin,sdkgen,test,transform,typecheck}` — `hnl` extensions (`libhnl_ext_*.so` discovered via `HANDL_EXT_DIR`/`~/.handl/ext`).
 
-## `lib-*` (~80)
+## `lib-*` (116)
 
 **Rule: one package per repo — `.hnl` codebases only, no Rust** (crates are const-only `*_HNL` exporters; native access via `handl-plugin-ffi`).
 
@@ -40,13 +41,13 @@
 - **FFI surfaces**: `lib-types` (`types/c/*` aliases), `lib-libc`, `lib-curl`, `lib-libz` (sdkgen bindings)
 - `pkg.hnl` declares `{ deps, modules }`; dep keys map to `handl-lang/lib-<dep>`.
 
-## `kit-*` (1)
+## `kit-*` (11)
 
-`kit-canonical` — kit declaration only: a curated manifest of `lib-*` packages + `modules/ffi`. `.hnl` sources live in their `lib-*` repos.
+`kit-{core,data-prelude,ffi,kernel-ir,lang,pkg,prelude,prelude-lang,server,stdlib,test}` — kit declarations and kit infrastructure. `kit-prelude-lang` + `kit-data-prelude` carry the canonical language definition (language-as-data, the successor to the retired `kit-data-canonical`); the rest are kit manifests/manifests-as-data over `lib-*` packages.
 
-## Retired shells
+## Retired
 
-`stdlib` (archived — folded into `host/crates`), `c`, `web` (code shells; docs merged into `project/{c,web}/`).
+`meta` (folded into `kernel/crates/defining-handl`), `kit-data-canonical` (crate now lives in `kit-data-prelude`), `kit-canonical` (superseded by the `kit-*` family), `stdlib` (archived — folded into `host/crates`), `bench`, `playground`, `project` (docs moved to per-repo `project` branches, ADR-0129).
 
 ## `tool-*`
 
@@ -54,7 +55,8 @@
 
 ## Rules
 
-- Bare = core layer or purpose repo (meta/docs/project/…)
+- Naming: the family prefix *is* the component kind — `engine-*` (language-operation engines), `lib-*` (stdlib `.hnl` packages), `kit-*` (kit declarations/infra), `compile-*` (emitters), `ext-*` (`hnl` dynamic extensions), `host-*` (host binaries), `sdkgen-*` (binding/SDK generators)
+- Bare = core layer or purpose repo (host/kernel/docs/…)
 - `prefix-*` = one component kind per repo
 - Sole-consumer generated bindings vendor into the consumer's `handl-packages/generated/`
 - `lib-{port}` = interface contract; `lib-{port}-{impl}` = backend
