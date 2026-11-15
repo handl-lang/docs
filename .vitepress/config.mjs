@@ -29,6 +29,8 @@ export default defineConfig({
     "README.md",
     "ANALYSIS.md",
     "DESIGN.md",
+    // Internal org/checkout map — names private repos; not site content.
+    "structure.md",
     "project/**",
     "scripts/**",
     "node_modules/**",
