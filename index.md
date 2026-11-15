@@ -23,9 +23,13 @@ features:
     link: /handl/comparison
     linkText: Why not functions
   - title: Handl Language
-    details: The platform — a closed arrow-calculus kernel, a data-driven engine, and a plugin-composed host.
+    details: The platform — a closed arrow-calculus kernel, a data-driven engine family, and a plugin-composed host.
     link: /handl/
     linkText: Explore the product
+  - title: The ecosystem
+    details: How the repos relate — kernel, engines, host, the eqsat/gamekit/graphopt research stack, and host-tensor.
+    link: /handl/explanation/platform-architecture
+    linkText: Repo map
   - title: graphopt
     details: Our first practical product applying Handl Language — a categorical optimizer that mints its own rewrite laws, certifies them, and learns to play the game they create.
     link: /graphopt/

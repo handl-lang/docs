@@ -19,6 +19,7 @@ Run from the docs repo: `python3 scripts/vendor-docs.py`.
 
 from __future__ import annotations
 
+import json
 import re
 import shutil
 import subprocess
@@ -88,6 +89,21 @@ def title_of(path: Path) -> str:
     return path.stem
 
 
+def js_str(s: str) -> str:
+    """Quote `s` as a JS string literal.
+
+    Sidebar titles come from markdown H1s / ADR headers and can contain
+    `"` or `\\` — interpolated raw they produce unparsable `.mjs` (the
+    ADR-0170 title broke the build once). `json.dumps` escapes exactly
+    the characters JS strings need; U+2028/U+2029 are escaped too since
+    they are line terminators in JS string literals pre-ES2019."""
+    return (
+        json.dumps(s, ensure_ascii=False)
+        .replace("\u2028", "\\u2028")
+        .replace("\u2029", "\\u2029")
+    )
+
+
 def collect_adrs(repo: str, product: str, adrs_dir: Path) -> None:
     if not adrs_dir.is_dir():
         return
@@ -96,7 +112,7 @@ def collect_adrs(repo: str, product: str, adrs_dir: Path) -> None:
         if f.suffix != ".md" or not NUM.match(f.name):
             continue
         items.append(
-            f'      {{ text: "ADR-{NUM.match(f.name).group(1)} {title_of(f)}",'
+            f"      {{ text: {js_str('ADR-' + NUM.match(f.name).group(1) + ' ' + title_of(f))},"
             f' link: "/{product}/project/adrs/{f.stem}" }},'
         )
     if items:
@@ -218,12 +234,12 @@ def write_product_sidebars() -> None:
             for page in sorted(p for p in d.glob("*.md") if p.name != "index.md"):
                 t = title_of_page(page, page.stem)
                 entries.append(
-                    f'          {{ text: "{t}", link: "/{product}/{folder}/{page.stem}" }},'
+                    f"          {{ text: {js_str(t)}, link: \"/{product}/{folder}/{page.stem}\" }},"
                 )
             if not entries:
                 continue
             items.append(
-                f'      {{\n        text: "{label}",\n        collapsed: false,\n'
+                f"      {{\n        text: {js_str(label)},\n        collapsed: false,\n"
                 f'        items: [\n' + "\n".join(entries) + "\n        ],\n      },"
             )
         proj = product_dir / "project"
@@ -232,8 +248,8 @@ def write_product_sidebars() -> None:
         if not items:
             continue
         out.append(f'  "/{product}/": [')
-        out.append('    {\n      text: "%s",\n      items: [\n%s\n      ],\n    },'
-                   % (product, "\n".join(items)))
+        out.append("    {\n      text: %s,\n      items: [\n%s\n      ],\n    },"
+                   % (js_str(product), "\n".join(items)))
         out.append("  ],")
     out.append("};")
     (DOCS_ROOT / ".vitepress" / "sidebar-products.mjs").write_text(

@@ -10,8 +10,12 @@ contract (`§` marker type, request, trait, shared helpers) and one or more
 **engine** crates implement it. The kit decides which engine fills each slot.
 
 This section covers the `engine-*` family only. The wider org families —
-`compile-*` (emitters), `ext-*` (`hnl` extensions), `kit-*`, `host-*`,
-`sdkgen-*` and `lib-*` — are private and documented in their own repos.
+`compile-*` (emitters), `ext-*` (`hnl` extensions), most `kit-*`,
+`host-cli`/`host-lsp`, `sdkgen-*` and most `lib-*` — are private; the
+public exceptions (`host-tensor`, `kit-prelude-lang`, `lib-char`,
+`lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`) have
+their own sections. See the [platform architecture](/handl/explanation/platform-architecture)
+for the full repo map.
 
 ## The five operations
 
@@ -21,7 +25,7 @@ This section covers the `engine-*` family only. The wider org families —
 | parse | [engine-parse](/engine-parse/) | [engine-parse-pratt](/engine-parse-pratt/) — Pratt, grammar rows |
 | transform | [engine-transform](/engine-transform/) | [engine-transform-rewrite](/engine-transform-rewrite/) — rule-interpreting |
 | typecheck | [engine-typecheck](/engine-typecheck/) | `engine-typecheck-nbe` (NBE; private) + bootstrap in the contract crate |
-| eval | [engine-exec](/engine-exec/) | [engine-exec-tree-walk](/engine-exec-tree-walk/) — reference; [engine-exec-bytecode](/engine-exec-bytecode/) — stack VM |
+| eval | [engine-exec](/engine-exec/) | [engine-exec-tree-walk](/engine-exec-tree-walk/) — reference; [engine-exec-bytecode](/engine-exec-bytecode/) — stack VM; [engine-exec-cranelift](/engine-exec-cranelift/) — JIT/object (see Tools) |
 
 ## Shared substrate
 

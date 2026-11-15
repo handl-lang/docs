@@ -75,6 +75,14 @@ export default defineConfig({
         items: [
           { text: "eqsat", link: "/eqsat/" },
           { text: "gamekit", link: "/gamekit/" },
+          { text: "host-tensor", link: "/host-tensor/" },
+          { text: "kit-prelude-lang", link: "/kit-prelude-lang/" },
+        ],
+      },
+      {
+        text: "Substrate",
+        items: [
+          { text: "kernel", link: "/kernel/" },
         ],
       },
     ],

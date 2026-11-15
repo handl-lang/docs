@@ -90,7 +90,7 @@ export const handlAdrs = [
       { text: "ADR-0098 One Language, Multiple Interpreters — A Graded Arrow Calculus", link: "/handl/project/adrs/0098-adr-0098-one-language-multiple-interpreters-a-graded-arrow-calculus" },
       { text: "ADR-0099 Principled Boundaries Between `plugin-engine-*` and `plugin-ext-*` Crates", link: "/handl/project/adrs/0099-adr-0099-principled-boundaries-between-plugin-engine-and-plugin-ext-crates" },
       { text: "ADR-0100 Canonical Term Arrows", link: "/handl/project/adrs/0100-adr-0100-canonical-term-arrows" },
-      { text: "ADR-0101 The Directed-HoTT Limit of the Term Calculus", link: "/handl/project/adrs/0101-adr-0100-the-directed-hott-limit-of-the-term-calculus" },
+      { text: "ADR-0101 The Directed-HoTT Limit of the Term Calculus", link: "/handl/project/adrs/0101-adr-0101-the-directed-hott-limit-of-the-term-calculus" },
       { text: "ADR-0102 Wiring `.hnl` modules into `HandlNativeLint` and `HandlNativeRewrite`", link: "/handl/project/adrs/0102-wiring-hnl-modules-into-handlnativelint-and-handlnativerewrite" },
       { text: "ADR-0103 The Kernel Is the Evaluator, Not the Calculus", link: "/handl/project/adrs/0103-adr-0103-the-kernel-is-the-evaluator-not-the-calculus" },
       { text: "ADR-0105 Typechecker in Handl", link: "/handl/project/adrs/0105-adr-0105-typechecker-in-handl" },
@@ -127,7 +127,9 @@ export const handlAdrs = [
       { text: "ADR-0167 Minimal `Term` Core with Generic Combinators", link: "/handl/project/adrs/0167-adr-0104b-minimal-term-core-with-generic-combinators" },
       { text: "ADR-0168 ADR index", link: "/handl/project/adrs/0168-adr-index" },
       { text: "ADR-0169 ADR Review and Archive Summary", link: "/handl/project/adrs/0169-adr-review-and-archive-summary" },
-      { text: "ADR-0170 ADR-NNNN: <the decision, stated as a fact — "X is Y", not "About X">", link: "/handl/project/adrs/0170-adr-nnnn-the-decision-stated-as-a-fact-x-is-y-not-about-x" },
+      { text: "ADR-0170 ADR-NNNN: <the decision, stated as a fact — \"X is Y\", not \"About X\">", link: "/handl/project/adrs/0170-adr-nnnn-the-decision-stated-as-a-fact-x-is-y-not-about-x" },
+      { text: "ADR-0171 The kernel IR gains layout and pointwise ops", link: "/handl/project/adrs/0171-adr-0171-the-kernel-ir-gains-layout-and-pointwise-ops" },
+      { text: "ADR-0172 Tensor programs are Handl Terms", link: "/handl/project/adrs/0172-adr-0172-tensor-programs-as-handl-terms" },
 ]
 export const webAdrs = [
       { text: "ADR-0003 handl Frontend: Custom `.handl` Syntax", link: "/web/project/adrs/0003-handl-frontend-custom-handl-syntax" },
