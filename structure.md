@@ -11,13 +11,13 @@
 - `c` `web` `research-dts` — public target/research repos (not checked out locally)
 - `slidev-theme` `pitch-*` `extension-{neovim,vscode}` — theme, pitch decks, editor extensions
 
-## `engine-*` (16)
+## `engine-*` (17)
 
-`engine` · `engine-{lex,lex-pattern,parse,parse-pratt,exec,exec-tree-walk,exec-bytecode,exec-cranelift,fmt,lint,test,transform,transform-rewrite,typecheck,typecheck-nbe}`
+`engine` · `engine-{lex,lex-pattern,parse,parse-pratt,exec,exec-tree-walk,exec-bytecode,exec-cranelift,eqsat,fmt,lint,test,transform,transform-rewrite,typecheck,typecheck-nbe}`
 
-## `compile-*` (7)
+## `compile-*` (8)
 
-`compile-{dot,handl,js,llvm,sexp,term,triton}`
+`compile-{cuda,dot,handl,js,llvm,sexp,term,triton}`
 
 ## `sdkgen-*` (5)
 

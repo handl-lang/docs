@@ -17,6 +17,20 @@ public exceptions (`host-tensor`, `kit-prelude-lang`, `lib-char`,
 their own sections. See the [platform architecture](/handl/explanation/platform-architecture)
 for the full repo map.
 
+Two private repos landed recently and are named here so the family map
+stays honest:
+
+- `engine-eqsat` — the e-graph **search** interpretation over kernel
+  `Term`s (ADR-0174 phase P2, contracts per ADR-0177). It is an engine
+  in the same sense as the exec backends — saturation and extraction
+  over `hnl_engine::Term` via `handl-egraph`, with `optimize` /
+  `saturate` / `extract_best` as the public surface and laws, guards,
+  and cost specs moving to kit data.
+- `compile-cuda` — a `compile-*` emitter (outside this section's
+  `engine-*` scope) that lowers `lib-kernel-ir` terms to real CUDA C++:
+  one templated `__global__` kernel plus an `extern "C"` launcher,
+  declining uncovered ops by name rather than emitting stubs.
+
 ## The five operations
 
 | operation | contract | engines |
