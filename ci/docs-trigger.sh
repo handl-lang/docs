@@ -8,7 +8,7 @@
 #
 # Behaviour:
 #   handl-lang/docs            -> always rebuild + deploy
-#   host/graphopt/eqsat/gamekit-> deploy iff `docs/site/**` or
+#   host/mlopt/eqsat/gamekit-> deploy iff `docs/site/**` or
 #                                 `docs/site.yaml` changed since the last
 #                                 push bupha ran for that repo
 #
@@ -93,7 +93,7 @@ sync_checkout() {
 }
 
 case "$repo" in
-  host | graphopt | eqsat | gamekit)
+  host | mlopt | eqsat | gamekit)
     sync_checkout "/home/luis/GitHub/handl-lang/$repo" "$repo"
     ;;
 esac

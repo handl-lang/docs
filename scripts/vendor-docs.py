@@ -9,7 +9,7 @@ Each public product repo may ship a published-site subtree at
 The vendored tree lands in `vendored/<site_path>/` (gitignored); VitePress
 `rewrites` map `vendored/**` to site-root paths. Sibling dirs are resolved
 by their git remote basename, so a checkout named differently from the
-repo (e.g. `research-mlopt` -> `graphopt`) still matches.
+repo (e.g. `graphopt` -> `mlopt` post-rename) still matches.
 
 Private repos, repos without `docs/site/`, and repos not in
 `PUBLIC_REPOS` produce nothing — same rule as the Pages clone set.
@@ -52,7 +52,7 @@ PROJECT_FILES = [
 # mentions on this site. Keys are repo names (post-remote resolution);
 # values are paths relative to the repo's `project/` dir.
 PROJECT_EXCLUDE = {
-    "graphopt": {
+    "mlopt": {
         "notes/repo-split-plan.md",
         "plans/0032-repo-split.md",
     },
@@ -60,7 +60,14 @@ PROJECT_EXCLUDE = {
 
 NUM = re.compile(r"^(\d+)")
 TITLE = re.compile(r"^#\s+(?:ADR-\d+[a-z]?:\s*)?(.*)")
-FRONT = re.compile(r"\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*\r?\n", re.S)
+# Same dual-header rule as gen-docs-index.py: a leading `+++` TOML block
+# (myco v2 fields) precedes the ADR-0163 `---` YAML block on project-branch
+# artifacts; skip the TOML block, parse the YAML one.
+FRONT = re.compile(
+    r"\A(?:\+\+\+[ \t]*\r?\n.*?\r?\n\+\+\+[ \t]*\r?\n(?:[ \t]*\r?\n)*)?"
+    r"---[ \t]*\r?\n(.*?)\r?\n---[ \t]*\r?\n",
+    re.S,
+)
 
 ADRS_SIDEBAR = DOCS_ROOT / ".vitepress" / "sidebar-adrs.mjs"
 _adrs: dict[str, list[str]] = {}

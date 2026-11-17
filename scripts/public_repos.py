@@ -38,7 +38,7 @@ PUBLIC_REPOS = {
     "c",
     "web",
     # products
-    "graphopt",
+    "mlopt",
     "eqsat",
     "gamekit",
     "host-tensor",

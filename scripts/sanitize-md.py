@@ -19,7 +19,13 @@ from pathlib import Path
 FENCE = re.compile(r"```.*?```", re.DOTALL)
 INLINE = re.compile(r"`[^`\n]*`")
 TAG = re.compile(r"<(/?)([a-zA-Z][a-zA-Z0-9-]*)")
-FRONT = re.compile(r"\A---[ \t]*\r?\n.*?\r?\n---[ \t]*\r?\n", re.S)
+# Tolerate a leading `+++` TOML block (myco v2 fields) ahead of the `---`
+# YAML frontmatter, same as the other docs generators.
+FRONT = re.compile(
+    r"\A(?:\+\+\+[ \t]*\r?\n.*?\r?\n\+\+\+[ \t]*\r?\n(?:[ \t]*\r?\n)*)?"
+    r"---[ \t]*\r?\n.*?\r?\n---[ \t]*\r?\n",
+    re.S,
+)
 HTML_TAGS = {
     "a", "abbr", "address", "article", "aside", "b", "blockquote", "br",
     "caption", "cite", "code", "col", "colgroup", "details", "dd", "del",

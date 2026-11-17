@@ -7,7 +7,10 @@ generated and committed like the old `ADR-INDEX.md`) and writes one
 index page per product subtree:
 
     adrs/handl.md    — handl product repos (host, kernel, engine-*, ...)
-    adrs/graphopt.md — the graphopt repo
+    adrs/graphopt.md — the mlopt repo (handl-lang/graphopt was renamed
+                       handl-lang/mlopt; the published product slug stays
+                       `graphopt` until the repo's docs/site.yaml
+                       `site_path` flips — vendor-docs.py owns the slug)
     adrs/index.md    — org-level (docs, research-dts, slidev-theme, project)
 
 The **canonical registry** is `host/project/adrs/INDEX.md` (on the
@@ -33,7 +36,14 @@ MANIFEST = ORG / "host" / "project" / "docs-split.yaml"
 
 NUM = re.compile(r"^(\d+)")
 TITLE = re.compile(r"^#\s+(?:ADR-\d+[a-z]?:\s*)?(.*)")
-FRONT = re.compile(r"\A---[ \t]*\r?\n(.*?)\r?\n---[ \t]*\r?\n", re.S)
+# Project-branch artifacts carry a `+++` TOML block (myco v2 fields) ahead of
+# the ADR-0163 `---` YAML block; the YAML section is the one with
+# title/status/date, so the TOML block is skipped, not parsed.
+FRONT = re.compile(
+    r"\A(?:\+\+\+[ \t]*\r?\n.*?\r?\n\+\+\+[ \t]*\r?\n(?:[ \t]*\r?\n)*)?"
+    r"---[ \t]*\r?\n(.*?)\r?\n---[ \t]*\r?\n",
+    re.S,
+)
 
 # Only public org repos may appear in the published index — this mirrors
 # the Pages workflow's `gh repo list --visibility public` clone set.
@@ -47,7 +57,10 @@ PRODUCT = {
     "engine-exec-tree-walk": "handl", "engine-lex": "handl",
     "engine-lex-pattern": "handl", "engine-parse": "handl",
     "engine-parse-pratt": "handl", "engine-transform": "handl",
-    "graphopt": "graphopt", "eqsat": "eqsat", "gamekit": "gamekit",
+    # `mlopt` -> `graphopt`: the GitHub repo was renamed graphopt -> mlopt,
+    # but the published product slug (docs/site.yaml `site_path`) is still
+    # `graphopt`, so its ADRs keep indexing under that page until it flips.
+    "mlopt": "graphopt", "eqsat": "eqsat", "gamekit": "gamekit",
 }
 
 
@@ -96,7 +109,7 @@ def repo_adrs() -> dict[str, list[tuple[str, str, Path]]]:
     A repo's ADRs live on its `project` branch, checked out as the
     `<repo>/project` worktree. Repo names are resolved from the
     checkout's `origin` remote so a dir named differently from the repo
-    (e.g. `research-mlopt` -> `graphopt`) still indexes correctly.
+    (e.g. `graphopt` -> `mlopt` post-rename) still indexes correctly.
     """
     found: dict[str, list[tuple[str, str, Path]]] = {}
 
