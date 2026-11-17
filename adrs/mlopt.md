@@ -1,4 +1,4 @@
-# ADR index — graphopt
+# ADR index — mlopt
 
 Decision records aggregated across the product's public repos.
 The canonical registry is `host/project/adrs/INDEX.md` (on the

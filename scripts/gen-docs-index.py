@@ -7,10 +7,10 @@ generated and committed like the old `ADR-INDEX.md`) and writes one
 index page per product subtree:
 
     adrs/handl.md    — handl product repos (host, kernel, engine-*, ...)
-    adrs/graphopt.md — the mlopt repo (handl-lang/graphopt was renamed
-                       handl-lang/mlopt; the published product slug stays
-                       `graphopt` until the repo's docs/site.yaml
-                       `site_path` flips — vendor-docs.py owns the slug)
+    adrs/mlopt.md   — the mlopt repo (handl-lang/graphopt was renamed
+                       handl-lang/mlopt; its docs/site.yaml `site_path`
+                       flipped to `mlopt`, so the ADRs index under that
+                       page — vendor-docs.py owns the slug)
     adrs/index.md    — org-level (docs, research-dts, slidev-theme, project)
 
 The **canonical registry** is `host/project/adrs/INDEX.md` (on the
@@ -57,10 +57,10 @@ PRODUCT = {
     "engine-exec-tree-walk": "handl", "engine-lex": "handl",
     "engine-lex-pattern": "handl", "engine-parse": "handl",
     "engine-parse-pratt": "handl", "engine-transform": "handl",
-    # `mlopt` -> `graphopt`: the GitHub repo was renamed graphopt -> mlopt,
-    # but the published product slug (docs/site.yaml `site_path`) is still
-    # `graphopt`, so its ADRs keep indexing under that page until it flips.
-    "mlopt": "graphopt", "eqsat": "eqsat", "gamekit": "gamekit",
+    # `mlopt` -> `mlopt`: the GitHub repo was renamed graphopt -> mlopt
+    # and its docs/site.yaml `site_path` flipped to `mlopt`, so its ADRs
+    # index under the mlopt page.
+    "mlopt": "mlopt", "eqsat": "eqsat", "gamekit": "gamekit",
 }
 
 
@@ -140,7 +140,7 @@ def repo_adrs() -> dict[str, list[tuple[str, str, Path]]]:
 
 
 def page(product: str, repos: dict[str, list]) -> str:
-    title = {"handl": "Handl Language", "graphopt": "graphopt",
+    title = {"handl": "Handl Language", "mlopt": "mlopt",
              "eqsat": "eqsat", "gamekit": "gamekit",
              "index": "handl-lang (org)"}[product]
     out = [

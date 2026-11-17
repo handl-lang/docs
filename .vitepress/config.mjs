@@ -4,7 +4,7 @@ import * as adrsSidebar from "./sidebar-adrs.mjs";
 import { productSidebars } from "./sidebar-products.mjs";
 import { handlDark } from "./theme/shiki-themes.mjs";
 
-const { handlAdrs = [], graphoptAdrs = [] } = adrsSidebar;
+const { handlAdrs = [], mloptAdrs = [] } = adrsSidebar;
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -69,7 +69,7 @@ export default defineConfig({
       {
         text: "Research",
         items: [
-          { text: "graphopt", link: "/graphopt/" },
+          { text: "mlopt", link: "/mlopt/" },
         ],
       },
       {
@@ -181,57 +181,57 @@ export default defineConfig({
           ],
         },
       ],
-      "/graphopt/": [
+      "/mlopt/": [
         {
-          text: "graphopt",
+          text: "mlopt",
           items: [
-            { text: "Overview", link: "/graphopt/" },
-            { text: "How graphopt works", link: "/graphopt/explanation/mechanism" },
-            { text: "Evaluation", link: "/graphopt/explanation/evaluation" },
-            { text: "The three costs", link: "/graphopt/explanation/three-costs" },
-            { text: "The game", link: "/graphopt/explanation/the-game" },
-            { text: "The gauntlet", link: "/graphopt/explanation/the-gauntlet" },
+            { text: "Overview", link: "/mlopt/" },
+            { text: "How mlopt works", link: "/mlopt/explanation/mechanism" },
+            { text: "Evaluation", link: "/mlopt/explanation/evaluation" },
+            { text: "The three costs", link: "/mlopt/explanation/three-costs" },
+            { text: "The game", link: "/mlopt/explanation/the-game" },
+            { text: "The gauntlet", link: "/mlopt/explanation/the-gauntlet" },
           ],
         },
         {
           text: "Tutorials",
           collapsed: false,
           items: [
-            { text: "Overview", link: "/graphopt/tutorials/" },
-            { text: "Set up graphopt", link: "/graphopt/tutorials/setup" },
-            { text: "Your first search()", link: "/graphopt/tutorials/first-search" },
-            { text: "Watch a law get minted", link: "/graphopt/tutorials/mint-a-law" },
-            { text: "Run the scorecard", link: "/graphopt/tutorials/run-the-scorecard" },
+            { text: "Overview", link: "/mlopt/tutorials/" },
+            { text: "Set up mlopt", link: "/mlopt/tutorials/setup" },
+            { text: "Your first search()", link: "/mlopt/tutorials/first-search" },
+            { text: "Watch a law get minted", link: "/mlopt/tutorials/mint-a-law" },
+            { text: "Run the scorecard", link: "/mlopt/tutorials/run-the-scorecard" },
           ],
         },
         {
           text: "How-to guides",
           collapsed: false,
           items: [
-            { text: "Optimize a model", link: "/graphopt/how-to/optimize-a-model" },
-            { text: "Add a board", link: "/graphopt/how-to/add-a-board" },
-            { text: "Register a player", link: "/graphopt/how-to/register-a-player" },
-            { text: "Admit a law", link: "/graphopt/how-to/admit-a-law" },
+            { text: "Optimize a model", link: "/mlopt/how-to/optimize-a-model" },
+            { text: "Add a board", link: "/mlopt/how-to/add-a-board" },
+            { text: "Register a player", link: "/mlopt/how-to/register-a-player" },
+            { text: "Admit a law", link: "/mlopt/how-to/admit-a-law" },
           ],
         },
         {
           text: "Reference",
           collapsed: false,
           items: [
-            { text: "The frozen API", link: "/graphopt/reference/frozen-api" },
-            { text: "Discovery scorecard", link: "/graphopt/reference/scorecard" },
-            { text: "Player leaderboard", link: "/graphopt/reference/leaderboard" },
-            { text: "Limits table", link: "/graphopt/reference/limits" },
+            { text: "The frozen API", link: "/mlopt/reference/frozen-api" },
+            { text: "Discovery scorecard", link: "/mlopt/reference/scorecard" },
+            { text: "Player leaderboard", link: "/mlopt/reference/leaderboard" },
+            { text: "Limits table", link: "/mlopt/reference/limits" },
           ],
         },
         {
           text: "Project",
           collapsed: false,
           items: [
-            { text: "TODO", link: "/graphopt/project/TODO" },
-            { text: "Goals", link: "/graphopt/project/GOALS" },
-            { text: "ADRs", link: "/adrs/graphopt" },
-            { text: "ADRs", collapsed: true, items: graphoptAdrs },
+            { text: "TODO", link: "/mlopt/project/TODO" },
+            { text: "Goals", link: "/mlopt/project/GOALS" },
+            { text: "ADRs", link: "/adrs/mlopt" },
+            { text: "ADRs", collapsed: true, items: mloptAdrs },
           ],
         },
       ],
@@ -289,7 +289,7 @@ export default defineConfig({
           items: [
             { text: "handl-lang (org)", link: "/adrs/" },
             { text: "Handl Language", link: "/adrs/handl" },
-            { text: "graphopt", link: "/adrs/graphopt" },
+            { text: "mlopt", link: "/adrs/mlopt" },
           ],
         },
       ],

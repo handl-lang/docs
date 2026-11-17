@@ -9,8 +9,8 @@ decision records themselves live with the repo that made them.
 exactly one place: [`scripts/public_repos.py`](scripts/public_repos.py) (all three
 generators import it — they had drifted apart). That is **33 repos today**:
 `kernel`, the `engine`/`engine-*` family (14), `host`, `host-tensor`, the `c`
-and `web` targets, `mlopt` (published under the `graphopt` slug until its
-`docs/site.yaml` `site_path` flips), `eqsat`, `gamekit`, `kit-prelude-lang`,
+and `web` targets, `mlopt` (published under the `mlopt` slug — formerly
+`graphopt` until its `docs/site.yaml` `site_path` flipped), `eqsat`, `gamekit`, `kit-prelude-lang`,
 `egraph`, `discovery`, `research-dts`, `slidev-theme`, `lib-char`,
 `lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`, and this
 repo. Membership rule: public on GitHub. (An earlier
@@ -46,7 +46,7 @@ The site's `srcDir` is the repo root; `README.md`, `project/**` and
 
 | script | output | source |
 |---|---|---|
-| `scripts/gen-docs-index.py` | `adrs/{index,handl,graphopt}.md` | every sibling's `project/adrs/` worktree + the `project` repo's retired-shell subtrees (+ `host/project/docs-split.yaml` for split/local metadata) |
+| `scripts/gen-docs-index.py` | `adrs/{index,handl,mlopt,eqsat,gamekit}.md` | every sibling's `project/adrs/` worktree + the `project` repo's retired-shell subtrees (+ `host/project/docs-split.yaml` for split/local metadata) |
 | `scripts/gen_reference_all.py` | `handl/reference/<repo>/` + `reference.yaml` + `.vitepress/sidebar-reference.mjs` | every sibling repo's package sources — `handl-packages/<pkg>/`, `pkg.hnl`+`src/`, or `crates/<crate>/src/*.hnl` doc comments |
 | `scripts/vendor-docs.py` | `vendored/<product>/` | each public product repo's `docs/site/` + `docs/site.yaml` |
 | `scripts/vendor-docs.py` (sidebars) | `.vitepress/sidebar-products.mjs` | the vendored tree — one sidebar per product, so a repo that starts shipping `docs/site/` is navigable without editing `config.mjs` |
@@ -70,7 +70,7 @@ bun run docs:build       # gen-api + gen-ref + vitepress build
 
 | what | where |
 |---|---|
-| ADR indexes (published, per-product) | [`adrs/index.md`](adrs/index.md), [`adrs/handl.md`](adrs/handl.md), [`adrs/graphopt.md`](adrs/graphopt.md) |
+| ADR indexes (published, per-product) | [`adrs/index.md`](adrs/index.md), [`adrs/handl.md`](adrs/handl.md), [`adrs/mlopt.md`](adrs/mlopt.md) |
 | ADR registry (canonical) | `host/project/adrs/INDEX.md` |
 | Project principles | `project/principles.md` (this repo's `project` branch) |
 | A repo's own docs | that repo's `project` branch, mounted at `<repo>/project/` |

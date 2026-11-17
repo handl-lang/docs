@@ -11,8 +11,8 @@ hero:
       text: Handl Language
       link: /handl/
     - theme: brand
-      text: graphopt
-      link: /graphopt/
+      text: mlopt
+      link: /mlopt/
     - theme: alt
       text: Kernel paper
       link: https://github.com/handl-lang/kernel/blob/main/paper/paper.pdf
@@ -27,12 +27,12 @@ features:
     link: /handl/
     linkText: Explore the product
   - title: The ecosystem
-    details: How the repos relate — kernel, engines, host, the eqsat/gamekit/graphopt research stack, and host-tensor.
+    details: How the repos relate — kernel, engines, host, the eqsat/gamekit/mlopt research stack, and host-tensor.
     link: /handl/explanation/platform-architecture
     linkText: Repo map
-  - title: graphopt
+  - title: mlopt
     details: Our first practical product applying Handl Language — a categorical optimizer that mints its own rewrite laws, certifies them, and learns to play the game they create.
-    link: /graphopt/
+    link: /mlopt/
     linkText: Explore the research
 ---
 

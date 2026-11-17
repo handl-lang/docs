@@ -523,59 +523,6 @@ export const productSidebars = {
       ],
     },
   ],
-  "/graphopt/": [
-    {
-      text: "graphopt",
-      items: [
-      { text: "Overview", link: "/graphopt/" },
-      {
-        text: "Tutorials",
-        collapsed: false,
-        items: [
-          { text: "Overview", link: "/graphopt/tutorials/" },
-          { text: "Your first `search()`", link: "/graphopt/tutorials/first-search" },
-          { text: "Watch a law get minted", link: "/graphopt/tutorials/mint-a-law" },
-          { text: "Run the scorecard", link: "/graphopt/tutorials/run-the-scorecard" },
-          { text: "Set up graphopt", link: "/graphopt/tutorials/setup" },
-        ],
-      },
-      {
-        text: "How-to guides",
-        collapsed: false,
-        items: [
-          { text: "Add a board", link: "/graphopt/how-to/add-a-board" },
-          { text: "Admit a law", link: "/graphopt/how-to/admit-a-law" },
-          { text: "Define a domain from a spec", link: "/graphopt/how-to/define-a-domain" },
-          { text: "Optimize a model", link: "/graphopt/how-to/optimize-a-model" },
-          { text: "Register a player", link: "/graphopt/how-to/register-a-player" },
-        ],
-      },
-      {
-        text: "Reference",
-        collapsed: false,
-        items: [
-          { text: "The frozen public API — plan 0032 phase 1", link: "/graphopt/reference/frozen-api" },
-          { text: "Player leaderboard", link: "/graphopt/reference/leaderboard" },
-          { text: "Limits table — the delivered form vs the registered baselines", link: "/graphopt/reference/limits" },
-          { text: "Discovery scorecard", link: "/graphopt/reference/scorecard" },
-        ],
-      },
-      {
-        text: "Explanation",
-        collapsed: false,
-        items: [
-          { text: "Evaluation — the fourth dimension", link: "/graphopt/explanation/evaluation" },
-          { text: "How mlopt works — syntax, structure, and the rewrite loop", link: "/graphopt/explanation/mechanism" },
-          { text: "The game — boards, players, and the learned-policy loop", link: "/graphopt/explanation/the-game" },
-          { text: "The gauntlet — what a minted law must survive", link: "/graphopt/explanation/the-gauntlet" },
-          { text: "The three costs — how the engine knows a form is *better*", link: "/graphopt/explanation/three-costs" },
-          { text: "What you can optimize — and what \"faster\" honestly means", link: "/graphopt/explanation/what-you-can-optimize" },
-        ],
-      },
-      { text: "Project docs", link: "/graphopt/project/" },
-      ],
-    },
-  ],
   "/handl/": [
     {
       text: "handl",
@@ -869,6 +816,59 @@ export const productSidebars = {
           { text: "Overview", link: "/lib-str-handl/explanation/" },
         ],
       },
+      ],
+    },
+  ],
+  "/mlopt/": [
+    {
+      text: "mlopt",
+      items: [
+      { text: "Overview", link: "/mlopt/" },
+      {
+        text: "Tutorials",
+        collapsed: false,
+        items: [
+          { text: "Overview", link: "/mlopt/tutorials/" },
+          { text: "Your first `search()`", link: "/mlopt/tutorials/first-search" },
+          { text: "Watch a law get minted", link: "/mlopt/tutorials/mint-a-law" },
+          { text: "Run the scorecard", link: "/mlopt/tutorials/run-the-scorecard" },
+          { text: "Set up graphopt", link: "/mlopt/tutorials/setup" },
+        ],
+      },
+      {
+        text: "How-to guides",
+        collapsed: false,
+        items: [
+          { text: "Add a board", link: "/mlopt/how-to/add-a-board" },
+          { text: "Admit a law", link: "/mlopt/how-to/admit-a-law" },
+          { text: "Define a domain from a spec", link: "/mlopt/how-to/define-a-domain" },
+          { text: "Optimize a model", link: "/mlopt/how-to/optimize-a-model" },
+          { text: "Register a player", link: "/mlopt/how-to/register-a-player" },
+        ],
+      },
+      {
+        text: "Reference",
+        collapsed: false,
+        items: [
+          { text: "The frozen public API — plan 0032 phase 1", link: "/mlopt/reference/frozen-api" },
+          { text: "Player leaderboard", link: "/mlopt/reference/leaderboard" },
+          { text: "Limits table — the delivered form vs the registered baselines", link: "/mlopt/reference/limits" },
+          { text: "Discovery scorecard", link: "/mlopt/reference/scorecard" },
+        ],
+      },
+      {
+        text: "Explanation",
+        collapsed: false,
+        items: [
+          { text: "Evaluation — the fourth dimension", link: "/mlopt/explanation/evaluation" },
+          { text: "How mlopt works — syntax, structure, and the rewrite loop", link: "/mlopt/explanation/mechanism" },
+          { text: "The game — boards, players, and the learned-policy loop", link: "/mlopt/explanation/the-game" },
+          { text: "The gauntlet — what a minted law must survive", link: "/mlopt/explanation/the-gauntlet" },
+          { text: "The three costs — how the engine knows a form is *better*", link: "/mlopt/explanation/three-costs" },
+          { text: "What you can optimize — and what \"faster\" honestly means", link: "/mlopt/explanation/what-you-can-optimize" },
+        ],
+      },
+      { text: "Project docs", link: "/mlopt/project/" },
       ],
     },
   ],

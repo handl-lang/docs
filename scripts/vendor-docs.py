@@ -4,7 +4,7 @@
 Each public product repo may ship a published-site subtree at
 `<repo>/docs/site/` plus a `docs/site.yaml` declaring its site path:
 
-    site_path: graphopt        # -> vendored/graphopt/, served at /graphopt/
+    site_path: mlopt          # -> vendored/mlopt/, served at /mlopt/
 
 The vendored tree lands in `vendored/<site_path>/` (gitignored); VitePress
 `rewrites` map `vendored/**` to site-root paths. Sibling dirs are resolved
