@@ -21,17 +21,6 @@ export default [
     "collapsed": false,
     "items": [
       {
-        "text": "Combinators",
-        "collapsed": false,
-        "link": "/handl/reference/kernel/lib-combinators",
-        "items": [
-          {
-            "text": "Combinators",
-            "link": "/handl/reference/kernel/lib-combinators-combinators"
-          }
-        ]
-      },
-      {
         "text": "Prim",
         "collapsed": false,
         "link": "/handl/reference/kernel/lib-prim",
@@ -39,17 +28,6 @@ export default [
           {
             "text": "Prim",
             "link": "/handl/reference/kernel/lib-prim-prim"
-          }
-        ]
-      },
-      {
-        "text": "Type",
-        "collapsed": false,
-        "link": "/handl/reference/kernel/lib-type",
-        "items": [
-          {
-            "text": "Typeof",
-            "link": "/handl/reference/kernel/lib-type-typeof"
           }
         ]
       }

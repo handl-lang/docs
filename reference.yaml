@@ -4,21 +4,11 @@ reference:
   description: host-side dense n-d tensor functions (f64, row-major).
   include:
   - package: tensor
-- title: Combinators
-  slug: lib-combinators
-  description: function combinator utilities for the handl runtime.
-  include:
-  - package: combinators
 - title: Prim
   slug: lib-prim
   description: the minimal atom layer for handl's arrow-based stdlib.
   include:
   - package: prim
-- title: Type
-  slug: lib-type
-  description: type coercion, predicates, and utility functions for the handl runtime.
-  include:
-  - package: type
 - title: Char
   slug: lib-char
   description: Axioms and laws for the character library.

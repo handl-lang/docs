@@ -83,6 +83,7 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
+      { text: "Strategy", link: "/strategy/" },
       {
         text: "Learn",
         items: [
@@ -96,7 +97,6 @@ export default defineConfig({
       {
         text: "Community",
         items: [
-          { text: "Strategy", link: "/strategy/" },
           { text: "Members", link: "/members/" },
           { text: "Contact", link: "/contact/" },
         ],
