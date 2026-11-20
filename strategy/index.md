@@ -51,5 +51,5 @@ See the [paradigm](/paradigm/) for what the calculus buys you and the
 
 The same foundation that describes a language also describes its tools,
 its libraries, and its products. Research projects like
-[mlopt](https://github.com/handl-lang/mlopt) are early proof that the
+[research-mlopt](https://github.com/handl-lang/mlopt) are early proof that the
 substrate carries real workloads, not just notation.

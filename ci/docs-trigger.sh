@@ -93,8 +93,13 @@ sync_checkout() {
 }
 
 case "$repo" in
-  host | mlopt | eqsat | gamekit)
+  host | eqsat | gamekit)
     sync_checkout "/home/luis/GitHub/handl-lang/$repo" "$repo"
+    ;;
+  mlopt)
+    # local checkout renamed mlopt -> research-mlopt; the git remote
+    # (and so $repo here) still resolves as mlopt until the GH rename
+    sync_checkout "/home/luis/GitHub/handl-lang/research-mlopt" "$repo"
     ;;
 esac
 sync_checkout "$DOCS_DIR" "docs"

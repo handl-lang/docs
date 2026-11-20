@@ -28,8 +28,8 @@ branch = "refs/heads/main"
   cancel_running = true
 
 [[repos]]
-name = "handl-lang/mlopt"
-dir = "/home/luis/GitHub/handl-lang/mlopt"
+name = "handl-lang/research-mlopt"
+dir = "/home/luis/GitHub/handl-lang/research-mlopt"
 branch = "refs/heads/main"
   [repos.runner]
   kind = "script"

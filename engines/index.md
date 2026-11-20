@@ -10,8 +10,8 @@ contract (`§` marker type, request, trait, shared helpers) and one or more
 **engine** crates implement it. The kit decides which engine fills each slot.
 
 This section covers the `engine-*` family only. The wider org families —
-`compile-*` (emitters), `ext-*` (`hnl` extensions), most `kit-*`,
-`host-cli`/`host-lsp`, `sdkgen-*` and most `lib-*` — are private; the
+`engine-compile-*` (emitters), `ext-*` (`hnl` extensions), most `kit-*`,
+`host-cli`/`host-lsp`, `tool-sdkgen-*` and most `lib-*` — are private; the
 public exceptions (`host-tensor`, `kit-prelude-lang`, `lib-char`,
 `lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`) have
 their own sections. See the [platform architecture](/handl/explanation/platform-architecture)
@@ -26,8 +26,8 @@ stays honest:
   over `hnl_engine::Term` via `handl-egraph`, with `optimize` /
   `saturate` / `extract_best` as the public surface and laws, guards,
   and cost specs moving to kit data.
-- `compile-cuda` — a `compile-*` emitter (outside this section's
-  `engine-*` scope) that lowers `lib-kernel-ir` terms to real CUDA C++:
+- `engine-compile-cuda` — an `engine-compile-*` emitter (a compiler
+  backend, outside this section's engine scope) that lowers `lib-kernel-ir` terms to real CUDA C++:
   one templated `__global__` kernel plus an `extern "C"` launcher,
   declining uncovered ops by name rather than emitting stubs.
 

@@ -7,21 +7,21 @@
 - `host` — runtime, loaders, `plugin-lib-*`/`plugin-ext-*` internals, `plugin-lib-stdlib` (the library-as-data registry)
 - `kernel` — `handl-language`, `handl-value`, `handl-ext`, `defining-handl` (self-hosting, ADR-0044 Phase 8), plus substrate ops: `prim`, `prim-handl`, `ops`, `bytes`, `cmp`, `error`, `obj`, `type`, `mood`, `combinators`
 - `docs` `automation` `assets` — org-level purpose repos
-- `graphopt` `eqsat` `gamekit` `kernelopt` `discovery` `egraph` — the research/product repos (public: `graphopt`, `eqsat`, `gamekit`, `discovery`, `egraph`)
+- `research-mlopt` `eqsat` `gamekit` `kernelopt` `discovery` `egraph` `mlopt-product` — the research/product repos (public: `research-mlopt`, `eqsat`, `gamekit`, `discovery`, `egraph`)
 - `c` `web` `research-dts` — public target/research repos (not checked out locally)
-- `slidev-theme` `pitch-*` `extension-{neovim,vscode}` — theme, pitch decks, editor extensions
+- `slidev-theme-handl` `pitch-*` `extension-{neovim,vscode}` — theme, pitch decks, editor extensions
 
-## `engine-*` (17)
+## `engine-*` (17 + the 8 `engine-compile-*` emitters below)
 
 `engine` · `engine-{lex,lex-pattern,parse,parse-pratt,exec,exec-tree-walk,exec-bytecode,exec-cranelift,eqsat,fmt,lint,test,transform,transform-rewrite,typecheck,typecheck-nbe}`
 
-## `compile-*` (8)
+## `engine-compile-*` (8)
 
-`compile-{cuda,dot,handl,js,llvm,sexp,term,triton}`
+`engine-compile-{cuda,dot,handl,js,llvm,sexp,term,triton}`
 
-## `sdkgen-*` (5)
+## `tool-sdkgen-*` (5)
 
-`sdkgen-{c,python,webidl,file,cli}` — backends/emitters; generated FFI bindings vendor under `handl-packages/generated/` in the consuming repo (multi-consumer bindings get own repos: `lib-libc`, `lib-curl`, `lib-libz`). `sdkgen-cli` generates SDKs that wrap command-line tools (backend `cli`: `*.clispec.yaml` spec or live `--help` probe; emitter `hnl-cli` → adapters on `lib-cli`'s `cli-c` process-spawn runtime); generated CLI SDKs are committed as spec+gate repos with `generated/` gitignored (`lib-gh`, `lib-cli-gen` for multi-tool SDKs).
+`tool-sdkgen-{c,python,webidl,file,cli}` — backends/emitters; generated FFI bindings vendor under `handl-packages/generated/` in the consuming repo (multi-consumer bindings get own repos: `lib-libc`, `lib-curl`, `lib-libz`). `tool-sdkgen-cli` generates SDKs that wrap command-line tools (backend `cli`: `*.clispec.yaml` spec or live `--help` probe; emitter `hnl-cli` → adapters on `lib-cli`'s `cli-c` process-spawn runtime); generated CLI SDKs are committed as spec+gate repos with `generated/` gitignored (`lib-gh`, `lib-cli-gen` for multi-tool SDKs).
 
 ## `host-*` (3)
 
@@ -55,7 +55,7 @@
 
 ## Rules
 
-- Naming: the family prefix *is* the component kind — `engine-*` (language-operation engines), `lib-*` (stdlib `.hnl` packages), `kit-*` (kit declarations/infra), `compile-*` (emitters), `ext-*` (`hnl` dynamic extensions), `host-*` (host binaries), `sdkgen-*` (binding/SDK generators)
+- Naming: the family prefix *is* the component kind — `engine-*` (language-operation engines), `lib-*` (stdlib `.hnl` packages), `kit-*` (kit declarations/infra), `engine-compile-*` (emitters), `ext-*` (`hnl` dynamic extensions), `host-*` (host binaries), `tool-sdkgen-*` (binding/SDK generators)
 - Bare = core layer or purpose repo (host/kernel/docs/…)
 - `prefix-*` = one component kind per repo
 - Sole-consumer generated bindings vendor into the consumer's `handl-packages/generated/`

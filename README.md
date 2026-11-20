@@ -9,15 +9,15 @@ decision records themselves live with the repo that made them.
 exactly one place: [`scripts/public_repos.py`](scripts/public_repos.py) (all three
 generators import it — they had drifted apart). That is **33 repos today**:
 `kernel`, the `engine`/`engine-*` family (14), `host`, `host-tensor`, the `c`
-and `web` targets, `mlopt` (published under the `mlopt` slug — formerly
-`graphopt` until its `docs/site.yaml` `site_path` flipped), `eqsat`, `gamekit`, `kit-prelude-lang`,
-`egraph`, `discovery`, `research-dts`, `slidev-theme`, `lib-char`,
+and `web` targets, `research-mlopt` (published under the `mlopt` slug — formerly
+`graphopt`/`mlopt` until its `docs/site.yaml` `site_path` flipped), `eqsat`, `gamekit`, `kit-prelude-lang`,
+`egraph`, `discovery`, `research-dts`, `slidev-theme-handl`, `lib-char`,
 `lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`, and this
 repo. Membership rule: public on GitHub. (An earlier
 revision withheld the `lib-*` repos on the theory that the language surface was
 unreleased; publishing docs for a public repo cannot disclose more than its
 source does, so they are in.) Every other repo (`ext-*`, `kit-*` other than
-`kit-prelude-lang`, `compile-*`, `host-cli`, `host-lsp`, `sdkgen-*`, …) is private
+`kit-prelude-lang`, `engine-compile-*`, `host-cli`, `host-lsp`, `tool-sdkgen-*`, …) is private
 and produces no pages, links, or mentions.
 
 ## Layout
