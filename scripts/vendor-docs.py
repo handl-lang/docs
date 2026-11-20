@@ -39,6 +39,11 @@ VENDORED = DOCS_ROOT / "vendored"
 # else defaults to its repo name.
 SITE_PATH = {"host": "handl"}
 
+# The published site is intentionally minimal: only the kernel repo's
+# docs/site ships pages. Other public repos keep their docs in-repo but
+# produce nothing here until this set grows again.
+VENDORED_REPOS = {"kernel"}
+
 # Project-branch items vendored per product (dirs wholesale, top-level
 # docs individually). Retired shells, yaml manifests, assets stay out.
 PROJECT_FILES = [
@@ -274,7 +279,7 @@ def main() -> int:
         if not d.is_dir() or d == DOCS_ROOT:
             continue
         repo = remote_name(d)
-        if repo not in PUBLIC_REPOS:
+        if repo not in PUBLIC_REPOS or repo not in VENDORED_REPOS:
             continue
         meta = {}
         yml = d / "docs" / "site.yaml"

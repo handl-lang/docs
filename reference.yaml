@@ -4,36 +4,11 @@ reference:
   description: host-side dense n-d tensor functions (f64, row-major).
   include:
   - package: tensor
-- title: Bytes
-  slug: lib-bytes
-  description: byte-buffer primitives for the `Bytes` scalar type.
-  include:
-  - package: bytes
-- title: Cmp
-  slug: lib-cmp
-  description: test whether two values are deeply equal.
-  include:
-  - package: cmp
 - title: Combinators
   slug: lib-combinators
   description: function combinator utilities for the handl runtime.
   include:
   - package: combinators
-- title: Error
-  slug: lib-error
-  description: the error-raising primitive contract (ADR-0092 gap (a)).
-  include:
-  - package: error
-- title: Mood
-  slug: lib-mood
-  description: mood (mode-of-data) operations for the handl runtime.
-  include:
-  - package: mood
-- title: Obj
-  slug: lib-obj
-  description: 'record introspection primitives (gap #3).'
-  include:
-  - package: obj
 - title: Prim
   slug: lib-prim
   description: the minimal atom layer for handl's arrow-based stdlib.

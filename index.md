@@ -4,36 +4,41 @@ layout: home
 
 hero:
   name: "handl-lang"
-  text: "A new paradigm"
-  tagline: "Products and services built on a categorical language — arrows, not functions."
+  text: "Arrows, not functions"
+  tagline: "Language, programs, laws, coherence, and effects: all data."
   actions:
     - theme: brand
-      text: Handl Language
-      link: /handl/
-    - theme: brand
-      text: mlopt
-      link: /mlopt/
+      text: Ecosystem
+      link: /ecosystem/
     - theme: alt
-      text: Kernel paper
-      link: https://github.com/handl-lang/kernel/blob/main/paper/paper.pdf
+      text: Kernel docs
+      link: /kernel/
 
 features:
-  - title: The paradigm
-    details: A categorical language — computation described as arrows, not applied as functions. Structure is inspectable; meaning is supplied by handlers.
-    link: /handl/comparison
-    linkText: Why not functions
-  - title: Handl Language
-    details: The platform — a closed arrow-calculus kernel, a data-driven engine family, and a plugin-composed host.
-    link: /handl/
-    linkText: Explore the product
-  - title: The ecosystem
-    details: How the repos relate — kernel, engines, host, the eqsat/gamekit/mlopt research stack, and host-tensor.
-    link: /handl/explanation/platform-architecture
-    linkText: Repo map
-  - title: mlopt
-    details: Our first practical product applying Handl Language — a categorical optimizer that mints its own rewrite laws, certifies them, and learns to play the game they create.
-    link: /mlopt/
-    linkText: Explore the research
+  - title: Story
+    details: "From Moggi's monads to Sanada's handlers: how category theory became a language infrastructure."
+    link: /story/
+    linkText: Read the story
+  - title: Paradigm
+    details: "Computation as arrows, not functions: structure you can inspect, meaning supplied by handlers."
+    link: /paradigm/
+    linkText: Why arrows
+  - title: Bibliography
+    details: "The academic foundations: Hughes, Paterson, LWY, profunctor semantics, Sanada."
+    link: /ecosystem/bibliography
+    linkText: Sources
+  - title: Kernel
+    details: "The arrow-calculus substrate: language schema, tagged values, and extension ABI."
+    link: /kernel/
+    linkText: Kernel docs
+  - title: Ecosystem
+    details: "Kernel, engines, libraries, kits, tools, hosts: how the repos fit together."
+    link: /ecosystem/
+    linkText: Explore the ecosystem
+  - title: Members
+    details: The people building Handl.
+    link: /members/
+    linkText: Meet the team
 ---
 
 <script setup>
@@ -63,10 +68,9 @@ onMounted(() => {
     alpha: 0.18
   }
 
-  const randInt = (min, max) => min + Math.floor(Math.random() * (max - min + 1))
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
 
-  // The kernel vocabulary — the six closed combinators and the
+  // The kernel vocabulary: the six closed combinators and the
   // object/arrow forms. This is the published calculus.
   const arrows = ['f', 'g', 'h', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w']
   const types = [
@@ -157,9 +161,47 @@ onMounted(() => {
 })
 </script>
 
+## The story
+
+Most languages hide their foundations. You apply functions, effects stay
+implicit, and the interesting structure (the laws, the rewrites, the
+effects) remains locked inside closures nobody can inspect.
+
+Handl starts from the opposite choice: computation as arrows, not
+functions. Category theory spent decades building the mathematics for
+exactly this: arrows, effects, and handlers, where structure is
+first-class and meaning comes from interpretation rather than a hardcoded
+runtime. We made that mathematics the IR itself, so programs, laws, and
+transformations are all data you can read, rewrite, and execute.
+
+[Read the full story](/story/): from Moggi's monads to Sanada's handlers,
+and where Handl picks up.
+
 ## The mission
 
-**handl-lang** builds products and services on a categorical language —
-a different paradigm from functional programming. Composition, not
-application; structure you can inspect, not closures you can't. The same
-foundation drives the language platform and the research stack.
+**handl-lang** is a language infrastructure, not a single language. At the
+bottom sits a closed arrow calculus (the kernel). On top: interchangeable
+engines, runtime-agnostic libraries, curated kits, tools (like the SDK
+generators), and hosts that expose it all to users and editors.
+
+One principle holds the stack together: composition over application, and
+inspectable structure over hidden closures. The same foundation drives the
+language platform and research projects like
+[mlopt](https://github.com/handl-lang/mlopt).
+
+[The strategy](/strategy/): vision, mission, and values.
+
+## The team
+
+A small team building open infrastructure for a new paradigm.
+
+- [Members](/members/): who's building Handl.
+- [Contact](/contact/): reach the team directly.
+
+## Get in touch
+
+Handl is open source and very much a work in progress. Questions,
+contributions, or just want to see what we're building? The team is small
+and easy to reach.
+
+[Contact us →](/contact/) · [GitHub org](https://github.com/handl-lang)

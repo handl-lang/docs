@@ -533,3 +533,128 @@ div[class*="language-"] pre {
 
   --vp-backdrop-bg-color: color-mix(in srgb, #000 70%, transparent);
 }
+
+/* WIP disclaimer bar above the nav (theme/index.mjs layout-top slot).
+   --vp-layout-top-height tells the theme how tall the bar is so the
+   nav, sidebar, and content offset correctly. */
+:root {
+  --vp-layout-top-height: 2.25rem;
+}
+
+.wip-topbar {
+  position: sticky;
+  top: 0;
+  z-index: calc(var(--vp-z-index-nav, 30) + 1);
+  height: var(--vp-layout-top-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+  overflow: hidden;
+  background: var(--vp-c-bg-alt, #1b1b1f);
+  border-bottom: 1px solid var(--vp-c-divider);
+  color: var(--vp-c-text-2);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.wip-track {
+  display: flex;
+}
+
+.wip-item {
+  white-space: nowrap;
+}
+
+.wip-item[aria-hidden="true"] {
+  display: none;
+}
+
+.wip-topbar strong {
+  color: var(--vp-c-warning-1, #f0a020);
+  font-weight: 600;
+}
+
+/* Small screens: the disclaimer is wider than the viewport, so scroll it
+   as a marquee instead of wrapping or clipping. */
+@media (max-width: 768px) {
+  .wip-topbar {
+    padding: 0;
+  }
+
+  .wip-track {
+    animation: wip-marquee 32s linear infinite;
+    will-change: transform;
+  }
+
+  .wip-item {
+    flex: 0 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  .wip-item[aria-hidden="true"] {
+    display: inline;
+  }
+}
+
+@keyframes wip-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wip-track {
+    animation: none;
+  }
+
+  .wip-item[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+/* Ecosystem page card grids (ecosystem/index.md). */
+.eco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0;
+}
+
+.eco-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  background: var(--vp-c-bg-alt);
+  transition: border-color 0.15s ease;
+}
+
+.eco-card:hover {
+  border-color: var(--vp-c-brand);
+}
+
+.eco-card strong {
+  font-size: 0.95rem;
+}
+
+.eco-card p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+}
+
+.eco-card .eco-links {
+  margin-top: auto;
+  padding-top: 0.35rem;
+  font-size: 0.82rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.9rem;
+}
