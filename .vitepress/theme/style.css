@@ -541,6 +541,15 @@ div[class*="language-"] pre {
   --vp-layout-top-height: 2.25rem;
 }
 
+/* Below 60rem the nav is position:relative (not fixed), so the theme's
+   top-offset math double-counts the bar and leaves gaps around the nav.
+   The bar is in-flow and sticky anyway: zero the offset on mobile. */
+@media (max-width: 60rem) {
+  :root {
+    --vp-layout-top-height: 0px;
+  }
+}
+
 .wip-topbar {
   position: sticky;
   top: 0;

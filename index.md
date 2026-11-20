@@ -177,19 +177,14 @@ transformations are all data you can read, rewrite, and execute.
 [Read the full story](/story/): from Moggi's monads to Sanada's handlers,
 and where Handl picks up.
 
-## The mission
+## The strategy
 
-**handl-lang** is a language infrastructure, not a single language. At the
-bottom sits a closed arrow calculus (the kernel). On top: interchangeable
-engines, runtime-agnostic libraries, curated kits, tools (like the SDK
-generators), and hosts that expose it all to users and editors.
+**handl-lang** is language infrastructure, not a single language: a closed
+arrow calculus at the bottom, with engines, runtime-agnostic libraries,
+curated kits, tools, and hosts built on top. Composition over application,
+inspectable structure over hidden closures.
 
-One principle holds the stack together: composition over application, and
-inspectable structure over hidden closures. The same foundation drives the
-language platform and research projects like
-[mlopt](https://github.com/handl-lang/mlopt).
-
-[The strategy](/strategy/): vision, mission, and values.
+[The strategy](/strategy/): vision, mission, values, and where it leads.
 
 ## The team
 

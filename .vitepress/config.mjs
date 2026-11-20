@@ -2,14 +2,15 @@ import { defineConfig } from "vitepress";
 import { productSidebars } from "./sidebar-products.mjs";
 import { handlDark } from "./theme/shiki-themes.mjs";
 
-// Shared sidebar groups: the "why" pages (story, paradigm/ecosystem
-// overview, bibliography) and the "who" pages (members, contact).
+// Shared sidebar groups: the "why/what" pages (story, paradigm, strategy,
+// ecosystem overview, bibliography) and the "who" pages (members, contact).
 const learnSidebar = [
   {
     text: "Learn",
     items: [
       { text: "Story", link: "/story/" },
       { text: "Paradigm", link: "/paradigm/" },
+      { text: "Strategy", link: "/strategy/" },
       { text: "Ecosystem", link: "/ecosystem/" },
       { text: "Bibliography", link: "/ecosystem/bibliography" },
     ],
@@ -20,7 +21,6 @@ const communitySidebar = [
   {
     text: "Community",
     items: [
-      { text: "Strategy", link: "/strategy/" },
       { text: "Members", link: "/members/" },
       { text: "Contact", link: "/contact/" },
     ],
@@ -83,12 +83,12 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Strategy", link: "/strategy/" },
       {
         text: "Learn",
         items: [
           { text: "Story", link: "/story/" },
           { text: "Paradigm", link: "/paradigm/" },
+          { text: "Strategy", link: "/strategy/" },
           { text: "Ecosystem", link: "/ecosystem/" },
           { text: "Bibliography", link: "/ecosystem/bibliography" },
         ],
@@ -107,7 +107,7 @@ export default defineConfig({
       "/story/": learnSidebar,
       "/paradigm/": learnSidebar,
       "/ecosystem/": learnSidebar,
-      "/strategy/": communitySidebar,
+      "/strategy/": learnSidebar,
       "/members/": communitySidebar,
       "/contact/": communitySidebar,
       // Only the kernel repo ships vendored docs (see VENDORED_REPOS in
