@@ -15,18 +15,18 @@ hero:
       link: /kernel/
 
 features:
-  - title: arr
-    details: "Lift a pure value into an arrow."
-  - title: ">>>"
-    details: "Sequential composition."
-  - title: first
-    details: "Apply an arrow to the first half of a pair."
-  - title: choice
-    details: "Alternative composition."
-  - title: loop
-    details: "Feed output back as input."
-  - title: app
-    details: "Application."
+  - title: Arrows, not functions
+    details: "Computation composes as arrows: inspectable structure, not closures you can only call."
+  - title: Serializable
+    details: "Programs, laws, and effects are data: they round-trip through JSON, YAML, and any engine's memory model."
+  - title: Globular
+    details: "Programs are 1-morphisms, laws and rewrites are 2-morphisms, and transformations extend into higher dimensions."
+  - title: Graded effects
+    details: "Operations carry grades and handlers supply meaning: effects are algebraic and first-class."
+  - title: Language as data
+    details: "Syntax, grammar, AST shapes, eval schemes, and type rules are declarative, not hardcoded into engines."
+  - title: Runtime-independent
+    details: "One IR feeds tree-walk, bytecode, Cranelift, LLVM, Triton, and CUDA backends interchangeably."
 ---
 
 <script setup>
@@ -149,8 +149,9 @@ onMounted(() => {
 })
 </script>
 
-The whole calculus fits in six combinators. Everything else (programs,
-laws, coherence, graded effects) is built from these as **data**:
+The whole calculus fits in six combinators (`arr`, `>>>`, `first`,
+`choice`, `loop`, `app`). Everything else (programs, laws, coherence,
+graded effects) is built from these as **data**:
 `parse >>> validate >>> exec` is a structure you can inspect, rewrite, and
 serialize, not a closure you can only call. See
 [the paradigm](/paradigm/) for what this buys you.
