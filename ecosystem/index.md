@@ -41,9 +41,9 @@ analyze, transform, compile, or execute the IR.
     <strong>Compilation</strong>
     <p>LLVM (native), Triton, CUDA emitters.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/compile-llvm">compile-llvm</a>
-      <a href="https://github.com/handl-lang/compile-triton">compile-triton</a>
-      <a href="https://github.com/handl-lang/compile-cuda">compile-cuda</a>
+      <a href="https://github.com/handl-lang/compile-llvm">compile-llvm</a> (private)
+      <a href="https://github.com/handl-lang/compile-triton">compile-triton</a> (private)
+      <a href="https://github.com/handl-lang/compile-cuda">compile-cuda</a> (private)
     </div>
   </div>
   <div class="eco-card">
@@ -106,28 +106,28 @@ Handl APIs from existing interfaces.
     <strong>sdkgen-python</strong>
     <p>Python interoperability.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/sdkgen-python">GitHub</a>
+      <a href="https://github.com/handl-lang/sdkgen-python">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
     <strong>sdkgen-c</strong>
     <p>C interoperability, including libc, libcurl, and zlib.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/sdkgen-c">GitHub</a>
+      <a href="https://github.com/handl-lang/sdkgen-c">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
     <strong>sdkgen-webidl</strong>
     <p>Web APIs, including Fetch and Console.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/sdkgen-webidl">GitHub</a>
+      <a href="https://github.com/handl-lang/sdkgen-webidl">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
     <strong>sdkgen-cli</strong>
     <p>Type-safe APIs for spawning and interacting with CLI processes.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/sdkgen-cli">GitHub</a>
+      <a href="https://github.com/handl-lang/sdkgen-cli">GitHub</a> (private)
     </div>
   </div>
 </div>
@@ -148,7 +148,7 @@ The distribution layer exposing Handl to users: the CLI and LSP.
     <strong>host-lsp</strong>
     <p>The language server for editors.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/host-lsp">GitHub</a>
+      <a href="https://github.com/handl-lang/host-lsp">GitHub</a> (private)
     </div>
   </div>
 </div>
@@ -162,14 +162,14 @@ Editor integrations for development environments.
     <strong>extension-vscode</strong>
     <p>VS Code integration.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/extension-vscode">GitHub</a>
+      <a href="https://github.com/handl-lang/extension-vscode">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
     <strong>extension-neovim</strong>
     <p>Neovim integration.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/extension-neovim">GitHub</a>
+      <a href="https://github.com/handl-lang/extension-neovim">GitHub</a> (private)
     </div>
   </div>
 </div>
@@ -207,4 +207,5 @@ Research projects built on Handl.
 
 ## 10. Products
 
-Applications built on Handl.
+Applications built on Handl. None yet; this section is a placeholder for
+what the ecosystem produces.
