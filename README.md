@@ -33,7 +33,7 @@ handl/                                                   generated reference out
 vendored/                                                product docs vendored from
                                                          <repo>/docs/site/ (generated)
 scripts/                                                 generators (see below)
-project/                                                 project worktree (ADR-0129)
+project/                                                 project worktree
 ```
 
 ADRs are **never** at a repo root — every repo keeps them on its `project`
@@ -76,9 +76,9 @@ bun run docs:build       # gen-api + gen-ref + vitepress build
 | A repo's own docs | that repo's `project` branch, mounted at `<repo>/project/` |
 
 Every repo carries its own docs on a `project` orphan branch, mounted as a
-worktree at `<repo>/project` (ADR-0129). `main` stays a clean build tree.
+worktree at `<repo>/project`. `main` stays a clean build tree.
 This repo publishes the aggregate.
 
-## History
+## License
 
-The site moved here from `host/docs` in ADR-0128 Phase 12 / ADR-0129 5.3.
+MIT.

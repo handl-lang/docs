@@ -2,6 +2,12 @@
   "name": "handl-docs",
   "version": "1.0.0",
   "private": true,
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/handl-lang/docs"
+  },
+  "homepage": "https://handl-lang.github.io/docs/",
   "description": "VitePress documentation hub for the handl platform — kernel, engines, host, and research stack",
   "scripts": {
     "docs:dev": "bun run docs:vendor && vitepress dev .",
