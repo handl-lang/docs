@@ -14,31 +14,6 @@ hero:
       text: Kernel docs
       link: /kernel/
 
-features:
-  - title: Story
-    details: "From Moggi's monads to Sanada's handlers: how category theory became a language infrastructure."
-    link: /story/
-    linkText: Read the story
-  - title: Paradigm
-    details: "Computation as arrows, not functions: structure you can inspect, meaning supplied by handlers."
-    link: /paradigm/
-    linkText: Why arrows
-  - title: Bibliography
-    details: "The academic foundations: Hughes, Paterson, LWY, profunctor semantics, Sanada."
-    link: /ecosystem/bibliography
-    linkText: Sources
-  - title: Kernel
-    details: "The arrow-calculus substrate: language schema, tagged values, and extension ABI."
-    link: /kernel/
-    linkText: Kernel docs
-  - title: Ecosystem
-    details: "Kernel, engines, libraries, kits, tools, hosts: how the repos fit together."
-    link: /ecosystem/
-    linkText: Explore the ecosystem
-  - title: Members
-    details: The people building Handl.
-    link: /members/
-    linkText: Meet the team
 ---
 
 <script setup>
@@ -160,6 +135,24 @@ onMounted(() => {
   window.addEventListener('resize', draw)
 })
 </script>
+
+## Under the hood
+
+The whole calculus fits in six combinators:
+
+<div class="eco-grid">
+  <div class="eco-card"><strong><code>arr</code></strong><p>Lift a pure value into an arrow.</p></div>
+  <div class="eco-card"><strong><code>&gt;&gt;&gt;</code></strong><p>Sequential composition.</p></div>
+  <div class="eco-card"><strong><code>first</code></strong><p>Apply an arrow to the first half of a pair.</p></div>
+  <div class="eco-card"><strong><code>choice</code></strong><p>Alternative composition.</p></div>
+  <div class="eco-card"><strong><code>loop</code></strong><p>Feed output back as input.</p></div>
+  <div class="eco-card"><strong><code>app</code></strong><p>Application.</p></div>
+</div>
+
+Everything else (programs, laws, coherence, graded effects) is built from
+these as **data**: `parse >>> validate >>> exec` is a structure you can
+inspect, rewrite, and serialize, not a closure you can only call. See
+[the paradigm](/paradigm/) for what this buys you.
 
 ## The story
 
