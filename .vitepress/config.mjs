@@ -3,7 +3,8 @@ import { productSidebars } from "./sidebar-products.mjs";
 import { handlDark } from "./theme/shiki-themes.mjs";
 
 // Shared sidebar groups: the "why/what" pages (story, paradigm, strategy,
-// ecosystem overview, bibliography) and the "who" pages (members, contact).
+// bibliography), the ecosystem map (overview, kernel), and the "who"
+// pages (members, contact).
 const learnSidebar = [
   {
     text: "Learn",
@@ -11,8 +12,17 @@ const learnSidebar = [
       { text: "Story", link: "/story/" },
       { text: "Paradigm", link: "/paradigm/" },
       { text: "Strategy", link: "/strategy/" },
-      { text: "Ecosystem", link: "/ecosystem/" },
       { text: "Bibliography", link: "/ecosystem/bibliography" },
+    ],
+  },
+];
+
+const ecosystemSidebar = [
+  {
+    text: "Ecosystem",
+    items: [
+      { text: "Overview", link: "/ecosystem/" },
+      { text: "Kernel", link: "/kernel/" },
     ],
   },
 ];
@@ -89,11 +99,16 @@ export default defineConfig({
           { text: "Story", link: "/story/" },
           { text: "Paradigm", link: "/paradigm/" },
           { text: "Strategy", link: "/strategy/" },
-          { text: "Ecosystem", link: "/ecosystem/" },
           { text: "Bibliography", link: "/ecosystem/bibliography" },
         ],
       },
-      { text: "Kernel", link: "/kernel/" },
+      {
+        text: "Ecosystem",
+        items: [
+          { text: "Overview", link: "/ecosystem/" },
+          { text: "Kernel", link: "/kernel/" },
+        ],
+      },
       {
         text: "Community",
         items: [
@@ -106,8 +121,9 @@ export default defineConfig({
     sidebar: {
       "/story/": learnSidebar,
       "/paradigm/": learnSidebar,
-      "/ecosystem/": learnSidebar,
       "/strategy/": learnSidebar,
+      "/ecosystem/bibliography": learnSidebar,
+      "/ecosystem/": ecosystemSidebar,
       "/members/": communitySidebar,
       "/contact/": communitySidebar,
       // Only the kernel repo ships vendored docs (see VENDORED_REPOS in
