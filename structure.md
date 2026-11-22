@@ -5,7 +5,7 @@
 ## Core layers (bare)
 
 - `host` — runtime, loaders, `plugin-lib-*`/`plugin-ext-*` internals, `plugin-lib-stdlib` (the library-as-data registry)
-- `kernel` — `handl-language`, `handl-value`, `handl-ext`, `defining-handl` (self-hosting, ADR-0044 Phase 8), plus substrate ops: `prim`, `prim-handl`, `ops`, `bytes`, `cmp`, `error`, `obj`, `type`, `mood`, `combinators`
+- `kernel` — `handl-calculus` (`Term`/`Model`), `handl-language`, `handl-value`, `handl-ops` (op ABI), `handl-ext`, `defining-handl` (self-hosting corpus, ADR-0044 Phase 8), plus the remaining substrate ops: `ops`, `prim`, `prim-handl` (the rest of the floor libs — `bytes`, `cmp`, `combinators`, `error`, `mood`, `obj`, `type` — are their own `lib-*` repos)
 - `docs` `automation` `assets` — org-level purpose repos
 - `research-mlopt` `eqsat` `gamekit` `kernelopt` `discovery` `egraph` `mlopt-product` — the research/product repos (public: `research-mlopt`, `eqsat`, `gamekit`, `discovery`, `egraph`)
 - `c` `web` `research-dts` — public target/research repos (not checked out locally)
