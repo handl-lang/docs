@@ -1,6 +1,6 @@
 # handl-lang repo structure
 
-~185 repos under `github.com/handl-lang`, checked out as siblings in `~/GitHub/handl-lang/`. Deps are git deps (`branch = "main"`); workspace-root `[patch]` tables resolve them from sibling checkouts (ADR-0128). The public subset is the docs hub's `PUBLIC_REPOS` allowlist (`docs/scripts/public_repos.py`).
+~200 repos under `github.com/handl-lang`, checked out as siblings in `~/GitHub/handl-lang/` (202 local checkouts). Deps are git deps (`branch = "main"`); workspace-root `[patch]` tables resolve them from sibling checkouts (ADR-0128). The public subset is the docs hub's `PUBLIC_REPOS` allowlist (`docs/scripts/public_repos.py`).
 
 ## Core layers (bare)
 
@@ -10,6 +10,7 @@
 - `research-mlopt` `eqsat` `gamekit` `kernelopt` `discovery` `egraph` `mlopt-product` — the research/product repos (public: `research-mlopt`, `eqsat`, `gamekit`, `discovery`, `egraph`)
 - `c` `web` `research-dts` — public target/research repos (not checked out locally)
 - `slidev-theme-handl` `pitch-*` `extension-{neovim,vscode}` — theme, pitch decks, editor extensions
+- `discoverykit` `source-onnx` `test` `workspace` — additional bare repos (Python discovery package, ONNX tooling, test crate, workspace meta)
 
 ## `engine-*` (17 + the 8 `engine-compile-*` emitters below)
 
@@ -31,7 +32,7 @@
 
 `ext-{compile,eval,fmt,kit,lint,plugin,sdkgen,test,transform,typecheck}` — `hnl` extensions (`libhnl_ext_*.so` discovered via `HANDL_EXT_DIR`/`~/.handl/ext`).
 
-## `lib-*` (116)
+## `lib-*` (120)
 
 **Rule: one package per repo — `.hnl` codebases only, no Rust** (crates are const-only `*_HNL` exporters; native access via `handl-plugin-ffi`).
 
@@ -41,9 +42,9 @@
 - **FFI surfaces**: `lib-types` (`types/c/*` aliases), `lib-libc`, `lib-curl`, `lib-libz` (sdkgen bindings)
 - `pkg.hnl` declares `{ deps, modules }`; dep keys map to `handl-lang/lib-<dep>`.
 
-## `kit-*` (11)
+## `kit-*` (18)
 
-`kit-{core,data-prelude,ffi,kernel-ir,lang,pkg,prelude,prelude-lang,server,stdlib,test}` — kit declarations and kit infrastructure. `kit-prelude-lang` + `kit-data-prelude` carry the canonical language definition (language-as-data, the successor to the retired `kit-data-canonical`); the rest are kit manifests/manifests-as-data over `lib-*` packages.
+`kit-{carriers,core,cuda,data-prelude,discovery,eqsat,ffi,host-tensor,kernel-ir,lang,onnx,pkg,prelude,prelude-lang,server,stdlib,test,torch}` — kit declarations and kit infrastructure. `kit-prelude-lang` + `kit-data-prelude` carry the canonical language definition (language-as-data, the successor to the retired `kit-data-canonical`); `kit-{carriers,cuda,discovery,eqsat,host-tensor,onnx,torch}` are the mlopt domain packages split out of `research-mlopt` (plan 0032); the rest (`kit-{core,ffi,kernel-ir,lang,pkg,prelude,server,stdlib,test}`) are kit manifests/manifests-as-data over `lib-*` packages.
 
 ## Retired
 
