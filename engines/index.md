@@ -11,7 +11,7 @@ contract (`§` marker type, request, trait, shared helpers) and one or more
 
 This section covers the `engine-*` family only. The wider org families —
 `engine-compile-*` (emitters), `ext-*` (`hnl` extensions), most `kit-*`,
-`host-cli`/`host-lsp`, `tool-sdkgen-*` and most `lib-*` — are private; the
+`host-cli`/`host-lsp`, `engine-sdkgen-*` and most `lib-*` — are private; the
 public exceptions (`host-tensor`, `kit-prelude-lang`, `lib-char`,
 `lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`) have
 their own sections. See the [platform architecture](/handl/explanation/platform-architecture)

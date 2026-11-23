@@ -17,7 +17,7 @@ repo. Membership rule: public on GitHub. (An earlier
 revision withheld the `lib-*` repos on the theory that the language surface was
 unreleased; publishing docs for a public repo cannot disclose more than its
 source does, so they are in.) Every other repo (`ext-*`, `kit-*` other than
-`kit-prelude-lang`, `engine-compile-*`, `host-cli`, `host-lsp`, `tool-sdkgen-*`, …) is private
+`kit-prelude-lang`, `engine-compile-*`, `host-cli`, `host-lsp`, `engine-sdkgen-*`, …) is private
 and produces no pages, links, or mentions.
 
 ## Layout

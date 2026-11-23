@@ -20,9 +20,9 @@
 
 `engine-compile-{cuda,dot,handl,js,llvm,sexp,term,triton}`
 
-## `tool-sdkgen-*` (5)
+## `engine-sdkgen-*` (5)
 
-`tool-sdkgen-{c,python,webidl,file,cli}` — backends/emitters; generated FFI bindings vendor under `handl-packages/generated/` in the consuming repo (multi-consumer bindings get own repos: `lib-libc`, `lib-curl`, `lib-libz`). `tool-sdkgen-cli` generates SDKs that wrap command-line tools (backend `cli`: `*.clispec.yaml` spec or live `--help` probe; emitter `hnl-cli` → adapters on `lib-cli`'s `cli-c` process-spawn runtime); generated CLI SDKs are committed as spec+gate repos with `generated/` gitignored (`lib-gh`, `lib-cli-gen` for multi-tool SDKs).
+`engine-sdkgen-{c,python,webidl,file,cli}` — backends/emitters; generated FFI bindings vendor under `handl-packages/generated/` in the consuming repo (multi-consumer bindings get own repos: `lib-libc`, `lib-curl`, `lib-libz`). `engine-sdkgen-cli` generates SDKs that wrap command-line tools (backend `cli`: `*.clispec.yaml` spec or live `--help` probe; emitter `hnl-cli` → adapters on `lib-cli`'s `cli-c` process-spawn runtime); generated CLI SDKs are committed as spec+gate repos with `generated/` gitignored (`lib-gh`, `lib-cli-gen` for multi-tool SDKs).
 
 ## `host-*` (3)
 
@@ -56,7 +56,7 @@
 
 ## Rules
 
-- Naming: the family prefix *is* the component kind — `engine-*` (language-operation engines), `lib-*` (stdlib `.hnl` packages), `kit-*` (kit declarations/infra), `engine-compile-*` (emitters), `ext-*` (`hnl` dynamic extensions), `host-*` (host binaries), `tool-sdkgen-*` (binding/SDK generators)
+- Naming: the family prefix *is* the component kind — `engine-*` (language-operation engines), `lib-*` (stdlib `.hnl` packages), `kit-*` (kit declarations/infra), `engine-compile-*` (emitters), `ext-*` (`hnl` dynamic extensions), `host-*` (host binaries), `engine-sdkgen-*` (binding/SDK generators)
 - Bare = core layer or purpose repo (host/kernel/docs/…)
 - `prefix-*` = one component kind per repo
 - Sole-consumer generated bindings vendor into the consumer's `handl-packages/generated/`

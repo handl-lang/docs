@@ -328,7 +328,7 @@ def write_module_page(out: Path, module: str, entries: list[dict]) -> None:
     out.write_text('\n'.join(md).rstrip() + '\n')
 
 
-REPO_PREFIXES = ('lib-', 'host-', 'ext-', 'kit-', 'sdkgen-', 'compile-', 'engine-')
+REPO_PREFIXES = ('lib-', 'host-', 'ext-', 'kit-', 'engine-sdkgen-', 'compile-', 'engine-')
 
 
 def package_name(repo: str) -> str:
