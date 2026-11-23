@@ -6,11 +6,11 @@
 
 - `host` — runtime, loaders, `plugin-lib-*`/`plugin-ext-*` internals, `plugin-lib-stdlib` (the library-as-data registry)
 - `kernel` — `handl-calculus` (`Term`/`Model`), `handl-language`, `handl-value`, `handl-ops` (op ABI), `handl-ext`, `defining-handl` (self-hosting corpus, ADR-0044 Phase 8), plus the remaining substrate ops: `ops`, `prim`, `prim-handl` (the rest of the floor libs — `bytes`, `cmp`, `combinators`, `error`, `mood`, `obj`, `type` — are their own `lib-*` repos)
-- `docs` `automation` `assets` — org-level purpose repos
+- `docs` `workspace` `assets` — org-level purpose repos (`workspace` absorbed the retired `automation` repo)
 - `research-mlopt` `eqsat` `gamekit` `kernelopt` `discovery` `egraph` `mlopt-product` — the research/product repos (public: `research-mlopt`, `eqsat`, `gamekit`, `discovery`, `egraph`)
 - `c` `web` `research-dts` — public target/research repos (not checked out locally)
 - `slidev-theme-handl` `pitch-*` `extension-{neovim,vscode}` — theme, pitch decks, editor extensions
-- `discoverykit` `source-onnx` `test` `workspace` — additional bare repos (Python discovery package, ONNX tooling, test crate, workspace meta)
+- `discoverykit` `source-onnx` `test` — additional bare repos (Python discovery package, ONNX tooling, test crate)
 
 ## `engine-*` (17 + the 8 `engine-compile-*` emitters below)
 

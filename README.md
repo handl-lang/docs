@@ -17,8 +17,8 @@ and `web` targets, `research-mlopt` (published under the `mlopt` slug — former
 repo. Membership rule: public on GitHub. (An earlier
 revision withheld the `lib-*` repos on the theory that the language surface was
 unreleased; publishing docs for a public repo cannot disclose more than its
-source does, so they are in.) Repos still private (`host-lsp`, `extension-*`, `workspace`, `pitch-*`,
-`project`, `playground`, `automation`, …) produce no pages, links, or
+source does, so they are in.) Repos still private (`host-lsp`, `extension-*`, `pitch-*`,
+`project`, `playground`, …) produce no pages, links, or
 mentions.
 
 ## Layout
