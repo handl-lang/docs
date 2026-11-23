@@ -41,9 +41,9 @@ analyze, transform, compile, or execute the IR.
     <strong>Compilation</strong>
     <p>LLVM (native), Triton, CUDA emitters.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/compile-llvm">tool-compile-llvm</a> (private)
-      <a href="https://github.com/handl-lang/compile-triton">tool-compile-triton</a> (private)
-      <a href="https://github.com/handl-lang/compile-cuda">tool-compile-cuda</a> (private)
+      <a href="https://github.com/handl-lang/tool-compile-llvm">tool-compile-llvm</a> (private)
+      <a href="https://github.com/handl-lang/tool-compile-triton">tool-compile-triton</a> (private)
+      <a href="https://github.com/handl-lang/tool-compile-cuda">tool-compile-cuda</a> (private)
     </div>
   </div>
   <div class="eco-card">
@@ -76,7 +76,10 @@ analyze, transform, compile, or execute the IR.
 </div>
 
 Engines are interchangeable consumers and processors of the shared
-representation, not intrinsic parts of the Kernel.
+representation, not intrinsic parts of the Kernel. In the repo taxonomy
+they are the `tool-*` instruments (lex/parse/transform/typecheck/fmt/lint),
+the `exec-*` eval backends, and the `engine`/`engine-eqsat` search engines —
+the `tool-compile-*` emitters sit alongside as compiler backends.
 
 ## 3. Libraries (`lib-*`)
 
@@ -106,28 +109,28 @@ Handl APIs from existing interfaces.
     <strong>tool-codegen-python</strong>
     <p>Python interoperability.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/sdkgen-python">GitHub</a> (private)
+      <a href="https://github.com/handl-lang/tool-codegen-python">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
     <strong>tool-codegen-c</strong>
     <p>C interoperability, including libc, libcurl, and zlib.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/sdkgen-c">GitHub</a> (private)
+      <a href="https://github.com/handl-lang/tool-codegen-c">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
     <strong>tool-codegen-webidl</strong>
     <p>Web APIs, including Fetch and Console.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/sdkgen-webidl">GitHub</a> (private)
+      <a href="https://github.com/handl-lang/tool-codegen-webidl">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
     <strong>tool-codegen-cli</strong>
     <p>Type-safe APIs for spawning and interacting with CLI processes.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/sdkgen-cli">GitHub</a> (private)
+      <a href="https://github.com/handl-lang/tool-codegen-cli">GitHub</a> (private)
     </div>
   </div>
 </div>

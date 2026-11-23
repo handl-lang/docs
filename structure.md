@@ -12,9 +12,15 @@
 - `slidev-theme-handl` `pitch-*` `extension-{neovim,vscode}` — theme, pitch decks, editor extensions
 - `discoverykit` `source-onnx` `test` — additional bare repos (Python discovery package, ONNX tooling, test crate)
 
-## `engine-*` (17 + the 8 `tool-compile-*` emitters below)
+## `engine-*` / `exec-*` / `tool-*` (the operation layer)
 
-`engine` · `engine-{lex,lex-pattern,parse,parse-pratt,exec,exec-tree-walk,exec-bytecode,exec-cranelift,eqsat,fmt,lint,test,transform,transform-rewrite,typecheck,typecheck-nbe}`
+`engine` · `engine-eqsat` stay `engine-*` — the genuine engines (the `hnl-engine`
+arrow-calculus substrate and the e-graph search engine). Everything else split:
+
+- `exec` · `exec-{tree-walk,bytecode,cranelift}` — the eval backends (`hnl-exec*`)
+- `tool-{lex,lex-pattern,parse,parse-pratt,transform,transform-rewrite,typecheck,typecheck-handl,typecheck-nbe,fmt,lint,test,watch,codemod}` — the on-demand toolchain instruments (`hnl-tool-*`)
+
+plus the emitters below.
 
 ## `tool-compile-*` (8)
 
@@ -28,9 +34,9 @@
 
 `host-{cli,lsp,tensor}`
 
-## `ext-*` (10)
+## `ext-*` (11)
 
-`ext-{compile,eval,fmt,kit,lint,plugin,sdkgen,test,transform,typecheck}` — `hnl` extensions (`libhnl_ext_*.so` discovered via `HANDL_EXT_DIR`/`~/.handl/ext`).
+`ext-{codegen,codemod,compile,eval,fmt,kit,lint,plugin,test,transform,typecheck}` — `hnl` extensions (`libhnl_ext_*.so` discovered via `HANDL_EXT_DIR`/`~/.handl/ext`).
 
 ## `lib-*` (120)
 
@@ -39,7 +45,7 @@
 - **Ports** (contracts): `lib-concurrent`, `lib-compress`, `lib-fetch`, `lib-ws`, `lib-tls`, `lib-serve`, `lib-ws-frame`, `lib-str`, `lib-math`, `lib-posix` (incl. the folded `lib-time` clock surface), `lib-cli` (two modules — `cli` port + `cli-c` libc backend), …
 - **Impls**: `lib-<port>-<backend>` — `lib-posix-c` (clock impl folded in from `lib-time-c`), `lib-str-handl`, `lib-math-js`, `lib-concurrent-epoll`, `lib-fetch-c`, `lib-fetch-js`, `lib-ws-c`, `lib-tls-libssl`, `lib-compress-{gzip,zlib}-c`, `lib-cli` (`cli-c`), …
 - **Runtime internals**: `lib-loader`, `lib-desugar`, `lib-tag` (embedded by host crates via `*_HNL` consts)
-- **FFI surfaces**: `lib-types` (`types/c/*` aliases), `lib-libc`, `lib-curl`, `lib-libz` (sdkgen bindings)
+- **FFI surfaces**: `lib-types` (`types/c/*` aliases), `lib-libc`, `lib-curl`, `lib-libz` (codegen bindings)
 - `pkg.hnl` declares `{ deps, modules }`; dep keys map to `handl-lang/lib-<dep>`.
 
 ## `kit-*` (18)
@@ -56,7 +62,7 @@
 
 ## Rules
 
-- Naming: the family prefix *is* the component kind — `engine-*` (language-operation engines), `lib-*` (stdlib `.hnl` packages), `kit-*` (kit declarations/infra), `tool-compile-*` (emitters), `ext-*` (`hnl` dynamic extensions), `host-*` (host binaries), `tool-codegen-*` (binding/SDK generators)
+- Naming: the family prefix *is* the component kind — `engine-*`/`exec-*`/`tool-*` (language-operation engines, exec backends, and on-demand toolchain instruments), `lib-*` (stdlib `.hnl` packages), `kit-*` (kit declarations/infra), `tool-compile-*` (emitters), `ext-*` (`hnl` dynamic extensions), `host-*` (host binaries), `tool-codegen-*` (binding/SDK generators)
 - Bare = core layer or purpose repo (host/kernel/docs/…)
 - `prefix-*` = one component kind per repo
 - Sole-consumer generated bindings vendor into the consumer's `handl-packages/generated/`

@@ -79,7 +79,7 @@ PUBLIC_REPOS = {
     "ext-kit",
     "ext-lint",
     "ext-plugin",
-    "ext-sdkgen",
+    "ext-codegen",
     "ext-test",
     "ext-transform",
     "ext-typecheck",

@@ -6,7 +6,7 @@ worktrees exist only in a developer checkout, not in CI, so the pages are
 generated and committed like the old `ADR-INDEX.md`) and writes one
 index page per product subtree:
 
-    adrs/handl.md    — handl product repos (host, kernel, engine-*, ...)
+    adrs/handl.md    — handl product repos (host, kernel, engine-*/tool-*/exec-*, ...)
     adrs/mlopt.md   — the mlopt repo (handl-lang/graphopt was renamed
                        handl-lang/mlopt; its docs/site.yaml `site_path`
                        flipped to `mlopt`, so the ADRs index under that

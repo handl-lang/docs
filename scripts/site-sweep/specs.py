@@ -2,7 +2,7 @@ SPECS = {}
 
 SPECS["engine"] = dict(
     tagline="Foundation types for every pluggable engine: `Term`, `Model`, and the arena view.",
-    what="""The substrate every other `engine-*` crate builds on. It defines the **`Term`**
+    what="""The substrate every `tool-*`/`exec-*` crate builds on. It defines the **`Term`**
 algebra used to express eval schemes, the **`Model`** trait an engine implements,
 and a minimal, object-safe **arena view** (`AstRef` / `AstNode` / `LanguageView`)
 that lets a model inspect an AST without depending on `handl-language` — which
@@ -20,7 +20,7 @@ would be a dependency cycle, since `handl-language` already depends on
          ("`EvalError` / `LangError`", "failure kinds surfaced by interpretation")],
     howto=[("Add a new engine",
             "Implement `Model` for your engine type and let `interpret` drive it; the "
-            "`engine-*` crates are the worked examples — no per-kind Rust branching.",
+            "`tool-*`/`exec-*` crates are the worked examples — no per-kind Rust branching.",
             """struct MyModel;
 impl Model for MyModel {
     // resolve the scheme's term for a node kind;

@@ -249,7 +249,7 @@ data), the tagged `Value` representation the engines share, the dynamic extensio
 ABI (`hnl` extensions, ADR-0149), and the `handl-lib-*` floor packages.
 
 What is *not* kernel: engines, emitters, kits, plugins and hosts. They live in the
-`engine-*`, `kit-*` and `host` repos and depend on the kernel, never the reverse.""",
+`engine-*`/`tool-*`/`exec-*`, `kit-*` and `host` repos and depend on the kernel, never the reverse.""",
     modules=[("`crates/handl-language`", "the `Language` schema + staged lex/parse/eval dispatch signatures"),
              ("`crates/handl-value`", "the tagged `Value` representation shared by engines"),
              ("`crates/handl-ext`", "the shared ABI for dynamic `hnl` extensions (ADR-0149)"),

@@ -8,7 +8,7 @@ decision records themselves live with the repo that made them.
 **Publication boundary.** Public repos are published, and the allowlist lives in
 exactly one place: [`scripts/public_repos.py`](scripts/public_repos.py) (all three
 generators import it — they had drifted apart). That is **every public repo** (204 today):
-`kernel`, the `engine`/`engine-*` family (14), `host`, `host-tensor`, the `c`
+`kernel`, the `engine`/`engine-eqsat` + `exec-*`/`tool-*` operation families, `host`, `host-tensor`, the `c`
 and `web` targets, `research-mlopt` (published under the `mlopt` slug — formerly
 `graphopt`/`mlopt` until its `docs/site.yaml` `site_path` flipped), `eqsat`, `gamekit`, `kit-prelude-lang`,
 `egraph`, `discovery`, `research-dts`, `slidev-theme-handl`, `lib-char`,

@@ -102,7 +102,7 @@ reference:
   - package: fetch
 - title: Fetch C
   slug: lib-fetch-c
-  description: fetch-c -- `fetch` backed by libcurl (sdkgen bindings).
+  description: fetch-c -- `fetch` backed by libcurl (codegen bindings).
   include:
   - package: fetch-c
 - title: Fetch Js

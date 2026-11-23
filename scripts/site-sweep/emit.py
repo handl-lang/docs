@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Emit Diátaxis site docs for the engine family (sweep helper).
+"""Emit Diátaxis site docs for the operation layer (sweep helper).
 
 Per repo: README block, docs/site.yaml, docs/site/{index,reference/index,
 how-to/index,explanation/index}.md. Content comes from specs_*.py.
@@ -78,7 +78,8 @@ TPL_EXPL = """# Explanation
 
 ## Where it sits
 
-This crate belongs to the `engine-*` family. Plugins, kits and hosts reach it
+This crate belongs to the operation layer — the `engine`/`engine-eqsat`,
+`tool-*` and `exec-*` repos. Plugins, kits and hosts reach it
 through the kit's operation slot, so the engine can be swapped without touching a
 language definition.
 
