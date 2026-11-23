@@ -20,49 +20,49 @@
 
 [[repos]]
 name = "handl-lang/host"
-dir = "/home/luis/GitHub/handl-lang/host"
+dir = "~/GitHub/handl-lang/host"
 branch = "refs/heads/main"
   [repos.runner]
   kind = "script"
-  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/trigger.sh"
+  cmd = "bash ~/GitHub/handl-lang/docs/ci/trigger.sh"
   cancel_running = true
 
 [[repos]]
 name = "handl-lang/research-mlopt"
-dir = "/home/luis/GitHub/handl-lang/research-mlopt"
+dir = "~/GitHub/handl-lang/research-mlopt"
 branch = "refs/heads/main"
   [repos.runner]
   kind = "script"
-  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/trigger.sh"
+  cmd = "bash ~/GitHub/handl-lang/docs/ci/trigger.sh"
   cancel_running = true
 
 [[repos]]
 name = "handl-lang/eqsat"
-dir = "/home/luis/GitHub/handl-lang/eqsat"
+dir = "~/GitHub/handl-lang/eqsat"
 branch = "refs/heads/main"
   [repos.runner]
   kind = "script"
-  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/trigger.sh"
+  cmd = "bash ~/GitHub/handl-lang/docs/ci/trigger.sh"
   cancel_running = true
 
 [[repos]]
 name = "handl-lang/gamekit"
-dir = "/home/luis/GitHub/handl-lang/gamekit"
+dir = "~/GitHub/handl-lang/gamekit"
 branch = "refs/heads/main"
   [repos.runner]
   kind = "script"
-  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/trigger.sh"
+  cmd = "bash ~/GitHub/handl-lang/docs/ci/trigger.sh"
   cancel_running = true
 
 # the docs repo itself: every push to main rebuilds (the trigger
 # script short-circuits the diff check for repo = "docs")
 [[repos]]
 name = "handl-lang/docs"
-dir = "/home/luis/GitHub/handl-lang/docs"
+dir = "~/GitHub/handl-lang/docs"
 branch = "refs/heads/main"
   [repos.runner]
   kind = "script"
-  cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/trigger.sh"
+  cmd = "bash ~/GitHub/handl-lang/docs/ci/trigger.sh"
   cancel_running = true
 
 [trigger]
@@ -74,7 +74,7 @@ secret_env = "BUPHA_WEBHOOK_SECRET"
 # it wholesale via [repos.runner] (a full replacement, per schema).
 [runner]
 kind = "script"
-cmd = "bash /home/luis/GitHub/handl-lang/docs/ci/trigger.sh"
+cmd = "bash ~/GitHub/handl-lang/docs/ci/trigger.sh"
 token_env = "BUPHA_TOKEN"
 
 [status]
@@ -88,4 +88,4 @@ local_url = "http://127.0.0.1:29173"
 public_url = "https://ci.luisfuturist.com"   # hooks land at <url>/hook
 
 [worktree]
-base = "/home/luis/dagger/worktrees/bupha"   # worktrees: <base>-<repo>-<sha12>
+base = "~/dagger/worktrees/bupha"   # worktrees: <base>-<repo>-<sha12>
