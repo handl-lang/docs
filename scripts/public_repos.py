@@ -226,4 +226,5 @@ PUBLIC_REPOS = {
     "host-cli",
     "kernelopt",
     ".github",
+    "workspace",
 }
