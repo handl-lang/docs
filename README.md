@@ -7,18 +7,19 @@ decision records themselves live with the repo that made them.
 
 **Publication boundary.** Public repos are published, and the allowlist lives in
 exactly one place: [`scripts/public_repos.py`](scripts/public_repos.py) (all three
-generators import it — they had drifted apart). That is **33 repos today**:
+generators import it — they had drifted apart). That is **every public repo** (204 today):
 `kernel`, the `engine`/`engine-*` family (14), `host`, `host-tensor`, the `c`
 and `web` targets, `research-mlopt` (published under the `mlopt` slug — formerly
 `graphopt`/`mlopt` until its `docs/site.yaml` `site_path` flipped), `eqsat`, `gamekit`, `kit-prelude-lang`,
 `egraph`, `discovery`, `research-dts`, `slidev-theme-handl`, `lib-char`,
-`lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`, and this
+`lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`, the `ext-*`/`engine-compile-*`/`engine-sdkgen-*` families,
+`host-cli`, the `kit-*`/`lib-*` package repos, and this
 repo. Membership rule: public on GitHub. (An earlier
 revision withheld the `lib-*` repos on the theory that the language surface was
 unreleased; publishing docs for a public repo cannot disclose more than its
-source does, so they are in.) Every other repo (`ext-*`, `kit-*` other than
-`kit-prelude-lang`, `engine-compile-*`, `host-cli`, `host-lsp`, `engine-sdkgen-*`, …) is private
-and produces no pages, links, or mentions.
+source does, so they are in.) Repos still private (`host-lsp`, `extension-*`, `workspace`, `pitch-*`,
+`project`, `playground`, `automation`, …) produce no pages, links, or
+mentions.
 
 ## Layout
 
