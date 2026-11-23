@@ -53,10 +53,10 @@ FRONT = re.compile(
 PRODUCT = {
     "host": "handl", "kernel": "handl", "host-tensor": "handl",
     "kit-prelude-lang": "handl", "egraph": "handl", "discovery": "handl",
-    "engine": "handl", "engine-exec": "handl",
-    "engine-exec-tree-walk": "handl", "engine-lex": "handl",
-    "engine-lex-pattern": "handl", "engine-parse": "handl",
-    "engine-parse-pratt": "handl", "engine-transform": "handl",
+    "engine": "handl", "exec": "handl",
+    "exec-tree-walk": "handl", "tool-lex": "handl",
+    "tool-lex-pattern": "handl", "tool-parse": "handl",
+    "tool-parse-pratt": "handl", "tool-transform": "handl",
     # `mlopt` -> `mlopt`: the GitHub repo was renamed graphopt -> mlopt
     # and its docs/site.yaml `site_path` flipped to `mlopt`, so its ADRs
     # index under the mlopt page.

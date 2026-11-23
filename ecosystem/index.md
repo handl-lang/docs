@@ -41,36 +41,36 @@ analyze, transform, compile, or execute the IR.
     <strong>Compilation</strong>
     <p>LLVM (native), Triton, CUDA emitters.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/compile-llvm">engine-compile-llvm</a> (private)
-      <a href="https://github.com/handl-lang/compile-triton">engine-compile-triton</a> (private)
-      <a href="https://github.com/handl-lang/compile-cuda">engine-compile-cuda</a> (private)
+      <a href="https://github.com/handl-lang/compile-llvm">tool-compile-llvm</a> (private)
+      <a href="https://github.com/handl-lang/compile-triton">tool-compile-triton</a> (private)
+      <a href="https://github.com/handl-lang/compile-cuda">tool-compile-cuda</a> (private)
     </div>
   </div>
   <div class="eco-card">
     <strong>Execution</strong>
     <p>Cranelift JIT, bytecode VM, and the tree-walk reference interpreter.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/engine-exec-cranelift">engine-exec-cranelift</a>
-      <a href="https://github.com/handl-lang/engine-exec-bytecode">engine-exec-bytecode</a>
-      <a href="https://github.com/handl-lang/engine-exec-tree-walk">engine-exec-tree-walk</a>
+      <a href="https://github.com/handl-lang/exec-cranelift">exec-cranelift</a>
+      <a href="https://github.com/handl-lang/exec-bytecode">exec-bytecode</a>
+      <a href="https://github.com/handl-lang/exec-tree-walk">exec-tree-walk</a>
     </div>
   </div>
   <div class="eco-card">
     <strong>Transformation</strong>
     <p>IR-to-IR rewriting, desugaring, and optimization.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/engine-transform-rewrite">engine-transform-rewrite</a>
+      <a href="https://github.com/handl-lang/tool-transform-rewrite">tool-transform-rewrite</a>
     </div>
   </div>
   <div class="eco-card">
     <strong>Language processing</strong>
     <p>Lexer, parser, typechecker, linter, and formatter engines.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/engine-lex-pattern">engine-lex-pattern</a>
-      <a href="https://github.com/handl-lang/engine-parse-pratt">engine-parse-pratt</a>
-      <a href="https://github.com/handl-lang/engine-typecheck">engine-typecheck</a>
-      <a href="https://github.com/handl-lang/engine-lint">engine-lint</a>
-      <a href="https://github.com/handl-lang/engine-fmt">engine-fmt</a>
+      <a href="https://github.com/handl-lang/tool-lex-pattern">tool-lex-pattern</a>
+      <a href="https://github.com/handl-lang/tool-parse-pratt">tool-parse-pratt</a>
+      <a href="https://github.com/handl-lang/tool-typecheck">tool-typecheck</a>
+      <a href="https://github.com/handl-lang/tool-lint">tool-lint</a>
+      <a href="https://github.com/handl-lang/tool-fmt">tool-fmt</a>
     </div>
   </div>
 </div>
@@ -103,28 +103,28 @@ Handl APIs from existing interfaces.
 
 <div class="eco-grid">
   <div class="eco-card">
-    <strong>engine-sdkgen-python</strong>
+    <strong>tool-codegen-python</strong>
     <p>Python interoperability.</p>
     <div class="eco-links">
       <a href="https://github.com/handl-lang/sdkgen-python">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
-    <strong>engine-sdkgen-c</strong>
+    <strong>tool-codegen-c</strong>
     <p>C interoperability, including libc, libcurl, and zlib.</p>
     <div class="eco-links">
       <a href="https://github.com/handl-lang/sdkgen-c">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
-    <strong>engine-sdkgen-webidl</strong>
+    <strong>tool-codegen-webidl</strong>
     <p>Web APIs, including Fetch and Console.</p>
     <div class="eco-links">
       <a href="https://github.com/handl-lang/sdkgen-webidl">GitHub</a> (private)
     </div>
   </div>
   <div class="eco-card">
-    <strong>engine-sdkgen-cli</strong>
+    <strong>tool-codegen-cli</strong>
     <p>Type-safe APIs for spawning and interacting with CLI processes.</p>
     <div class="eco-links">
       <a href="https://github.com/handl-lang/sdkgen-cli">GitHub</a> (private)

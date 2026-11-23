@@ -202,7 +202,7 @@ SPECS2["lib-desugar"] = dict(
     what="""This repo carries the **desugar pass as handl data**: the `TransformDef`s the
 runtime applies to surface syntax before evaluation. It is not a library a user
 imports — `plugin-lib-handl` embeds it and hands the rules to
-`engine-transform-rewrite`, so the pass can change without a runtime rebuild.""",
+`tool-transform-rewrite`, so the pass can change without a runtime rebuild.""",
     modules=[("`src/index.hnl`", "the transform definitions (the pass source)"),
              ("`src/lib.rs`", "the embedding shim that exposes the source to the plugin")],
     api=[("transform definitions", "the rules themselves — data, reviewed as data"),

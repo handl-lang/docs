@@ -12,17 +12,17 @@
 - `slidev-theme-handl` `pitch-*` `extension-{neovim,vscode}` — theme, pitch decks, editor extensions
 - `discoverykit` `source-onnx` `test` — additional bare repos (Python discovery package, ONNX tooling, test crate)
 
-## `engine-*` (17 + the 8 `engine-compile-*` emitters below)
+## `engine-*` (17 + the 8 `tool-compile-*` emitters below)
 
 `engine` · `engine-{lex,lex-pattern,parse,parse-pratt,exec,exec-tree-walk,exec-bytecode,exec-cranelift,eqsat,fmt,lint,test,transform,transform-rewrite,typecheck,typecheck-nbe}`
 
-## `engine-compile-*` (8)
+## `tool-compile-*` (8)
 
-`engine-compile-{cuda,dot,handl,js,llvm,sexp,term,triton}`
+`tool-compile-{cuda,dot,handl,js,llvm,sexp,term,triton}`
 
-## `engine-sdkgen-*` (5)
+## `tool-codegen-*` (5)
 
-`engine-sdkgen-{c,python,webidl,file,cli}` — backends/emitters; generated FFI bindings vendor under `handl-packages/generated/` in the consuming repo (multi-consumer bindings get own repos: `lib-libc`, `lib-curl`, `lib-libz`). `engine-sdkgen-cli` generates SDKs that wrap command-line tools (backend `cli`: `*.clispec.yaml` spec or live `--help` probe; emitter `hnl-cli` → adapters on `lib-cli`'s `cli-c` process-spawn runtime); generated CLI SDKs are committed as spec+gate repos with `generated/` gitignored (`lib-gh`, `lib-cli-gen` for multi-tool SDKs).
+`tool-codegen-{c,python,webidl,file,cli}` — backends/emitters; generated FFI bindings vendor under `handl-packages/generated/` in the consuming repo (multi-consumer bindings get own repos: `lib-libc`, `lib-curl`, `lib-libz`). `tool-codegen-cli` generates SDKs that wrap command-line tools (backend `cli`: `*.clispec.yaml` spec or live `--help` probe; emitter `hnl-cli` → adapters on `lib-cli`'s `cli-c` process-spawn runtime); generated CLI SDKs are committed as spec+gate repos with `generated/` gitignored (`lib-gh`, `lib-cli-gen` for multi-tool SDKs).
 
 ## `host-*` (3)
 
@@ -56,7 +56,7 @@
 
 ## Rules
 
-- Naming: the family prefix *is* the component kind — `engine-*` (language-operation engines), `lib-*` (stdlib `.hnl` packages), `kit-*` (kit declarations/infra), `engine-compile-*` (emitters), `ext-*` (`hnl` dynamic extensions), `host-*` (host binaries), `engine-sdkgen-*` (binding/SDK generators)
+- Naming: the family prefix *is* the component kind — `engine-*` (language-operation engines), `lib-*` (stdlib `.hnl` packages), `kit-*` (kit declarations/infra), `tool-compile-*` (emitters), `ext-*` (`hnl` dynamic extensions), `host-*` (host binaries), `tool-codegen-*` (binding/SDK generators)
 - Bare = core layer or purpose repo (host/kernel/docs/…)
 - `prefix-*` = one component kind per repo
 - Sole-consumer generated bindings vendor into the consumer's `handl-packages/generated/`

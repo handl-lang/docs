@@ -10,8 +10,8 @@ contract (`§` marker type, request, trait, shared helpers) and one or more
 **engine** crates implement it. The kit decides which engine fills each slot.
 
 This section covers the `engine-*` family only. The wider org families —
-`engine-compile-*` (emitters), `ext-*` (`hnl` extensions), most `kit-*`,
-`host-cli`/`host-lsp`, `engine-sdkgen-*` and most `lib-*` — are private; the
+`tool-compile-*` (emitters), `ext-*` (`hnl` extensions), most `kit-*`,
+`host-cli`/`host-lsp`, `tool-codegen-*` and most `lib-*` — are private; the
 public exceptions (`host-tensor`, `kit-prelude-lang`, `lib-char`,
 `lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`) have
 their own sections. See the [platform architecture](/handl/explanation/platform-architecture)
@@ -26,7 +26,7 @@ stays honest:
   over `hnl_engine::Term` via `handl-egraph`, with `optimize` /
   `saturate` / `extract_best` as the public surface and laws, guards,
   and cost specs moving to kit data.
-- `engine-compile-cuda` — an `engine-compile-*` emitter (a compiler
+- `tool-compile-cuda` — an `tool-compile-*` emitter (a compiler
   backend, outside this section's engine scope) that lowers `lib-kernel-ir` terms to real CUDA C++:
   one templated `__global__` kernel plus an `extern "C"` launcher,
   declining uncovered ops by name rather than emitting stubs.
@@ -35,11 +35,11 @@ stays honest:
 
 | operation | contract | engines |
 |---|---|---|
-| lex | [engine-lex](/engine-lex/) | [engine-lex-pattern](/engine-lex-pattern/) — data-driven rules |
-| parse | [engine-parse](/engine-parse/) | [engine-parse-pratt](/engine-parse-pratt/) — Pratt, grammar rows |
-| transform | [engine-transform](/engine-transform/) | [engine-transform-rewrite](/engine-transform-rewrite/) — rule-interpreting |
-| typecheck | [engine-typecheck](/engine-typecheck/) | `engine-typecheck-nbe` (NBE; private) + bootstrap in the contract crate |
-| eval | [engine-exec](/engine-exec/) | [engine-exec-tree-walk](/engine-exec-tree-walk/) — reference; [engine-exec-bytecode](/engine-exec-bytecode/) — stack VM; [engine-exec-cranelift](/engine-exec-cranelift/) — JIT/object (see Tools) |
+| lex | [tool-lex](/tool-lex/) | [tool-lex-pattern](/tool-lex-pattern/) — data-driven rules |
+| parse | [tool-parse](/tool-parse/) | [tool-parse-pratt](/tool-parse-pratt/) — Pratt, grammar rows |
+| transform | [tool-transform](/tool-transform/) | [tool-transform-rewrite](/tool-transform-rewrite/) — rule-interpreting |
+| typecheck | [tool-typecheck](/tool-typecheck/) | `tool-typecheck-nbe` (NBE; private) + bootstrap in the contract crate |
+| eval | [exec](/exec/) | [exec-tree-walk](/exec-tree-walk/) — reference; [exec-bytecode](/exec-bytecode/) — stack VM; [exec-cranelift](/exec-cranelift/) — JIT/object (see Tools) |
 
 ## Shared substrate
 
@@ -52,11 +52,11 @@ rule-based tools over the same `Language` data:
 
 | tool | what it does |
 |---|---|
-| [engine-fmt](/engine-fmt/) | data-driven AST formatter (`FormattingRule` / `PostProcessRule` seams) |
-| [engine-lint](/engine-lint/) | rule-based linter (`lang.lints` + named native checks) |
-| [engine-exec-cranelift](/engine-exec-cranelift/) | Cranelift eval backend (JIT / object file) |
+| [tool-fmt](/tool-fmt/) | data-driven AST formatter (`FormattingRule` / `PostProcessRule` seams) |
+| [tool-lint](/tool-lint/) | rule-based linter (`lang.lints` + named native checks) |
+| [exec-cranelift](/exec-cranelift/) | Cranelift eval backend (JIT / object file) |
 
-`engine-test` is the test runner; it stays private while its corpus harness
+`tool-test` is the test runner; it stays private while its corpus harness
 depends on the private kit closure.
 
 ## How to read a crate here
@@ -69,8 +69,8 @@ belong to the product that composes them, the
 
 ## Design invariant
 
-The reference interpreter is the oracle: `engine-exec-bytecode` must produce
-results **identical** to `engine-exec-tree-walk`, and its conformance suite
+The reference interpreter is the oracle: `exec-bytecode` must produce
+results **identical** to `exec-tree-walk`, and its conformance suite
 enforces that. Optimisation is allowed to change speed, never meaning. The same
 rule holds for the other operations — a data-driven engine must not become a
 second definition of the language.

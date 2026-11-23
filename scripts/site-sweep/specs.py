@@ -38,13 +38,13 @@ without cycles.""",
     tests=None,
 )
 
-SPECS["engine-exec"] = dict(
+SPECS["exec"] = dict(
     tagline="The eval-operation contract: `Eval`, `EvalRequest`, `EvalEngine`.",
     what="""The **abstraction crate** for the eval operation (ADR-0044 §3, §4, §7):
 the `Eval` operation marker, the `EvalRequest` an engine receives, and the
 `EvalEngine` trait it implements. **No interpreter lives here.** The concrete
-engines are `engine-exec-tree-walk` (reference interpreter) and
-`engine-exec-bytecode` (stack VM), which must agree value-for-value.""",
+engines are `exec-tree-walk` (reference interpreter) and
+`exec-bytecode` (stack VM), which must agree value-for-value.""",
     modules=[("`io`", "the `IO` effect surface: handler frames, resume, accumulation"),
              ("`native_ops`", "the native operation table an engine dispatches to"),
              ("`pattern_match`", "`try_pattern` — shared pattern matching on a growable stack")],
@@ -62,7 +62,7 @@ engines are `engine-exec-tree-walk` (reference interpreter) and
             "Use `pattern_match::try_pattern`; it grows the stack at `STACK_RED_ZONE` "
             "instead of overflowing, so deeply nested values are bounded by total "
             "growable stack rather than the platform stack.", "")],
-    why="""Splitting eval into *abstraction* (`engine-exec`) and *engines*
+    why="""Splitting eval into *abstraction* (`exec`) and *engines*
 (`…-tree-walk`, `…-bytecode`) is what makes the backend swappable: a kit registers
 an engine under one operation name and the same language definition runs on the
 interpreter or the VM. The abstraction owns the parts that must not diverge —
@@ -71,12 +71,12 @@ backends is structural rather than coincidental.""",
     tests=None,
 )
 
-SPECS["engine-lex"] = dict(
+SPECS["tool-lex"] = dict(
     tagline="The lex-operation contract: `LexerEngine`, `LexerRequest`, `Lexer`.",
     what="""The **abstraction crate** for the lex operation (ADR-0044 §1, §3): the
 `LexerEngine` trait, the `LexerRequest` describing what to tokenize, and a
 `Lexer` handle. It contains **no lexing logic** — the data-driven implementation
-is `engine-lex-pattern`.""",
+is `tool-lex-pattern`.""",
     modules=[],
     api=[("`LexerEngine`", "the trait a lexer implements"),
          ("`LexerRequest`", "source text + language + position, as handed to an engine"),
@@ -84,7 +84,7 @@ is `engine-lex-pattern`.""",
     howto=[("Implement a lexer",
             "Implement `LexerEngine`; return tokens plus the advanced position. Keep "
             "policy — patterns, priority, block forms — in `Language` data rather than "
-            "in the engine, as `engine-lex-pattern` does.", "")],
+            "in the engine, as `tool-lex-pattern` does.", "")],
     why="""Lexing is the first place a language definition has to *be* data: token shapes
 are declared per language and swapping the lexer must be a data change, not a
 recompile. The abstraction is deliberately tiny so alternative lexers
@@ -92,12 +92,12 @@ recompile. The abstraction is deliberately tiny so alternative lexers
     tests=None,
 )
 
-SPECS["engine-parse"] = dict(
+SPECS["tool-parse"] = dict(
     tagline="The parse-operation contract: `ParserEngine`, `ParserRequest`, `ParserContext`.",
     what="""The **abstraction crate** for the parse operation (ADR-0044 §3): the
 `ParserEngine` trait, the `ParserRequest`/`ParserContext` an engine receives, and a
 `Parser` cursor helper. **No grammar logic lives here** — the concrete engine is
-`engine-parse-pratt`, which reads grammar rows from the language definition.""",
+`tool-parse-pratt`, which reads grammar rows from the language definition.""",
     modules=[],
     api=[("`ParserEngine`", "the trait a parser implements"),
          ("`ParserRequest`", "tokens + language the engine parses"),
@@ -105,20 +105,20 @@ SPECS["engine-parse"] = dict(
          ("`Parser`", "lexed-token cursor: `advance`, `peek`, `pos`, `tokens`, `expression`")],
     howto=[("Implement a parser",
             "Implement `ParserEngine` and produce an `Ast` arena. Follow "
-            "`engine-parse-pratt`'s root-node convention so downstream passes can "
+            "`tool-parse-pratt`'s root-node convention so downstream passes can "
             "rely on it.", "")],
-    why="""Parsing is where the grammar-as-data story pays off: `engine-parse-pratt`
+    why="""Parsing is where the grammar-as-data story pays off: `tool-parse-pratt`
 drives a Pratt loop from `GrammarRow`s rather than from hard-coded Rust methods,
 so a language changes its operator precedence table without a rebuild.""",
     tests=None,
 )
 
-SPECS["engine-transform"] = dict(
+SPECS["tool-transform"] = dict(
     tagline="The AST-transform contract: `TransformEngine`, `TransformMode`, arena helpers.",
     what="""The **abstraction crate** for the AST transform operation (ADR-0094):
 `TransformEngine`, `TransformMode`, and the arena navigation helpers (`node_ref`,
 `child_ref`, `descendant_ref`, `child_is_kind`, `contains`) that implementations
-share. The rule-interpreting implementation is `engine-transform-rewrite`.""",
+share. The rule-interpreting implementation is `tool-transform-rewrite`.""",
     modules=[],
     api=[("`TransformEngine`", "the trait a pass engine implements"),
          ("`TransformMode`", "how a pass applies: rewrite vs overlay"),
@@ -126,7 +126,7 @@ share. The rule-interpreting implementation is `engine-transform-rewrite`.""",
          ("`node_ref`, `child_ref`, `descendant_ref`, `child_is_kind`, `contains`", "arena navigation without holding borrows"),
          ("`declined`, `out`, `ast`, `lang`", "result and context accessors")],
     howto=[("Write a transform pass",
-            "Implement `TransformEngine`, or reuse `engine-transform-rewrite`'s rule "
+            "Implement `TransformEngine`, or reuse `tool-transform-rewrite`'s rule "
             "loop; return `declined` when nothing matched so the caller can skip "
             "re-running.", ""),
            ("Replace the AST safely",
@@ -139,7 +139,7 @@ passes registerable data.""",
     tests=None,
 )
 
-SPECS["engine-typecheck"] = dict(
+SPECS["tool-typecheck"] = dict(
     tagline="The typecheck contract (`TypecheckEngine`) plus the bootstrap checker.",
     what="""The **abstraction crate** for the typecheck operation (ADR-0054 §3):
 `Typecheck`, `TypecheckRequest`, `TypecheckResult`/`TypecheckReport`,
@@ -147,7 +147,7 @@ SPECS["engine-typecheck"] = dict(
 
 Unlike the other abstraction crates this one *does* ship a checker — a small
 **bootstrap** implementation used when no engine is registered. The production
-engine is `engine-typecheck-nbe`, registered by the canonical kit as `"nbe"`.""",
+engine is `tool-typecheck-nbe`, registered by the canonical kit as `"nbe"`.""",
     modules=[("`bootstrap`", "the bootstrap checker: structure + obvious type errors only")],
     api=[("`TypecheckEngine`", "the trait a checker implements"),
          ("`TypecheckRequest` / `TypecheckResult`", "input (AST, language, options) and output (diagnostics, accepted AST)"),
@@ -157,7 +157,7 @@ engine is `engine-typecheck-nbe`, registered by the canonical kit as `"nbe"`."""
     howto=[("Run the checker from Rust",
             "Call `check_module(&ast, &lang, options)`; the report's diagnostics carry "
             "spans, which is how `hnl typecheck` renders `file:line:col`.",
-            """let report = hnl_engine_typecheck::check_module(&ast, &lang, options);
+            """let report = hnl_tool_typecheck::check_module(&ast, &lang, options);
 if !report.is_clean() {
     for d in &report.diagnostics { eprintln!("{d}"); }
 }"""),
@@ -172,7 +172,7 @@ engine.""",
     tests="cargo test",
 )
 
-SPECS["engine-lex-pattern"] = dict(
+SPECS["tool-lex-pattern"] = dict(
     tagline="The data-driven lexer: every pattern comes from the language definition.",
     what="""A lexer engine with **no Rust lexing logic**. It collects `LexerRuleDef`
 fragments from the `Language`, sorts them by `priority` ascending, and applies
@@ -182,7 +182,7 @@ Swapping the lexer is a change to `lexer_rules`, not a recompile (ADR-0044
     modules=[],
     api=[("`LexerRuleDef` input", "rule fragments read from `Language::lexer_rules`"),
          ("priority ordering", "lowest `priority` wins first; ties keep declaration order"),
-         ("`LexerEngine` impl", "the `engine-lex` contract, satisfied without hard-coded patterns")],
+         ("`LexerEngine` impl", "the `tool-lex` contract, satisfied without hard-coded patterns")],
     howto=[("Add a token kind",
             "Add a `LexerRuleDef` fragment with a `priority` below the catch-all rules; "
             "no Rust change is needed.", ""),
@@ -195,7 +195,7 @@ makes grammar reviewable as data.""",
     tests="cargo test",
 )
 
-SPECS["engine-parse-pratt"] = dict(
+SPECS["tool-parse-pratt"] = dict(
     tagline="The Pratt parser: top-down operator precedence driven by grammar data.",
     what="""The parse engine used by the canonical kit. It looks up `GrammarRow`s by
 `(token, position)` and drives a classic top-down operator-precedence loop. It
@@ -204,7 +204,7 @@ child shape are read from the descriptor and executed (ADR-0044 §3).""",
     modules=[],
     api=[("`GrammarRow` input", "prefix/infix descriptors keyed by token and position"),
          ("`Ast` output", "arena of nodes; the **root node is the last node** of the arena"),
-         ("`ParserEngine` impl", "the `engine-parse` contract")],
+         ("`ParserEngine` impl", "the `tool-parse` contract")],
     howto=[("Add an operator",
             "Add grammar rows for the token with its left/right binding power; a "
             "precedence change is a data edit, not a code edit.", ""),
@@ -219,7 +219,7 @@ where grammar readers can see it.""",
     tests="cargo test",
 )
 
-SPECS["engine-exec-tree-walk"] = dict(
+SPECS["exec-tree-walk"] = dict(
     tagline="The reference interpreter for the eval operation.",
     what="""The **reference** eval engine. It interprets the arrow-calculus `Term` kernel
 directly: look up `lang.eval[node.kind]` → `EvalSchemeDef` → `Term`, then
@@ -227,7 +227,7 @@ interpret the scheme. Entirely data-driven, and the oracle the bytecode engine i
 conformance-tested against (ADR-0044 §3, §4; ADR-0052).""",
     modules=[],
     api=[("value shapes", "tagged JSON pair `__pair__` and friends — the values combinators operate on"),
-         ("`EvalEngine` impl", "the `engine-exec` contract"),
+         ("`EvalEngine` impl", "the `exec` contract"),
          ("handler support", "resumable `handle`/`perform` via the shared journal keys (ADR-0158)")],
     howto=[("Trace an evaluation",
             "Dispatch is `kind → scheme → interpret`, so log the scheme term for the "
@@ -242,15 +242,15 @@ is what lets the platform optimise without redefining the language.""",
     tests="cargo test",
 )
 
-SPECS["engine-exec-bytecode"] = dict(
+SPECS["exec-bytecode"] = dict(
     tagline="The bytecode eval engine: compile `Term` to bytecode, run it on a stack VM.",
     what="""Compiles `Term` (the v2 arrow-calculus kernel, ADR-0052) to a bytecode
 representation and executes it on a stack-based VM. It shares the `Term`
-vocabulary with `engine-exec-tree-walk`, and conformance tests require both to
+vocabulary with `exec-tree-walk`, and conformance tests require both to
 produce **identical results** (ADR-0044 §4, §7).""",
     modules=[("`vm`", "the stack machine: frames, resumable `perform`, accumulated handlers (ADR-0158)"),
              ("`compile`", "`Term` → bytecode, erasing per-node data dispatch")],
-    api=[("`EvalEngine` impl", "the `engine-exec` contract"),
+    api=[("`EvalEngine` impl", "the `exec` contract"),
          ("bytecode compilation", "scheme lookup happens at compile time, not per node"),
          ("conformance suite", "shared cases asserting parity with the tree-walk engine")],
     howto=[("Add an instruction",
@@ -266,7 +266,7 @@ conformance tests enforce.""",
     tests="cargo test",
 )
 
-SPECS["engine-transform-rewrite"] = dict(
+SPECS["tool-transform-rewrite"] = dict(
     tagline="The rule-interpreting transform engine (ADR-0094).",
     what="""The first `TransformEngine` implementation: it walks a pass's `TransformDef`s
 bottom-up over the `Ast` arena with a `remap` old→new index table — the proven

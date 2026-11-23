@@ -12,7 +12,7 @@ generators import it — they had drifted apart). That is **every public repo** 
 and `web` targets, `research-mlopt` (published under the `mlopt` slug — formerly
 `graphopt`/`mlopt` until its `docs/site.yaml` `site_path` flipped), `eqsat`, `gamekit`, `kit-prelude-lang`,
 `egraph`, `discovery`, `research-dts`, `slidev-theme-handl`, `lib-char`,
-`lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`, the `ext-*`/`engine-compile-*`/`engine-sdkgen-*` families,
+`lib-char-native`, `lib-desugar`, `lib-loader`, `lib-str-handl`, the `ext-*`/`tool-compile-*`/`tool-codegen-*` families,
 `host-cli`, the `kit-*`/`lib-*` package repos, and this
 repo. Membership rule: public on GitHub. (An earlier
 revision withheld the `lib-*` repos on the theory that the language surface was
