@@ -93,7 +93,6 @@ PUBLIC_REPOS = {
     "kit-ffi",
     "kit-host-tensor",
     "kit-lang",
-    "kit-onnx",
     "kit-pkg",
     "kit-prelude",
     "kit-server",
