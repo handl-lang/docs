@@ -1,5 +1,33 @@
 # handl-lang repo structure
 
+## Architecture — platform / tenant / edge (P-011, accepted 2026-11-24)
+
+```
+PLATFORM (this toolchain — the product)
+  categorical IR + verified-rewrite machinery (laws, e-graph,
+  minted records, gauntlet admission — proof-carrying rewrites)
+  toolchain: engine/exec/tool/ext · lib/kit · tensor runtime · host
+
+TENANTS (domains built ON the platform — applications, not families)
+  mlopt stack: eqsat (substrate) · gamekit (RL players) ·
+  mlopt-{discovery,carriers,torch,pipeline,product} · kernelopt ·
+  discoverykit · research-mlopt · bench
+
+EDGES (foreign runtimes ↔ platform)
+  tool-codegen-* emitters + generated typed surfaces
+  (python→hnl SDK gen, hnl→python compile — both directions)
+  + thin runtime shims (e.g. kit-mlopt's `python -m mlopt stage`
+  JSON protocol — hnl orchestrates, python measures)
+```
+
+Conventions:
+
+- **Prefix = ecosystem role, never language/content** — `.hnl` is the only language target; language-named cohorts (`kit-python`) are the bug P-010 audits.
+- **Domain machinery stays in domain repos** — only ports/contracts promote to toolchain (catalog: project T-119).
+- **Edges are generated, not hand-written** — foreign surfaces become typed hnl decls via `tool-codegen-*`; thin shims only where the foreign side is runtime-coupled (torch autograd/CUDA). `interop-*` as a family was scaffolding.
+- **Native components pair with `.hnl` specs** — `lib-tensor` (spec) ↔ native impl is the pattern: spec gives rewrites structure, impl gives speed.
+- **Compilers**: `tool-compile-{handl,js,llvm,dot,sexp,term,tensor}` = canonical/debug targets; `tool-compile-{cuda,triton,python}` = performance/interop exits. LLVM is the escape hatch; verified-rewrite integration only exists in own backends.
+
 ~200 repos under `github.com/handl-lang`, checked out as siblings in `~/GitHub/handl-lang/` (202 local checkouts). Deps are git deps (`branch = "main"`); workspace-root `[patch]` tables resolve them from sibling checkouts (ADR-0128). The public subset is the docs hub's `PUBLIC_REPOS` allowlist (`docs/scripts/public_repos.py`).
 
 ## Core layers (bare)
@@ -22,17 +50,17 @@ arrow-calculus substrate and the e-graph search engine). Everything else split:
 
 plus the emitters below.
 
-## `tool-compile-*` (8)
+## `tool-compile-*` (10)
 
-`tool-compile-{cuda,dot,handl,js,llvm,sexp,term,triton}`
+`tool-compile-{cuda,dot,handl,js,llvm,python,sexp,tensor,term,triton}`
 
-## `tool-codegen-*` (5)
+## `tool-codegen-*` (9)
 
-`tool-codegen-{c,python,webidl,file,cli}` — backends/emitters; generated FFI bindings vendor under `handl-packages/generated/` in the consuming repo (multi-consumer bindings get own repos: `lib-libc`, `lib-curl`, `lib-libz`). `tool-codegen-cli` generates SDKs that wrap command-line tools (backend `cli`: `*.clispec.yaml` spec or live `--help` probe; emitter `hnl-cli` → adapters on `lib-cli`'s `cli-c` process-spawn runtime); generated CLI SDKs are committed as spec+gate repos with `generated/` gitignored (`lib-gh`, `lib-cli-gen` for multi-tool SDKs).
+`tool-codegen-{aten,c,cli,ffi,file,onnx,openapi,python,webidl}` — backends/emitters; generated FFI bindings vendor under `handl-packages/generated/` in the consuming repo (multi-consumer bindings get own repos: `lib-libc`, `lib-curl`, `lib-libz`). `tool-codegen-cli` generates SDKs that wrap command-line tools (backend `cli`: `*.clispec.yaml` spec or live `--help` probe; emitter `hnl-cli` → adapters on `lib-cli`'s `cli-c` process-spawn runtime); generated CLI SDKs are committed as spec+gate repos with `generated/` gitignored (`lib-gh`, `lib-cli-gen` for multi-tool SDKs).
 
-## `host-*` (3)
+## `host-*` (2+)
 
-`host-{cli,lsp,tensor}`
+`host-{cli,lsp}` (+ `host-tensor` native component pending rename per P-010/P-011)
 
 ## `ext-*` (11)
 
@@ -48,13 +76,13 @@ plus the emitters below.
 - **FFI surfaces**: `lib-types` (`types/c/*` aliases), `lib-libc`, `lib-curl`, `lib-libz` (codegen bindings)
 - `pkg.hnl` declares `{ deps, modules }`; dep keys map to `handl-lang/lib-<dep>`.
 
-## `kit-*` (18)
+## `kit-*` (10) + mlopt cohort
 
-`kit-{carriers,core,cuda,data-prelude,discovery,eqsat,ffi,host-tensor,kernel-ir,lang,onnx,pkg,prelude,prelude-lang,server,stdlib,test,torch}` — kit declarations and kit infrastructure. `kit-prelude-lang` + `kit-data-prelude` carry the canonical language definition (language-as-data, the successor to the retired `kit-data-canonical`); `kit-{carriers,cuda,discovery,eqsat,host-tensor,onnx,torch}` are the mlopt domain packages split out of `research-mlopt` (plan 0032); the rest (`kit-{core,ffi,kernel-ir,lang,pkg,prelude,server,stdlib,test}`) are kit manifests/manifests-as-data over `lib-*` packages.
+`kit-{cli-app,cuda,host-tensor,onnx,pkg,py-smoke,test,web-browser-interop,web-server,web-worker-interop}` — kit declarations and kit infrastructure. The mlopt domain packages were renamed `kit-*`→`mlopt-*` (P-010 cohort migration, in flight): `mlopt-{carriers,discovery,pipeline,product,torch}` plus tenant repos `eqsat`, `gamekit`, `kernelopt`, `discoverykit`, `research-mlopt`, `bench`. `kit-{cuda,host-tensor,onnx}` await the same dissolution (blocked on parity work).
 
 ## Retired
 
-`meta` (folded into `kernel/crates/defining-handl`), `kit-data-canonical` (crate now lives in `kit-data-prelude`), `kit-canonical` (superseded by the `kit-*` family), `stdlib` (archived — folded into `host/crates`), `bench`, `playground`, `project` (docs moved to per-repo `project` branches, ADR-0129).
+`meta` (folded into `kernel/crates/defining-handl`), `kit-data-canonical` (crate now lives in `kit-data-prelude`), `kit-canonical` (superseded by the `kit-*` family), `stdlib` (archived — folded into `host/crates`), `playground`, `ext-sdkgen` (dead after PL-004), `lib-grade` (retired — `Grade` promoted to the `type` surface, T-113). `bench` and `project` are live again (tenant repo / ledger repo respectively).
 
 ## `tool-*`
 
