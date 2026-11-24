@@ -72,7 +72,7 @@ bun run docs:build       # gen-api + gen-ref + vitepress build
 | what | where |
 |---|---|
 | ADR indexes (published, per-product) | [`adrs/index.md`](adrs/index.md), [`adrs/handl.md`](adrs/handl.md), [`adrs/mlopt.md`](adrs/mlopt.md) |
-| ADR registry (canonical) | `host/project/adrs/INDEX.md` |
+| ADR registry (canonical) | `host/project/registry/INDEX.md` |
 | Project principles | `project/principles.md` (this repo's `project` branch) |
 | A repo's own docs | that repo's `project` branch, mounted at `<repo>/project/` |
 
