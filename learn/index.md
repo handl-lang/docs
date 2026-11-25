@@ -265,7 +265,9 @@ Row union, unit, and subsumption are the `Effects` algebra's
 `compose`/`unit`/`order`, so `>>>` *computes* the mode exactly like
 `Cost(2) >>> Cost(5)` computes a grade. Handlers are ordinary records
 of arrows and compose like any value; a deep handler is an ordinary
-function wrapping `handle`.
+function wrapping `handle`. When an op name is declared in scope,
+`puts("hi")` is sugar for `perform(puts, "hi")`: ops carry arrow types
+and applications elaborate to `perform`.
 
 ### Instances and evidence
 
@@ -286,7 +288,10 @@ nat_eq : Bool := eqv(zero)(zero)
 composition), `Constraint` (evidence dictionaries). An `instance`
 fills a registry slot; `ev : Eq(a)` binders are evidence-implicit,
 resolved by unification-driven dictionary search with
-declaration-time no-overlap coherence.
+declaration-time no-overlap coherence. Evidence is an ordinary value:
+explicit dictionaries can always be passed directly, and `instance`
+search exists for the obligations the checker synthesizes itself
+(`J`, `match` refinement) where no call site exists to pass one.
 
 ## Part III: Synthesis
 
