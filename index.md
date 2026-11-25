@@ -58,15 +58,15 @@ onMounted(() => {
 
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)]
 
-  // The kernel vocabulary: the six closed combinators and the
-  // object/arrow forms. This is the published calculus.
+  // The kernel vocabulary: the closed combinators are IR-level; the
+  // graded arrows use mode-call payloads (`~[Cost(3)]~>`).
   const arrows = ['f', 'g', 'h', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w']
   const types = [
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
     'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
     'Obj', 'State', 'Input', 'Output', 'World'
   ]
-  const grades = ['Op', 'Query', 'Command', 'Event', 'IO', 'Net', 'Time', 'Rand']
+  const grades = ['Cost(3)', 'Cost(7)', 'Session(net)', 'Perm(ro)', 'IO(puts)', 'Rand(42)']
   const p = (s) => s
 
   const ty = () => pick(types)

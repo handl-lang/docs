@@ -61,11 +61,18 @@ hand-written product page lives in its repo's `docs/site/` and is
 vendored.
 
 ```bash
-bun run docs:gen-ref     # regenerate the aggregated reference
-bun run docs:gen-api     # collect per-repo rustdoc
+bun run docs:gen-ref     # regenerate the aggregated reference (parked, see below)
+bun run docs:gen-api     # collect per-repo rustdoc (parked, see below)
 bun run docs:dev         # local preview
-bun run docs:build       # gen-api + gen-ref + vitepress build
+bun run docs:build       # vendor + vitepress build
 ```
+
+Note: `handl/reference/` and `api/` output is currently **generated but
+not published**: both trees are gitignored and `srcExclude`d in
+`.vitepress/config.mjs`, and `sidebar-reference.mjs` is not wired into
+the nav. Treat the reference/api pipeline as parked until it is
+connected (or drop `docs:gen-ref`/`docs:gen-api` from
+`scripts/deploy-pages.sh`).
 
 ## Where things live
 

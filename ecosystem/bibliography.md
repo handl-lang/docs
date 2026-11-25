@@ -106,6 +106,12 @@ Handl's mode arrows generalize grades, coeffects, and effects onto one
 axis in the spirit of modal type theory: a mode annotates how a term may
 be used, and algebras govern how modes combine.
 
+- **Daniel Gratzer, Georgios A. Kavvos, Andreas Nuyts & Lars Birkedal**:
+  [*Multimodal Dependent Type Theory*](https://doi.org/10.46298/lmcs-17(3:11)2021)
+  (2021, *Logical Methods in Computer Science* 17(3); also LICS 2020).
+  MTT proper: a dependent type theory parametrized by a mode theory of
+  modes, modalities, and transformations between them; the direct
+  ancestor of Handl's mode-algebra approach.
 - **Aleksandar Nanevski, Frank Pfenning & Brigitte Pientka**:
   [*Contextual Modal Type Theory*](https://doi.org/10.1145/1352582.1352591)
   (2008, *ACM Transactions on Computational Logic* 9(3)). Modal type

@@ -19,7 +19,7 @@ higher-categorical structure. Six combinators are enough:
 - `arr`: lift a pure value into an arrow
 - `>>>`: sequential composition
 - `first`: apply an arrow to the first component of a pair
-- `choice`: alternative composition
+- `choice`: alternative composition (the `|||` surface form)
 - `loop`: feedback
 - `app`: application
 
@@ -57,7 +57,9 @@ Effects are first-class but disciplined. The kernel implements the Graded
 Modal Sanada Arrow Calculus: operations carry grades, handlers interpret
 them, and the grade system tracks what a computation is allowed to do.
 Effects are algebraic (Sanada 2024) and handlers are where meaning is
-supplied.
+supplied. Grades generalize further into **modes**: an MTT-style axis
+where grades, coeffects, and effect rows are all mode-algebra instances
+over ordinary data.
 
 ## Why it matters
 
@@ -73,6 +75,10 @@ representations. Libraries provide runtime-agnostic abstractions, while
 Kits assemble them into usable environments. Tools bridge Handl with
 external systems, and Hosts expose the ecosystem to users and development
 environments.
+
+For the full type system that sits on this substrate (dependent types,
+cubical equality, effect signatures, and modes), see the
+[type system overview](/learn/).
 
 The [story](/story/) covers where this comes from; the
 [bibliography](/ecosystem/bibliography) lists the papers; the

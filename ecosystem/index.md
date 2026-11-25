@@ -41,9 +41,9 @@ analyze, transform, compile, or execute the IR.
     <strong>Compilation</strong>
     <p>LLVM (native), Triton, CUDA emitters.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/tool-compile-llvm">tool-compile-llvm</a> (private)
-      <a href="https://github.com/handl-lang/tool-compile-triton">tool-compile-triton</a> (private)
-      <a href="https://github.com/handl-lang/tool-compile-cuda">tool-compile-cuda</a> (private)
+      <a href="https://github.com/handl-lang/tool-compile-llvm">tool-compile-llvm</a>
+      <a href="https://github.com/handl-lang/tool-compile-triton">tool-compile-triton</a>
+      <a href="https://github.com/handl-lang/tool-compile-cuda">tool-compile-cuda</a>
     </div>
   </div>
   <div class="eco-card">
@@ -109,28 +109,28 @@ Handl APIs from existing interfaces.
     <strong>tool-codegen-python</strong>
     <p>Python interoperability.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/tool-codegen-python">GitHub</a> (private)
+      <a href="https://github.com/handl-lang/tool-codegen-python">GitHub</a>
     </div>
   </div>
   <div class="eco-card">
     <strong>tool-codegen-c</strong>
     <p>C interoperability, including libc, libcurl, and zlib.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/tool-codegen-c">GitHub</a> (private)
+      <a href="https://github.com/handl-lang/tool-codegen-c">GitHub</a>
     </div>
   </div>
   <div class="eco-card">
     <strong>tool-codegen-webidl</strong>
     <p>Web APIs, including Fetch and Console.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/tool-codegen-webidl">GitHub</a> (private)
+      <a href="https://github.com/handl-lang/tool-codegen-webidl">GitHub</a>
     </div>
   </div>
   <div class="eco-card">
     <strong>tool-codegen-cli</strong>
     <p>Type-safe APIs for spawning and interacting with CLI processes.</p>
     <div class="eco-links">
-      <a href="https://github.com/handl-lang/tool-codegen-cli">GitHub</a> (private)
+      <a href="https://github.com/handl-lang/tool-codegen-cli">GitHub</a>
     </div>
   </div>
 </div>
@@ -210,5 +210,23 @@ Research projects built on Handl.
 
 ## 10. Products
 
-Applications built on Handl. None yet; this section is a placeholder for
-what the ecosystem produces.
+Applications and substrate projects in the ecosystem.
+
+<div class="eco-grid">
+  <div class="eco-card">
+    <strong>gamekit</strong>
+    <p>The game layer for the mlopt game: boards, players, scoring, and
+    the benchmark harness. Substrate-free by contract.</p>
+    <div class="eco-links">
+      <a href="https://github.com/handl-lang/gamekit">GitHub</a>
+    </div>
+  </div>
+  <div class="eco-card">
+    <strong>eqsat</strong>
+    <p>The equality-saturation substrate for the mlopt game: term IR,
+    e-graphs, certificates, and the optimizer pipeline.</p>
+    <div class="eco-links">
+      <a href="https://github.com/handl-lang/eqsat">GitHub</a>
+    </div>
+  </div>
+</div>
