@@ -24,6 +24,18 @@ const ecosystemSidebar = [
     items: [
       { text: "Overview", link: "/ecosystem/" },
       { text: "Kernel", link: "/kernel/" },
+      {
+        text: "Layers",
+        items: [
+          { text: "Engines", link: "/ecosystem/engines" },
+          { text: "Libraries", link: "/ecosystem/libraries" },
+          { text: "Kits", link: "/ecosystem/kits" },
+          { text: "Tooling & SDK generation", link: "/ecosystem/tooling" },
+          { text: "Hosts", link: "/ecosystem/hosts" },
+          { text: "Extensions", link: "/ecosystem/extensions" },
+          { text: "Bibliography", link: "/ecosystem/bibliography" },
+        ],
+      },
     ],
   },
 ];
@@ -111,6 +123,12 @@ export default defineConfig({
         items: [
           { text: "Overview", link: "/ecosystem/" },
           { text: "Kernel", link: "/kernel/" },
+          { text: "Engines", link: "/ecosystem/engines" },
+          { text: "Libraries", link: "/ecosystem/libraries" },
+          { text: "Kits", link: "/ecosystem/kits" },
+          { text: "Tooling", link: "/ecosystem/tooling" },
+          { text: "Hosts", link: "/ecosystem/hosts" },
+          { text: "Extensions", link: "/ecosystem/extensions" },
         ],
       },
       {

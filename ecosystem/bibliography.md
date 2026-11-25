@@ -165,3 +165,20 @@ transport computes, and univalence is a value rather than an axiom.
   neural networks and backpropagation via linear reverse effect handlers,
   combining strong promonads with Cartesian reverse differential
   categories.
+
+## Tooling and implementation
+
+The engineering techniques behind the engine and library families.
+
+- **Nelson Niu, Chandrakana Nandi, Andrew Rice, Antoine Yang & Adam
+  Chlipala**: [*egg: Fast and Extensible Equality
+  Saturation*](https://doi.org/10.1145/3434290) (2021, POPL). E-graphs
+  and equality saturation — the technique `engine-eqsat` implements
+  over Handl `Term`s.
+- **Andreas Abel, Thierry Coquand & Peter Dybjer**: [*Normalization by
+  Evaluation for Martin-Löf Type Theory*](https://doi.org/10.1016/j.entcs.2007.01.012)
+  (2007, TYPES; ENTCS 174). NbE — the evaluation strategy
+  `tool-typecheck-nbe` uses to decide conversion.
+- **Vaughan R. Pratt**: [*Top Down Operator Precedence*
+  ](https://doi.org/10.1145/512927.512931) (1973, SOAP). Precedence
+  climbing — the parsing technique behind `tool-parse-pratt`.

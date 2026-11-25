@@ -79,12 +79,17 @@ Engines are interchangeable consumers and processors of the shared
 representation, not intrinsic parts of the Kernel. In the repo taxonomy
 they are the `tool-*` instruments (lex/parse/transform/typecheck/fmt/lint),
 the `exec-*` eval backends, and the `engine`/`engine-eqsat` search engines —
-the `tool-compile-*` emitters sit alongside as compiler backends.
+the `tool-compile-*` emitters sit alongside as compiler backends. Each
+operation is also packaged as a dynamic `ext-*` extension — see
+[Engines](/ecosystem/engines) and [Extensions](/ecosystem/extensions)
+for the per-repo maps.
 
 ## 3. Libraries (`lib-*`)
 
 Reusable Handl libraries (`.hnl`) providing foundational and domain-specific
 functionality, such as mathematics, strings, logic, and other utilities.
+See [Libraries](/ecosystem/libraries) for the port/impl convention and the
+full categorized map.
 
 Libraries provide runtime-agnostic abstractions: the same APIs can be used
 across different execution environments, with runtime-specific implementations
@@ -97,12 +102,15 @@ Curated collections of libraries and components targeting particular
 environments or use cases, such as testing, server-side development,
 and web services. Kits provide ready-to-use environments by assembling
 compatible libraries, engines, and supporting components.
+See [Kits](/ecosystem/kits) for the manifest format and the public kits.
 
 ## 5. Tools
 
 Developer utilities and generators that facilitate development and
 interoperability with external systems. SDK generators produce type-safe
-Handl APIs from existing interfaces.
+Handl APIs from existing interfaces. See
+[Tooling and SDK generation](/ecosystem/tooling) for the codegen
+pipeline.
 
 <div class="eco-grid">
   <div class="eco-card">
@@ -138,6 +146,7 @@ Handl APIs from existing interfaces.
 ## 6. Hosts
 
 The distribution layer exposing Handl to users: the CLI and LSP.
+See [Hosts](/ecosystem/hosts).
 
 <div class="eco-grid">
   <div class="eco-card">
