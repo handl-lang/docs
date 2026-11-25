@@ -192,6 +192,12 @@ representation — but the ambient form is canonical: it says where
 the effect lives (the judgement), not inside a codomain type that
 reads like a generic application.
 
+The mode is a record because modes are a *product* of independent
+dimensions: `{io: {puts}, cost: 3, session: net}` ascribes effects,
+cost, and session simultaneously, and each field's value selects its
+own algebra (`Effects`, `Cost`, `Session`) for `mode_compose` — the
+same call-head selection `Cost(3)` uses for a single dimension.
+
 ## Instances and evidence
 
 ```hnl
