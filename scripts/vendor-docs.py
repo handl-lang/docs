@@ -275,12 +275,14 @@ def main() -> int:
     VENDORED.mkdir()
 
     vendored: list[str] = []
+    seen: set[str] = set()
     for d in sorted(ORG.iterdir()):
         if not d.is_dir() or d == DOCS_ROOT:
             continue
         repo = remote_name(d)
-        if repo not in PUBLIC_REPOS or repo not in VENDORED_REPOS:
+        if repo not in PUBLIC_REPOS or repo not in VENDORED_REPOS or repo in seen:
             continue
+        seen.add(repo)
         meta = {}
         yml = d / "docs" / "site.yaml"
         if yml.exists():
