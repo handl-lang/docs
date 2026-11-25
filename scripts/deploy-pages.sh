@@ -29,6 +29,11 @@ if [ "${GITHUB_ACTIONS:-}" = "true" ]; then
 fi
 
 # --- build ----------------------------------------------------------------
+# node_modules is gitignored and may be absent/stale in fresh clones or
+# after cleanup — install quietly when vitepress isn't resolvable.
+if [ ! -x node_modules/.bin/vitepress ]; then
+  bun install --frozen-lockfile
+fi
 bun run docs:vendor
 bun run docs:gen-ref
 # Project Pages live at handl-lang.github.io/docs/ → base must be /docs/.
