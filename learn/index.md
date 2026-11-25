@@ -186,12 +186,6 @@ union, unit, and subsumption are the `Effects` algebra's
 `compose`/`unit`/`order`, so `>>>` *computes* the mode exactly like
 `Cost(2) >>> Cost(5)` computes a grade.
 
-`IO<sig>` remains as a reified spelling of the same mode —
-`Str ~> IO<puts>` and `(Str ~> Str) @ {io: {puts}}` elaborate to one
-representation — but the ambient form is canonical: it says where
-the effect lives (the judgement), not inside a codomain type that
-reads like a generic application.
-
 The mode is a record because modes are a *product* of independent
 dimensions: `{io: {puts}, cost: 3, session: net}` ascribes effects,
 cost, and session simultaneously, and each field's value selects its
