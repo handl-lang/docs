@@ -166,31 +166,28 @@ definitionally by normalization.
 ## Effects: ambient modes
 
 ```hnl
-printLn : (Str ~> Str) @ {io: {puts: Str}}
-readFile : (Str ~> Str) @ {io: {fs: Path}}
-greet   : Str @ {io: {puts: Str}} := perform puts "hi"
+printLn : (Str ~> Str) @ [Effects({puts: Str ~> Unit})]
+readFile : (Str ~> Str) @ [Effects({fs: Path ~> Str})]
+greet   : Str @ [Effects({puts: Str ~> Unit})] := perform puts "hi"
 
-f : (Str ~> Str) @ {io: {puts}}
-g : (Str ~> Str) @ {io: {fs}}
-h := g >>> f     -- : (Str ~> Str) @ {io: {puts, fs}}
+f : (Str ~> Str) @ [Effects({puts: Str ~> Unit})]
+g : (Str ~> Str) @ [Effects({fs: Path ~> Str})]
+h := g >>> f
+-- h : (Str ~> Str) @ [Effects({puts: Str ~> Unit, fs: Path ~> Str})]
 
 puts_handler : Str ~> Unit := s ~> print(s)
-handled : (Str ~> Str) @ {} :=
+handled : (Str ~> Str) @ [] :=
   handle printLn with {puts: puts_handler}
 ```
 
 `perform` extends the ambient mode `μ`; `handle` is a modality
 `μ → μ'` whose residual row is `(S ∖ S_h) ∪ {op ↦ ret}` — covered
-ops take their handler's return type, uncovered ops survive. Row
-union, unit, and subsumption are the `Effects` algebra's
-`compose`/`unit`/`order`, so `>>>` *computes* the mode exactly like
-`Cost(2) >>> Cost(5)` computes a grade.
-
-The mode is a record because modes are a *product* of independent
-dimensions: `{io: {puts}, cost: 3, session: net}` ascribes effects,
-cost, and session simultaneously, and each field's value selects its
-own algebra (`Effects`, `Cost`, `Session`) for `mode_compose` — the
-same call-head selection `Cost(3)` uses for a single dimension.
+ops take their handler's return type, uncovered ops survive. Every
+row entry is an operation type `name : A ~> B`, one shape whether
+the op was declared or performed. Row union, unit, and subsumption
+are the `Effects` algebra's `compose`/`unit`/`order`, so `>>>`
+*computes* the mode exactly like `Cost(2) >>> Cost(5)` computes a
+grade.
 
 ## Instances and evidence
 
@@ -215,9 +212,10 @@ declaration-time no-overlap coherence.
 
 ## Modes: MTT arrows
 
-Modes unify grades, coeffects, and effects onto one axis. A mode is an arbitrary Handl data value; an algebra is an ordinary
-type, a record of `compose`/`unit`/`order` functions, declared once and
-selected by the mode's call head:
+Modes unify grades, coeffects, and effects onto one axis. Every mode
+ascription is `@ [Algebra(payload), …]` — a **set** of applications of
+declared algebras. An algebra is an ordinary type, a record of
+`compose`/`unit`/`order` functions:
 
 ```hnl
 Cost := new Algebra(Nat) {
@@ -226,25 +224,29 @@ Cost := new Algebra(Nat) {
   order:   (a, b) ~> a <= b
 }
 
-f : A ~[Cost(2)]~> B
-g : B ~[Cost(5)]~> C
-h := g >>> f        -- : A ~[Cost(7)]~> C
+double : (Nat ~> Nat) @ [Cost(2)]
+f : (Nat ~> Nat) @ [Cost(3)]
+g : (Nat ~> Nat) @ [Cost(5)]
+h := g >>> f        -- : (Nat ~> Nat) @ [Cost(8)]
 ```
 
-`Cost(2)` composed with `Cost(5)` dispatches to the `Cost` instance's
-`compose`, so composition *computes* the mode. Subsumption is the
-algebra's `order`: an arrow usable at `Cost(3)` is accepted where
-`Cost(5)` is expected. Modes are data, so algebras are computable:
-transformers, products, and mode expressions like `Cost(3) +
-Session(p)` are ordinary functions returning algebra records.
+Each element's head selects its algebra: `Cost(3)` composed with
+`Cost(5)` dispatches to the `Cost` instance's `compose`, so
+composition *computes* the mode. The set holds one element per
+algebra — order is irrelevant and duplicate heads are rejected.
+Subsumption is one judgement-level `order` check per algebra, shared
+by grades, coeffects, and effects alike. Modes are data, so algebras
+are computable: transformers, products, and mode expressions are
+ordinary functions returning algebra records.
 
 ```hnl
-mapM : (m : Mode) ~> (f : A ~[m]~> B) ~> List(A) ~[m]~> List(B)
-costed := mapM(Cost(1), double)     -- mode polymorphism by substitution
+mapM : (m : Mode) ~> (f : (A ~> B) @ m) ~> (List(A) ~> List(B)) @ m
+costed := mapM([Cost(1)], double)   -- mode polymorphism by substitution
 ```
 
 `~>[n]` remains the dimension arrow: globular structure, a different
-axis from modes.
+axis from modes. A cell type takes `@` like any type —
+`e : (f ~[2]~> g) @ [Cost(3)]` is a cost-3-graded 2-cell.
 
 ## The meta layer: everything is data
 
