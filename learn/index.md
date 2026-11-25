@@ -163,23 +163,34 @@ interchange := (al,al2,be,be2) ~>
 unitality, and interchange are *typechecked equations*, verified
 definitionally by normalization.
 
-## Effects: `IO<sig>` codomain formers
+## Effects: ambient modes
 
 ```hnl
-printLn : Str ~> IO<puts>
-both    : Str ~> IO<puts, fs>
-handled : Str ~> IO<puts: Unit, fs> :=
-  handle both with {puts: puts_handler}
-widen_ok : Str ~> IO<puts, fs> := s ~> printLn(s)
-perf    : IO<{ puts: Str }> := perform(puts, "hi")
+printLn : (Str ~> Str) @ {io: {puts: Str}}
+readFile : (Str ~> Str) @ {io: {fs: Path}}
+greet   : Str @ {io: {puts: Str}} := perform puts "hi"
+
+f : (Str ~> Str) @ {io: {puts}}
+g : (Str ~> Str) @ {io: {fs}}
+h := g >>> f     -- : (Str ~> Str) @ {io: {puts, fs}}
+
+puts_handler : Str ~> Unit := s ~> print(s)
+handled : (Str ~> Str) @ {} :=
+  handle printLn with {puts: puts_handler}
 ```
 
-Signature entries compute: a covered op takes its handler's return type;
-uncovered ops stay residual; effect widening is checked. Under the
-hood the signature is a *mode*: effects are one algebra on the same
-axis as grades and coeffects, and `IO<sig>` is the reified spelling of
-an ambient mode `{io: sig}` that `perform` extends and `handle`
-transforms.
+`perform` extends the ambient mode `μ`; `handle` is a modality
+`μ → μ'` whose residual row is `(S ∖ S_h) ∪ {op ↦ ret}` — covered
+ops take their handler's return type, uncovered ops survive. Row
+union, unit, and subsumption are the `Effects` algebra's
+`compose`/`unit`/`order`, so `>>>` *computes* the mode exactly like
+`Cost(2) >>> Cost(5)` computes a grade.
+
+`IO<sig>` remains as a reified spelling of the same mode —
+`Str ~> IO<puts>` and `(Str ~> Str) @ {io: {puts}}` elaborate to one
+representation — but the ambient form is canonical: it says where
+the effect lives (the judgement), not inside a codomain type that
+reads like a generic application.
 
 ## Instances and evidence
 
