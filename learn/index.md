@@ -9,7 +9,7 @@ witnesses, judgments are data. There is no separate type-theoretic
 subsystem. Dependent structure, equality, effects, and modes are all
 cells in the same arrow calculus.
 
-## Basics: one binder, one arrow
+## Core: one binder, one arrow
 
 ```hnl
 x := 42
@@ -19,9 +19,10 @@ rec := { name: "luis", age: 30 }
 ```
 
 `:=` is the only binder. `~>` is the only arrow: terms and types share
-it, and data declarations are `new` expressions.
+it, and data declarations are `new` expressions. Module forms such as
+`export` control visibility only; they play no role in typing.
 
-## Data families: records-as-inductives
+## Inductive families
 
 ```hnl
 Nat := new Inductive {
@@ -41,7 +42,7 @@ v1 : Vec<2, Bool> := vcons(true, vcons(false, vnil))
 `family_app` whose indices **compute**: `Vec<1+1>` is `Vec<2-0>` is
 `Vec<2*1>`, and all check against the same value.
 
-### Inductives as data
+## Inductives as data
 
 An inductive specification is itself a value: an `inductive.spec`
 record of constructor signatures as owned type expressions. Specs can be
@@ -49,7 +50,7 @@ computed, composed, inspected, and passed to generic eliminators; the
 same spec drives `match` refinement and `F.rec`-style folds. Positivity
 is a checker judgment over the spec value, not a parse-time native.
 
-## Dependent types: arrows and pairs
+## Dependent types: Π and Σ
 
 ```hnl
 -- Π: a typed-binder arrow in type position
@@ -61,7 +62,7 @@ one_vec : (m : Nat, v : Vec(m, Bool)) := [succ(zero), vcons(true, vnil)]
 prod : (x : Bool, y : String) := [true, "hi"]
 ```
 
-## Dependent elimination: match refines indices per branch
+## Dependent elimination: match
 
 ```hnl
 export vtail<n, a> : Vec<n + 1, a> ~> Vec<n, a> :=
@@ -79,6 +80,8 @@ and records a proof-relevant `eq_n` path witness. Impossible arms are
 decided: `vnil: absurd` checks iff the branch's index equations are
 unsatisfiable.
 
+## Eliminators and motives
+
 Family eliminators are visible to the checker:
 
 ```hnl
@@ -95,7 +98,7 @@ id_vec : (n : Nat) ~> (v : Vec(n + 0, Bool)) ~> Vec(n + 0, Bool) :=
   }
 ```
 
-## Equality: paths are data, transport IS substitution
+## Equality: paths are data
 
 ```hnl
 p : Path(1, 1) := refl
@@ -109,9 +112,14 @@ jv : Vec<2, Bool> := J(p22, (i, w) ~> Vec(i, Bool), v2)  -- J eliminator
 
 Unification itself consumes in-scope paths: `P[frm]` against `P[to]`
 succeeds when a `Path` bound in the environment justifies the rewrite.
-Equality is weak and proof-relevant, never erased.
+Equality is weak and proof-relevant, never erased: transport along a
+path *is* substitution.
 
-## Cubical: the interval and Kan structure
+## Cubical structure
+
+Paths are not an axiomatized identity type; they are terms over an
+interval `I`, and the Kan operations that make them compute are
+ordinary primitives:
 
 ```hnl
 cp : Path(Bool, true, true) := i ~> true
@@ -121,7 +129,11 @@ y : unglue(Glue(Bool, fF, Pi(I, i ~> Bool))) := true
 pfB : isFibrant(Bool) := fibrant Bool
 ```
 
-## Computing univalence: `ua(e)` is a value, not an axiom
+`transp` transports along a path, `hcomp` is homogeneous composition,
+`Glue`/`unglue` glue types along equivalences, and `fibrant` is the
+fibrancy predicate the Kan structure is stated over.
+
+## Univalence computes
 
 ```hnl
 eBN : Equiv(Bool, Nat) := { to: x ~> zero, fro: y ~> true }
@@ -130,10 +142,10 @@ tb : Bool := symm(ua(eBN)) # zero
 ```
 
 `ua(e)` mints a path over the interval carrying the recorded equivalence;
-transport along it applies the equivalence's functions. Univalence
-computes.
+transport along it applies the equivalence's functions. Univalence is a
+value, not an axiom.
 
-## Higher-category structure: laws are typechecked terms
+## Higher categories: dimension arrows
 
 ```hnl
 export comp_assoc := (a,b,c) ~> ((a >>>[2] b) >>>[2] c)
@@ -164,7 +176,7 @@ perf    : IO<{ puts: Str }> := perform(puts, "hi")
 Signature entries compute: a covered op takes its handler's return type;
 uncovered ops stay residual; effect widening is checked.
 
-## Instances: typeclass-style evidence
+## Instances and evidence
 
 ```hnl
 Eq<a : Type> := { mkEq : (f : a ~> a ~> Bool) ~> Eq }
@@ -172,6 +184,9 @@ instance Eq(Nat) := { eq: (x, y) ~> x == y }
 export eqv<a, ev : Eq(a)> : a ~> a ~> Bool := x ~> y ~> match ev { mkEq(f): f(x, y) }
 nat_eq : Bool := eqv(zero)(zero)
 ```
+
+An `instance` registers evidence for a constraint head; `ev : Eq(a)`
+binders resolve it by search, exactly like a typeclass.
 
 ## Modes: MTT arrows
 
