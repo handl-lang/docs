@@ -22,9 +22,10 @@ Every judgement has the form `t : A @ μ`:
   (`[]` is pure)
 
 The surface vocabulary is minimal: `:=` is the only binder, `~>` is
-the only arrow (terms and types share it), and `new` is the only
-declaration form. Module forms such as `export` control visibility
-only; they play no role in typing.
+the only arrow (terms and types share it), and `new` is the only form
+for declaring types, algebras, and constraints (`instance` fills
+registry slots rather than declaring new heads). Module forms such as
+`export` control visibility only; they play no role in typing.
 
 ```hnl
 x := 42
@@ -124,6 +125,9 @@ curried : (x : Nat, y : Bool) ~> Nat := x ~> y ~> x
 one_vec : (m : Nat, v : Vec(m, Bool)) := [succ(zero), vcons(true, vnil)]
 prod : (x : Bool, y : String) := [true, "hi"]
 ```
+
+`Type(i)` is a cumulative universe: `Type(i) : Type(i+1)`, and
+`Type(i) <: Type(j)` for `i ≤ j`.
 
 ### Elimination: match, motives, recursors
 
