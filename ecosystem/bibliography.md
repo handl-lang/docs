@@ -94,6 +94,56 @@ a coeffect/grade.
   Dependent Type Theory*](https://doi.org/10.1007/978-3-030-72019-3_17)
   (2021, ESOP). Graded analysis of dataflow in a dependent type theory;
   grades applied to both terms and types.
+- **Robert Atkey**: [*Syntax and Semantics of Quantitative Type
+  Theory*](https://doi.org/10.1145/3209108.3209189) (2018, LICS; pp.
+  56–65). Usage quantities tracked per variable in the judgement, with a
+  realizability semantics via quantitative categories with families;
+  the semantic foundation for graded/usage modes.
+
+## Modal type theory
+
+Handl's mode arrows generalize grades, coeffects, and effects onto one
+axis in the spirit of modal type theory: a mode annotates how a term may
+be used, and algebras govern how modes combine.
+
+- **Aleksandar Nanevski, Frank Pfenning & Brigitte Pientka**:
+  [*Contextual Modal Type Theory*](https://doi.org/10.1145/1352582.1352591)
+  (2008, *ACM Transactions on Computational Logic* 9(3)). Modal type
+  theory with explicitly specified contexts; the canonical treatment of
+  modes as context structure.
+- **Daan Leijen**: [*Koka: Programming with Row-Polymorphic Effect
+  Types*](https://doi.org/10.4204/EPTCS.153.8) (2014, MSFP; EPTCS 153,
+  pp. 100–126). Effects as row-polymorphic signatures on function types;
+  the model for Handl's `IO<sig>` codomain formers and residual-effect
+  reasoning.
+
+## Dependent type theory
+
+- **Per Martin-Löf**: *Intuitionistic Type Theory* (Bibliopolis, 1984).
+  The original dependent type theory: universes, identity types,
+  well-founded trees.
+- **Peter Dybjer**: [*Inductive Families*](https://doi.org/10.1007/BF01211308)
+  (1994, *Formal Aspects of Computing* 6(4), pp. 440–465). Indexed
+  inductive families in Martin-Löf type theory with a general
+  positivity criterion and elimination-rule derivation; the reference
+  for Handl's `Vec<n, a>`-style families and the inductives-as-data
+  representation.
+
+## Cubical type theory and univalence
+
+Handl's equality is cubical: paths are interval-indexed terms,
+transport computes, and univalence is a value rather than an axiom.
+
+- **Cyril Cohen, Thierry Coquand, Simon Huber & Anders Mörtberg**:
+  [*Cubical Type Theory: A Constructive Interpretation of the Univalence
+  Axiom*](https://doi.org/10.4230/LIPIcs.TYPES.2015.5) (TYPES 2015;
+  published in LIPIcs vol. 69, 2018). Dependent type theory interpreted
+  in cubical sets: `transp`, `hcomp`, `Glue`, and a *provable*
+  univalence axiom with judgmental computation.
+- **The Univalent Foundations Program**: [*Homotopy Type
+  Theory: Univalent Foundations of Mathematics*](https://homotopytypetheory.org/book/)
+  (2013). The book-length development of identity types as paths,
+  function extensionality, and the univalence axiom.
 
 ## Effects and handlers for arrows
 

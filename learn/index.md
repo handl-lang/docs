@@ -19,7 +19,7 @@ rec := { name: "luis", age: 30 }
 ```
 
 `:=` is the only binder. `~>` is the only arrow: terms and types share
-it, and every declaration form is a `new` expression.
+it, and data declarations are `new` expressions.
 
 ## Data families: records-as-inductives
 
@@ -99,12 +99,12 @@ id_vec : (n : Nat) ~> (v : Vec(n + 0, Bool)) ~> Vec(n + 0, Bool) :=
 
 ```hnl
 p : Path(1, 1) := refl
-moved : Nat := p # Zero
-transported : Nat := transport(p, Zero)
+moved : Nat := p # zero
+transported : Nat := transport(p, zero)
 
 tt : Path(Nat, zero, succ(succ(zero))) := trans(pt, qt)
 st := symm(tt)
-jv : Vec<2, Bool> := J(p22, (i, w) ~> Vec(i, Bool), v2)
+jv : Vec<2, Bool> := J(p22, (i, w) ~> Vec(i, Bool), v2)  -- J eliminator
 ```
 
 Unification itself consumes in-scope paths: `P[frm]` against `P[to]`
@@ -229,3 +229,9 @@ exactly which computations may cross it.
 **One line:** programs, proofs, types, effects, and modes are cells in
 one calculus, and equality, transport, univalence, and grading all
 *compute*.
+
+The academic groundwork behind each layer is collected in the
+[bibliography](/ecosystem/bibliography): arrows and categorical
+semantics, graded and quantitative type theory, modal type theory,
+dependent and inductive types, cubical type theory and univalence, and
+effects and handlers.
