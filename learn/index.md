@@ -175,7 +175,11 @@ perf    : IO<{ puts: Str }> := perform(puts, "hi")
 ```
 
 Signature entries compute: a covered op takes its handler's return type;
-uncovered ops stay residual; effect widening is checked.
+uncovered ops stay residual; effect widening is checked. Under the
+hood the signature is a *mode*: effects are one algebra on the same
+axis as grades and coeffects, and `IO<sig>` is the reified spelling of
+an ambient mode `{io: sig}` that `perform` extends and `handle`
+transforms.
 
 ## Instances and evidence
 
