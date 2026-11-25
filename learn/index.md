@@ -184,19 +184,27 @@ transforms.
 ## Instances and evidence
 
 ```hnl
-Eq<a : Type> := { mkEq : (f : a ~> a ~> Bool) ~> Eq }
-instance Eq(Nat) := { eq: (x, y) ~> x == y }
-eqv<a, ev : Eq(a)> : a ~> a ~> Bool := x ~> y ~> match ev { mkEq(f): f(x, y) }
+Eq := new Constraint(Type) {
+  evidence : a ~> a ~> Bool
+}
+
+instance Eq(Nat) := { evidence: (x, y) ~> x == y }
+
+eqv<a, ev : Eq(a)> : a ~> a ~> Bool :=
+  x ~> y ~> ev.evidence(x, y)
 nat_eq : Bool := eqv(zero)(zero)
 ```
 
-An `instance` registers evidence for a constraint head; `ev : Eq(a)`
-binders resolve it by search, exactly like a typeclass.
+`new` is the single declaration form for checker registries:
+`Inductive` (constructors and eliminators), `Algebra` (mode
+composition), `Constraint` (evidence dictionaries). An `instance`
+fills a registry slot; `ev : Eq(a)` binders are evidence-implicit,
+resolved by unification-driven dictionary search with
+declaration-time no-overlap coherence.
 
 ## Modes: MTT arrows
 
-Modes generalize grades, coeffects, and (eventually) effects onto one
-axis. A mode is an arbitrary Handl data value; an algebra is an ordinary
+Modes unify grades, coeffects, and effects onto one axis. A mode is an arbitrary Handl data value; an algebra is an ordinary
 type, a record of `compose`/`unit`/`order` functions, declared once and
 selected by the mode's call head:
 
