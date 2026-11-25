@@ -27,6 +27,11 @@ for declaring types, algebras, and constraints (`instance` fills
 registry slots rather than declaring new heads). Module forms such as
 `export` control visibility only; they play no role in typing.
 
+Binders come in two groups: `(x : A)` is explicit — the caller passes
+the argument — while `<x : A>` is implicit — indices and evidence the
+checker discharges by unification. `Vec<n : Nat, a : Type>` and
+`eqv<a, ev : Eq(a)>` both use the implicit group.
+
 ```hnl
 x := 42
 id : Nat ~> Nat := n ~> n
@@ -37,7 +42,7 @@ rec := { name: "luis", age: 30 }
 ### Everything is data
 
 Types, terms, proofs, algebras, and inductive specifications are all
-values in one evaluator. Judgments are serializable data; unification
+values in one evaluator. Judgements are serializable data; unification
 records its `via` paths; witnesses are stored in the evaluation state.
 There is no type-theoretic subsystem beside the language — the
 checker is a Handl program like any other.
@@ -76,7 +81,7 @@ mapM : (m : Mode) ~> (f : (A ~> B) @ m) ~> (List(A) ~> List(B)) @ m
 costed := mapM([Cost(1)], double)   -- mode polymorphism by substitution
 ```
 
-`~>[n]` is a separate axis — the dimension arrow for globular/cubical
+`~[n]~>` is a separate axis — the dimension arrow for globular/cubical
 structure, not a mode. A cell type takes `@` like any type:
 `e : (f ~[2]~> g) @ [Cost(3)]` is a cost-graded 2-cell.
 
@@ -111,7 +116,7 @@ An inductive specification is itself a value: an `inductive.spec`
 record of constructor signatures as owned type expressions. Specs can
 be computed, composed, inspected, and passed to generic eliminators;
 the same spec drives `match` refinement and `F.rec`-style folds.
-Positivity is a checker judgment over the spec value, not a
+Positivity is a checker judgement over the spec value, not a
 parse-time native.
 
 ### Dependent types: Π and Σ
@@ -145,7 +150,9 @@ is_nil : Vec<n, a> ~> Bool :=
 Under `vcons`, the checker refines `n ≡ ?k+1`, binds `xs : Vec<?k, a>`,
 and records a proof-relevant `eq_n` path witness. Impossible arms are
 decided: `vnil: absurd` checks iff the branch's index equations are
-unsatisfiable. Family eliminators are visible to the checker:
+unsatisfiable. Elimination is totality-checked — every constructor arm
+is present or proved absurd. Family eliminators are visible to the
+checker:
 
 ```hnl
 len_via_rec : Nat := Vec.rec(null, zero, step)(2, Bool, v1)
@@ -176,7 +183,9 @@ jv : Vec<2, Bool> := J p22, (i, w) ~> Vec(i, Bool), v2
 Unification itself consumes in-scope paths: `P[frm]` against `P[to]`
 succeeds when a `Path` bound in the environment justifies the rewrite.
 Equality is weak and proof-relevant, never erased: transport along a
-path *is* substitution.
+path *is* substitution. `Path` is overloaded by arity: `Path(i, j)` is
+index equality in a family, `Path(A, x, y)` is a homogeneous path in a
+type.
 
 ### Cubical structure
 
@@ -220,7 +229,7 @@ interchange := (al,al2,be,be2) ~>
   ((al =>> be) =>| (al2 =>> be2))
 ```
 
-`~>[n]` is the dimension-n arrow `Hom(n, ·, ·)`, consistent with
+`~[n]~>` is the dimension-n arrow `Hom(n, ·, ·)`, consistent with
 `>>>[k]` composing k-cells. `Path` itself is defined as a Sigma of
 2-cells, their inverses, and coherence 3-cells; associativity,
 unitality, and interchange are *typechecked equations*, verified
@@ -234,7 +243,7 @@ system:
 ```hnl
 printLn : (Str ~> Str) @ [Effects({ puts: Str ~> Unit })]
 readFile : (Str ~> Str) @ [Effects({ fs: Path ~> Str })]
-greet   : Str @ [Effects({ puts: Str ~> Unit })] := perform puts "hi"
+greet   : Str @ [Effects({ puts: Str ~> Unit })] := perform(puts, "hi")
 
 f : (Str ~> Str) @ [Effects({ puts: Str ~> Unit })]
 g : (Str ~> Str) @ [Effects({ fs: Path ~> Str })]
@@ -246,14 +255,17 @@ handled : (Str ~> Str) @ [] :=
   handle printLn with { puts: puts_handler }
 ```
 
-`perform` extends the ambient mode `μ`; `handle` is a modality
-`μ → μ'` whose residual row is `(S ∖ S_h) ∪ { op ↦ ret }` — covered
-ops take their handler's return type, uncovered ops survive. Every
-row entry is an operation type `name : A ~> B`, one shape whether
-the op was declared or performed. Row union, unit, and subsumption
-are the `Effects` algebra's `compose`/`unit`/`order`, so `>>>`
-*computes* the mode exactly like `Cost(2) >>> Cost(5)` computes a
-grade.
+`perform(op, arg)` checks `arg` against the op's declared domain,
+extends the ambient mode `μ` with the op's type, and returns the
+codomain; `handle` is a modality `μ → μ'` whose residual row is
+`(S ∖ S_h) ∪ { op ↦ ret }` — covered ops take their handler's return
+type, uncovered ops survive. Every row entry is an operation type
+`name : A ~> B`, one shape whether the op was declared or performed.
+Row union, unit, and subsumption are the `Effects` algebra's
+`compose`/`unit`/`order`, so `>>>` *computes* the mode exactly like
+`Cost(2) >>> Cost(5)` computes a grade. Handlers are ordinary records
+of arrows and compose like any value; a deep handler is an ordinary
+function wrapping `handle`.
 
 ### Instances and evidence
 
@@ -284,7 +296,7 @@ The typechecker is itself a Handl program: types are `type.*` values,
 proofs are witnesses stored in the evaluation state, unification
 records its `via` paths, and algebras are records the checker
 interprets. Aliases are transparent expansions; `forall` is Pi-sugar;
-judgments are serializable, cacheable, parallelizable data.
+judgements are serializable, cacheable, parallelizable data.
 
 Because types and terms share one evaluator, **typechecking already
 runs your computations**: normalizing `Vec(2, Bool)` evaluates indices,
@@ -296,6 +308,30 @@ spans every domain: the checker, the libraries it checks, the proofs
 it records, and the algebras it interprets are all ordinary Handl. The
 purity boundary is itself typed: modes mark exactly which computations
 may cross it.
+
+## Notation
+
+| Form | Meaning |
+|---|---|
+| `x := e` | binder / definition |
+| `f : A ~> B` | arrow type and function |
+| `(x : A) ~> B` | dependent function (Π) |
+| `(x : A, y : B)` | dependent pair (Σ) |
+| `t : A @ μ` | judgement: type `A` in ambient mode `μ` |
+| `@ [F(a), …]` | mode ascription — a set of algebra applications |
+| `A ~[n]~> B` | dimension-`n` cell type |
+| `a >>>[k] b` | `k`-cell composition |
+| `new Inductive { … }` | inductive family declaration |
+| `new Algebra(C) { … }` | mode algebra declaration |
+| `new Constraint(T) { … }` | evidence-constraint declaration |
+| `instance C(T) := { … }` | registry evidence |
+| `<x : A>` | implicit binder (indices, evidence) |
+| `(x : A)` | explicit binder |
+| `match s return M with { … }` | dependent elimination |
+| `Path`, `refl`, `trans`, `symm`, `J`, `transport`, `ua` | equality and paths |
+| `transp`, `hcomp`, `Glue`, `unglue`, `fibrant` | cubical Kan operations |
+| `perform(op, arg)`, `handle m with { … }` | effect operations |
+| `Equiv`, `isFibrant`, `Mode` | univalence, fibrancy, mode types |
 
 ---
 
