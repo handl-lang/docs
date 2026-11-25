@@ -15,9 +15,9 @@ consumer was built against, so the fleet floats: a green build today can
 silently change tomorrow when a platform repo lands on `main`. There is
 no reproducible pin and no release point to bump to deliberately.
 
-Precedent: `kernelopt` and `mlopt-product` already pin
+Precedent: `kernelopt` and `kit-product` already pin
 `[tool.uv.sources]` entries to `tag = "vX.Y.Z"` on `eqsat`, `gamekit`,
-`mlopt-torch`, etc., and their AGENTS.md files state the rule: *"Bump the
+`kit-torch`, etc., and their AGENTS.md files state the rule: *"Bump the
 pin deliberately."*
 
 ## Tag scheme
@@ -49,7 +49,7 @@ Phase-1 tagged set (all at `v0.1.0` unless noted):
 Remaining `tool-*`/`exec-*`/`ext-*`/`host-*` repos, then `lib-*`,
 `kit-*`, and the mlopt/tenant repos tag on the same scheme as they
 stabilize. Tenants already using `v*` tags (`eqsat`, `gamekit`,
-`mlopt-*`, `discoverykit`, `benchkit` per kernelopt/mlopt-product
+`kit-torch`/`kit-discovery`/`kit-carriers`/`kit-product`, `discoverykit`, `benchkit` per kernelopt/kit-product
 `[tool.uv.sources]`) continue unchanged.
 
 ## Dep-pin forms
@@ -109,7 +109,7 @@ always propagate sources to transitive-only requirements.
   `cargo metadata` — resolves `git+…/kernel?tag=v0.1.0`).
 - **Phase 2:** high-value consumers pin — repos whose gates are
   load-bearing or that already pretend to be stable (`host`,
-  `host-cli`, `host-lsp`, `kit-*`, `mlopt-product`, `kernelopt`
+  `host-cli`, `host-lsp`, `kit-*`, `kit-product`, `kernelopt`
   already-pinned set). Each pin is an explicit commit per the rule
   above.
 - **Phase 3:** fleet-wide — `lib-*`/`kit-*`/tenant manifests migrate
