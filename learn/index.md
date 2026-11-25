@@ -65,10 +65,10 @@ prod : (x : Bool, y : String) := [true, "hi"]
 ## Dependent elimination: match
 
 ```hnl
-export vtail<n, a> : Vec<n + 1, a> ~> Vec<n, a> :=
+vtail<n, a> : Vec<n + 1, a> ~> Vec<n, a> :=
   v ~> match v { vcons(x, xs): xs }
 
-export vhead<n, a> : Vec<succ n, a> ~> a :=
+vhead<n, a> : Vec<succ n, a> ~> a :=
   v ~> match v { vcons(x, xs): x }
 
 is_nil : Vec<n, a> ~> Bool :=
@@ -148,10 +148,10 @@ value, not an axiom.
 ## Higher categories: dimension arrows
 
 ```hnl
-export comp_assoc := (a,b,c) ~> ((a >>>[2] b) >>>[2] c)
+comp_assoc := (a,b,c) ~> ((a >>>[2] b) >>>[2] c)
                     ~>[3]~> (a >>>[2] (b >>>[2] c))
 
-export interchange := (al,al2,be,be2) ~>
+interchange := (al,al2,be,be2) ~>
   ((al =>| al2) =>> (be =>| be2)) ~>[3]~>
   ((al =>> be) =>| (al2 =>> be2))
 ```
@@ -181,7 +181,7 @@ uncovered ops stay residual; effect widening is checked.
 ```hnl
 Eq<a : Type> := { mkEq : (f : a ~> a ~> Bool) ~> Eq }
 instance Eq(Nat) := { eq: (x, y) ~> x == y }
-export eqv<a, ev : Eq(a)> : a ~> a ~> Bool := x ~> y ~> match ev { mkEq(f): f(x, y) }
+eqv<a, ev : Eq(a)> : a ~> a ~> Bool := x ~> y ~> match ev { mkEq(f): f(x, y) }
 nat_eq : Bool := eqv(zero)(zero)
 ```
 
