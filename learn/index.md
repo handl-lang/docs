@@ -4,18 +4,27 @@ One calculus for programs, proofs, types, effects, and modes. There is
 no separate type-theoretic subsystem and no second language for specs
 or checks: **everything is data**, the same evaluator computes types
 and terms, and the typechecker itself is a program in the language it
-checks. Equality, transport, univalence, composition, and mode
-arithmetic all *compute* — and the same computation runs at typecheck
-time and at run time.
+checks.
 
-Every judgement has the form `t : A @ μ`: a type `A` plus an ambient
-mode `μ`, a set of applications of declared algebras (`[]` is pure).
-Modes are the unifying frame — grades, coeffects, and effects are all
-instances of the same mechanism, developed in the Modes section. The
-sections before it are type structure; the sections after it are
-specializations.
+This page is organized as **concepts → applications → synthesis**.
+Part I defines the complete mechanism set — there are only three.
+Part II shows each type-system feature as an application of those
+mechanisms. Part III is the payoff.
 
-## Core: one binder, one arrow
+## Part I — Concepts
+
+### Judgements
+
+Every judgement has the form `t : A @ μ`:
+
+- `A` — the type, an ordinary Handl type expression
+- `μ` — the ambient mode, a set of applications of declared algebras
+  (`[]` is pure)
+
+The surface vocabulary is minimal: `:=` is the only binder, `~>` is
+the only arrow (terms and types share it), and `new` is the only
+declaration form. Module forms such as `export` control visibility
+only; they play no role in typing.
 
 ```hnl
 x := 42
@@ -24,158 +33,20 @@ pair := [1, "two"]
 rec := { name: "luis", age: 30 }
 ```
 
-`:=` is the only binder. `~>` is the only arrow: terms and types share
-it, and data declarations are `new` expressions. Module forms such as
-`export` control visibility only; they play no role in typing.
+### Everything is data
 
-## Inductive families
+Types, terms, proofs, algebras, and inductive specifications are all
+values in one evaluator. Judgments are serializable data; unification
+records its `via` paths; witnesses are stored in the evaluation state.
+There is no type-theoretic subsystem beside the language — the
+checker is a Handl program like any other.
 
-```hnl
-Nat := new Inductive {
-  zero : Nat,
-  succ : (pred : Nat) ~> Nat
-}
+### Modes
 
-Vec<n : Nat, a : Type> := new Inductive {
-  vnil  : Vec(0, a),
-  vcons : (x : a, xs : Vec(n, a)) ~> Vec(n + 1, a)
-}
-
-v1 : Vec<2, Bool> := vcons(true, vcons(false, vnil))
-```
-
-`<n : Nat, a : Type>` declares indexed families. `Vec(2, Bool)` is a
-`family_app` whose indices **compute**: `Vec<1+1>` is `Vec<2-0>` is
-`Vec<2*1>`, and all check against the same value.
-
-## Inductives as data
-
-An inductive specification is itself a value: an `inductive.spec`
-record of constructor signatures as owned type expressions. Specs can be
-computed, composed, inspected, and passed to generic eliminators; the
-same spec drives `match` refinement and `F.rec`-style folds. Positivity
-is a checker judgment over the spec value, not a parse-time native.
-
-## Dependent types: Π and Σ
-
-```hnl
--- Π: a typed-binder arrow in type position
-idp : (x : Nat) ~> Nat := x ~> x
-curried : (x : Nat, y : Bool) ~> Nat := x ~> y ~> x
-
--- Σ: a typed-binder list with no arrow is a dependent pair
-one_vec : (m : Nat, v : Vec(m, Bool)) := [succ(zero), vcons(true, vnil)]
-prod : (x : Bool, y : String) := [true, "hi"]
-```
-
-## Dependent elimination: match
-
-```hnl
-vtail<n, a> : Vec<n + 1, a> ~> Vec<n, a> :=
-  v ~> match v { vcons(x, xs): xs }
-
-vhead<n, a> : Vec<succ n, a> ~> a :=
-  v ~> match v { vcons(x, xs): x }
-
-is_nil : Vec<n, a> ~> Bool :=
-  v ~> match v { vnil: true, vcons(x, xs): false }
-```
-
-Under `vcons`, the checker refines `n ≡ ?k+1`, binds `xs : Vec<?k, a>`,
-and records a proof-relevant `eq_n` path witness. Impossible arms are
-decided: `vnil: absurd` checks iff the branch's index equations are
-unsatisfiable.
-
-## Eliminators and motives
-
-Family eliminators are visible to the checker:
-
-```hnl
-len_via_rec : Nat := Vec.rec(null, zero, step)(2, Bool, v1)
-```
-
-And motives can be stated explicitly:
-
-```hnl
-id_vec : (n : Nat) ~> (v : Vec(n + 0, Bool)) ~> Vec(n + 0, Bool) :=
-  n ~> v ~> match v return (i, w) ~> Vec(i, Bool) with {
-    vnil:    J eq_n, (i2, w2) ~> Vec(i2, Bool), v,
-    vcons(x, xs): eq_n # v
-  }
-```
-
-## Equality: paths are data
-
-```hnl
-p : Path(1, 1) := refl
-moved : Nat := p # zero
-transported : Nat := transport(p, zero)
-
-tt : Path(Nat, zero, succ(succ(zero))) := trans pt, qt
-st := symm(tt)
-jv : Vec<2, Bool> := J p22, (i, w) ~> Vec(i, Bool), v2
-```
-
-Unification itself consumes in-scope paths: `P[frm]` against `P[to]`
-succeeds when a `Path` bound in the environment justifies the rewrite.
-Equality is weak and proof-relevant, never erased: transport along a
-path *is* substitution.
-
-## Cubical structure
-
-Paths are not an axiomatized identity type; they are terms over an
-interval `I`, and the Kan operations that make them compute are
-ordinary primitives:
-
-```hnl
-cp : Path(Bool, true, true) := i ~> true
-t1 := transp Pi(I, i ~> Bool), i0, fF, true
-h1 : Bool := hcomp Bool, i0, fF, true, false
-y : unglue(Glue(Bool, fF, Pi(I, i ~> Bool))) := true
-pfB : isFibrant(Bool) := fibrant Bool
-```
-
-`transp` is transport in a type family along a dimension, partial on a
-face; `hcomp` is homogeneous composition over a single type; `Glue` and
-`unglue` glue types along equivalences; `fibrant` is the fibrancy
-predicate the Kan structure is stated over.
-
-## Univalence computes
-
-```hnl
-eBN : Equiv(Bool, Nat) := { to: x ~> zero, fro: y ~> true }
-tv : Nat := ua(eBN) # true        -- transport applies `to` and reduces
-tb : Bool := symm(ua(eBN)) # zero
-```
-
-`ua(e)` mints a path over the interval carrying the recorded equivalence;
-transport along it applies the equivalence's functions. Univalence is a
-value, not an axiom.
-
-## Higher categories: dimension arrows
-
-```hnl
-comp_assoc := (a,b,c) ~> ((a >>>[2] b) >>>[2] c)
-                    ~>[3]~> (a >>>[2] (b >>>[2] c))
-
-interchange := (al,al2,be,be2) ~>
-  ((al =>| al2) =>> (be =>| be2)) ~>[3]~>
-  ((al =>> be) =>| (al2 =>> be2))
-```
-
-`~>[n]` is the dimension-n arrow `Hom(n, ·, ·)`, consistent with
-`>>>[k]` composing k-cells. `Path` itself is defined as a Sigma of
-2-cells, their inverses, and coherence 3-cells; associativity,
-unitality, and interchange are *typechecked equations*, verified
-definitionally by normalization.
-
-## Modes: the unifying frame
-
-Modes unify grades, coeffects, and effects onto one axis — the same
-mechanism the judgement form `t : A @ μ` introduced above. Every mode
-ascription is `@ [Algebra(payload), …]`: a **set** of applications of
-declared algebras. An algebra is an ordinary type, a record of
-`compose`/`unit`/`order` functions:
+Modes unify grades, coeffects, and effects onto one axis. A mode
+ascription is `@ [Algebra(payload), …]` — a **set** of applications of
+declared algebras. An algebra is an ordinary type: a record of
+`compose`/`unit`/`order` functions.
 
 ```hnl
 Cost := new Algebra(Nat) {
@@ -204,14 +75,157 @@ mapM : (m : Mode) ~> (f : (A ~> B) @ m) ~> (List(A) ~> List(B)) @ m
 costed := mapM([Cost(1)], double)   -- mode polymorphism by substitution
 ```
 
-`~>[n]` remains the dimension arrow: globular structure, a different
-axis from modes. A cell type takes `@` like any type —
+`~>[n]` is a separate axis — the dimension arrow for globular/cubical
+structure, not a mode. A cell type takes `@` like any type:
 `e : (f ~[2]~> g) @ [Cost(3)]` is a cost-graded 2-cell.
 
-## Effects: the `Effects` algebra
+## Part II — Applications
 
-Effects are not a separate system — they are one algebra instance on
-the mode axis:
+### Data declarations
+
+`new Inductive` declares an inductive family; `<n : Nat, a : Type>`
+declares indices.
+
+```hnl
+Nat := new Inductive {
+  zero : Nat,
+  succ : (pred : Nat) ~> Nat
+}
+
+Vec<n : Nat, a : Type> := new Inductive {
+  vnil  : Vec(0, a),
+  vcons : (x : a, xs : Vec(n, a)) ~> Vec(n + 1, a)
+}
+
+v1 : Vec<2, Bool> := vcons(true, vcons(false, vnil))
+```
+
+`Vec(2, Bool)` is a `family_app` whose indices **compute**:
+`Vec<1+1>` is `Vec<2-0>` is `Vec<2*1>`, and all check against the same
+value.
+
+### Inductives as data
+
+An inductive specification is itself a value: an `inductive.spec`
+record of constructor signatures as owned type expressions. Specs can
+be computed, composed, inspected, and passed to generic eliminators;
+the same spec drives `match` refinement and `F.rec`-style folds.
+Positivity is a checker judgment over the spec value, not a
+parse-time native.
+
+### Dependent types: Π and Σ
+
+```hnl
+-- Π: a typed-binder arrow in type position
+idp : (x : Nat) ~> Nat := x ~> x
+curried : (x : Nat, y : Bool) ~> Nat := x ~> y ~> x
+
+-- Σ: a typed-binder list with no arrow is a dependent pair
+one_vec : (m : Nat, v : Vec(m, Bool)) := [succ(zero), vcons(true, vnil)]
+prod : (x : Bool, y : String) := [true, "hi"]
+```
+
+### Elimination: match, motives, recursors
+
+```hnl
+vtail<n, a> : Vec<n + 1, a> ~> Vec<n, a> :=
+  v ~> match v { vcons(x, xs): xs }
+
+vhead<n, a> : Vec<succ n, a> ~> a :=
+  v ~> match v { vcons(x, xs): x }
+
+is_nil : Vec<n, a> ~> Bool :=
+  v ~> match v { vnil: true, vcons(x, xs): false }
+```
+
+Under `vcons`, the checker refines `n ≡ ?k+1`, binds `xs : Vec<?k, a>`,
+and records a proof-relevant `eq_n` path witness. Impossible arms are
+decided: `vnil: absurd` checks iff the branch's index equations are
+unsatisfiable. Family eliminators are visible to the checker:
+
+```hnl
+len_via_rec : Nat := Vec.rec(null, zero, step)(2, Bool, v1)
+```
+
+Motives can be stated explicitly:
+
+```hnl
+id_vec : (n : Nat) ~> (v : Vec(n + 0, Bool)) ~> Vec(n + 0, Bool) :=
+  n ~> v ~> match v return (i, w) ~> Vec(i, Bool) with {
+    vnil:    J eq_n, (i2, w2) ~> Vec(i2, Bool), v,
+    vcons(x, xs): eq_n # v
+  }
+```
+
+### Equality: paths are data
+
+```hnl
+p : Path(1, 1) := refl
+moved : Nat := p # zero
+transported : Nat := transport(p, zero)
+
+tt : Path(Nat, zero, succ(succ(zero))) := trans pt, qt
+st := symm(tt)
+jv : Vec<2, Bool> := J p22, (i, w) ~> Vec(i, Bool), v2
+```
+
+Unification itself consumes in-scope paths: `P[frm]` against `P[to]`
+succeeds when a `Path` bound in the environment justifies the rewrite.
+Equality is weak and proof-relevant, never erased: transport along a
+path *is* substitution.
+
+### Cubical structure
+
+Paths are not an axiomatized identity type; they are terms over an
+interval `I`, and the Kan operations that make them compute are
+ordinary primitives:
+
+```hnl
+cp : Path(Bool, true, true) := i ~> true
+t1 := transp Pi(I, i ~> Bool), i0, fF, true
+h1 : Bool := hcomp Bool, i0, fF, true, false
+y : unglue(Glue(Bool, fF, Pi(I, i ~> Bool))) := true
+pfB : isFibrant(Bool) := fibrant Bool
+```
+
+`transp` is transport in a type family along a dimension, partial on a
+face; `hcomp` is homogeneous composition over a single type; `Glue` and
+`unglue` glue types along equivalences; `fibrant` is the fibrancy
+predicate the Kan structure is stated over.
+
+### Univalence computes
+
+```hnl
+eBN : Equiv(Bool, Nat) := { to: x ~> zero, fro: y ~> true }
+tv : Nat := ua(eBN) # true        -- transport applies `to` and reduces
+tb : Bool := symm(ua(eBN)) # zero
+```
+
+`ua(e)` mints a path over the interval carrying the recorded equivalence;
+transport along it applies the equivalence's functions. Univalence is a
+value, not an axiom.
+
+### Higher categories: dimension arrows
+
+```hnl
+comp_assoc := (a,b,c) ~> ((a >>>[2] b) >>>[2] c)
+                    ~>[3]~> (a >>>[2] (b >>>[2] c))
+
+interchange := (al,al2,be,be2) ~>
+  ((al =>| al2) =>> (be =>| be2)) ~>[3]~>
+  ((al =>> be) =>| (al2 =>> be2))
+```
+
+`~>[n]` is the dimension-n arrow `Hom(n, ·, ·)`, consistent with
+`>>>[k]` composing k-cells. `Path` itself is defined as a Sigma of
+2-cells, their inverses, and coherence 3-cells; associativity,
+unitality, and interchange are *typechecked equations*, verified
+definitionally by normalization.
+
+### Effects: the `Effects` algebra
+
+Effects are one algebra instance on the mode axis — not a separate
+system:
 
 ```hnl
 printLn : (Str ~> Str) @ [Effects({ puts: Str ~> Unit })]
@@ -237,7 +251,7 @@ are the `Effects` algebra's `compose`/`unit`/`order`, so `>>>`
 *computes* the mode exactly like `Cost(2) >>> Cost(5)` computes a
 grade.
 
-## Instances and evidence
+### Instances and evidence
 
 ```hnl
 Eq := new Constraint(Type) {
@@ -258,7 +272,9 @@ fills a registry slot; `ev : Eq(a)` binders are evidence-implicit,
 resolved by unification-driven dictionary search with
 declaration-time no-overlap coherence.
 
-## Everything computes
+## Part III — Synthesis
+
+### Everything computes
 
 The typechecker is itself a Handl program: types are `type.*` values,
 proofs are witnesses stored in the evaluation state, unification
