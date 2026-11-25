@@ -7,18 +7,18 @@ and terms, and the typechecker itself is a program in the language it
 checks.
 
 This page is organized as **concepts → applications → synthesis**.
-Part I defines the complete mechanism set — there are only three.
+Part I defines the complete mechanism set: there are only three.
 Part II shows each type-system feature as an application of those
 mechanisms. Part III is the payoff.
 
-## Part I — Concepts
+## Part I: Concepts
 
 ### Judgements
 
 Every judgement has the form `t : A @ μ`:
 
-- `A` — the type, an ordinary Handl type expression
-- `μ` — the ambient mode, a set of applications of declared algebras
+- `A`: the type, an ordinary Handl type expression
+- `μ`: the ambient mode, a set of applications of declared algebras
   (`[]` is pure)
 
 The surface vocabulary is minimal: `:=` is the only binder, `~>` is
@@ -27,8 +27,8 @@ for declaring types, algebras, and constraints (`instance` fills
 registry slots rather than declaring new heads). Module forms such as
 `export` control visibility only; they play no role in typing.
 
-Binders come in two groups: `(x : A)` is explicit — the caller passes
-the argument — while `<x : A>` is implicit — indices and evidence the
+Binders come in two groups: `(x : A)` is explicit (the caller passes
+the argument), while `<x : A>` is implicit (indices and evidence the
 checker discharges by unification. `Vec<n : Nat, a : Type>` and
 `eqv<a, ev : Eq(a)>` both use the implicit group.
 
@@ -44,13 +44,13 @@ rec := { name: "luis", age: 30 }
 Types, terms, proofs, algebras, and inductive specifications are all
 values in one evaluator. Judgements are serializable data; unification
 records its `via` paths; witnesses are stored in the evaluation state.
-There is no type-theoretic subsystem beside the language — the
+There is no type-theoretic subsystem beside the language: the
 checker is a Handl program like any other.
 
 ### Modes
 
 Modes unify grades, coeffects, and effects onto one axis. A mode
-ascription is `@ [Algebra(payload), …]` — a **set** of applications of
+ascription is `@ [Algebra(payload), …]`: a **set** of applications of
 declared algebras. An algebra is an ordinary type: a record of
 `compose`/`unit`/`order` functions.
 
@@ -70,7 +70,7 @@ h := g >>> f        -- : (Nat ~> Nat) @ [Cost(8)]
 Each element's head selects its algebra: `Cost(3)` composed with
 `Cost(5)` dispatches to the `Cost` instance's `compose`, so
 composition *computes* the mode. The set holds one element per
-algebra — order is irrelevant and duplicate heads are rejected.
+algebra; order is irrelevant and duplicate heads are rejected.
 Subsumption is one judgement-level `order` check per algebra, shared
 by every mode dimension alike. Modes are data, so algebras are
 computable: transformers, products, and mode expressions are ordinary
@@ -81,11 +81,11 @@ mapM : (m : Mode) ~> (f : (A ~> B) @ m) ~> (List(A) ~> List(B)) @ m
 costed := mapM([Cost(1)], double)   -- mode polymorphism by substitution
 ```
 
-`~[n]~>` is a separate axis — the dimension arrow for globular/cubical
+`~[n]~>` is a separate axis: the dimension arrow for globular/cubical
 structure, not a mode. A cell type takes `@` like any type:
 `e : (f ~[2]~> g) @ [Cost(3)]` is a cost-graded 2-cell.
 
-## Part II — Applications
+## Part II: Applications
 
 ### Data declarations
 
@@ -150,7 +150,7 @@ is_nil : Vec<n, a> ~> Bool :=
 Under `vcons`, the checker refines `n ≡ ?k+1`, binds `xs : Vec<?k, a>`,
 and records a proof-relevant `eq_n` path witness. Impossible arms are
 decided: `vnil: absurd` checks iff the branch's index equations are
-unsatisfiable. Elimination is totality-checked — every constructor arm
+unsatisfiable. Elimination is totality-checked: every constructor arm
 is present or proved absurd. Family eliminators are visible to the
 checker:
 
@@ -237,7 +237,7 @@ definitionally by normalization.
 
 ### Effects: the `Effects` algebra
 
-Effects are one algebra instance on the mode axis — not a separate
+Effects are one algebra instance on the mode axis, not a separate
 system:
 
 ```hnl
@@ -258,7 +258,7 @@ handled : (Str ~> Str) @ [] :=
 `perform(op, arg)` checks `arg` against the op's declared domain,
 extends the ambient mode `μ` with the op's type, and returns the
 codomain; `handle` is a modality `μ → μ'` whose residual row is
-`(S ∖ S_h) ∪ { op ↦ ret }` — covered ops take their handler's return
+`(S ∖ S_h) ∪ { op ↦ ret }`: covered ops take their handler's return
 type, uncovered ops survive. Every row entry is an operation type
 `name : A ~> B`, one shape whether the op was declared or performed.
 Row union, unit, and subsumption are the `Effects` algebra's
@@ -288,7 +288,7 @@ fills a registry slot; `ev : Eq(a)` binders are evidence-implicit,
 resolved by unification-driven dictionary search with
 declaration-time no-overlap coherence.
 
-## Part III — Synthesis
+## Part III: Synthesis
 
 ### Everything computes
 
@@ -302,8 +302,7 @@ Because types and terms share one evaluator, **typechecking already
 runs your computations**: normalizing `Vec(2, Bool)` evaluates indices,
 transport along `ua(e)` applies the equivalence, and `mode_compose`
 evaluates the governing algebra. The checker's normalization cache is a
-demand-driven partial evaluator whose results the runtime inherits —
-the same compute is reused, never run twice. And the same language
+demand-driven partial evaluator whose results the runtime inherits; the same compute is reused, never run twice. And the same language
 spans every domain: the checker, the libraries it checks, the proofs
 it records, and the algebras it interprets are all ordinary Handl. The
 purity boundary is itself typed: modes mark exactly which computations
@@ -318,7 +317,7 @@ may cross it.
 | `(x : A) ~> B` | dependent function (Π) |
 | `(x : A, y : B)` | dependent pair (Σ) |
 | `t : A @ μ` | judgement: type `A` in ambient mode `μ` |
-| `@ [F(a), …]` | mode ascription — a set of algebra applications |
+| `@ [F(a), …]` | mode ascription: a set of algebra applications |
 | `A ~[n]~> B` | dimension-`n` cell type |
 | `a >>>[k] b` | `k`-cell composition |
 | `new Inductive { … }` | inductive family declaration |
@@ -336,7 +335,7 @@ may cross it.
 ---
 
 **One line:** programs, proofs, types, effects, and modes are cells in
-one calculus — everything is data, everything computes, and equality,
+one calculus: everything is data, everything computes, and equality,
 transport, univalence, and mode arithmetic are all the same evaluator
 at work.
 
