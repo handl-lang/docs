@@ -105,9 +105,9 @@ p : Path(1, 1) := refl
 moved : Nat := p # zero
 transported : Nat := transport(p, zero)
 
-tt : Path(Nat, zero, succ(succ(zero))) := trans(pt, qt)
+tt : Path(Nat, zero, succ(succ(zero))) := trans pt, qt
 st := symm(tt)
-jv : Vec<2, Bool> := J(p22, (i, w) ~> Vec(i, Bool), v2)  -- J eliminator
+jv : Vec<2, Bool> := J p22, (i, w) ~> Vec(i, Bool), v2
 ```
 
 Unification itself consumes in-scope paths: `P[frm]` against `P[to]`
@@ -123,15 +123,16 @@ ordinary primitives:
 
 ```hnl
 cp : Path(Bool, true, true) := i ~> true
-t1 := transp(Pi(I, i ~> Bool), i0, fF, true)
-h1 : Bool := hcomp(Bool, i0, fF, true, false)
+t1 := transp Pi(I, i ~> Bool), i0, fF, true
+h1 : Bool := hcomp Bool, i0, fF, true, false
 y : unglue(Glue(Bool, fF, Pi(I, i ~> Bool))) := true
 pfB : isFibrant(Bool) := fibrant Bool
 ```
 
-`transp` transports along a path, `hcomp` is homogeneous composition,
-`Glue`/`unglue` glue types along equivalences, and `fibrant` is the
-fibrancy predicate the Kan structure is stated over.
+`transp` is transport in a type family along a dimension, partial on a
+face; `hcomp` is homogeneous composition over a single type; `Glue` and
+`unglue` glue types along equivalences; `fibrant` is the fibrancy
+predicate the Kan structure is stated over.
 
 ## Univalence computes
 
