@@ -28,7 +28,7 @@ Conventions:
 - **Native components pair with `.hnl` specs** — `lib-tensor` (spec) ↔ native impl is the pattern: spec gives rewrites structure, impl gives speed.
 - **Compilers**: `tool-compile-{handl,js,llvm,dot,sexp,term,tensor}` = canonical/debug targets; `tool-compile-{cuda,triton,python}` = performance/interop exits. LLVM is the escape hatch; verified-rewrite integration only exists in own backends.
 
-~200 repos under `github.com/handl-lang`, checked out as siblings in `~/GitHub/handl-lang/` (202 local checkouts). Deps are git deps (`branch = "main"`); workspace-root `[patch]` tables resolve them from sibling checkouts (ADR-0128). The public subset is the docs hub's `PUBLIC_REPOS` allowlist (`docs/scripts/public_repos.py`).
+~200 repos under `github.com/handl-lang`, checked out as siblings in `~/GitHub/handl-lang/` (202 local checkouts). Deps are git deps (`branch = "main"`); workspace-root `[patch]` tables resolve them from sibling checkouts (ADR-0128). The public subset is the docs hub's `PUBLIC_REPOS` allowlist (`docs/scripts/public_repos.py`). Dep pinning/release convention (tags, deliberate bumps, migration phases): [pinning.md](./pinning.md).
 
 ## Core layers (bare)
 

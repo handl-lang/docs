@@ -63,6 +63,8 @@ export default defineConfig({
     "DESIGN.md",
     // Internal org/checkout map — names private repos; not site content.
     "structure.md",
+    // Internal dep-pinning convention for the fleet — same audience.
+    "pinning.md",
     // Generated / parked content — kept in the repo, not published.
     "api/**",
     "adrs/**",
