@@ -12,6 +12,14 @@
 #
 # Secrets resolve env var -> OS keyring -> ~/.config/bupha/env; never
 # this file. Schema: github.com/9aia/bupha examples/bupha.toml.example.
+#
+# This manifest is the deploy-WATCH config only — it is not this
+# repo's gate runner. The per-push gate is the handl-gates
+# `peregrin campaign` over workflows/gate.yaml (see that file's
+# header). The handl/base spec's bupha.toml predicate keys on the
+# "peregrin campaign" substring; this note keeps the manifest
+# self-describing and the check green until mimus-spec's `except`
+# repo exemption ships and the spec can skip docs/ outright.
 
 # A push to docs/site/** or docs/site.yaml on main in any of these
 # queues one pending sha (latest-wins, default) and runs
