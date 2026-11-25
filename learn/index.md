@@ -1,13 +1,19 @@
 # The Handl type system
 
-One calculus for programs, proofs, types, effects, and modes, where
-equality, transport, and univalence all *compute*, and the typechecker
-itself is a program in the same language it checks.
+One calculus for programs, proofs, types, effects, and modes. There is
+no separate type-theoretic subsystem and no second language for specs
+or checks: **everything is data**, the same evaluator computes types
+and terms, and the typechecker itself is a program in the language it
+checks. Equality, transport, univalence, composition, and mode
+arithmetic all *compute* — and the same computation runs at typecheck
+time and at run time.
 
-Everything on this page is ordinary Handl: types are values, proofs are
-witnesses, judgments are data. There is no separate type-theoretic
-subsystem. Dependent structure, equality, effects, and modes are all
-cells in the same arrow calculus.
+Every judgement has the form `t : A @ μ`: a type `A` plus an ambient
+mode `μ`, a set of applications of declared algebras (`[]` is pure).
+Modes are the unifying frame — grades, coeffects, and effects are all
+instances of the same mechanism, developed in the Modes section. The
+sections before it are type structure; the sections after it are
+specializations.
 
 ## Core: one binder, one arrow
 
@@ -163,25 +169,67 @@ interchange := (al,al2,be,be2) ~>
 unitality, and interchange are *typechecked equations*, verified
 definitionally by normalization.
 
-## Effects: ambient modes
+## Modes: the unifying frame
+
+Modes unify grades, coeffects, and effects onto one axis — the same
+mechanism the judgement form `t : A @ μ` introduced above. Every mode
+ascription is `@ [Algebra(payload), …]`: a **set** of applications of
+declared algebras. An algebra is an ordinary type, a record of
+`compose`/`unit`/`order` functions:
 
 ```hnl
-printLn : (Str ~> Str) @ [Effects({puts: Str ~> Unit})]
-readFile : (Str ~> Str) @ [Effects({fs: Path ~> Str})]
-greet   : Str @ [Effects({puts: Str ~> Unit})] := perform puts "hi"
+Cost := new Algebra(Nat) {
+  compose: (a, b) ~> a + b,
+  unit:    0,
+  order:   (a, b) ~> a <= b
+}
 
-f : (Str ~> Str) @ [Effects({puts: Str ~> Unit})]
-g : (Str ~> Str) @ [Effects({fs: Path ~> Str})]
+double : (Nat ~> Nat) @ [Cost(2)]
+f : (Nat ~> Nat) @ [Cost(3)]
+g : (Nat ~> Nat) @ [Cost(5)]
+h := g >>> f        -- : (Nat ~> Nat) @ [Cost(8)]
+```
+
+Each element's head selects its algebra: `Cost(3)` composed with
+`Cost(5)` dispatches to the `Cost` instance's `compose`, so
+composition *computes* the mode. The set holds one element per
+algebra — order is irrelevant and duplicate heads are rejected.
+Subsumption is one judgement-level `order` check per algebra, shared
+by every mode dimension alike. Modes are data, so algebras are
+computable: transformers, products, and mode expressions are ordinary
+functions returning algebra records.
+
+```hnl
+mapM : (m : Mode) ~> (f : (A ~> B) @ m) ~> (List(A) ~> List(B)) @ m
+costed := mapM([Cost(1)], double)   -- mode polymorphism by substitution
+```
+
+`~>[n]` remains the dimension arrow: globular structure, a different
+axis from modes. A cell type takes `@` like any type —
+`e : (f ~[2]~> g) @ [Cost(3)]` is a cost-graded 2-cell.
+
+## Effects: the `Effects` algebra
+
+Effects are not a separate system — they are one algebra instance on
+the mode axis:
+
+```hnl
+printLn : (Str ~> Str) @ [Effects({ puts: Str ~> Unit })]
+readFile : (Str ~> Str) @ [Effects({ fs: Path ~> Str })]
+greet   : Str @ [Effects({ puts: Str ~> Unit })] := perform puts "hi"
+
+f : (Str ~> Str) @ [Effects({ puts: Str ~> Unit })]
+g : (Str ~> Str) @ [Effects({ fs: Path ~> Str })]
 h := g >>> f
--- h : (Str ~> Str) @ [Effects({puts: Str ~> Unit, fs: Path ~> Str})]
+-- h : (Str ~> Str) @ [Effects({ puts: Str ~> Unit, fs: Path ~> Str })]
 
 puts_handler : Str ~> Unit := s ~> print(s)
 handled : (Str ~> Str) @ [] :=
-  handle printLn with {puts: puts_handler}
+  handle printLn with { puts: puts_handler }
 ```
 
 `perform` extends the ambient mode `μ`; `handle` is a modality
-`μ → μ'` whose residual row is `(S ∖ S_h) ∪ {op ↦ ret}` — covered
+`μ → μ'` whose residual row is `(S ∖ S_h) ∪ { op ↦ ret }` — covered
 ops take their handler's return type, uncovered ops survive. Every
 row entry is an operation type `name : A ~> B`, one shape whether
 the op was declared or performed. Row union, unit, and subsumption
@@ -210,45 +258,7 @@ fills a registry slot; `ev : Eq(a)` binders are evidence-implicit,
 resolved by unification-driven dictionary search with
 declaration-time no-overlap coherence.
 
-## Modes: MTT arrows
-
-Modes unify grades, coeffects, and effects onto one axis. Every mode
-ascription is `@ [Algebra(payload), …]` — a **set** of applications of
-declared algebras. An algebra is an ordinary type, a record of
-`compose`/`unit`/`order` functions:
-
-```hnl
-Cost := new Algebra(Nat) {
-  compose: (a, b) ~> a + b,
-  unit:    0,
-  order:   (a, b) ~> a <= b
-}
-
-double : (Nat ~> Nat) @ [Cost(2)]
-f : (Nat ~> Nat) @ [Cost(3)]
-g : (Nat ~> Nat) @ [Cost(5)]
-h := g >>> f        -- : (Nat ~> Nat) @ [Cost(8)]
-```
-
-Each element's head selects its algebra: `Cost(3)` composed with
-`Cost(5)` dispatches to the `Cost` instance's `compose`, so
-composition *computes* the mode. The set holds one element per
-algebra — order is irrelevant and duplicate heads are rejected.
-Subsumption is one judgement-level `order` check per algebra, shared
-by grades, coeffects, and effects alike. Modes are data, so algebras
-are computable: transformers, products, and mode expressions are
-ordinary functions returning algebra records.
-
-```hnl
-mapM : (m : Mode) ~> (f : (A ~> B) @ m) ~> (List(A) ~> List(B)) @ m
-costed := mapM([Cost(1)], double)   -- mode polymorphism by substitution
-```
-
-`~>[n]` remains the dimension arrow: globular structure, a different
-axis from modes. A cell type takes `@` like any type —
-`e : (f ~[2]~> g) @ [Cost(3)]` is a cost-3-graded 2-cell.
-
-## The meta layer: everything is data
+## Everything computes
 
 The typechecker is itself a Handl program: types are `type.*` values,
 proofs are witnesses stored in the evaluation state, unification
@@ -260,16 +270,19 @@ Because types and terms share one evaluator, **typechecking already
 runs your computations**: normalizing `Vec(2, Bool)` evaluates indices,
 transport along `ua(e)` applies the equivalence, and `mode_compose`
 evaluates the governing algebra. The checker's normalization cache is a
-demand-driven partial evaluator whose results the runtime can inherit.
-Pure computations verified once at typecheck time are replayable at run
-time, and the purity boundary is itself typed: graded arrows mark
-exactly which computations may cross it.
+demand-driven partial evaluator whose results the runtime inherits —
+the same compute is reused, never run twice. And the same language
+spans every domain: the checker, the libraries it checks, the proofs
+it records, and the algebras it interprets are all ordinary Handl. The
+purity boundary is itself typed: modes mark exactly which computations
+may cross it.
 
 ---
 
 **One line:** programs, proofs, types, effects, and modes are cells in
-one calculus, and equality, transport, univalence, and grading all
-*compute*.
+one calculus — everything is data, everything computes, and equality,
+transport, univalence, and mode arithmetic are all the same evaluator
+at work.
 
 The academic groundwork behind each layer is collected in the
 [bibliography](/ecosystem/bibliography): arrows and categorical
