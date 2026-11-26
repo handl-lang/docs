@@ -76,13 +76,13 @@ plus the emitters below.
 - **FFI surfaces**: `lib-types` (`types/c/*` aliases), `lib-libc`, `lib-curl`, `lib-libz` (codegen bindings)
 - `pkg.hnl` declares `{ deps, modules }`; dep keys map to `handl-lang/lib-<dep>`.
 
-## `kit-*` (10) + mlopt cohort
+## `kit-*` (9) + mlopt cohort
 
-`kit-{cli-app,cuda,host-tensor,onnx,pkg,py-smoke,test,web-browser-interop,web-server,web-worker-interop}` — kit declarations and kit infrastructure. The mlopt domain packages were renamed `kit-*`→`mlopt-*` (P-010 cohort migration, in flight): `mlopt-{carriers,discovery,pipeline,product,torch}` plus tenant repos `eqsat`, `gamekit`, `kernelopt`, `discoverykit`, `research-mlopt`, `bench`. `kit-{cuda,host-tensor,onnx}` await the same dissolution (blocked on parity work).
+`kit-{cli-app,cuda,onnx,pkg,py-smoke,test,web-browser-interop,web-server,web-worker-interop}` — kit declarations and kit infrastructure. The mlopt domain packages were renamed `kit-*`→`mlopt-*` (P-010 cohort migration, in flight): `mlopt-{carriers,discovery,pipeline,product,torch}` plus tenant repos `eqsat`, `gamekit`, `kernelopt`, `discoverykit`, `research-mlopt`, `bench`. `kit-{cuda,onnx}` await the same dissolution (blocked on parity work).
 
 ## Retired
 
-`meta` (folded into `kernel/crates/defining-handl`), `kit-data-canonical` (crate now lives in `kit-data-prelude`), `kit-canonical` (superseded by the `kit-*` family), `stdlib` (archived — folded into `host/crates`), `playground`, `ext-sdkgen` (dead after PL-004), `lib-grade` (retired — `Grade` promoted to the `type` surface, T-113). `bench` and `project` are live again (tenant repo / ledger repo respectively).
+`kit-host-tensor` (retired — P-013 atom migration; tensor execution goes through `handl_host_tensor` `ffi.rust.resolve` handles in `lib-tensor-native`), `meta` (folded into `kernel/crates/defining-handl`), `kit-data-canonical` (crate now lives in `kit-data-prelude`), `kit-canonical` (superseded by the `kit-*` family), `stdlib` (archived — folded into `host/crates`), `playground`, `ext-sdkgen` (dead after PL-004), `lib-grade` (retired — `Grade` promoted to the `type` surface, T-113). `bench` and `project` are live again (tenant repo / ledger repo respectively).
 
 ## `tool-*`
 

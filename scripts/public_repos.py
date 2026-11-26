@@ -85,7 +85,6 @@ PUBLIC_REPOS = {
     "kit-cli-app",
     "kit-cuda",
     "kit-discovery",
-    "kit-host-tensor",
     "kit-pkg",
     "kit-test",
     "kit-torch",

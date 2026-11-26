@@ -35,7 +35,6 @@ discovery machinery:
 | [kit-cuda](https://github.com/handl-lang/kit-cuda) | CUDA-graph delivery mechanism for the mlopt game |
 | [kit-carriers](https://github.com/handl-lang/kit-carriers) | Semantic carriers — online-softmax monoids |
 | [kit-discovery](https://github.com/handl-lang/kit-discovery) | Law-discovery engine — census, proposal, verification |
-| [kit-host-tensor](https://github.com/handl-lang/kit-host-tensor) | Host-tensor backend — `mlopt_core.ports.Sink` over native tensor ops |
 
 Kits are data, so composing one is editing a manifest: pick the libs,
 let `pkg.hnl` deps resolve the rest. The kits that bootstrap the
